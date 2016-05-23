@@ -30,7 +30,7 @@ public class EarthBasicData {
 	}
 
 	public int getNumber() {
-		return number;
+		return this.number;
 	}
 
 	public void setNumber(int number) {
@@ -38,7 +38,7 @@ public class EarthBasicData {
 	}
 
 	public String getPreSellLicenceNo() {
-		return preSellLicenceNo;
+		return this.preSellLicenceNo;
 	}
 
 	public void setPreSellLicenceNo(String preSellLicenceNo) {
@@ -46,7 +46,7 @@ public class EarthBasicData {
 	}
 
 	public String getProjectName() {
-		return projectName;
+		return this.projectName;
 	}
 
 	public void setProjectName(String projectName) {
@@ -54,7 +54,7 @@ public class EarthBasicData {
 	}
 
 	public String getDeveloper() {
-		return developer;
+		return this.developer;
 	}
 
 	public void setDeveloper(String developer) {
@@ -62,7 +62,7 @@ public class EarthBasicData {
 	}
 
 	public int getCount() {
-		return count;
+		return this.count;
 	}
 
 	public void setCount(int count) {
@@ -70,7 +70,7 @@ public class EarthBasicData {
 	}
 
 	public int getTotalCount() {
-		return totalCount;
+		return this.totalCount;
 	}
 
 	public void setTotalCount(int totalCount) {
@@ -78,7 +78,7 @@ public class EarthBasicData {
 	}
 
 	public String getTotalArea() {
-		return totalArea;
+		return this.totalArea;
 	}
 
 	public void setTotalArea(String totalArea) {
@@ -86,7 +86,7 @@ public class EarthBasicData {
 	}
 
 	public String getLicenceDate() {
-		return licenceDate;
+		return this.licenceDate;
 	}
 
 	public void setLicenceDate(String licenceDate) {
