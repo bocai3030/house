@@ -1,5 +1,8 @@
 package org.house.bean;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+@JsonAutoDetect
 public class EarthBasicData {
 	private int number;
 	private String preSellLicenceNo;
