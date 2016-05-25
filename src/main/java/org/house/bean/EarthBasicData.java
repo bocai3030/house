@@ -4,103 +4,112 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect
 public class EarthBasicData {
-	private int number; // 编号，并没有用
-	private String preSellLicenceNo; // 预售许可证号
-	private String projectName; // 所属项目名称
-	private String developer; // 开发商
-	private int count; // 预售幢数
-	private int totalCount; // 预售总套数
-	private String totalArea; // 预售总面积
-	private String licenceDate; // 发证日期
-	private String projectId; // 项目ID
+	private String earthLicenceNo; // 国土证号
+	private String location; // 土地座落
+	private String user; // 土地使用者
+	private String earthNo; // 地号
+	private String graphNo;// 图号
+	private String usage;// 土地用途
+	private String level; // 土地等级
+	private String borrowFrom; // 土地出让年限自
+	private String useRightKind; // 使用权类型
+	private String useArea; // 使用权面积
+	private String shareArea; // 其中共用分推面积
+	private String licenceIssueDate; // 发证日期
 
-	public EarthBasicData() {
-
+	public String getEarthLicenceNo() {
+		return this.earthLicenceNo;
 	}
 
-	public EarthBasicData(final int number, final String preSellLicenceNo, final String projectName,
-			final String developer, final int count, final int totalCount, final String totalArea,
-			final String licenceDate, final String projectId) {
-		this.number = number;
-		this.preSellLicenceNo = preSellLicenceNo;
-		this.projectName = projectName;
-		this.developer = developer;
-		this.count = count;
-		this.totalCount = totalCount;
-		this.totalArea = totalArea;
-		this.licenceDate = licenceDate;
-		this.projectId = projectId;
+	public void setEarthLicenceNo(final String earthLicenceNo) {
+		this.earthLicenceNo = earthLicenceNo;
 	}
 
-	public int getNumber() {
-		return this.number;
+	public String getLocation() {
+		return this.location;
 	}
 
-	public void setNumber(final int number) {
-		this.number = number;
+	public void setLocation(final String location) {
+		this.location = location;
 	}
 
-	public String getPreSellLicenceNo() {
-		return this.preSellLicenceNo;
+	public String getUser() {
+		return this.user;
 	}
 
-	public void setPreSellLicenceNo(final String preSellLicenceNo) {
-		this.preSellLicenceNo = preSellLicenceNo;
+	public void setUser(final String user) {
+		this.user = user;
 	}
 
-	public String getProjectName() {
-		return this.projectName;
+	public String getEarthNo() {
+		return this.earthNo;
 	}
 
-	public void setProjectName(final String projectName) {
-		this.projectName = projectName;
+	public void setEarthNo(final String earthNo) {
+		this.earthNo = earthNo;
 	}
 
-	public String getDeveloper() {
-		return this.developer;
+	public String getGraphNo() {
+		return this.graphNo;
 	}
 
-	public void setDeveloper(final String developer) {
-		this.developer = developer;
+	public void setGraphNo(final String graphNo) {
+		this.graphNo = graphNo;
 	}
 
-	public int getCount() {
-		return this.count;
+	public String getUsage() {
+		return this.usage;
 	}
 
-	public void setCount(final int count) {
-		this.count = count;
+	public void setUsage(final String usage) {
+		this.usage = usage;
 	}
 
-	public int getTotalCount() {
-		return this.totalCount;
+	public String getLevel() {
+		return this.level;
 	}
 
-	public void setTotalCount(final int totalCount) {
-		this.totalCount = totalCount;
+	public void setLevel(final String level) {
+		this.level = level;
 	}
 
-	public String getTotalArea() {
-		return this.totalArea;
+	public String getBorrowFrom() {
+		return this.borrowFrom;
 	}
 
-	public void setTotalArea(final String totalArea) {
-		this.totalArea = totalArea;
+	public void setBorrowFrom(final String borrowFrom) {
+		this.borrowFrom = borrowFrom;
 	}
 
-	public String getLicenceDate() {
-		return this.licenceDate;
+	public String getUseRightKind() {
+		return this.useRightKind;
 	}
 
-	public void setLicenceDate(final String licenceDate) {
-		this.licenceDate = licenceDate;
+	public void setUseRightKind(final String useRightKind) {
+		this.useRightKind = useRightKind;
 	}
 
-	public String getProjectId() {
-		return this.projectId;
+	public String getUseArea() {
+		return this.useArea;
 	}
 
-	public void setProjectId(final String projectId) {
-		this.projectId = projectId;
+	public void setUseArea(final String useArea) {
+		this.useArea = useArea;
+	}
+
+	public String getShareArea() {
+		return this.shareArea;
+	}
+
+	public void setShareArea(final String shareArea) {
+		this.shareArea = shareArea;
+	}
+
+	public String getLicenceIssueDate() {
+		return this.licenceIssueDate;
+	}
+
+	public void setLicenceIssueDate(final String licenceIssueDate) {
+		this.licenceIssueDate = licenceIssueDate;
 	}
 }
