@@ -1,2 +1,4 @@
-/target/
-.project
+house_service/target/
+house_service/.project
+house_service/.settings/
+house_service/.idea/
