@@ -1,10 +1,20 @@
-package org.house.bean;
+package org.house.db.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect
-public class ProjectBasicData {
+@Entity
+@Table(name = "project_basic_data")
+public class ProjectBasicData extends AbstractDbBean implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	// 还需要请求project_detail.jsp拿各种证件的id
+	// @JsonProperty("test")
 	private String projectId; // 项目ID
 	private String projectName; // 所属项目名称
 	private String preSellLicenceNo; // 预售许可证号
@@ -14,7 +24,7 @@ public class ProjectBasicData {
 	private String totalCostArea; // 总占地面积
 	private String totalBuildArea; // 总建筑面积
 	private String qualificationLicenceNo; // 资质证书编号
-	private String usage; // 用途
+	private String usagee; // 用途
 	private int preSellTotalCount; // 批准预售总套数
 	private String preSellTotalArea; // 批准预售总面积
 	private int buildingCount; // 预售幢数
@@ -96,12 +106,12 @@ public class ProjectBasicData {
 		this.qualificationLicenceNo = qualificationLicenceNo;
 	}
 
-	public String getUsage() {
-		return this.usage;
+	public String getUsagee() {
+		return this.usagee;
 	}
 
-	public void setUsage(final String usage) {
-		this.usage = usage;
+	public void setUsagee(final String usage) {
+		this.usagee = usage;
 	}
 
 	public int getPreSellTotalCount() {

@@ -15,9 +15,9 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.house.bean.EarthBasicData;
-import org.house.bean.PreSellLicenceData;
-import org.house.bean.ProjectBasicData;
+import org.house.db.entity.EarthBasicData;
+import org.house.db.entity.PreSellLicenceData;
+import org.house.db.entity.ProjectBasicData;
 
 import com.google.common.collect.Lists;
 
@@ -74,7 +74,7 @@ public class WebSpider {
 
 		final CloseableHttpResponse theResponse = client.execute(httpPost);
 
-		final List<ProjectBasicData> earthBasicDatas = Lists.<ProjectBasicData> newArrayList();
+		final List<ProjectBasicData> earthBasicDatas = Lists.<ProjectBasicData>newArrayList();
 		final String content = EntityUtils.toString(theResponse.getEntity());
 		int idx = 0;
 		final String tag = "box_tab_style02_td";
@@ -142,6 +142,7 @@ public class WebSpider {
 			earthBasicDatas.add(projectBasicData);
 
 			idx = idx16 + tag3.length();
+			break;
 		}
 
 		return earthBasicDatas;
@@ -191,8 +192,8 @@ public class WebSpider {
 
 		final int idx13 = content.indexOf(tag2, idx12 + tag3.length());// 用途性质
 		final int idx14 = content.indexOf(tag3, idx13 + tag2.length());
-		final String usage = content.substring(idx13 + tag2.length() + 2, idx14);
-		projectBasicData.setUsage(usage);
+		final String usagee = content.substring(idx13 + tag2.length() + 2, idx14);
+		projectBasicData.setUsagee(usagee);
 	}
 
 	public static PreSellLicenceData getPreSellLicenceData(final String projectId, final String licenceId)

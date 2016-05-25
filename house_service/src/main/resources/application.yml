@@ -1,0 +1,7 @@
+spring:
+  http:
+    encoding.charset: UTF-8
+    encoding.enabled: true
+    encoding.force: true
+  jpa:
+    show-sql: true

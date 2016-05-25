@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+<configuration scan="true">
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<Pattern>.%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n
-			</Pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<charset>UTF-8</charset>
 		</encoder>
-		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-			<level>TRACE</level>
-		</filter>
-	</appender>
-
-	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>test.log</file>
-		<append>true</append><!-- 日志追加 -->
+	</appender>	
+	<appender name="DEFAULT"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/data/logs/house_service/default.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/data/logs/house_service/default.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+			<maxHistory>1</maxHistory>
+		</rollingPolicy>
 		<encoder>
-			<pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
-			</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<charset>UTF-8</charset>
 		</encoder>
 	</appender>
+	
+	<logger name="ch.qos.logback" level="WARN" />
+	<logger name="com.zaxxer" level="WARN" />
+	<logger name="org.apache" level="WARN" />
+	<logger name="org.springframework" level="WARN" />
+	<logger name="org.house" level="ALL">
+		<appender-ref ref="STDOUT" />
+	</logger>
 
-	<root>
-		<level value="DEBUG" />
-		<appender-ref ref="consoleAppender" />
-	</root>
 </configuration>

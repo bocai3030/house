@@ -1,9 +1,18 @@
-package org.house.bean;
+package org.house.db.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect
-public class EarthBasicData {
+@Entity
+@Table(name = "ad_name_lang_map_v4")
+public class EarthBasicData extends AbstractDbBean implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String earthLicenceNo; // 国土证号
 	private String location; // 土地座落
 	private String user; // 土地使用者

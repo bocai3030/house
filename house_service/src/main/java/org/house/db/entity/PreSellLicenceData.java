@@ -1,9 +1,18 @@
-package org.house.bean;
+package org.house.db.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect
-public class PreSellLicenceData {
+@Entity
+@Table(name = "ad_name_lang_map_v4")
+public class PreSellLicenceData extends AbstractDbBean implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String preSellLicenceNo; // 预售许可证号
 	private int buildingCount; // 预售幢数
 	private String buildingHouse; // 报建屋数
