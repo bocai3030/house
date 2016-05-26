@@ -18,9 +18,17 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 	protected String projectId; // 项目ID
 	protected String projectName; // 所属项目名称
 	protected String preSellLicenceNo; // 预售许可证号
+	protected String countryName; // 国土证名
+	protected String countryId; // 国土证ID
+	protected String agreeName; // 施工许可证名
+	protected String agreeId; // 施工许可证ID
+	protected String layoutName; // 规划许可证名
+	protected String layoutId; // 规划许可证ID
 	protected String projectAddress; // 项目地址
 	protected String developer; // 开发商
+	protected String developerId; // 开发商ID
 	protected String division; // 行政区划
+	protected String sectionId; // 区
 	protected String totalCostArea; // 总占地面积
 	protected String totalBuildArea; // 总建筑面积
 	protected String qualificationLicenceNo; // 资质证书编号
@@ -33,10 +41,27 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return new StringBuilder().append(this.projectId).append(this.projectName).append(this.preSellLicenceNo)
-				.append(this.projectAddress).append(this.developer).append(this.division).append(this.totalCostArea)
-				.append(this.totalBuildArea).append(this.qualificationLicenceNo).append(this.usagee)
-				.append(this.preSellTotalCount).append(this.preSellTotalArea).append(this.buildingCount)
+		return new StringBuilder().append(this.projectId)//
+				.append(this.projectName)//
+				.append(this.preSellLicenceNo)//
+				.append(this.countryName)//
+				.append(this.countryId)//
+				.append(this.agreeName)//
+				.append(this.agreeId)//
+				.append(this.layoutName)//
+				.append(this.layoutId)//
+				.append(this.projectAddress)//
+				.append(this.developer)//
+				.append(this.developerId)//
+				.append(this.division)//
+				.append(this.sectionId)//
+				.append(this.totalCostArea)//
+				.append(this.totalBuildArea)//
+				.append(this.qualificationLicenceNo)//
+				.append(this.usagee)//
+				.append(this.preSellTotalCount)//
+				.append(this.preSellTotalArea)//
+				.append(this.buildingCount)//
 				.append(this.licenceDate).toString().hashCode();
 	}
 
@@ -50,9 +75,17 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 			if (ObjectUtils.nullSafeEquals(this.projectId, anObject.getProjectId())
 					&& ObjectUtils.nullSafeEquals(this.projectName, anObject.getProjectName())
 					&& ObjectUtils.nullSafeEquals(this.preSellLicenceNo, anObject.getPreSellLicenceNo())
+					&& ObjectUtils.nullSafeEquals(this.countryName, anObject.getCountryName())
+					&& ObjectUtils.nullSafeEquals(this.countryId, anObject.getCountryId())
+					&& ObjectUtils.nullSafeEquals(this.agreeName, anObject.getAgreeName())
+					&& ObjectUtils.nullSafeEquals(this.agreeId, anObject.getAgreeId())
+					&& ObjectUtils.nullSafeEquals(this.layoutName, anObject.getLayoutName())
+					&& ObjectUtils.nullSafeEquals(this.layoutId, anObject.getLayoutId())
 					&& ObjectUtils.nullSafeEquals(this.projectAddress, anObject.getProjectAddress())
 					&& ObjectUtils.nullSafeEquals(this.developer, anObject.getDeveloper())
+					&& ObjectUtils.nullSafeEquals(this.developerId, anObject.getDeveloperId())
 					&& ObjectUtils.nullSafeEquals(this.division, anObject.getDivision())
+					&& ObjectUtils.nullSafeEquals(this.sectionId, anObject.getSectionId())
 					&& ObjectUtils.nullSafeEquals(this.totalCostArea, anObject.getTotalCostArea())
 					&& ObjectUtils.nullSafeEquals(this.totalBuildArea, anObject.getTotalBuildArea())
 					&& ObjectUtils.nullSafeEquals(this.qualificationLicenceNo, anObject.getQualificationLicenceNo())
@@ -71,9 +104,17 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 		this.projectId = theObj.projectId;
 		this.projectName = theObj.projectName;
 		this.preSellLicenceNo = theObj.preSellLicenceNo;
+		this.countryName = theObj.countryName;
+		this.countryId = theObj.countryId;
+		this.agreeName = theObj.agreeName;
+		this.agreeId = theObj.agreeId;
+		this.layoutName = theObj.layoutName;
+		this.layoutId = theObj.layoutId;
 		this.projectAddress = theObj.projectAddress;
 		this.developer = theObj.developer;
+		this.developerId = theObj.developerId;
 		this.division = theObj.division;
+		this.sectionId = theObj.sectionId;
 		this.totalCostArea = theObj.totalCostArea;
 		this.totalBuildArea = theObj.totalBuildArea;
 		this.qualificationLicenceNo = theObj.qualificationLicenceNo;
@@ -197,6 +238,70 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 
 	public void setLicenceDate(final String licenceDate) {
 		this.licenceDate = licenceDate;
+	}
+
+	public String getCountryName() {
+		return this.countryName;
+	}
+
+	public void setCountryName(final String countryName) {
+		this.countryName = countryName;
+	}
+
+	public String getCountryId() {
+		return this.countryId;
+	}
+
+	public void setCountryId(final String countryId) {
+		this.countryId = countryId;
+	}
+
+	public String getAgreeName() {
+		return this.agreeName;
+	}
+
+	public void setAgreeName(final String agreeName) {
+		this.agreeName = agreeName;
+	}
+
+	public String getAgreeId() {
+		return this.agreeId;
+	}
+
+	public void setAgreeId(final String agreeId) {
+		this.agreeId = agreeId;
+	}
+
+	public String getLayoutName() {
+		return this.layoutName;
+	}
+
+	public void setLayoutName(final String layoutName) {
+		this.layoutName = layoutName;
+	}
+
+	public String getLayoutId() {
+		return this.layoutId;
+	}
+
+	public void setLayoutId(final String layoutId) {
+		this.layoutId = layoutId;
+	}
+
+	public String getDeveloperId() {
+		return this.developerId;
+	}
+
+	public void setDeveloperId(final String developerId) {
+		this.developerId = developerId;
+	}
+
+	public String getSectionId() {
+		return this.sectionId;
+	}
+
+	public void setSectionId(final String sectionId) {
+		this.sectionId = sectionId;
 	}
 
 	@Override

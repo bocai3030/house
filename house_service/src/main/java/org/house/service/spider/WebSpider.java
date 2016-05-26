@@ -138,13 +138,62 @@ public class WebSpider {
 			projectBasicData.setLicenceDate(licenceDate);
 
 			fullFillProjectDetailData(projectBasicData);
+			fullFillProjectLicenceIdData(projectBasicData);
 
 			earthBasicDatas.add(projectBasicData);
 
 			idx = idx16 + tag3.length();
+			break;
 		}
 
 		return earthBasicDatas;
+	}
+
+	private static void fullFillProjectLicenceIdData(final ProjectBasicData projectBasicData)
+			throws ClientProtocolException, IOException {
+		final HttpGet httpGet = new HttpGet(
+				"http://www.laho.gov.cn/g4cdata/search/laho/project_detail.jsp?changeproInfoTag=0&changePreSellTag=1&preSell="
+						+ projectBasicData.getPreSellLicenceNo() + "&pjID=" + projectBasicData.getProjectId()
+						+ "&name=ysz");
+		setAjaxRequestHeader(httpGet);
+
+		final CloseableHttpResponse theResponse = client.execute(httpGet);
+
+		final String content = EntityUtils.toString(theResponse.getEntity());
+
+		final String tag0 = "&country_id=";
+		final String tag1 = "&agreeId=";
+		final String tag2 = "&layoutId=";
+		final String tag3 = "/project/country.jsp?country_name=";
+		final String tag4 = "/project/workAgree.jsp?agreeName=";
+		final String tag5 = "/project/layoutAgree.jsp?layoutName=";
+		final String tag6 = "developer.jsp?pjID=";
+		final String tag7 = "\";";
+		final String tag8 = "&pjID=";
+
+		final int idx1 = content.indexOf(tag3);
+		final int idx2 = content.indexOf(tag7, idx1 + tag3.length());
+		final String[] countryStr = content.substring(idx1 + tag3.length(), idx2).split(tag0);
+		projectBasicData.setCountryName(countryStr[0]);
+		projectBasicData.setCountryId(countryStr[1]);
+
+		final int idx3 = content.indexOf(tag4, idx2 + tag7.length());
+		final int idx4 = content.indexOf(tag7, idx3 + tag4.length());
+		final String[] agreeStr = content.substring(idx3 + tag4.length(), idx4).split(tag1);
+		projectBasicData.setAgreeName(agreeStr[0]);
+		projectBasicData.setAgreeId(agreeStr[1]);
+
+		final int idx5 = content.indexOf(tag5, idx4 + tag7.length());
+		final int idx6 = content.indexOf(tag8, idx5 + tag5.length());
+		final String[] layoutStr = content.substring(idx5 + tag5.length(), idx6).split(tag2);
+		projectBasicData.setLayoutName(layoutStr[0]);
+		projectBasicData.setLayoutId(layoutStr[1]);
+
+		final int idx7 = content.indexOf(tag6, idx6 + tag8.length());
+		final int idx8 = content.indexOf(tag7, idx7 + tag6.length());
+		final String[] str = content.substring(idx7 + tag6.length(), idx8).split("&");
+		projectBasicData.setDeveloperId(str[1].split("=")[1]);
+		projectBasicData.setSectionId(str[2].split("=")[1]);
 	}
 
 	private static void fullFillProjectDetailData(final ProjectBasicData projectBasicData)
