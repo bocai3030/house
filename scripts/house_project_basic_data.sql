@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.30, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: house
 -- ------------------------------------------------------
--- Server version	5.7.12-0ubuntu1.1
+-- Server version	5.6.30-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,7 +26,7 @@ CREATE TABLE `project_basic_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` varchar(255) NOT NULL COMMENT '项目ID',
   `project_name` varchar(255) NOT NULL DEFAULT '' COMMENT '所属项目名称',
-  `pre_sell_licence_no` varchar(255) NOT NULL COMMENT '预售许可证号',
+  `pre_sell_license_no` varchar(255) NOT NULL COMMENT '预售许可证号',
   `country_name` varchar(255) NOT NULL DEFAULT '' COMMENT '国土证名',
   `country_id` varchar(255) NOT NULL DEFAULT '' COMMENT '国土证ID',
   `agree_name` varchar(255) NOT NULL DEFAULT '' COMMENT '施工许可证名',
@@ -45,12 +45,12 @@ CREATE TABLE `project_basic_data` (
   `pre_sell_total_count` int(11) NOT NULL DEFAULT '0' COMMENT '批准预售总套数',
   `pre_sell_total_area` varchar(255) NOT NULL DEFAULT '' COMMENT '批准预售总面积',
   `building_count` int(11) NOT NULL DEFAULT '0' COMMENT '预售幢数',
-  `licence_date` varchar(255) NOT NULL DEFAULT '' COMMENT '发证日期',
+  `license_date` varchar(255) NOT NULL DEFAULT '' COMMENT '发证日期',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `project_id_UNIQUE` (`project_id`),
-  UNIQUE KEY `pre_sell_licence_no_UNIQUE` (`pre_sell_licence_no`)
+  UNIQUE KEY `pre_sell_license_no_UNIQUE` (`pre_sell_license_no`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -63,4 +63,4 @@ CREATE TABLE `project_basic_data` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-26 21:04:35
+-- Dump completed on 2016-05-26 23:38:48

@@ -17,7 +17,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String projectId; // 项目ID
 	protected String projectName; // 所属项目名称
-	protected String preSellLicenceNo; // 预售许可证号
+	protected String preSellLicenseNo; // 预售许可证号
 	protected String countryName; // 国土证名
 	protected String countryId; // 国土证ID
 	protected String agreeName; // 施工许可证名
@@ -36,14 +36,14 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 	protected int preSellTotalCount; // 批准预售总套数
 	protected String preSellTotalArea; // 批准预售总面积
 	protected int buildingCount; // 预售幢数
-	protected String licenceDate; // 发证日期
+	protected String licenseDate; // 发证日期
 	// 已售套数、已售面积 待另建表在本页抓取
 
 	@Override
 	public int hashCode() {
 		return new StringBuilder().append(this.projectId)//
 				.append(this.projectName)//
-				.append(this.preSellLicenceNo)//
+				.append(this.preSellLicenseNo)//
 				.append(this.countryName)//
 				.append(this.countryId)//
 				.append(this.agreeName)//
@@ -62,7 +62,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 				.append(this.preSellTotalCount)//
 				.append(this.preSellTotalArea)//
 				.append(this.buildingCount)//
-				.append(this.licenceDate).toString().hashCode();
+				.append(this.licenseDate).toString().hashCode();
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 			final ProjectBasicData anObject = (ProjectBasicData) obj;
 			if (ObjectUtils.nullSafeEquals(this.projectId, anObject.getProjectId())
 					&& ObjectUtils.nullSafeEquals(this.projectName, anObject.getProjectName())
-					&& ObjectUtils.nullSafeEquals(this.preSellLicenceNo, anObject.getPreSellLicenceNo())
+					&& ObjectUtils.nullSafeEquals(this.preSellLicenseNo, anObject.getPreSellLicenseNo())
 					&& ObjectUtils.nullSafeEquals(this.countryName, anObject.getCountryName())
 					&& ObjectUtils.nullSafeEquals(this.countryId, anObject.getCountryId())
 					&& ObjectUtils.nullSafeEquals(this.agreeName, anObject.getAgreeName())
@@ -93,7 +93,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 					&& ObjectUtils.nullSafeEquals(this.preSellTotalCount, anObject.getPreSellTotalCount())
 					&& ObjectUtils.nullSafeEquals(this.preSellTotalArea, anObject.getPreSellTotalArea())
 					&& ObjectUtils.nullSafeEquals(this.buildingCount, anObject.getBuildingCount())
-					&& ObjectUtils.nullSafeEquals(this.licenceDate, anObject.getLicenceDate())) {
+					&& ObjectUtils.nullSafeEquals(this.licenseDate, anObject.getLicenseDate())) {
 				return true;
 			}
 		}
@@ -103,7 +103,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 	public void fromObj(final ProjectBasicData theObj) {
 		// this.projectId = theObj.projectId; // NO ID
 		this.projectName = theObj.projectName;
-		this.preSellLicenceNo = theObj.preSellLicenceNo;
+		this.preSellLicenseNo = theObj.preSellLicenseNo;
 		this.countryName = theObj.countryName;
 		this.countryId = theObj.countryId;
 		this.agreeName = theObj.agreeName;
@@ -122,7 +122,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 		this.preSellTotalCount = theObj.preSellTotalCount;
 		this.preSellTotalArea = theObj.preSellTotalArea;
 		this.buildingCount = theObj.buildingCount;
-		this.licenceDate = theObj.licenceDate;
+		this.licenseDate = theObj.licenseDate;
 	}
 
 	public String getProjectId() {
@@ -141,12 +141,12 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 		this.projectName = projectName;
 	}
 
-	public String getPreSellLicenceNo() {
-		return this.preSellLicenceNo;
+	public String getPreSellLicenseNo() {
+		return this.preSellLicenseNo;
 	}
 
-	public void setPreSellLicenceNo(final String preSellLicenceNo) {
-		this.preSellLicenceNo = preSellLicenceNo;
+	public void setPreSellLicenseNo(final String preSellLicenseNo) {
+		this.preSellLicenseNo = preSellLicenseNo;
 	}
 
 	public String getProjectAddress() {
@@ -229,12 +229,12 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 		this.buildingCount = buildingCount;
 	}
 
-	public String getLicenceDate() {
-		return this.licenceDate;
+	public String getLicenseDate() {
+		return this.licenseDate;
 	}
 
-	public void setLicenceDate(final String licenceDate) {
-		this.licenceDate = licenceDate;
+	public void setLicenseDate(final String licenseDate) {
+		this.licenseDate = licenseDate;
 	}
 
 	public String getCountryName() {

@@ -16,7 +16,7 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.house.db.entity.EarthBasicData;
-import org.house.db.entity.PreSellLicenceData;
+import org.house.db.entity.PreSellLicenseData;
 import org.house.db.entity.ProjectBasicData;
 
 import com.google.common.collect.Lists;
@@ -74,7 +74,7 @@ public class WebSpider {
 
 		final CloseableHttpResponse theResponse = client.execute(httpPost);
 
-		final List<ProjectBasicData> earthBasicDatas = Lists.<ProjectBasicData> newArrayList();
+		final List<ProjectBasicData> earthBasicDatas = Lists.<ProjectBasicData>newArrayList();
 		final String content = EntityUtils.toString(theResponse.getEntity());
 		int idx = 0;
 		final String tag = "box_tab_style02_td";
@@ -96,7 +96,7 @@ public class WebSpider {
 
 			final int idx3 = content.indexOf(tag2, idx2);
 			final int idx4 = content.indexOf(tag3, idx3);
-			final String preSellLicenceNo = content.substring(idx3 + tag2.length(), idx4);
+			final String preSellLicenseNo = content.substring(idx3 + tag2.length(), idx4);
 
 			final int idx5 = content.indexOf(tag2, idx4);
 			final int idx6 = content.indexOf(tag3, idx5);
@@ -120,7 +120,7 @@ public class WebSpider {
 
 			final int idx15 = content.indexOf(tag2, idx14);
 			final int idx16 = content.indexOf(tag3, idx15);
-			final String licenceDate = content.substring(idx15 + tag2.length(), idx16);
+			final String licenseDate = content.substring(idx15 + tag2.length(), idx16);
 
 			if (projectId == null) {
 				final int idx17 = content.indexOf(tag4, idx2);
@@ -129,13 +129,13 @@ public class WebSpider {
 			}
 
 			projectBasicData.setProjectId(projectId);
-			projectBasicData.setPreSellLicenceNo(preSellLicenceNo);
+			projectBasicData.setPreSellLicenseNo(preSellLicenseNo);
 			projectBasicData.setProjectName(projectName);
 			projectBasicData.setDeveloper(developer);
 			projectBasicData.setBuildingCount(buildingCount);
 			projectBasicData.setPreSellTotalCount(preSellTotalCount);
 			projectBasicData.setPreSellTotalArea(preSellTotalArea);
-			projectBasicData.setLicenceDate(licenceDate);
+			projectBasicData.setLicenseDate(licenseDate);
 
 			fullFillProjectDetailData(projectBasicData);
 			fullFillProjectLicenceIdData(projectBasicData);
@@ -153,7 +153,7 @@ public class WebSpider {
 			throws ClientProtocolException, IOException {
 		final HttpGet httpGet = new HttpGet(
 				"http://www.laho.gov.cn/g4cdata/search/laho/project_detail.jsp?changeproInfoTag=0&changePreSellTag=1&preSell="
-						+ projectBasicData.getPreSellLicenceNo() + "&pjID=" + projectBasicData.getProjectId()
+						+ projectBasicData.getPreSellLicenseNo() + "&pjID=" + projectBasicData.getProjectId()
 						+ "&name=ysz");
 		setAjaxRequestHeader(httpGet);
 
@@ -244,18 +244,18 @@ public class WebSpider {
 		projectBasicData.setUsagee(usagee);
 	}
 
-	public static PreSellLicenceData getPreSellLicenceData(final String projectId, final String licenceId)
+	public static PreSellLicenseData getPreSellLicenseData(final String projectId, final String licenseId)
 			throws ClientProtocolException, IOException {
 		final HttpGet httpGet = new HttpGet("http://www.laho.gov.cn/g4cdata/search/project/preSell.jsp?pjID="
-				+ projectId + "&presell=" + licenceId + "&maxPrice=&groundPrice=");
+				+ projectId + "&presell=" + licenseId + "&maxPrice=&groundPrice=");
 		setAjaxRequestHeader(httpGet);
 
 		final CloseableHttpResponse theResponse = client.execute(httpGet);
 
 		final String content = EntityUtils.toString(theResponse.getEntity());
 
-		final PreSellLicenceData preSellLicenceData = new PreSellLicenceData();
-		preSellLicenceData.setPreSellLicenceNo(licenceId);
+		final PreSellLicenseData preSellLicenseData = new PreSellLicenseData();
+		preSellLicenseData.setPreSellLicenseNo(licenseId);
 
 		final String tag1 = "预售幢数";
 		final String tag2 = "tab_style01_td";
@@ -271,132 +271,132 @@ public class WebSpider {
 		final int idx2 = content.indexOf(tag2, idx1 + tag1.length());
 		final int idx3 = content.indexOf(tag3, idx2 + tag2.length());
 		final int buildingCount = Integer.parseInt(content.substring(idx2 + tag2.length() + tag4.length(), idx3));
-		preSellLicenceData.setBuildingCount(buildingCount);
+		preSellLicenseData.setBuildingCount(buildingCount);
 
 		final int idx4 = content.indexOf(tag2, idx3 + tag3.length());
 		final int idx5 = content.indexOf(tag3, idx4 + tag2.length());
 		final String buildingHouse = content.substring(idx4 + tag2.length() + tag4.length() + 1, idx5); // 这里多了一个空格
-		preSellLicenceData.setBuildingHouse(buildingHouse);
+		preSellLicenseData.setBuildingHouse(buildingHouse);
 
 		final int idx6 = content.indexOf(tag2, idx5 + tag3.length());
 		final int idx7 = content.indexOf(tag3, idx6 + tag2.length());
 		final String builtHouse = content.substring(idx6 + tag2.length() + tag4.length(), idx7);
-		preSellLicenceData.setBuiltHouse(builtHouse);
+		preSellLicenseData.setBuiltHouse(builtHouse);
 
 		final int idx8 = content.indexOf(tag2, idx7 + tag3.length());
 		final int idx9 = content.indexOf(tag3, idx8 + tag2.length());
 		final int currentPhase = Integer.parseInt(content.substring(idx8 + tag2.length() + tag4.length(), idx9));
-		preSellLicenceData.setCurrentPhase(currentPhase);
+		preSellLicenseData.setCurrentPhase(currentPhase);
 
 		final int idx10 = content.indexOf(tag2, idx9 + tag3.length());
 		final int idx11 = content.indexOf(tag3, idx10 + tag2.length());
 		final String currentPhaseBuildingArea = content.substring(idx10 + tag2.length() + tag4.length(), idx11);
-		preSellLicenceData.setCurrentPhaseBuildingArea(currentPhaseBuildingArea);
+		preSellLicenseData.setCurrentPhaseBuildingArea(currentPhaseBuildingArea);
 
 		final int idx12 = content.indexOf(tag2, idx11 + tag3.length());
 		final int idx13 = content.indexOf(tag3, idx12 + tag2.length());
 		final String areaUpGround = content.substring(idx12 + tag2.length() + tag4.length(), idx13);
-		preSellLicenceData.setAreaUpGround(areaUpGround);
+		preSellLicenseData.setAreaUpGround(areaUpGround);
 
 		final int idx14 = content.indexOf(tag2, idx13 + tag3.length());
 		final int idx15 = content.indexOf(tag3, idx14 + tag2.length());
 		final String areaUnderGround = content.substring(idx14 + tag2.length() + tag4.length(), idx15);
-		preSellLicenceData.setAreaUnderGround(areaUnderGround);
+		preSellLicenseData.setAreaUnderGround(areaUnderGround);
 
 		final int idx16 = content.indexOf(tag2, idx15 + tag3.length());
 		final int idx17 = content.indexOf(tag3, idx16 + tag2.length());
 		final int unitCount = Integer.parseInt(content.substring(idx16 + tag2.length() + tag4.length(), idx17));
-		preSellLicenceData.setUnitCount(unitCount);
+		preSellLicenseData.setUnitCount(unitCount);
 
 		final int idx18 = content.indexOf(tag2, idx17 + tag3.length());
 		final int idx19 = content.indexOf(tag3, idx18 + tag2.length());
 		final String totalBuidingArea = content.substring(idx18 + tag2.length() + tag4.length(), idx19);
-		preSellLicenceData.setTotalBuidingArea(totalBuidingArea);
+		preSellLicenseData.setTotalBuidingArea(totalBuidingArea);
 
 		final int idx20 = content.indexOf(tag2, idx19 + tag3.length());
 		final int idx21 = content.indexOf(tag3, idx20 + tag2.length());
 		final String contactPersion = content.substring(idx20 + tag2.length() + tag4.length(), idx21);
-		preSellLicenceData.setContactPersion(contactPersion);
+		preSellLicenseData.setContactPersion(contactPersion);
 
 		final int idx22 = content.indexOf(tag2, idx21 + tag3.length());
 		final int idx23 = content.indexOf(tag3, idx22 + tag2.length());
 		final String mortgage = content.substring(idx22 + tag2.length() + tag4.length(), idx23);
-		preSellLicenceData.setMortgage(mortgage);
+		preSellLicenseData.setMortgage(mortgage);
 
 		final int idx24 = content.indexOf(tag2, idx23 + tag3.length());
 		final int idx25 = content.indexOf(tag3, idx24 + tag2.length());
 		final String supportingArea = content.substring(idx24 + tag2.length() + tag4.length(), idx25);
-		preSellLicenceData.setSupportingArea(supportingArea);
+		preSellLicenseData.setSupportingArea(supportingArea);
 
 		final int idx26 = content.indexOf(tag5, idx25 + tag3.length());
 		final int idx27 = content.indexOf(tag3, idx26 + tag5.length());
 		final String validateFrom = content.substring(idx26 + tag5.length() + tag4.length() + 1, idx27);
-		preSellLicenceData.setValidateFrom(validateFrom);
+		preSellLicenseData.setValidateFrom(validateFrom);
 
 		final int idx28 = content.indexOf(tag5, idx27 + tag3.length());
 		final int idx29 = content.indexOf(tag3, idx28 + tag5.length());
 		final String validateTo = content.substring(idx28 + tag5.length() + tag4.length() + 1, idx29);
-		preSellLicenceData.setValidateTo(validateTo);
+		preSellLicenseData.setValidateTo(validateTo);
 
 		final int idx30 = content.indexOf(tag2, idx29 + tag3.length());
 		final int idx31 = content.indexOf(tag3, idx30 + tag2.length());
-		final String licenceIssueDate = content.substring(idx30 + tag2.length() + tag4.length(), idx31);
-		preSellLicenceData.setLicenceIssueDate(licenceIssueDate);
+		final String licenseIssueDate = content.substring(idx30 + tag2.length() + tag4.length(), idx31);
+		preSellLicenseData.setLicenseIssueDate(licenseIssueDate);
 
 		final int idx32 = content.indexOf(tag6, idx31 + tag3.length());
 
 		final int idx33 = content.indexOf(tag2, idx32 + tag6.length());
 		final int idx34 = content.indexOf(tag7, idx33 + tag2.length());
 		final int distributeOfResidentialCount = Integer.parseInt(content.substring(idx33 + tag2.length() + 2, idx34));
-		preSellLicenceData.setDistributeOfResidentialCount(distributeOfResidentialCount);
+		preSellLicenseData.setDistributeOfResidentialCount(distributeOfResidentialCount);
 
 		final int idx35 = content.indexOf(tag2, idx34 + tag7.length());
 		final int idx36 = content.indexOf(tag7, idx35 + tag2.length());
 		final int distributeOfBussinessCount = Integer.parseInt(content.substring(idx35 + tag2.length() + 2, idx36));
-		preSellLicenceData.setDistributeOfBussinessCount(distributeOfBussinessCount);
+		preSellLicenseData.setDistributeOfBussinessCount(distributeOfBussinessCount);
 
 		final int idx37 = content.indexOf(tag2, idx36 + tag7.length());
 		final int idx38 = content.indexOf(tag7, idx37 + tag2.length());
 		final int distributeOfOfficeCount = Integer.parseInt(content.substring(idx37 + tag2.length() + 2, idx38));
-		preSellLicenceData.setDistributeOfOfficeCount(distributeOfOfficeCount);
+		preSellLicenseData.setDistributeOfOfficeCount(distributeOfOfficeCount);
 
 		final int idx39 = content.indexOf(tag2, idx38 + tag7.length());
 		final int idx40 = content.indexOf(tag7, idx39 + tag2.length());
 		final int distributeOfParkingCount = Integer.parseInt(content.substring(idx39 + tag2.length() + 2, idx40));
-		preSellLicenceData.setDistributeOfParkingCount(distributeOfParkingCount);
+		preSellLicenseData.setDistributeOfParkingCount(distributeOfParkingCount);
 
 		final int idx41 = content.indexOf(tag2, idx40 + tag7.length());
 		final int idx42 = content.indexOf(tag7, idx41 + tag2.length());
 		final int distributeOfOtherCount = Integer.parseInt(content.substring(idx41 + tag2.length() + 2, idx42));
-		preSellLicenceData.setDistributeOfOtherCount(distributeOfOtherCount);
+		preSellLicenseData.setDistributeOfOtherCount(distributeOfOtherCount);
 
 		final int idx43 = content.indexOf(tag8, idx42 + tag7.length());
 
 		final int idx44 = content.indexOf(tag2, idx43 + tag8.length());
 		final int idx45 = content.indexOf(tag7, idx44 + tag2.length());
 		final String distributeOfResidentialArea = content.substring(idx44 + tag2.length() + 2, idx45);
-		preSellLicenceData.setDistributeOfResidentialArea(distributeOfResidentialArea);
+		preSellLicenseData.setDistributeOfResidentialArea(distributeOfResidentialArea);
 
 		final int idx46 = content.indexOf(tag2, idx45 + tag7.length());
 		final int idx47 = content.indexOf(tag7, idx46 + tag2.length());
 		final String distributeOfBussinessArea = content.substring(idx46 + tag2.length() + 2, idx47);
-		preSellLicenceData.setDistributeOfBussinessArea(distributeOfBussinessArea);
+		preSellLicenseData.setDistributeOfBussinessArea(distributeOfBussinessArea);
 
 		final int idx48 = content.indexOf(tag2, idx47 + tag7.length());
 		final int idx49 = content.indexOf(tag7, idx48 + tag2.length());
 		final String distributeOfOfficeArea = content.substring(idx48 + tag2.length() + 2, idx49);
-		preSellLicenceData.setDistributeOfOfficeArea(distributeOfOfficeArea);
+		preSellLicenseData.setDistributeOfOfficeArea(distributeOfOfficeArea);
 
 		final int idx50 = content.indexOf(tag2, idx49 + tag7.length());
 		final int idx51 = content.indexOf(tag7, idx50 + tag2.length());
 		final String distributeOfParkingArea = content.substring(idx50 + tag2.length() + 2, idx51);
-		preSellLicenceData.setDistributeOfParkingArea(distributeOfParkingArea);
+		preSellLicenseData.setDistributeOfParkingArea(distributeOfParkingArea);
 
 		final int idx52 = content.indexOf(tag2, idx51 + tag7.length());
 		final int idx53 = content.indexOf(tag7, idx52 + tag2.length());
 		final String distributeOfOtherArea = content.substring(idx52 + tag2.length() + 2, idx53);
-		preSellLicenceData.setDistributeOfOtherArea(distributeOfOtherArea);
-		return preSellLicenceData;
+		preSellLicenseData.setDistributeOfOtherArea(distributeOfOtherArea);
+		return preSellLicenseData;
 	}
 
 	public static EarthBasicData getEarthBasicData(final String countryName, final String countryId,
@@ -416,7 +416,7 @@ public class WebSpider {
 		final String content = EntityUtils.toString(theResponse.getEntity());
 
 		final EarthBasicData earthBasicData = new EarthBasicData();
-		earthBasicData.setEarthLicenceId(queryCountryId);
+		earthBasicData.setEarthLicenseId(queryCountryId);
 
 		final String tag1 = "国土证号";
 		final String tag2 = "tab_style01_td\">";
@@ -426,8 +426,8 @@ public class WebSpider {
 
 		final int idx2 = content.indexOf(tag2, idx1 + tag1.length());
 		final int idx3 = content.indexOf(tag3, idx2 + tag2.length());
-		final String earthLicenceNo = content.substring(idx2 + tag2.length(), idx3);
-		earthBasicData.setEarthLicenceNo(earthLicenceNo);
+		final String earthLicenseNo = content.substring(idx2 + tag2.length(), idx3);
+		earthBasicData.setEarthLicenseNo(earthLicenseNo);
 
 		final int idx4 = content.indexOf(tag2, idx3 + tag3.length());
 		final int idx5 = content.indexOf(tag3, idx4 + tag2.length());
@@ -481,8 +481,8 @@ public class WebSpider {
 
 		final int idx24 = content.indexOf(tag2, idx23 + tag3.length());
 		final int idx25 = content.indexOf(tag3, idx24 + tag2.length());
-		final String licenceIssueDate = content.substring(idx24 + tag2.length(), idx25);
-		earthBasicData.setLicenceIssueDate(licenceIssueDate);
+		final String licenseIssueDate = content.substring(idx24 + tag2.length(), idx25);
+		earthBasicData.setLicenseIssueDate(licenseIssueDate);
 
 		return earthBasicData;
 	}

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.http.client.ClientProtocolException;
 import org.house.db.entity.EarthBasicData;
-import org.house.db.entity.PreSellLicenceData;
+import org.house.db.entity.PreSellLicenseData;
 import org.house.db.entity.ProjectBasicData;
 import org.house.db.repository.EarthBasicDataRepository;
 import org.house.db.repository.ProjectBasicDataRepository;
@@ -56,12 +56,12 @@ public class SpiderController {
 		return re;
 	}
 
-	@RequestMapping(value = "/getPreSellLicenceData", produces = "application/json")
-	Object getPreSellLicenceData(@RequestParam("projectId") final String projectId,
-			@RequestParam("licenceId") final String licenceId) throws ClientProtocolException, IOException {
-		final PreSellLicenceData preSellLicenceData = WebSpider.getPreSellLicenceData(projectId, licenceId);
+	@RequestMapping(value = "/getPreSellLicenseData", produces = "application/json")
+	Object getPreSellLicenseData(@RequestParam("projectId") final String projectId,
+			@RequestParam("licenseId") final String licenseId) throws ClientProtocolException, IOException {
+		final PreSellLicenseData preSellLicenseData = WebSpider.getPreSellLicenseData(projectId, licenseId);
 
-		return preSellLicenceData;
+		return preSellLicenseData;
 	}
 
 	@RequestMapping(value = "/updateEarthBasicData", produces = "application/json")
@@ -77,13 +77,13 @@ public class SpiderController {
 		final EarthBasicData earthBasicDataInDb = this.earthBasicDataRepository.findByEarthLicenceId(queryCountryId);
 		if (earthBasicDataInDb == null) {
 			this.earthBasicDataRepository.save(earthBasicData);
-			newEarthBasicDatas.add(earthBasicData.getEarthLicenceId());
+			newEarthBasicDatas.add(earthBasicData.getEarthLicenseId());
 		} else if (!earthBasicDataInDb.equals(earthBasicData)) {
 			earthBasicDataInDb.fromObj(earthBasicData);
 			this.earthBasicDataRepository.save(earthBasicDataInDb);
-			updatedEarthBasicDatas.add(earthBasicData.getEarthLicenceId());
+			updatedEarthBasicDatas.add(earthBasicData.getEarthLicenseId());
 		} else {
-			sameEarthBasicDatas.add(earthBasicData.getEarthLicenceId());
+			sameEarthBasicDatas.add(earthBasicData.getEarthLicenseId());
 		}
 
 		re.put("new", newEarthBasicDatas);

@@ -14,8 +14,8 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @Table(name = "earth_basic_data")
 public class EarthBasicData extends AbstractDbBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	protected String earthLicenceId; // 国土证号ID
-	protected String earthLicenceNo; // 国土证号
+	protected String earthLicenseId; // 国土证号ID
+	protected String earthLicenseNo; // 国土证号
 	protected String location; // 土地座落
 	protected String userr; // 土地使用者
 	protected String earthNo; // 地号
@@ -26,12 +26,12 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 	protected String useRightKind; // 使用权类型
 	protected String useArea; // 使用权面积
 	protected String shareArea; // 其中共用分推面积
-	protected String licenceIssueDate; // 发证日期
+	protected String licenseIssueDate; // 发证日期
 
 	@Override
 	public int hashCode() {
-		return new StringBuilder().append(this.earthLicenceId)//
-				.append(this.earthLicenceNo)//
+		return new StringBuilder().append(this.earthLicenseId)//
+				.append(this.earthLicenseNo)//
 				.append(this.location)//
 				.append(this.userr)//
 				.append(this.earthNo)//
@@ -42,7 +42,7 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 				.append(this.useRightKind)//
 				.append(this.useArea)//
 				.append(this.shareArea)//
-				.append(this.licenceIssueDate).toString().hashCode();
+				.append(this.licenseIssueDate).toString().hashCode();
 	}
 
 	@Override
@@ -52,8 +52,8 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 		}
 		if (obj instanceof EarthBasicData) {
 			final EarthBasicData anObject = (EarthBasicData) obj;
-			if (ObjectUtils.nullSafeEquals(this.earthLicenceId, anObject.getEarthLicenceId())
-					&& ObjectUtils.nullSafeEquals(this.earthLicenceNo, anObject.getEarthLicenceNo())
+			if (ObjectUtils.nullSafeEquals(this.earthLicenseId, anObject.getEarthLicenseId())
+					&& ObjectUtils.nullSafeEquals(this.earthLicenseNo, anObject.getEarthLicenseNo())
 					&& ObjectUtils.nullSafeEquals(this.location, anObject.getLocation())
 					&& ObjectUtils.nullSafeEquals(this.userr, anObject.getUserr())
 					&& ObjectUtils.nullSafeEquals(this.earthNo, anObject.getEarthNo())
@@ -64,7 +64,7 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 					&& ObjectUtils.nullSafeEquals(this.useRightKind, anObject.getUseRightKind())
 					&& ObjectUtils.nullSafeEquals(this.useArea, anObject.getUseArea())
 					&& ObjectUtils.nullSafeEquals(this.shareArea, anObject.getShareArea())
-					&& ObjectUtils.nullSafeEquals(this.licenceIssueDate, anObject.getLicenceIssueDate())) {
+					&& ObjectUtils.nullSafeEquals(this.licenseIssueDate, anObject.getLicenseIssueDate())) {
 				return true;
 			}
 		}
@@ -72,8 +72,8 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 	}
 
 	public void fromObj(final EarthBasicData theObj) {
-		// this.earthLicenceId = theObj.earthLicenceId; // NO ID
-		this.earthLicenceNo = theObj.earthLicenceNo;
+		// this.earthLicenseId = theObj.earthLicenseId; // NO ID
+		this.earthLicenseNo = theObj.earthLicenseNo;
 		this.location = theObj.location;
 		this.userr = theObj.userr;
 		this.earthNo = theObj.earthNo;
@@ -84,23 +84,23 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 		this.useRightKind = theObj.useRightKind;
 		this.useArea = theObj.useArea;
 		this.shareArea = theObj.shareArea;
-		this.licenceIssueDate = theObj.licenceIssueDate;
+		this.licenseIssueDate = theObj.licenseIssueDate;
 	}
 
-	public String getEarthLicenceId() {
-		return this.earthLicenceId;
+	public String getEarthLicenseId() {
+		return this.earthLicenseId;
 	}
 
-	public void setEarthLicenceId(final String earthLicenceId) {
-		this.earthLicenceId = earthLicenceId;
+	public void setEarthLicenseId(final String earthLicenseId) {
+		this.earthLicenseId = earthLicenseId;
 	}
 
-	public String getEarthLicenceNo() {
-		return this.earthLicenceNo;
+	public String getEarthLicenseNo() {
+		return this.earthLicenseNo;
 	}
 
-	public void setEarthLicenceNo(final String earthLicenceNo) {
-		this.earthLicenceNo = earthLicenceNo;
+	public void setEarthLicenseNo(final String earthLicenceNo) {
+		this.earthLicenseNo = earthLicenceNo;
 	}
 
 	public String getLocation() {
@@ -183,11 +183,11 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 		this.shareArea = shareArea;
 	}
 
-	public String getLicenceIssueDate() {
-		return this.licenceIssueDate;
+	public String getLicenseIssueDate() {
+		return this.licenseIssueDate;
 	}
 
-	public void setLicenceIssueDate(final String licenceIssueDate) {
-		this.licenceIssueDate = licenceIssueDate;
+	public void setLicenseIssueDate(final String licenseIssueDate) {
+		this.licenseIssueDate = licenseIssueDate;
 	}
 }

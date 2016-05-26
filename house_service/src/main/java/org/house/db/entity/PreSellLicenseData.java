@@ -9,11 +9,11 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect
 @Entity
-@Table(name = "ad_name_lang_map_v4")
-public class PreSellLicenceData extends AbstractDbBean implements Serializable {
+@Table(name = "pre_sell_license_data")
+public class PreSellLicenseData extends AbstractDbBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String preSellLicenceNo; // 预售许可证号
+	private String preSellLicenseNo; // 预售许可证号
 	private int buildingCount; // 预售幢数
 	private String buildingHouse; // 报建屋数
 	private String builtHouse; // 已建层数
@@ -28,7 +28,7 @@ public class PreSellLicenceData extends AbstractDbBean implements Serializable {
 	private String supportingArea; // 配套面积
 	private String validateFrom; // 有效期自
 	private String validateTo; // 有效期至
-	private String licenceIssueDate; // 发证日期
+	private String licenseIssueDate; // 发证日期
 	private int distributeOfResidentialCount; // 住宅套数
 	private String distributeOfResidentialArea; // 住宅面积
 	private int distributeOfBussinessCount; // 商业套数
@@ -40,12 +40,12 @@ public class PreSellLicenceData extends AbstractDbBean implements Serializable {
 	private int distributeOfOtherCount; // 其他套数
 	private String distributeOfOtherArea; // 其他面积
 
-	public String getPreSellLicenceNo() {
-		return this.preSellLicenceNo;
+	public String getPreSellLicenseNo() {
+		return this.preSellLicenseNo;
 	}
 
-	public void setPreSellLicenceNo(final String preSellLicenceNo) {
-		this.preSellLicenceNo = preSellLicenceNo;
+	public void setPreSellLicenseNo(final String preSellLicenseNo) {
+		this.preSellLicenseNo = preSellLicenseNo;
 	}
 
 	public int getBuildingCount() {
@@ -160,12 +160,12 @@ public class PreSellLicenceData extends AbstractDbBean implements Serializable {
 		this.validateTo = validateTo;
 	}
 
-	public String getLicenceIssueDate() {
-		return this.licenceIssueDate;
+	public String getLicenseIssueDate() {
+		return this.licenseIssueDate;
 	}
 
-	public void setLicenceIssueDate(final String licenceIssueDate) {
-		this.licenceIssueDate = licenceIssueDate;
+	public void setLicenseIssueDate(final String licenseIssueDate) {
+		this.licenseIssueDate = licenseIssueDate;
 	}
 
 	public int getDistributeOfResidentialCount() {
