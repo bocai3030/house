@@ -25,8 +25,7 @@ public class WebSpider {
 	static CloseableHttpClient client = HttpClientBuilder.create().build();
 
 	private static void setRequestHeader(final HttpRequestBase HttpRequestBase, final String referer) {
-		HttpRequestBase.setHeader(new BasicHeader("Accept",
-				"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"));
+		HttpRequestBase.setHeader(new BasicHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"));
 		HttpRequestBase.setHeader(new BasicHeader("Accept-Encoding", "gzip, deflate"));
 		HttpRequestBase.setHeader(new BasicHeader("Accept-Language", "en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4"));
 		HttpRequestBase.setHeader(new BasicHeader("Cache-Control", "max-age=0"));
@@ -39,8 +38,7 @@ public class WebSpider {
 	}
 
 	private static void setAjaxRequestHeader(final HttpRequestBase HttpRequestBase) {
-		HttpRequestBase.setHeader(new BasicHeader("Accept",
-				"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"));
+		HttpRequestBase.setHeader(new BasicHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"));
 		HttpRequestBase.setHeader(new BasicHeader("Accept-Encoding", "gzip, deflate"));
 		HttpRequestBase.setHeader(new BasicHeader("Accept-Language", "en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4"));
 		HttpRequestBase.setHeader(new BasicHeader("Cache-Control", "max-age=0"));
@@ -49,8 +47,7 @@ public class WebSpider {
 				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"));
 	}
 
-	public static List<ProjectBasicData> getProjectBasicData(final int page)
-			throws ClientProtocolException, IOException {
+	public static List<ProjectBasicData> getProjectBasicData(final int page) throws ClientProtocolException, IOException {
 		final HttpPost httpPost = new HttpPost("http://www.laho.gov.cn/g4cdata/search/laho/preSellSearch.jsp");
 		setRequestHeader(httpPost, "http://www.laho.gov.cn/g4cdata/search/laho/preSellSearch.jsp");
 
@@ -96,7 +93,7 @@ public class WebSpider {
 
 			final int idx3 = content.indexOf(tag2, idx2);
 			final int idx4 = content.indexOf(tag3, idx3);
-			final String preSellLicenseNo = content.substring(idx3 + tag2.length(), idx4);
+			final String preSellLicenseId = content.substring(idx3 + tag2.length(), idx4);
 
 			final int idx5 = content.indexOf(tag2, idx4);
 			final int idx6 = content.indexOf(tag3, idx5);
@@ -129,7 +126,7 @@ public class WebSpider {
 			}
 
 			projectBasicData.setProjectId(projectId);
-			projectBasicData.setPreSellLicenseNo(preSellLicenseNo);
+			projectBasicData.setPreSellLicenseId(preSellLicenseId);
 			projectBasicData.setProjectName(projectName);
 			projectBasicData.setDeveloper(developer);
 			projectBasicData.setBuildingCount(buildingCount);
@@ -149,12 +146,10 @@ public class WebSpider {
 		return earthBasicDatas;
 	}
 
-	private static void fullFillProjectLicenceIdData(final ProjectBasicData projectBasicData)
-			throws ClientProtocolException, IOException {
+	private static void fullFillProjectLicenceIdData(final ProjectBasicData projectBasicData) throws ClientProtocolException, IOException {
 		final HttpGet httpGet = new HttpGet(
 				"http://www.laho.gov.cn/g4cdata/search/laho/project_detail.jsp?changeproInfoTag=0&changePreSellTag=1&preSell="
-						+ projectBasicData.getPreSellLicenseNo() + "&pjID=" + projectBasicData.getProjectId()
-						+ "&name=ysz");
+						+ projectBasicData.getPreSellLicenseId() + "&pjID=" + projectBasicData.getProjectId() + "&name=ysz");
 		setAjaxRequestHeader(httpGet);
 
 		final CloseableHttpResponse theResponse = client.execute(httpGet);
@@ -196,10 +191,8 @@ public class WebSpider {
 		projectBasicData.setSectionId(str[2].split("=")[1]);
 	}
 
-	private static void fullFillProjectDetailData(final ProjectBasicData projectBasicData)
-			throws ClientProtocolException, IOException {
-		final HttpGet httpGet = new HttpGet(
-				"http://www.laho.gov.cn/g4cdata/search/laho/project.jsp?pjID=" + projectBasicData.getProjectId());
+	private static void fullFillProjectDetailData(final ProjectBasicData projectBasicData) throws ClientProtocolException, IOException {
+		final HttpGet httpGet = new HttpGet("http://www.laho.gov.cn/g4cdata/search/laho/project.jsp?pjID=" + projectBasicData.getProjectId());
 		setAjaxRequestHeader(httpGet);
 
 		final CloseableHttpResponse theResponse = client.execute(httpGet);
@@ -244,10 +237,10 @@ public class WebSpider {
 		projectBasicData.setUsagee(usagee);
 	}
 
-	public static PreSellLicenseData getPreSellLicenseData(final String projectId, final String licenseId)
+	public static PreSellLicenseData getPreSellLicenseData(final String projectId, final String preSellLicenseId)
 			throws ClientProtocolException, IOException {
-		final HttpGet httpGet = new HttpGet("http://www.laho.gov.cn/g4cdata/search/project/preSell.jsp?pjID="
-				+ projectId + "&presell=" + licenseId + "&maxPrice=&groundPrice=");
+		final HttpGet httpGet = new HttpGet("http://www.laho.gov.cn/g4cdata/search/project/preSell.jsp?pjID=" + projectId + "&presell="
+				+ preSellLicenseId + "&maxPrice=&groundPrice=");
 		setAjaxRequestHeader(httpGet);
 
 		final CloseableHttpResponse theResponse = client.execute(httpGet);
@@ -255,7 +248,7 @@ public class WebSpider {
 		final String content = EntityUtils.toString(theResponse.getEntity());
 
 		final PreSellLicenseData preSellLicenseData = new PreSellLicenseData();
-		preSellLicenseData.setPreSellLicenseNo(licenseId);
+		preSellLicenseData.setPreSellLicenseId(preSellLicenseId);
 
 		final String tag1 = "预售幢数";
 		final String tag2 = "tab_style01_td";
@@ -399,15 +392,15 @@ public class WebSpider {
 		return preSellLicenseData;
 	}
 
-	public static EarthBasicData getEarthBasicData(final String countryName, final String countryId,
-			final String queryCountryId) throws ClientProtocolException, IOException {
+	public static EarthBasicData getEarthBasicData(final String countryName, final String countryId, final String queryCountryId, String flag)
+			throws ClientProtocolException, IOException {
 		final HttpPost httpPost = new HttpPost("http://www.laho.gov.cn/g4cdata/search/project/country.jsp");
 		setAjaxRequestHeader(httpPost);
 		final List<NameValuePair> parameters = Lists.newArrayList();
 		parameters.add(new BasicNameValuePair("country_name", countryName));
 		parameters.add(new BasicNameValuePair("country_id", countryId));
 		parameters.add(new BasicNameValuePair("countryId", queryCountryId));
-		parameters.add(new BasicNameValuePair("flag", "1"));
+		parameters.add(new BasicNameValuePair("flag", flag));
 		final UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(parameters);
 		httpPost.setEntity(urlEncodedFormEntity);
 

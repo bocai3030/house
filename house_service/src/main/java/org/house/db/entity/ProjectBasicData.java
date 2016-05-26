@@ -17,7 +17,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String projectId; // 项目ID
 	protected String projectName; // 所属项目名称
-	protected String preSellLicenseNo; // 预售许可证号
+	protected String preSellLicenseId; // 预售许可证号
 	protected String countryName; // 国土证名
 	protected String countryId; // 国土证ID
 	protected String agreeName; // 施工许可证名
@@ -43,7 +43,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 	public int hashCode() {
 		return new StringBuilder().append(this.projectId)//
 				.append(this.projectName)//
-				.append(this.preSellLicenseNo)//
+				.append(this.preSellLicenseId)//
 				.append(this.countryName)//
 				.append(this.countryId)//
 				.append(this.agreeName)//
@@ -74,7 +74,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 			final ProjectBasicData anObject = (ProjectBasicData) obj;
 			if (ObjectUtils.nullSafeEquals(this.projectId, anObject.getProjectId())
 					&& ObjectUtils.nullSafeEquals(this.projectName, anObject.getProjectName())
-					&& ObjectUtils.nullSafeEquals(this.preSellLicenseNo, anObject.getPreSellLicenseNo())
+					&& ObjectUtils.nullSafeEquals(this.preSellLicenseId, anObject.getPreSellLicenseId())
 					&& ObjectUtils.nullSafeEquals(this.countryName, anObject.getCountryName())
 					&& ObjectUtils.nullSafeEquals(this.countryId, anObject.getCountryId())
 					&& ObjectUtils.nullSafeEquals(this.agreeName, anObject.getAgreeName())
@@ -103,7 +103,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 	public void fromObj(final ProjectBasicData theObj) {
 		// this.projectId = theObj.projectId; // NO ID
 		this.projectName = theObj.projectName;
-		this.preSellLicenseNo = theObj.preSellLicenseNo;
+		this.preSellLicenseId = theObj.preSellLicenseId;
 		this.countryName = theObj.countryName;
 		this.countryId = theObj.countryId;
 		this.agreeName = theObj.agreeName;
@@ -141,12 +141,12 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 		this.projectName = projectName;
 	}
 
-	public String getPreSellLicenseNo() {
-		return this.preSellLicenseNo;
+	public String getPreSellLicenseId() {
+		return this.preSellLicenseId;
 	}
 
-	public void setPreSellLicenseNo(final String preSellLicenseNo) {
-		this.preSellLicenseNo = preSellLicenseNo;
+	public void setPreSellLicenseId(final String preSellLicenseId) {
+		this.preSellLicenseId = preSellLicenseId;
 	}
 
 	public String getProjectAddress() {

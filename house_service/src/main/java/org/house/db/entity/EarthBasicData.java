@@ -99,8 +99,8 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 		return this.earthLicenseNo;
 	}
 
-	public void setEarthLicenseNo(final String earthLicenceNo) {
-		this.earthLicenseNo = earthLicenceNo;
+	public void setEarthLicenseNo(final String earthLicenseNo) {
+		this.earthLicenseNo = earthLicenseNo;
 	}
 
 	public String getLocation() {

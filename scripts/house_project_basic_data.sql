@@ -26,7 +26,7 @@ CREATE TABLE `project_basic_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` varchar(255) NOT NULL COMMENT '项目ID',
   `project_name` varchar(255) NOT NULL DEFAULT '' COMMENT '所属项目名称',
-  `pre_sell_license_no` varchar(255) NOT NULL COMMENT '预售许可证号',
+  `pre_sell_license_id` varchar(255) NOT NULL COMMENT '预售许可证号',
   `country_name` varchar(255) NOT NULL DEFAULT '' COMMENT '国土证名',
   `country_id` varchar(255) NOT NULL DEFAULT '' COMMENT '国土证ID',
   `agree_name` varchar(255) NOT NULL DEFAULT '' COMMENT '施工许可证名',
@@ -50,8 +50,8 @@ CREATE TABLE `project_basic_data` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `project_id_UNIQUE` (`project_id`),
-  UNIQUE KEY `pre_sell_license_no_UNIQUE` (`pre_sell_license_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `pre_sell_license_id_UNIQUE` (`pre_sell_license_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -63,4 +63,4 @@ CREATE TABLE `project_basic_data` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-26 23:38:48
+-- Dump completed on 2016-05-27  1:09:53

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.springframework.util.ObjectUtils;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect
@@ -12,40 +14,137 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @Table(name = "pre_sell_license_data")
 public class PreSellLicenseData extends AbstractDbBean implements Serializable {
 	private static final long serialVersionUID = 1L;
+	protected String preSellLicenseId; // 预售许可证号
+	protected int buildingCount; // 预售幢数
+	protected String buildingHouse; // 报建屋数
+	protected String builtHouse; // 已建层数
+	protected int currentPhase;// 本期期数
+	protected String currentPhaseBuildingArea;// 本期报建总面积
+	protected String areaUpGround; // 地上面积
+	protected String areaUnderGround; // 地下面积
+	protected int unitCount; // 本期总单元套数
+	protected String totalBuidingArea; // 总建筑面积
+	protected String contactPersion; // 联系人
+	protected String mortgage; // 土地是否抵押
+	protected String supportingArea; // 配套面积
+	protected String validateFrom; // 有效期自
+	protected String validateTo; // 有效期至
+	protected String licenseIssueDate; // 发证日期
+	protected int distributeOfResidentialCount; // 住宅套数
+	protected String distributeOfResidentialArea; // 住宅面积
+	protected int distributeOfBussinessCount; // 商业套数
+	protected String distributeOfBussinessArea; // 商业面积
+	protected int distributeOfOfficeCount; // 办公套数
+	protected String distributeOfOfficeArea; // 办公面积
+	protected int distributeOfParkingCount; // 车位套数
+	protected String distributeOfParkingArea; // 车位面积
+	protected int distributeOfOtherCount; // 其他套数
+	protected String distributeOfOtherArea; // 其他面积
 
-	private String preSellLicenseNo; // 预售许可证号
-	private int buildingCount; // 预售幢数
-	private String buildingHouse; // 报建屋数
-	private String builtHouse; // 已建层数
-	private int currentPhase;// 本期期数
-	private String currentPhaseBuildingArea;// 本期报建总面积
-	private String areaUpGround; // 地上面积
-	private String areaUnderGround; // 地下面积
-	private int unitCount; // 本期总单元套数
-	private String totalBuidingArea; // 总建筑面积
-	private String contactPersion; // 联系人
-	private String mortgage; // 土地是否抵押
-	private String supportingArea; // 配套面积
-	private String validateFrom; // 有效期自
-	private String validateTo; // 有效期至
-	private String licenseIssueDate; // 发证日期
-	private int distributeOfResidentialCount; // 住宅套数
-	private String distributeOfResidentialArea; // 住宅面积
-	private int distributeOfBussinessCount; // 商业套数
-	private String distributeOfBussinessArea; // 商业面积
-	private int distributeOfOfficeCount; // 办公套数
-	private String distributeOfOfficeArea; // 办公面积
-	private int distributeOfParkingCount; // 车位套数
-	private String distributeOfParkingArea; // 车位面积
-	private int distributeOfOtherCount; // 其他套数
-	private String distributeOfOtherArea; // 其他面积
-
-	public String getPreSellLicenseNo() {
-		return this.preSellLicenseNo;
+	@Override
+	public int hashCode() {
+		return new StringBuilder().append(this.preSellLicenseId)//
+				.append(this.buildingCount)//
+				.append(this.buildingHouse)//
+				.append(this.builtHouse)//
+				.append(this.currentPhase)//
+				.append(this.currentPhaseBuildingArea)//
+				.append(this.areaUpGround)//
+				.append(this.areaUnderGround)//
+				.append(this.unitCount)//
+				.append(this.totalBuidingArea)//
+				.append(this.contactPersion)//
+				.append(this.mortgage)//
+				.append(this.supportingArea)//
+				.append(this.validateFrom)//
+				.append(this.validateTo)//
+				.append(this.licenseIssueDate)//
+				.append(this.distributeOfResidentialCount)//
+				.append(this.distributeOfResidentialArea)//
+				.append(this.distributeOfBussinessCount)//
+				.append(this.distributeOfBussinessArea)//
+				.append(this.distributeOfOfficeCount)//
+				.append(this.distributeOfOfficeArea)//
+				.append(this.distributeOfParkingCount)//
+				.append(this.distributeOfParkingArea)//
+				.append(this.distributeOfOtherCount)//
+				.append(this.distributeOfOtherArea).toString().hashCode();
 	}
 
-	public void setPreSellLicenseNo(final String preSellLicenseNo) {
-		this.preSellLicenseNo = preSellLicenseNo;
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof PreSellLicenseData) {
+			final PreSellLicenseData anObject = (PreSellLicenseData) obj;
+			if (ObjectUtils.nullSafeEquals(this.preSellLicenseId, anObject.getPreSellLicenseId())
+					&& ObjectUtils.nullSafeEquals(this.buildingCount, anObject.getBuildingCount())
+					&& ObjectUtils.nullSafeEquals(this.buildingHouse, anObject.getBuildingHouse())
+					&& ObjectUtils.nullSafeEquals(this.builtHouse, anObject.getBuiltHouse())
+					&& ObjectUtils.nullSafeEquals(this.currentPhase, anObject.getCurrentPhase())
+					&& ObjectUtils.nullSafeEquals(this.currentPhaseBuildingArea, anObject.getCurrentPhaseBuildingArea())
+					&& ObjectUtils.nullSafeEquals(this.areaUpGround, anObject.getAreaUpGround())
+					&& ObjectUtils.nullSafeEquals(this.areaUnderGround, anObject.getAreaUnderGround())
+					&& ObjectUtils.nullSafeEquals(this.unitCount, anObject.getUnitCount())
+					&& ObjectUtils.nullSafeEquals(this.totalBuidingArea, anObject.getTotalBuidingArea())
+					&& ObjectUtils.nullSafeEquals(this.contactPersion, anObject.getContactPersion())
+					&& ObjectUtils.nullSafeEquals(this.mortgage, anObject.getMortgage())
+					&& ObjectUtils.nullSafeEquals(this.supportingArea, anObject.getSupportingArea())
+					&& ObjectUtils.nullSafeEquals(this.validateFrom, anObject.getValidateFrom())
+					&& ObjectUtils.nullSafeEquals(this.validateTo, anObject.getValidateTo())
+					&& ObjectUtils.nullSafeEquals(this.licenseIssueDate, anObject.getLicenseIssueDate())
+					&& ObjectUtils.nullSafeEquals(this.distributeOfResidentialCount, anObject.getDistributeOfResidentialCount())
+					&& ObjectUtils.nullSafeEquals(this.distributeOfResidentialArea, anObject.getDistributeOfResidentialArea())
+					&& ObjectUtils.nullSafeEquals(this.distributeOfBussinessCount, anObject.getDistributeOfBussinessCount())
+					&& ObjectUtils.nullSafeEquals(this.distributeOfBussinessArea, anObject.getDistributeOfBussinessArea())
+					&& ObjectUtils.nullSafeEquals(this.distributeOfOfficeCount, anObject.getDistributeOfOfficeCount())
+					&& ObjectUtils.nullSafeEquals(this.distributeOfOfficeArea, anObject.getDistributeOfOfficeArea())
+					&& ObjectUtils.nullSafeEquals(this.distributeOfParkingCount, anObject.getDistributeOfParkingCount())
+					&& ObjectUtils.nullSafeEquals(this.distributeOfParkingArea, anObject.getDistributeOfParkingArea())
+					&& ObjectUtils.nullSafeEquals(this.distributeOfOtherCount, anObject.getDistributeOfOtherCount())
+					&& ObjectUtils.nullSafeEquals(this.distributeOfOtherArea, anObject.getDistributeOfOtherArea())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void fromObj(final PreSellLicenseData theObj) {
+		// this.preSellLicenseNo = theObj.preSellLicenseNo; // NO ID
+		this.buildingCount = theObj.buildingCount;
+		this.buildingHouse = theObj.buildingHouse;
+		this.builtHouse = theObj.builtHouse;
+		this.currentPhase = theObj.currentPhase;
+		this.currentPhaseBuildingArea = theObj.currentPhaseBuildingArea;
+		this.areaUpGround = theObj.areaUpGround;
+		this.areaUnderGround = theObj.areaUnderGround;
+		this.unitCount = theObj.unitCount;
+		this.totalBuidingArea = theObj.totalBuidingArea;
+		this.contactPersion = theObj.contactPersion;
+		this.mortgage = theObj.mortgage;
+		this.supportingArea = theObj.supportingArea;
+		this.validateFrom = theObj.validateFrom;
+		this.validateTo = theObj.validateTo;
+		this.licenseIssueDate = theObj.licenseIssueDate;
+		this.distributeOfResidentialCount = theObj.distributeOfResidentialCount;
+		this.distributeOfResidentialArea = theObj.distributeOfResidentialArea;
+		this.distributeOfBussinessCount = theObj.distributeOfBussinessCount;
+		this.distributeOfBussinessArea = theObj.distributeOfBussinessArea;
+		this.distributeOfOfficeCount = theObj.distributeOfOfficeCount;
+		this.distributeOfOfficeArea = theObj.distributeOfOfficeArea;
+		this.distributeOfParkingCount = theObj.distributeOfParkingCount;
+		this.distributeOfParkingArea = theObj.distributeOfParkingArea;
+		this.distributeOfOtherCount = theObj.distributeOfOtherCount;
+		this.distributeOfOtherArea = theObj.distributeOfOtherArea;
+	}
+
+	public String getPreSellLicenseId() {
+		return this.preSellLicenseId;
+	}
+
+	public void setPreSellLicenseId(final String preSellLicenseId) {
+		this.preSellLicenseId = preSellLicenseId;
 	}
 
 	public int getBuildingCount() {
