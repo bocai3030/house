@@ -1,7 +1,8 @@
-package org.house.service;
+package org.house.service.spider;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.client.ClientProtocolException;
 import org.house.db.entity.EarthBasicData;
@@ -13,23 +14,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 @RestController
-public class EarthDataController {
+@RequestMapping("/spider")
+public class SpiderController {
 	@Autowired
 	private ProjectBasicDataRepository projectBasicDataRepository;
 
-	@RequestMapping(value = "/getProjectBasicData", produces = "application/json")
-	Object getProjectBasicData(@RequestParam("page") final int page) throws ClientProtocolException, IOException {
+	@RequestMapping(value = "/updateProjectBasicData", produces = "application/json")
+	Object updateProjectBasicData(@RequestParam("page") final int page) throws ClientProtocolException, IOException {
 		final List<ProjectBasicData> projectBasicDatas = WebSpider.getProjectBasicData(page);
 
-		projectBasicDatas.get(0).setUsagee("");
-		try {
-			this.projectBasicDataRepository.save(projectBasicDatas.get(0));
-		} catch (final Exception e) {
-			e.printStackTrace();
+		final Map<String, List<String>> re = Maps.newHashMap();
+		final List<String> updatedProjectBasicDatas = Lists.newArrayList();
+		final List<String> newProjectBasicDatas = Lists.newArrayList();
+		final List<String> sameProjectBasicDatas = Lists.newArrayList();
+		for (final ProjectBasicData projectBasicData : projectBasicDatas) {
+			final ProjectBasicData projectBasicDataInDb = this.projectBasicDataRepository
+					.findByProjectId(projectBasicData.getProjectId());
+			if (projectBasicDataInDb == null) {
+				this.projectBasicDataRepository.save(projectBasicData);
+				newProjectBasicDatas.add(projectBasicData.getProjectId());
+			} else if (!projectBasicDataInDb.equals(projectBasicData)) {
+				projectBasicDataInDb.fromObj(projectBasicData);
+				this.projectBasicDataRepository.save(projectBasicDataInDb);
+				updatedProjectBasicDatas.add(projectBasicData.getProjectId());
+			} else {
+				sameProjectBasicDatas.add(projectBasicData.getProjectId());
+			}
 		}
 
-		return projectBasicDatas;
+		re.put("new", newProjectBasicDatas);
+		re.put("updated", updatedProjectBasicDatas);
+		re.put("same", sameProjectBasicDatas);
+
+		return re;
 	}
 
 	@RequestMapping(value = "/getPreSellLicenceData", produces = "application/json")

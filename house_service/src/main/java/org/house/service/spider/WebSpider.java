@@ -1,4 +1,4 @@
-package org.house.service;
+package org.house.service.spider;
 
 import java.io.IOException;
 import java.util.List;
@@ -74,7 +74,7 @@ public class WebSpider {
 
 		final CloseableHttpResponse theResponse = client.execute(httpPost);
 
-		final List<ProjectBasicData> earthBasicDatas = Lists.<ProjectBasicData>newArrayList();
+		final List<ProjectBasicData> earthBasicDatas = Lists.<ProjectBasicData> newArrayList();
 		final String content = EntityUtils.toString(theResponse.getEntity());
 		int idx = 0;
 		final String tag = "box_tab_style02_td";
@@ -142,7 +142,6 @@ public class WebSpider {
 			earthBasicDatas.add(projectBasicData);
 
 			idx = idx16 + tag3.length();
-			break;
 		}
 
 		return earthBasicDatas;

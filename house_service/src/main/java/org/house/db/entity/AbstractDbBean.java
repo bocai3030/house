@@ -23,16 +23,15 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 @MappedSuperclass
 public abstract class AbstractDbBean {
 	@Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@GeneratedValue()
 	@JsonIgnore
-	private Long id;
+	protected Long id;
 
 	@Column(updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonSerialize(using = DateSerializer.class)
 	@JsonFormat(pattern = C.DATE_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
-	private Date createTime;
+	protected Date createTime;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonSerialize(using = DateSerializer.class)
@@ -43,7 +42,7 @@ public abstract class AbstractDbBean {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(final Long id) {
 		this.id = id;
 	}
 
@@ -51,7 +50,7 @@ public abstract class AbstractDbBean {
 		return this.createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(final Date createTime) {
 		this.createTime = createTime;
 	}
 
