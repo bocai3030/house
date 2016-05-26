@@ -8,6 +8,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.house.db.entity.EarthBasicData;
 import org.house.db.entity.PreSellLicenceData;
 import org.house.db.entity.ProjectBasicData;
+import org.house.db.repository.EarthBasicDataRepository;
 import org.house.db.repository.ProjectBasicDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,8 @@ import com.google.common.collect.Maps;
 public class SpiderController {
 	@Autowired
 	private ProjectBasicDataRepository projectBasicDataRepository;
+	@Autowired
+	private EarthBasicDataRepository earthBasicDataRepository;
 
 	@RequestMapping(value = "/updateProjectBasicData", produces = "application/json")
 	Object updateProjectBasicData(@RequestParam("page") final int page) throws ClientProtocolException, IOException {
@@ -61,11 +64,32 @@ public class SpiderController {
 		return preSellLicenceData;
 	}
 
-	@RequestMapping(value = "/getEarthBasicData", produces = "application/json")
-	Object getEarthBasicData(@RequestParam("projectId") final String projectId,
-			@RequestParam("licenceId") final String licenceId) throws ClientProtocolException, IOException {
-		final EarthBasicData preSellLicenceData = WebSpider.getEarthBasicData(projectId, licenceId);
+	@RequestMapping(value = "/updateEarthBasicData", produces = "application/json")
+	Object updateEarthBasicData(@RequestParam("countryName") final String countryName,
+			@RequestParam("countryId") final String countryId,
+			@RequestParam("queryCountryId") final String queryCountryId) throws ClientProtocolException, IOException {
+		final EarthBasicData earthBasicData = WebSpider.getEarthBasicData(countryName, countryId, queryCountryId);
 
-		return preSellLicenceData;
+		final Map<String, List<String>> re = Maps.newHashMap();
+		final List<String> updatedEarthBasicDatas = Lists.newArrayList();
+		final List<String> newEarthBasicDatas = Lists.newArrayList();
+		final List<String> sameEarthBasicDatas = Lists.newArrayList();
+		final EarthBasicData earthBasicDataInDb = this.earthBasicDataRepository.findByEarthLicenceId(queryCountryId);
+		if (earthBasicDataInDb == null) {
+			this.earthBasicDataRepository.save(earthBasicData);
+			newEarthBasicDatas.add(earthBasicData.getEarthLicenceId());
+		} else if (!earthBasicDataInDb.equals(earthBasicData)) {
+			earthBasicDataInDb.fromObj(earthBasicData);
+			this.earthBasicDataRepository.save(earthBasicDataInDb);
+			updatedEarthBasicDatas.add(earthBasicData.getEarthLicenceId());
+		} else {
+			sameEarthBasicDatas.add(earthBasicData.getEarthLicenceId());
+		}
+
+		re.put("new", newEarthBasicDatas);
+		re.put("updated", updatedEarthBasicDatas);
+		re.put("same", sameEarthBasicDatas);
+
+		return re;
 	}
 }

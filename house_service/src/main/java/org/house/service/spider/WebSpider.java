@@ -399,8 +399,91 @@ public class WebSpider {
 		return preSellLicenceData;
 	}
 
-	public static EarthBasicData getEarthBasicData(final String projectId, final String licenceId)
-			throws ClientProtocolException, IOException {
-		return null;
+	public static EarthBasicData getEarthBasicData(final String countryName, final String countryId,
+			final String queryCountryId) throws ClientProtocolException, IOException {
+		final HttpPost httpPost = new HttpPost("http://www.laho.gov.cn/g4cdata/search/project/country.jsp");
+		setAjaxRequestHeader(httpPost);
+		final List<NameValuePair> parameters = Lists.newArrayList();
+		parameters.add(new BasicNameValuePair("country_name", countryName));
+		parameters.add(new BasicNameValuePair("country_id", countryId));
+		parameters.add(new BasicNameValuePair("countryId", queryCountryId));
+		parameters.add(new BasicNameValuePair("flag", "1"));
+		final UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(parameters);
+		httpPost.setEntity(urlEncodedFormEntity);
+
+		final CloseableHttpResponse theResponse = client.execute(httpPost);
+
+		final String content = EntityUtils.toString(theResponse.getEntity());
+
+		final EarthBasicData earthBasicData = new EarthBasicData();
+		earthBasicData.setEarthLicenceId(queryCountryId);
+
+		final String tag1 = "国土证号";
+		final String tag2 = "tab_style01_td\">";
+		final String tag3 = "</td>";
+
+		final int idx1 = content.indexOf(tag1);
+
+		final int idx2 = content.indexOf(tag2, idx1 + tag1.length());
+		final int idx3 = content.indexOf(tag3, idx2 + tag2.length());
+		final String earthLicenceNo = content.substring(idx2 + tag2.length(), idx3);
+		earthBasicData.setEarthLicenceNo(earthLicenceNo);
+
+		final int idx4 = content.indexOf(tag2, idx3 + tag3.length());
+		final int idx5 = content.indexOf(tag3, idx4 + tag2.length());
+		final String location = content.substring(idx4 + tag2.length(), idx5);
+		earthBasicData.setLocation(location);
+
+		final int idx6 = content.indexOf(tag2, idx5 + tag3.length());
+		final int idx7 = content.indexOf(tag3, idx6 + tag2.length());
+		final String userr = content.substring(idx6 + tag2.length(), idx7);
+		earthBasicData.setUserr(userr);
+
+		final int idx8 = content.indexOf(tag2, idx7 + tag3.length());
+		final int idx9 = content.indexOf(tag3, idx8 + tag2.length());
+		final String earthNo = content.substring(idx8 + tag2.length(), idx9);
+		earthBasicData.setEarthNo(earthNo);
+
+		final int idx10 = content.indexOf(tag2, idx9 + tag3.length());
+		final int idx11 = content.indexOf(tag3, idx10 + tag2.length());
+		final String graphNo = content.substring(idx10 + tag2.length(), idx11);
+		earthBasicData.setGraphNo(graphNo);
+
+		final int idx12 = content.indexOf(tag2, idx11 + tag3.length());
+		final int idx13 = content.indexOf(tag3, idx12 + tag2.length());
+		final String usagee = content.substring(idx12 + tag2.length(), idx13);
+		earthBasicData.setUsagee(usagee);
+
+		final int idx14 = content.indexOf(tag2, idx13 + tag3.length());
+		final int idx15 = content.indexOf(tag3, idx14 + tag2.length());
+		final String levell = content.substring(idx14 + tag2.length(), idx15);
+		earthBasicData.setLevell(levell);
+
+		final int idx16 = content.indexOf(tag2, idx15 + tag3.length());
+		final int idx17 = content.indexOf(tag3, idx16 + tag2.length());
+		final String borrowFrom = content.substring(idx16 + tag2.length(), idx17);
+		earthBasicData.setBorrowFrom(borrowFrom);
+
+		final int idx18 = content.indexOf(tag2, idx17 + tag3.length());
+		final int idx19 = content.indexOf(tag3, idx18 + tag2.length());
+		final String useRightKind = content.substring(idx18 + tag2.length(), idx19);
+		earthBasicData.setUseRightKind(useRightKind);
+
+		final int idx20 = content.indexOf(tag2, idx19 + tag3.length());
+		final int idx21 = content.indexOf(tag3, idx20 + tag2.length());
+		final String useArea = content.substring(idx20 + tag2.length(), idx21);
+		earthBasicData.setUseArea(useArea);
+
+		final int idx22 = content.indexOf(tag2, idx21 + tag3.length());
+		final int idx23 = content.indexOf(tag3, idx22 + tag2.length());
+		final String shareArea = content.substring(idx22 + tag2.length(), idx23);
+		earthBasicData.setShareArea(shareArea);
+
+		final int idx24 = content.indexOf(tag2, idx23 + tag3.length());
+		final int idx25 = content.indexOf(tag3, idx24 + tag2.length());
+		final String licenceIssueDate = content.substring(idx24 + tag2.length(), idx25);
+		earthBasicData.setLicenceIssueDate(licenceIssueDate);
+
+		return earthBasicData;
 	}
 }

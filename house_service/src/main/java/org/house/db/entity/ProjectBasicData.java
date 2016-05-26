@@ -101,7 +101,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 	}
 
 	public void fromObj(final ProjectBasicData theObj) {
-		this.projectId = theObj.projectId;
+		// this.projectId = theObj.projectId; // NO ID
 		this.projectName = theObj.projectName;
 		this.preSellLicenceNo = theObj.preSellLicenceNo;
 		this.countryName = theObj.countryName;
@@ -123,9 +123,6 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 		this.preSellTotalArea = theObj.preSellTotalArea;
 		this.buildingCount = theObj.buildingCount;
 		this.licenceDate = theObj.licenceDate;
-	}
-
-	public ProjectBasicData() {
 	}
 
 	public String getProjectId() {
