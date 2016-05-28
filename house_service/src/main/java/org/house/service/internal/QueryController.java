@@ -1,10 +1,8 @@
 package org.house.service.internal;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.client.ClientProtocolException;
 import org.house.db.entity.EarthBasicData;
 import org.house.db.entity.PreSellLicenseData;
 import org.house.db.entity.ProjectBasicData;
@@ -64,12 +62,12 @@ public class QueryController {
 	}
 
 	@RequestMapping(value = "/getWholeProjectData", produces = "application/json")
-	public Object getWholeProjectData(final String projectId) throws ClientProtocolException, IOException {
+	public Object getWholeProjectData(final String projectId) {
 		return this.getData(projectId, null);
 	}
 
 	@RequestMapping(value = "/getProjectData", produces = "application/json")
-	public Object getProjectData(final String division) throws ClientProtocolException, IOException {
+	public Object getProjectData(final String division) {
 		return this.getData(null, division);
 	}
 }

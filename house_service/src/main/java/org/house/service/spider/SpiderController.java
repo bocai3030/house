@@ -1,9 +1,8 @@
 package org.house.service.spider;
 
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import org.apache.http.client.ClientProtocolException;
 import org.house.db.entity.EarthBasicData;
 import org.house.db.entity.PreSellLicenseData;
 import org.house.db.entity.ProjectBasicData;
@@ -25,7 +24,7 @@ public class SpiderController {
 	private EarthBasicDataRepository earthBasicDataRepository;
 
 	@RequestMapping(value = "/updateProjectBasicData", produces = "application/json")
-	public List<ProjectBasicData> updateProjectBasicData(final int page) throws ClientProtocolException, IOException {
+	public List<ProjectBasicData> updateProjectBasicData(final int page) throws UnsupportedEncodingException {
 		final List<ProjectBasicData> projectBasicDatas = WebSpider.getProjectBasicData(page);
 
 		for (final ProjectBasicData projectBasicData : projectBasicDatas) {
@@ -43,8 +42,7 @@ public class SpiderController {
 	}
 
 	@RequestMapping(value = "/updatePreSellLicenseData", produces = "application/json")
-	public PreSellLicenseData updatePreSellLicenseData(final String projectId, final String preSellLicenseId)
-			throws ClientProtocolException, IOException {
+	public PreSellLicenseData updatePreSellLicenseData(final String projectId, final String preSellLicenseId) {
 		final PreSellLicenseData preSellLicenseData = WebSpider.getPreSellLicenseData(projectId, preSellLicenseId);
 
 		final PreSellLicenseData preSellLicenseDataInDb = this.preSellLicenseDataRepository.findByPreSellLicenseId(preSellLicenseId);
@@ -61,7 +59,7 @@ public class SpiderController {
 
 	@RequestMapping(value = "/updateEarthBasicData", produces = "application/json")
 	public EarthBasicData updateEarthBasicData(final String countryName, final String countryId, final String queryCountryId, final int flag)
-			throws ClientProtocolException, IOException {
+			throws UnsupportedEncodingException {
 		final EarthBasicData earthBasicData = WebSpider.getEarthBasicData(countryName, countryId, queryCountryId, flag);
 
 		final EarthBasicData earthBasicDataInDb = this.earthBasicDataRepository.findByEarthLicenseId(queryCountryId);

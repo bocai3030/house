@@ -1,10 +1,9 @@
 package org.house.service.spider;
 
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -23,6 +22,33 @@ import com.google.common.collect.Lists;
 
 public class WebSpider {
 	static CloseableHttpClient client = HttpClientBuilder.create().build();
+
+	private static long lastCallTime = -1;
+
+	private static synchronized String doHttpRequest(final HttpRequestBase httpRequestBase) {
+		if (lastCallTime == -1) {
+			lastCallTime = System.currentTimeMillis();
+		}
+		while (true) {
+			if ((System.currentTimeMillis() - lastCallTime) < 500) {
+				try {
+					Thread.sleep(200);
+				} catch (final InterruptedException e) {
+					e.printStackTrace();
+				}
+			} else {
+				lastCallTime = System.currentTimeMillis();
+				break;
+			}
+		}
+		try {
+			final CloseableHttpResponse theResponse = client.execute(httpRequestBase);
+			return EntityUtils.toString(theResponse.getEntity());
+		} catch (final Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	private static void setRequestHeader(final HttpRequestBase HttpRequestBase, final String referer) {
 		HttpRequestBase.setHeader(new BasicHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"));
@@ -47,7 +73,7 @@ public class WebSpider {
 				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"));
 	}
 
-	public static List<ProjectBasicData> getProjectBasicData(final int page) throws ClientProtocolException, IOException {
+	public static List<ProjectBasicData> getProjectBasicData(final int page) throws UnsupportedEncodingException {
 		final HttpPost httpPost = new HttpPost("http://www.laho.gov.cn/g4cdata/search/laho/preSellSearch.jsp");
 		setRequestHeader(httpPost, "http://www.laho.gov.cn/g4cdata/search/laho/preSellSearch.jsp");
 
@@ -69,10 +95,13 @@ public class WebSpider {
 
 		httpPost.setEntity(entity);
 
-		final CloseableHttpResponse theResponse = client.execute(httpPost);
-
 		final List<ProjectBasicData> earthBasicDatas = Lists.<ProjectBasicData>newArrayList();
-		final String content = EntityUtils.toString(theResponse.getEntity());
+
+		final String content = doHttpRequest(httpPost);
+		if (content == null) {
+			return earthBasicDatas;
+		}
+
 		int idx = 0;
 		final String tag = "box_tab_style02_td";
 		final String tag2 = "target=\"_blank\">";
@@ -142,15 +171,16 @@ public class WebSpider {
 		return earthBasicDatas;
 	}
 
-	private static void fullFillProjectLicenceIdData(final ProjectBasicData projectBasicData) throws ClientProtocolException, IOException {
+	private static void fullFillProjectLicenceIdData(final ProjectBasicData projectBasicData) {
 		final HttpGet httpGet = new HttpGet(
 				"http://www.laho.gov.cn/g4cdata/search/laho/project_detail.jsp?changeproInfoTag=0&changePreSellTag=1&preSell="
 						+ projectBasicData.getPreSellLicenseId() + "&pjID=" + projectBasicData.getProjectId() + "&name=ysz");
 		setAjaxRequestHeader(httpGet);
 
-		final CloseableHttpResponse theResponse = client.execute(httpGet);
-
-		final String content = EntityUtils.toString(theResponse.getEntity());
+		final String content = doHttpRequest(httpGet);
+		if (content == null) {
+			return;
+		}
 
 		final String tag0 = "&country_id=";
 		final String tag1 = "&agreeId=";
@@ -187,14 +217,14 @@ public class WebSpider {
 		projectBasicData.setSectionId(str[2].split("=")[1]);
 	}
 
-	private static void fullFillProjectDetailData(final ProjectBasicData projectBasicData) throws ClientProtocolException, IOException {
+	private static void fullFillProjectDetailData(final ProjectBasicData projectBasicData) {
 		final HttpGet httpGet = new HttpGet("http://www.laho.gov.cn/g4cdata/search/laho/project.jsp?pjID=" + projectBasicData.getProjectId());
 		setAjaxRequestHeader(httpGet);
 
-		final CloseableHttpResponse theResponse = client.execute(httpGet);
-
-		final String content = EntityUtils.toString(theResponse.getEntity());
-
+		final String content = doHttpRequest(httpGet);
+		if (content == null) {
+			return;
+		}
 		final String tag1 = "<td class=\"tab_style01_th\">项目地址：</td>";
 		final String tag2 = "tab_style01_td";
 		final String tag3 = "</td>";
@@ -233,15 +263,15 @@ public class WebSpider {
 		projectBasicData.setUsagee(usagee);
 	}
 
-	public static PreSellLicenseData getPreSellLicenseData(final String projectId, final String preSellLicenseId)
-			throws ClientProtocolException, IOException {
+	public static PreSellLicenseData getPreSellLicenseData(final String projectId, final String preSellLicenseId) {
 		final HttpGet httpGet = new HttpGet("http://www.laho.gov.cn/g4cdata/search/project/preSell.jsp?pjID=" + projectId + "&presell="
 				+ preSellLicenseId + "&maxPrice=&groundPrice=");
 		setAjaxRequestHeader(httpGet);
 
-		final CloseableHttpResponse theResponse = client.execute(httpGet);
-
-		final String content = EntityUtils.toString(theResponse.getEntity());
+		final String content = doHttpRequest(httpGet);
+		if (content == null) {
+			return null;
+		}
 
 		final PreSellLicenseData preSellLicenseData = new PreSellLicenseData();
 		preSellLicenseData.setPreSellLicenseId(preSellLicenseId);
@@ -389,7 +419,7 @@ public class WebSpider {
 	}
 
 	public static EarthBasicData getEarthBasicData(final String countryName, final String countryId, final String queryCountryId, final int flag)
-			throws ClientProtocolException, IOException {
+			throws UnsupportedEncodingException {
 		final HttpPost httpPost = new HttpPost("http://www.laho.gov.cn/g4cdata/search/project/country.jsp");
 		setAjaxRequestHeader(httpPost);
 		final List<NameValuePair> parameters = Lists.newArrayList();
@@ -400,9 +430,10 @@ public class WebSpider {
 		final UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(parameters);
 		httpPost.setEntity(urlEncodedFormEntity);
 
-		final CloseableHttpResponse theResponse = client.execute(httpPost);
-
-		final String content = EntityUtils.toString(theResponse.getEntity());
+		final String content = doHttpRequest(httpPost);
+		if (content == null) {
+			return null;
+		}
 
 		final EarthBasicData earthBasicData = new EarthBasicData();
 		earthBasicData.setEarthLicenseId(queryCountryId);
