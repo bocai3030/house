@@ -4,4 +4,4 @@ spring:
     encoding.enabled: true
     encoding.force: true
   jpa:
-    show-sql: true
+    show-sql: false

@@ -79,7 +79,6 @@ public class WebSpider {
 		final String tag3 = "</a></td>";
 		final String tag4 = "<a href=\"";
 		final String tag5 = "\" target=\"_blank\"";
-		String projectId = null;
 		while (true) {
 			final int idx1 = content.indexOf(tag, idx);
 			if (idx1 == -1) {
@@ -119,11 +118,9 @@ public class WebSpider {
 			final int idx16 = content.indexOf(tag3, idx15);
 			final String licenseDate = content.substring(idx15 + tag2.length(), idx16);
 
-			if (projectId == null) {
-				final int idx17 = content.indexOf(tag4, idx2);
-				final int idx18 = content.indexOf(tag5, idx17);
-				projectId = content.substring(idx17 + tag4.length(), idx18).split("pjID=")[1].split("&")[0];
-			}
+			final int idx17 = content.indexOf(tag4, idx2);
+			final int idx18 = content.indexOf(tag5, idx17);
+			final String projectId = content.substring(idx17 + tag4.length(), idx18).split("pjID=")[1].split("&")[0];
 
 			projectBasicData.setProjectId(projectId);
 			projectBasicData.setPreSellLicenseId(preSellLicenseId);
@@ -140,7 +137,6 @@ public class WebSpider {
 			earthBasicDatas.add(projectBasicData);
 
 			idx = idx16 + tag3.length();
-			break;
 		}
 
 		return earthBasicDatas;
@@ -392,7 +388,7 @@ public class WebSpider {
 		return preSellLicenseData;
 	}
 
-	public static EarthBasicData getEarthBasicData(final String countryName, final String countryId, final String queryCountryId, String flag)
+	public static EarthBasicData getEarthBasicData(final String countryName, final String countryId, final String queryCountryId, final int flag)
 			throws ClientProtocolException, IOException {
 		final HttpPost httpPost = new HttpPost("http://www.laho.gov.cn/g4cdata/search/project/country.jsp");
 		setAjaxRequestHeader(httpPost);
@@ -400,7 +396,7 @@ public class WebSpider {
 		parameters.add(new BasicNameValuePair("country_name", countryName));
 		parameters.add(new BasicNameValuePair("country_id", countryId));
 		parameters.add(new BasicNameValuePair("countryId", queryCountryId));
-		parameters.add(new BasicNameValuePair("flag", flag));
+		parameters.add(new BasicNameValuePair("flag", "" + flag));
 		final UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(parameters);
 		httpPost.setEntity(urlEncodedFormEntity);
 
