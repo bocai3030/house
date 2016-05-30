@@ -36,25 +36,14 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return new StringBuilder().append(this.projectId)//
-				.append(this.projectName)//
-				.append(this.preSellLicenseId)//
-				.append(this.countryName)//
-				.append(this.countryId)//
-				.append(this.agreeName)//
-				.append(this.agreeId)//
-				.append(this.layoutName)//
-				.append(this.layoutId)//
-				.append(this.projectAddress)//
-				.append(this.developer)//
-				.append(this.developerId)//
-				.append(this.division)//
-				.append(this.sectionId)//
-				.append(this.totalCostArea)//
-				.append(this.totalBuildArea)//
-				.append(this.qualificationLicenceNo)//
-				.append(this.usagee)//
-				.toString().hashCode();
+		int result = 17;
+		if (this.projectId != null) {
+			result = (31 * result) + this.projectId.hashCode();
+		}
+		if (this.projectName != null) {
+			result = (31 * result) + this.projectName.hashCode();
+		}
+		return result;
 	}
 
 	@Override

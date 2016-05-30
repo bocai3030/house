@@ -30,19 +30,14 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return new StringBuilder().append(this.earthLicenseId)//
-				.append(this.earthLicenseNo)//
-				.append(this.location)//
-				.append(this.userr)//
-				.append(this.earthNo)//
-				.append(this.graphNo)//
-				.append(this.usagee)//
-				.append(this.levell)//
-				.append(this.borrowFrom)//
-				.append(this.useRightKind)//
-				.append(this.useArea)//
-				.append(this.shareArea)//
-				.append(this.licenseIssueDate).toString().hashCode();
+		int result = 17;
+		if (this.earthLicenseId != null) {
+			result = (31 * result) + this.earthLicenseId.hashCode();
+		}
+		if (this.earthLicenseNo != null) {
+			result = (31 * result) + this.earthLicenseNo.hashCode();
+		}
+		return result;
 	}
 
 	@Override
@@ -55,11 +50,9 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 			if (ObjectUtils.nullSafeEquals(this.earthLicenseId, anObject.getEarthLicenseId())
 					&& ObjectUtils.nullSafeEquals(this.earthLicenseNo, anObject.getEarthLicenseNo())
 					&& ObjectUtils.nullSafeEquals(this.location, anObject.getLocation())
-					&& ObjectUtils.nullSafeEquals(this.userr, anObject.getUserr())
-					&& ObjectUtils.nullSafeEquals(this.earthNo, anObject.getEarthNo())
+					&& ObjectUtils.nullSafeEquals(this.userr, anObject.getUserr()) && ObjectUtils.nullSafeEquals(this.earthNo, anObject.getEarthNo())
 					&& ObjectUtils.nullSafeEquals(this.graphNo, anObject.getGraphNo())
-					&& ObjectUtils.nullSafeEquals(this.usagee, anObject.getUsagee())
-					&& ObjectUtils.nullSafeEquals(this.levell, anObject.getLevell())
+					&& ObjectUtils.nullSafeEquals(this.usagee, anObject.getUsagee()) && ObjectUtils.nullSafeEquals(this.levell, anObject.getLevell())
 					&& ObjectUtils.nullSafeEquals(this.borrowFrom, anObject.getBorrowFrom())
 					&& ObjectUtils.nullSafeEquals(this.useRightKind, anObject.getUseRightKind())
 					&& ObjectUtils.nullSafeEquals(this.useArea, anObject.getUseArea())

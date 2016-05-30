@@ -43,32 +43,11 @@ public class PreSellLicenseData extends AbstractDbBean implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return new StringBuilder().append(this.preSellLicenseId)//
-				.append(this.buildingCount)//
-				.append(this.buildingHouse)//
-				.append(this.builtHouse)//
-				.append(this.currentPhase)//
-				.append(this.currentPhaseBuildingArea)//
-				.append(this.areaUpGround)//
-				.append(this.areaUnderGround)//
-				.append(this.unitCount)//
-				.append(this.totalBuidingArea)//
-				.append(this.contactPersion)//
-				.append(this.mortgage)//
-				.append(this.supportingArea)//
-				.append(this.validateFrom)//
-				.append(this.validateTo)//
-				.append(this.licenseIssueDate)//
-				.append(this.distributeOfResidentialCount)//
-				.append(this.distributeOfResidentialArea)//
-				.append(this.distributeOfBussinessCount)//
-				.append(this.distributeOfBussinessArea)//
-				.append(this.distributeOfOfficeCount)//
-				.append(this.distributeOfOfficeArea)//
-				.append(this.distributeOfParkingCount)//
-				.append(this.distributeOfParkingArea)//
-				.append(this.distributeOfOtherCount)//
-				.append(this.distributeOfOtherArea).toString().hashCode();
+		int result = 17;
+		if (this.preSellLicenseId != null) {
+			result = (31 * result) + this.preSellLicenseId.hashCode();
+		}
+		return result;
 	}
 
 	@Override
