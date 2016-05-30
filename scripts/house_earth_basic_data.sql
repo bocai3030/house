@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.30, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: house
 -- ------------------------------------------------------
--- Server version	5.7.12-0ubuntu1.1
+-- Server version	5.6.30-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `earth_basic_data`;
 CREATE TABLE `earth_basic_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `earth_license_id` varchar(255) NOT NULL COMMENT '国土证ID',
+  `project_id` varchar(255) NOT NULL DEFAULT '' COMMENT '项目ID',
   `earth_license_no` varchar(255) NOT NULL COMMENT '国土证号',
   `location` varchar(255) NOT NULL DEFAULT '' COMMENT '土地座落',
   `userr` varchar(255) NOT NULL DEFAULT '' COMMENT '土地使用者',
@@ -32,7 +33,7 @@ CREATE TABLE `earth_basic_data` (
   `graph_no` varchar(255) NOT NULL DEFAULT '' COMMENT '图号',
   `usagee` varchar(255) NOT NULL DEFAULT '' COMMENT '土地用途',
   `levell` varchar(255) NOT NULL DEFAULT '' COMMENT '土地等级',
-  `borrow_from` varchar(255) NOT NULL DEFAULT '' COMMENT '土地出让年限自',
+  `borrow_from` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '土地出让年限自',
   `use_right_kind` varchar(255) NOT NULL DEFAULT '' COMMENT '使用权类型',
   `use_area` varchar(255) NOT NULL DEFAULT '' COMMENT '使用权面积',
   `share_area` varchar(255) NOT NULL DEFAULT '' COMMENT '其中共用分推面积',
@@ -54,4 +55,4 @@ CREATE TABLE `earth_basic_data` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-30 22:13:25
+-- Dump completed on 2016-05-31  0:32:49

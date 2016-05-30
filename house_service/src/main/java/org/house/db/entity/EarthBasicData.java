@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 public class EarthBasicData extends AbstractDbBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String earthLicenseId; // 国土证号ID
+	protected String projectId;
 	protected String earthLicenseNo; // 国土证号
 	protected String location; // 土地座落
 	protected String userr; // 土地使用者
@@ -58,6 +59,7 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 		if (obj instanceof EarthBasicData) {
 			final EarthBasicData anObject = (EarthBasicData) obj;
 			if (ObjectUtils.nullSafeEquals(this.earthLicenseId, anObject.getEarthLicenseId())
+					&& ObjectUtils.nullSafeEquals(this.projectId, anObject.getProjectId())
 					&& ObjectUtils.nullSafeEquals(this.earthLicenseNo, anObject.getEarthLicenseNo())
 					&& ObjectUtils.nullSafeEquals(this.location, anObject.getLocation())
 					&& ObjectUtils.nullSafeEquals(this.userr, anObject.getUserr()) && ObjectUtils.nullSafeEquals(this.earthNo, anObject.getEarthNo())
@@ -76,6 +78,7 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 
 	public void fromObj(final EarthBasicData theObj) {
 		// this.earthLicenseId = theObj.earthLicenseId; // NO ID
+		this.projectId = theObj.projectId;
 		this.earthLicenseNo = theObj.earthLicenseNo;
 		this.location = theObj.location;
 		this.userr = theObj.userr;
@@ -96,6 +99,14 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 
 	public void setEarthLicenseId(final String earthLicenseId) {
 		this.earthLicenseId = earthLicenseId;
+	}
+
+	public String getProjectId() {
+		return this.projectId;
+	}
+
+	public void setProjectId(final String projectId) {
+		this.projectId = projectId;
 	}
 
 	public String getEarthLicenseNo() {

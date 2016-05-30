@@ -37,7 +37,8 @@ public class ShellSpiderController {
 			final String countryId = projectBasicData.getCountryId();
 			final String[] countryIdAr = countryId.split(",");
 			for (int i = 0; i < countryIdAr.length; i++) {
-				final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(countryName, countryId, countryIdAr[i], i);
+				final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(projectBasicData.getProjectId(), countryName,
+						countryId, countryIdAr[i], i);
 				Utils.writlnAndFlushResponse(response, "updated earthBasicData, id:" + earthBasicData.getEarthLicenseId());
 			}
 			Utils.writlnAndFlushResponse(response, "");
@@ -62,7 +63,7 @@ public class ShellSpiderController {
 		final String countryId = projectBasicData.getCountryId();
 		final String[] countryIdAr = countryId.split(",");
 		for (int i = 0; i < countryIdAr.length; i++) {
-			final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(countryName, countryId, countryIdAr[i], i);
+			final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(projectId, countryName, countryId, countryIdAr[i], i);
 			Utils.writlnAndFlushResponse(response, "updated earthBasicData, id:" + earthBasicData.getEarthLicenseId());
 		}
 		Utils.writlnAndFlushResponse(response, "");

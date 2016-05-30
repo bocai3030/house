@@ -1,5 +1,6 @@
 package org.house.service.internal;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -97,7 +98,7 @@ public class QueryController {
 	}
 
 	@RequestMapping(value = "/getProjectDataByEarthBorrowFromBetween", produces = "application/json")
-	public Object getProjectDataByEarthBorrowFromBetween(final String borrowFrom, final String borrowTo) {
+	public Object getProjectDataByEarthBorrowFromBetween(final Date borrowFrom, final Date borrowTo) {
 		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
 		// TODO
 		return this.getFullProjectData(projectBasicDatas);

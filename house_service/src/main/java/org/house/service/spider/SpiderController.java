@@ -11,6 +11,7 @@ import org.house.db.repository.PreSellLicenseDataRepository;
 import org.house.db.repository.ProjectBasicDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -74,9 +75,10 @@ public class SpiderController {
 	}
 
 	@RequestMapping(value = "/updateEarthBasicData", produces = "application/json")
-	public EarthBasicData updateEarthBasicData(final String countryName, final String countryId, final String queryCountryId, final int flag)
-			throws UnsupportedEncodingException {
+	public EarthBasicData updateEarthBasicData(@RequestParam(value = "projectId", defaultValue = "") final String projectId, final String countryName,
+			final String countryId, final String queryCountryId, final int flag) throws UnsupportedEncodingException {
 		final EarthBasicData earthBasicData = WebSpider.getEarthBasicData(countryName, countryId, queryCountryId, flag);
+		earthBasicData.setProjectId(projectId);
 
 		final EarthBasicData earthBasicDataInDb = this.earthBasicDataRepository.findByEarthLicenseId(queryCountryId);
 		if (earthBasicDataInDb == null) {
