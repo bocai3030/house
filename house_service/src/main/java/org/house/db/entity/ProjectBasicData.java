@@ -33,11 +33,6 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 	protected String totalBuildArea; // 总建筑面积
 	protected String qualificationLicenceNo; // 资质证书编号
 	protected String usagee; // 用途
-	protected int preSellTotalCount; // 批准预售总套数
-	protected String preSellTotalArea; // 批准预售总面积
-	protected int buildingCount; // 预售幢数
-	protected String licenseDate; // 发证日期
-	// 已售套数、已售面积 待另建表在本页抓取
 
 	@Override
 	public int hashCode() {
@@ -59,10 +54,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 				.append(this.totalBuildArea)//
 				.append(this.qualificationLicenceNo)//
 				.append(this.usagee)//
-				.append(this.preSellTotalCount)//
-				.append(this.preSellTotalArea)//
-				.append(this.buildingCount)//
-				.append(this.licenseDate).toString().hashCode();
+				.toString().hashCode();
 	}
 
 	@Override
@@ -89,11 +81,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 					&& ObjectUtils.nullSafeEquals(this.totalCostArea, anObject.getTotalCostArea())
 					&& ObjectUtils.nullSafeEquals(this.totalBuildArea, anObject.getTotalBuildArea())
 					&& ObjectUtils.nullSafeEquals(this.qualificationLicenceNo, anObject.getQualificationLicenceNo())
-					&& ObjectUtils.nullSafeEquals(this.usagee, anObject.getUsagee())
-					&& ObjectUtils.nullSafeEquals(this.preSellTotalCount, anObject.getPreSellTotalCount())
-					&& ObjectUtils.nullSafeEquals(this.preSellTotalArea, anObject.getPreSellTotalArea())
-					&& ObjectUtils.nullSafeEquals(this.buildingCount, anObject.getBuildingCount())
-					&& ObjectUtils.nullSafeEquals(this.licenseDate, anObject.getLicenseDate())) {
+					&& ObjectUtils.nullSafeEquals(this.usagee, anObject.getUsagee())) {
 				return true;
 			}
 		}
@@ -119,10 +107,6 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 		this.totalBuildArea = theObj.totalBuildArea;
 		this.qualificationLicenceNo = theObj.qualificationLicenceNo;
 		this.usagee = theObj.usagee;
-		this.preSellTotalCount = theObj.preSellTotalCount;
-		this.preSellTotalArea = theObj.preSellTotalArea;
-		this.buildingCount = theObj.buildingCount;
-		this.licenseDate = theObj.licenseDate;
 	}
 
 	public String getProjectId() {
@@ -203,38 +187,6 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 
 	public void setUsagee(final String usage) {
 		this.usagee = usage;
-	}
-
-	public int getPreSellTotalCount() {
-		return this.preSellTotalCount;
-	}
-
-	public void setPreSellTotalCount(final int preSellTotalCount) {
-		this.preSellTotalCount = preSellTotalCount;
-	}
-
-	public String getPreSellTotalArea() {
-		return this.preSellTotalArea;
-	}
-
-	public void setPreSellTotalArea(final String preSellTotalArea) {
-		this.preSellTotalArea = preSellTotalArea;
-	}
-
-	public int getBuildingCount() {
-		return this.buildingCount;
-	}
-
-	public void setBuildingCount(final int buildingCount) {
-		this.buildingCount = buildingCount;
-	}
-
-	public String getLicenseDate() {
-		return this.licenseDate;
-	}
-
-	public void setLicenseDate(final String licenseDate) {
-		this.licenseDate = licenseDate;
 	}
 
 	public String getCountryName() {

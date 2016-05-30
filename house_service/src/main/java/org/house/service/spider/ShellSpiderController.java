@@ -23,7 +23,7 @@ public class ShellSpiderController {
 	@RequestMapping(value = "/updatePageData", produces = "text/html; charset=utf-8")
 	public void updatePageData(final int page, final HttpServletResponse response) throws ClientProtocolException, IOException {
 		response.setContentType("text/html; charset=utf-8");
-		final List<ProjectBasicData> projectBasicDatas = this.spiderController.updateProjectBasicData(page);
+		final List<ProjectBasicData> projectBasicDatas = this.spiderController.updateProjectBasicDataByPage(page);
 		Utils.writlnAndFlushResponse(response, "updated page " + page);
 		for (final ProjectBasicData projectBasicData : projectBasicDatas) {
 			Utils.writlnAndFlushResponse(response,
@@ -42,12 +42,29 @@ public class ShellSpiderController {
 			}
 			Utils.writlnAndFlushResponse(response, "");
 		}
-
 	}
 
 	@RequestMapping(value = "/updateProjectData", produces = "text/html; charset=utf-8")
 	public void updateProjectData(final String projectId, final HttpServletResponse response) throws ClientProtocolException, IOException {
 		response.setContentType("text/html; charset=utf-8");
-		// we need such method here.
+
+		Utils.writlnAndFlushResponse(response, "updating project_basic_data " + projectId);
+		final ProjectBasicData projectBasicData = this.spiderController.updateProjectBasicData(projectId);
+
+		Utils.writlnAndFlushResponse(response,
+				"updating projectId:" + projectBasicData.getProjectId() + ", projectName:" + projectBasicData.getProjectName());
+
+		final PreSellLicenseData preSellLicenseData = this.spiderController.updatePreSellLicenseData(projectBasicData.getProjectId(),
+				projectBasicData.getPreSellLicenseId());
+		Utils.writlnAndFlushResponse(response, "updated preSellLicenseData, id:" + preSellLicenseData.getPreSellLicenseId());
+
+		final String countryName = projectBasicData.getCountryName();
+		final String countryId = projectBasicData.getCountryId();
+		final String[] countryIdAr = countryId.split(",");
+		for (int i = 0; i < countryIdAr.length; i++) {
+			final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(countryName, countryId, countryIdAr[i], i);
+			Utils.writlnAndFlushResponse(response, "updated earthBasicData, id:" + earthBasicData.getEarthLicenseId());
+		}
+		Utils.writlnAndFlushResponse(response, "");
 	}
 }

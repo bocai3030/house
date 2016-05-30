@@ -24,7 +24,23 @@ public class SpiderController {
 	private EarthBasicDataRepository earthBasicDataRepository;
 
 	@RequestMapping(value = "/updateProjectBasicData", produces = "application/json")
-	public List<ProjectBasicData> updateProjectBasicData(final int page) throws UnsupportedEncodingException {
+	public ProjectBasicData updateProjectBasicData(final String projectId) throws UnsupportedEncodingException {
+		final ProjectBasicData projectBasicData = WebSpider.getProjectBasicData(projectId);
+
+		final ProjectBasicData projectBasicDataInDb = this.projectBasicDataRepository.findByProjectId(projectBasicData.getProjectId());
+		if (projectBasicDataInDb == null) {
+			this.projectBasicDataRepository.save(projectBasicData);
+		} else if (!projectBasicDataInDb.equals(projectBasicData)) {
+			projectBasicDataInDb.fromObj(projectBasicData);
+			this.projectBasicDataRepository.save(projectBasicDataInDb);
+		} else {
+		}
+
+		return projectBasicData;
+	}
+
+	@RequestMapping(value = "/updateProjectBasicDataByPage", produces = "application/json")
+	public List<ProjectBasicData> updateProjectBasicDataByPage(final int page) throws UnsupportedEncodingException {
 		final List<ProjectBasicData> projectBasicDatas = WebSpider.getProjectBasicData(page);
 
 		for (final ProjectBasicData projectBasicData : projectBasicDatas) {

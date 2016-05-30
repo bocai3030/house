@@ -42,16 +42,12 @@ CREATE TABLE `project_basic_data` (
   `total_build_area` varchar(255) NOT NULL DEFAULT '' COMMENT '总建筑面积',
   `qualification_licence_no` varchar(255) NOT NULL DEFAULT '' COMMENT '资质证书编号',
   `usagee` varchar(255) NOT NULL DEFAULT '' COMMENT '用途',
-  `pre_sell_total_count` int(11) NOT NULL DEFAULT '0' COMMENT '批准预售总套数',
-  `pre_sell_total_area` varchar(255) NOT NULL DEFAULT '' COMMENT '批准预售总面积',
-  `building_count` int(11) NOT NULL DEFAULT '0' COMMENT '预售幢数',
-  `license_date` varchar(255) NOT NULL DEFAULT '' COMMENT '发证日期',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `project_id_UNIQUE` (`project_id`),
   UNIQUE KEY `pre_sell_license_id_UNIQUE` (`pre_sell_license_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -63,4 +59,4 @@ CREATE TABLE `project_basic_data` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-27  1:09:53
+-- Dump completed on 2016-05-30  9:17:16
