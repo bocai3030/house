@@ -27,14 +27,7 @@ public class QueryController {
 	@Autowired
 	private EarthBasicDataRepository earthBasicDataRepository;
 
-	private Object getData(final String projectId, final String division) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		if (projectId != null) {
-			projectBasicDatas.add(this.projectBasicDataRepository.findByProjectId(projectId));
-		} else {
-			projectBasicDatas.addAll(this.projectBasicDataRepository.findByDivision(division));
-		}
-
+	private Object getFullProjectData(final List<ProjectBasicData> projectBasicDatas) {
 		final List<Map<String, Object>> reList = Lists.newArrayList();
 
 		for (final ProjectBasicData projectBasicData : projectBasicDatas) {
@@ -61,13 +54,53 @@ public class QueryController {
 		return reList;
 	}
 
-	@RequestMapping(value = "/getWholeProjectData", produces = "application/json")
-	public Object getWholeProjectData(final String projectId) {
-		return this.getData(projectId, null);
+	@RequestMapping(value = "/getProjectDataByProjectId", produces = "application/json")
+	public Object getProjectDataByProjectId(final String projectId) {
+		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
+		projectBasicDatas.add(this.projectBasicDataRepository.findByProjectId(projectId));
+		return this.getFullProjectData(projectBasicDatas);
 	}
 
-	@RequestMapping(value = "/getProjectData", produces = "application/json")
-	public Object getProjectData(final String division) {
-		return this.getData(null, division);
+	@RequestMapping(value = "/getProjectDataByProjectNameLike", produces = "application/json")
+	public Object getProjectDataByProjectNameLike(final String projectNameLike) {
+		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
+		projectBasicDatas.addAll(this.projectBasicDataRepository.findByProjectNameLike("%" + projectNameLike + "%"));
+		return this.getFullProjectData(projectBasicDatas);
 	}
+
+	@RequestMapping(value = "/getProjectDataByPreSellLicenseId", produces = "application/json")
+	public Object getProjectDataByPreSellLicenseId(final String preSellLicenseId) {
+		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
+		projectBasicDatas.add(this.projectBasicDataRepository.findByPreSellLicenseId(preSellLicenseId));
+		return this.getFullProjectData(projectBasicDatas);
+	}
+
+	@RequestMapping(value = "/getProjectDataByProjectAddressLike", produces = "application/json")
+	public Object getProjectDataByProjectAddressLike(final String projectAddressLike) {
+		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
+		projectBasicDatas.addAll(this.projectBasicDataRepository.findByProjectAddressLike("%" + projectAddressLike + "%"));
+		return this.getFullProjectData(projectBasicDatas);
+	}
+
+	@RequestMapping(value = "/getProjectDataByDeveloperLike", produces = "application/json")
+	public Object getProjectDataByDeveloperLike(final String developerLike) {
+		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
+		projectBasicDatas.addAll(this.projectBasicDataRepository.findByDeveloperLike("%" + developerLike + "%"));
+		return this.getFullProjectData(projectBasicDatas);
+	}
+
+	@RequestMapping(value = "/getProjectDataByDivision", produces = "application/json")
+	public Object getProjectDataByDivision(final String division) {
+		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
+		projectBasicDatas.addAll(this.projectBasicDataRepository.findByDivision(division));
+		return this.getFullProjectData(projectBasicDatas);
+	}
+
+	@RequestMapping(value = "/getProjectDataByEarthBorrowFromBetween", produces = "application/json")
+	public Object getProjectDataByEarthBorrowFromBetween(final String earthBorrowFromBetween) {
+		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
+		// TODO
+		return this.getFullProjectData(projectBasicDatas);
+	}
+
 }
