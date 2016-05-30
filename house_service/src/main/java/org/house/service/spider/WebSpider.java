@@ -30,7 +30,7 @@ public class WebSpider {
 			lastCallTime = System.currentTimeMillis();
 		}
 		while (true) {
-			if (System.currentTimeMillis() - lastCallTime < 500) {
+			if ((System.currentTimeMillis() - lastCallTime) < 500) {
 				try {
 					Thread.sleep(200);
 				} catch (final InterruptedException e) {
@@ -78,8 +78,8 @@ public class WebSpider {
 		setRequestHeader(httpPost, "http://www.laho.gov.cn/g4cdata/search/laho/preSellSearch.jsp");
 
 		final List<NameValuePair> parameters = Lists.newArrayList();
-		parameters.add(new BasicNameValuePair("orderfield", ""));
-		parameters.add(new BasicNameValuePair("ordertype", ""));
+		parameters.add(new BasicNameValuePair("orderfield", "PRESELL_NO"));
+		parameters.add(new BasicNameValuePair("ordertype", "desc"));
 		parameters.add(new BasicNameValuePair("presellNo", ""));
 		parameters.add(new BasicNameValuePair("projectName", ""));
 		parameters.add(new BasicNameValuePair("awardedStartDate", ""));
@@ -104,6 +104,7 @@ public class WebSpider {
 
 		int idx = 0;
 		final String tag = "box_tab_style02_td";
+		final String tag1 = "</td>";
 		final String tag2 = "target=\"_blank\">";
 		final String tag3 = "</a></td>";
 		final String tag4 = "<a href=\"";
@@ -116,24 +117,35 @@ public class WebSpider {
 
 			final ProjectBasicData projectBasicData = new ProjectBasicData();
 
-			final int idx2 = content.indexOf("</td>", idx1);
-			Integer.parseInt(content.substring(idx1 + tag.length() + 2, idx2));
+			final int idx2 = content.indexOf(tag1, idx1);
 
-			final int idx3 = content.indexOf(tag2, idx2);
-			final int idx4 = content.indexOf(tag3, idx3);
+			final int idx3 = content.indexOf(tag2, idx2 + tag1.length());
+			final int idx4 = content.indexOf(tag3, idx3 + tag2.length());
+			if ((idx3 + tag2.length()) > idx4) {
+				break; // 表示匹配结束
+			}
 			final String preSellLicenseId = content.substring(idx3 + tag2.length(), idx4);
 
-			final int idx5 = content.indexOf(tag2, idx4);
-			final int idx6 = content.indexOf(tag3, idx5);
+			final int idx5 = content.indexOf(tag2, idx4 + tag3.length());
+			final int idx6 = content.indexOf(tag3, idx5 + tag2.length());
 			final String projectName = content.substring(idx5 + tag2.length(), idx6);
 
-			final int idx7 = content.indexOf(tag2, idx6);
-			final int idx8 = content.indexOf(tag3, idx7);
+			final int idx7 = content.indexOf(tag2, idx6 + tag3.length());
+			final int idx8 = content.indexOf(tag3, idx7 + tag2.length());
 			final String developer = content.substring(idx7 + tag2.length(), idx8);
 
-			final int idx17 = content.indexOf(tag4, idx2);
-			final int idx18 = content.indexOf(tag5, idx17);
+			final int idx17 = content.indexOf(tag4, idx2 + tag3.length());
+			final int idx18 = content.indexOf(tag5, idx17 + tag4.length());
 			final String projectId = content.substring(idx17 + tag4.length(), idx18).split("pjID=")[1].split("&")[0];
+
+			// 过滤后面四个字段和最开始的字段
+			idx = idx18;
+			idx = content.indexOf(tag, idx + tag5.length());
+			idx = content.indexOf(tag, idx + tag.length());
+			idx = content.indexOf(tag, idx + tag.length());
+			idx = content.indexOf(tag, idx + tag.length());
+			idx = content.indexOf(tag, idx + tag.length());
+			idx = idx + tag.length();
 
 			projectBasicData.setProjectId(projectId);
 			projectBasicData.setPreSellLicenseId(preSellLicenseId);
@@ -144,8 +156,6 @@ public class WebSpider {
 			fullFillProjectLicenceIdData(projectBasicData);
 
 			earthBasicDatas.add(projectBasicData);
-
-			idx = idx8 + tag3.length();
 		}
 
 		return earthBasicDatas;
