@@ -42,7 +42,8 @@ CREATE TABLE `earth_basic_data` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `earth_license_id_UNIQUE` (`earth_license_id`)
+  UNIQUE KEY `earth_license_id_UNIQUE` (`earth_license_id`),
+  KEY `borrow_from_INDEX` (`borrow_from`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +56,4 @@ CREATE TABLE `earth_basic_data` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-31  0:32:49
+-- Dump completed on 2016-05-31  0:58:50

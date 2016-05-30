@@ -3,6 +3,7 @@ package org.house.service.internal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.house.db.entity.EarthBasicData;
 import org.house.db.entity.PreSellLicenseData;
@@ -11,12 +12,14 @@ import org.house.db.repository.EarthBasicDataRepository;
 import org.house.db.repository.PreSellLicenseDataRepository;
 import org.house.db.repository.ProjectBasicDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 @RestController
 @RequestMapping("/internal")
@@ -98,9 +101,22 @@ public class QueryController {
 	}
 
 	@RequestMapping(value = "/getProjectDataByEarthBorrowFromBetween", produces = "application/json")
-	public Object getProjectDataByEarthBorrowFromBetween(final Date borrowFrom, final Date borrowTo) {
+	public Object getProjectDataByEarthBorrowFromBetween(@DateTimeFormat(pattern = "yyyy-MM-dd") final Date borrowFrom,
+			@DateTimeFormat(pattern = "yyyy-MM-dd") final Date borrowTo) {
 		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		// TODO
+
+		final List<EarthBasicData> earthBasicDatas = this.earthBasicDataRepository.findByBorrowFromBetween(borrowFrom, borrowTo);
+		final Set<String> set = Sets.newHashSet();
+		for (final EarthBasicData earthBasicData : earthBasicDatas) {
+			if (!set.contains(earthBasicData.getProjectId())) {
+				final ProjectBasicData projectBasicData = this.projectBasicDataRepository.findByProjectId(earthBasicData.getProjectId());
+				if (projectBasicData != null) {
+					projectBasicDatas.add(projectBasicData);
+				}
+				set.add(earthBasicData.getProjectId());
+			}
+		}
+
 		return this.getFullProjectData(projectBasicDatas);
 	}
 
