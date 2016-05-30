@@ -1,6 +1,9 @@
 package org.house.service.spider;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -30,7 +33,7 @@ public class WebSpider {
 			lastCallTime = System.currentTimeMillis();
 		}
 		while (true) {
-			if ((System.currentTimeMillis() - lastCallTime) < 500) {
+			if (System.currentTimeMillis() - lastCallTime < 500) {
 				try {
 					Thread.sleep(200);
 				} catch (final InterruptedException e) {
@@ -121,7 +124,7 @@ public class WebSpider {
 
 			final int idx3 = content.indexOf(tag2, idx2 + tag1.length());
 			final int idx4 = content.indexOf(tag3, idx3 + tag2.length());
-			if ((idx3 + tag2.length()) > idx4) {
+			if (idx3 + tag2.length() > idx4) {
 				break; // 表示匹配结束
 			}
 			final String preSellLicenseId = content.substring(idx3 + tag2.length(), idx4);
@@ -473,7 +476,13 @@ public class WebSpider {
 		final int idx16 = content.indexOf(tag2, idx15 + tag3.length());
 		final int idx17 = content.indexOf(tag3, idx16 + tag2.length());
 		final String borrowFrom = content.substring(idx16 + tag2.length(), idx17);
-		earthBasicData.setBorrowFrom(borrowFrom);
+		Date bfDate = null;
+		try {
+			bfDate = new SimpleDateFormat("yyyy-MM-dd").parse(borrowFrom);
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
+		earthBasicData.setBorrowFrom(bfDate);
 
 		final int idx18 = content.indexOf(tag2, idx17 + tag3.length());
 		final int idx19 = content.indexOf(tag3, idx18 + tag2.length());

@@ -1,13 +1,20 @@
 package org.house.db.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.house.util.C;
 import org.springframework.util.ObjectUtils;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 @JsonAutoDetect
 @Entity
@@ -22,7 +29,10 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 	protected String graphNo;// 图号
 	protected String usagee;// 土地用途
 	protected String levell; // 土地等级
-	protected String borrowFrom; // 土地出让年限自
+	@Temporal(TemporalType.DATE)
+	@JsonSerialize(using = DateSerializer.class)
+	@JsonFormat(pattern = C.DATE_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
+	protected Date borrowFrom; // 土地出让年限自
 	protected String useRightKind; // 使用权类型
 	protected String useArea; // 使用权面积
 	protected String shareArea; // 其中共用分推面积
@@ -32,10 +42,10 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 	public int hashCode() {
 		int result = 17;
 		if (this.earthLicenseId != null) {
-			result = (31 * result) + this.earthLicenseId.hashCode();
+			result = 31 * result + this.earthLicenseId.hashCode();
 		}
 		if (this.earthLicenseNo != null) {
-			result = (31 * result) + this.earthLicenseNo.hashCode();
+			result = 31 * result + this.earthLicenseNo.hashCode();
 		}
 		return result;
 	}
@@ -144,11 +154,11 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 		this.levell = levell;
 	}
 
-	public String getBorrowFrom() {
+	public Date getBorrowFrom() {
 		return this.borrowFrom;
 	}
 
-	public void setBorrowFrom(final String borrowFrom) {
+	public void setBorrowFrom(final Date borrowFrom) {
 		this.borrowFrom = borrowFrom;
 	}
 

@@ -97,7 +97,7 @@ public class QueryController {
 	}
 
 	@RequestMapping(value = "/getProjectDataByEarthBorrowFromBetween", produces = "application/json")
-	public Object getProjectDataByEarthBorrowFromBetween(final String earthBorrowFromBetween) {
+	public Object getProjectDataByEarthBorrowFromBetween(final String borrowFrom, final String borrowTo) {
 		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
 		// TODO
 		return this.getFullProjectData(projectBasicDatas);
