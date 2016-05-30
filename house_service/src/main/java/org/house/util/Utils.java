@@ -10,7 +10,7 @@ public class Utils {
 		try {
 			final PrintWriter printWriter = response.getWriter();
 			printWriter.write(string);
-			printWriter.write("\n");
+			printWriter.write("<br/>");
 			printWriter.flush();
 		} catch (final IOException e) {
 			e.printStackTrace();

@@ -20,8 +20,9 @@ public class ShellSpiderController {
 	@Autowired
 	private SpiderController spiderController;
 
-	@RequestMapping(value = "/updatePageData")
-	public void updateProjectBasicData(final int page, final HttpServletResponse response) throws ClientProtocolException, IOException {
+	@RequestMapping(value = "/updatePageData", produces = "text/html; charset=utf-8")
+	public void updatePageData(final int page, final HttpServletResponse response) throws ClientProtocolException, IOException {
+		response.setContentType("text/html; charset=utf-8");
 		final List<ProjectBasicData> projectBasicDatas = this.spiderController.updateProjectBasicData(page);
 		Utils.writlnAndFlushResponse(response, "updated page " + page);
 		for (final ProjectBasicData projectBasicData : projectBasicDatas) {
@@ -42,5 +43,11 @@ public class ShellSpiderController {
 			Utils.writlnAndFlushResponse(response, "");
 		}
 
+	}
+
+	@RequestMapping(value = "/updateProjectData", produces = "text/html; charset=utf-8")
+	public void updateProjectData(final String projectId, final HttpServletResponse response) throws ClientProtocolException, IOException {
+		response.setContentType("text/html; charset=utf-8");
+		// we need such method here.
 	}
 }
