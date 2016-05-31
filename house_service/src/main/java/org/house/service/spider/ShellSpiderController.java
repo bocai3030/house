@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.base.Strings;
+
 @RestController
 @RequestMapping("/spider")
 public class ShellSpiderController {
@@ -35,11 +37,15 @@ public class ShellSpiderController {
 
 			final String countryName = projectBasicData.getCountryName();
 			final String countryId = projectBasicData.getCountryId();
-			final String[] countryIdAr = countryId.split(",");
-			for (int i = 0; i < countryIdAr.length; i++) {
-				final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(projectBasicData.getProjectId(), countryName,
-						countryId, countryIdAr[i], i);
-				Utils.writlnAndFlushResponse(response, "updated earthBasicData, id:" + earthBasicData.getEarthLicenseId());
+			if (!Strings.isNullOrEmpty(countryId)) {
+				final String[] countryIdAr = countryId.split(",");
+				for (int i = 0; i < countryIdAr.length; i++) {
+					final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(projectBasicData.getProjectId(), countryName,
+							countryId, countryIdAr[i], i);
+					Utils.writlnAndFlushResponse(response, "updated earthBasicData, id:" + earthBasicData.getEarthLicenseId());
+				}
+			} else {
+				Utils.writlnAndFlushResponse(response, "no earthBasicData found for projectId:" + projectBasicData.getProjectId());
 			}
 			Utils.writlnAndFlushResponse(response, "");
 		}
@@ -61,10 +67,15 @@ public class ShellSpiderController {
 
 		final String countryName = projectBasicData.getCountryName();
 		final String countryId = projectBasicData.getCountryId();
-		final String[] countryIdAr = countryId.split(",");
-		for (int i = 0; i < countryIdAr.length; i++) {
-			final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(projectId, countryName, countryId, countryIdAr[i], i);
-			Utils.writlnAndFlushResponse(response, "updated earthBasicData, id:" + earthBasicData.getEarthLicenseId());
+		if (!Strings.isNullOrEmpty(countryId)) {
+			final String[] countryIdAr = countryId.split(",");
+			for (int i = 0; i < countryIdAr.length; i++) {
+				final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(projectId, countryName, countryId, countryIdAr[i],
+						i);
+				Utils.writlnAndFlushResponse(response, "updated earthBasicData, id:" + earthBasicData.getEarthLicenseId());
+			}
+		} else {
+			Utils.writlnAndFlushResponse(response, "no earthBasicData found for projectId:" + projectId);
 		}
 		Utils.writlnAndFlushResponse(response, "");
 	}

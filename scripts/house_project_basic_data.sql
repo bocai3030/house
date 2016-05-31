@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.30, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.12, for Linux (x86_64)
 --
 -- Host: localhost    Database: house
 -- ------------------------------------------------------
--- Server version	5.6.30-0ubuntu0.14.04.1
+-- Server version	5.7.12-0ubuntu1.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,8 +31,8 @@ CREATE TABLE `project_basic_data` (
   `country_id` varchar(255) NOT NULL DEFAULT '' COMMENT '国土证ID',
   `agree_name` varchar(255) NOT NULL DEFAULT '' COMMENT '施工许可证名',
   `agree_id` varchar(255) NOT NULL DEFAULT '' COMMENT '施工许可证ID',
-  `layout_name` varchar(255) NOT NULL DEFAULT '' COMMENT '规划许可证名',
-  `layout_id` varchar(255) NOT NULL DEFAULT '' COMMENT '规划许可证ID',
+  `layout_name` varchar(1500) NOT NULL DEFAULT '' COMMENT '规划许可证名',
+  `layout_id` varchar(1500) NOT NULL DEFAULT '' COMMENT '规划许可证ID',
   `project_address` varchar(255) NOT NULL DEFAULT '' COMMENT '项目地址',
   `developer` varchar(255) NOT NULL DEFAULT '' COMMENT '开发商',
   `developer_id` varchar(255) NOT NULL DEFAULT '' COMMENT '开发商ID',
@@ -63,4 +63,4 @@ CREATE TABLE `project_basic_data` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-31  0:32:49
+-- Dump completed on 2016-05-31 22:20:04

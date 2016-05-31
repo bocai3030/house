@@ -189,15 +189,24 @@ public class WebSpider {
 		final int idx1 = content.indexOf(tag3);
 		final int idx2 = content.indexOf(tag7, idx1 + tag3.length());
 		final String[] countryStr = content.substring(idx1 + tag3.length(), idx2).split(tag0);
-		projectBasicData.setCountryName(countryStr[0]);
-		projectBasicData.setCountryId(countryStr[1]);
+		if (countryStr.length == 2) { // 目前发现有可能没有国土证信息
+			projectBasicData.setCountryName(countryStr[0]);
+			projectBasicData.setCountryId(countryStr[1]);
+		} else {
+			projectBasicData.setCountryName("");
+			projectBasicData.setCountryId("");
+		}
 
 		final int idx3 = content.indexOf(tag4, idx2 + tag7.length());
 		final int idx4 = content.indexOf(tag7, idx3 + tag4.length());
 		final String[] agreeStr = content.substring(idx3 + tag4.length(), idx4).split(tag1);
-		projectBasicData.setAgreeName(agreeStr[0]);
-		projectBasicData.setAgreeId(agreeStr[1]);
-
+		if (agreeStr.length == 2) { // 目前发现有可能没有施工许可证信息
+			projectBasicData.setAgreeName(agreeStr[0]);
+			projectBasicData.setAgreeId(agreeStr[1]);
+		} else {
+			projectBasicData.setAgreeName("");
+			projectBasicData.setAgreeId("");
+		}
 		final int idx5 = content.indexOf(tag5, idx4 + tag7.length());
 		final int idx6 = content.indexOf(tag8, idx5 + tag5.length());
 		final String[] layoutStr = content.substring(idx5 + tag5.length(), idx6).split(tag2);
