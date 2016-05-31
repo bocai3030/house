@@ -16,4 +16,13 @@ public class Utils {
 			e.printStackTrace();
 		}
 	}
+
+	public static int tryParseInteger(final String str) {
+		try {
+			return Integer.parseInt(str);
+		} catch (final Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
 }

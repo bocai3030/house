@@ -20,6 +20,7 @@ import org.apache.http.util.EntityUtils;
 import org.house.db.entity.EarthBasicData;
 import org.house.db.entity.PreSellLicenseData;
 import org.house.db.entity.ProjectBasicData;
+import org.house.util.Utils;
 
 import com.google.common.collect.Lists;
 
@@ -33,7 +34,7 @@ public class WebSpider {
 			lastCallTime = System.currentTimeMillis();
 		}
 		while (true) {
-			if (System.currentTimeMillis() - lastCallTime < 500) {
+			if ((System.currentTimeMillis() - lastCallTime) < 300) {
 				try {
 					Thread.sleep(200);
 				} catch (final InterruptedException e) {
@@ -124,7 +125,7 @@ public class WebSpider {
 
 			final int idx3 = content.indexOf(tag2, idx2 + tag1.length());
 			final int idx4 = content.indexOf(tag3, idx3 + tag2.length());
-			if (idx3 + tag2.length() > idx4) {
+			if ((idx3 + tag2.length()) > idx4) {
 				break; // 表示匹配结束
 			}
 			final String preSellLicenseId = content.substring(idx3 + tag2.length(), idx4);
@@ -283,7 +284,7 @@ public class WebSpider {
 
 		final int idx2 = content.indexOf(tag2, idx1 + tag1.length());
 		final int idx3 = content.indexOf(tag3, idx2 + tag2.length());
-		final int buildingCount = Integer.parseInt(content.substring(idx2 + tag2.length() + tag4.length(), idx3));
+		final int buildingCount = Utils.tryParseInteger(content.substring(idx2 + tag2.length() + tag4.length(), idx3));
 		preSellLicenseData.setBuildingCount(buildingCount);
 
 		final int idx4 = content.indexOf(tag9, idx3 + tag3.length());
@@ -298,7 +299,7 @@ public class WebSpider {
 
 		final int idx8 = content.indexOf(tag2, idx7 + tag3.length());
 		final int idx9 = content.indexOf(tag3, idx8 + tag2.length());
-		final int currentPhase = Integer.parseInt(content.substring(idx8 + tag2.length() + tag4.length(), idx9));
+		final int currentPhase = Utils.tryParseInteger(content.substring(idx8 + tag2.length() + tag4.length(), idx9));
 		preSellLicenseData.setCurrentPhase(currentPhase);
 
 		final int idx10 = content.indexOf(tag2, idx9 + tag3.length());
@@ -318,7 +319,7 @@ public class WebSpider {
 
 		final int idx16 = content.indexOf(tag2, idx15 + tag3.length());
 		final int idx17 = content.indexOf(tag3, idx16 + tag2.length());
-		final int unitCount = Integer.parseInt(content.substring(idx16 + tag2.length() + tag4.length(), idx17));
+		final int unitCount = Utils.tryParseInteger(content.substring(idx16 + tag2.length() + tag4.length(), idx17));
 		preSellLicenseData.setUnitCount(unitCount);
 
 		final int idx18 = content.indexOf(tag2, idx17 + tag3.length());
@@ -360,27 +361,27 @@ public class WebSpider {
 
 		final int idx33 = content.indexOf(tag2, idx32 + tag6.length());
 		final int idx34 = content.indexOf(tag7, idx33 + tag2.length());
-		final int distributeOfResidentialCount = Integer.parseInt(content.substring(idx33 + tag2.length(), idx34));
+		final int distributeOfResidentialCount = Utils.tryParseInteger(content.substring(idx33 + tag2.length(), idx34));
 		preSellLicenseData.setDistributeOfResidentialCount(distributeOfResidentialCount);
 
 		final int idx35 = content.indexOf(tag2, idx34 + tag7.length());
 		final int idx36 = content.indexOf(tag7, idx35 + tag2.length());
-		final int distributeOfBussinessCount = Integer.parseInt(content.substring(idx35 + tag2.length(), idx36));
+		final int distributeOfBussinessCount = Utils.tryParseInteger(content.substring(idx35 + tag2.length(), idx36));
 		preSellLicenseData.setDistributeOfBussinessCount(distributeOfBussinessCount);
 
 		final int idx37 = content.indexOf(tag2, idx36 + tag7.length());
 		final int idx38 = content.indexOf(tag7, idx37 + tag2.length());
-		final int distributeOfOfficeCount = Integer.parseInt(content.substring(idx37 + tag2.length(), idx38));
+		final int distributeOfOfficeCount = Utils.tryParseInteger(content.substring(idx37 + tag2.length(), idx38));
 		preSellLicenseData.setDistributeOfOfficeCount(distributeOfOfficeCount);
 
 		final int idx39 = content.indexOf(tag2, idx38 + tag7.length());
 		final int idx40 = content.indexOf(tag7, idx39 + tag2.length());
-		final int distributeOfParkingCount = Integer.parseInt(content.substring(idx39 + tag2.length(), idx40));
+		final int distributeOfParkingCount = Utils.tryParseInteger(content.substring(idx39 + tag2.length(), idx40));
 		preSellLicenseData.setDistributeOfParkingCount(distributeOfParkingCount);
 
 		final int idx41 = content.indexOf(tag2, idx40 + tag7.length());
 		final int idx42 = content.indexOf(tag7, idx41 + tag2.length());
-		final int distributeOfOtherCount = Integer.parseInt(content.substring(idx41 + tag2.length(), idx42));
+		final int distributeOfOtherCount = Utils.tryParseInteger(content.substring(idx41 + tag2.length(), idx42));
 		preSellLicenseData.setDistributeOfOtherCount(distributeOfOtherCount);
 
 		final int idx43 = content.indexOf(tag8, idx42 + tag7.length());
