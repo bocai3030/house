@@ -13,6 +13,7 @@ import org.house.db.repository.PreSellLicenseDataRepository;
 import org.house.db.repository.ProjectBasicDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,8 +22,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+@CrossOrigin
 @RestController
-@RequestMapping("/internal")
+@RequestMapping("/api/internal")
 public class QueryController {
 	@Autowired
 	private ProjectBasicDataRepository projectBasicDataRepository;
