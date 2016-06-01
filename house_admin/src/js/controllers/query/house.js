@@ -12,8 +12,23 @@ angular.module('adminApp').config(function ($stateProvider) {
         projectId: true,
         projectName: true,
         preSellLicenseId: true,
-        createTime: true,
-        updateTime: true
+        countryName: true,
+        countryId: true,
+        agreeName: false,
+        agreeId: false,
+        layoutName: false,
+        layoutId: false,
+        projectAddress: true,
+        developer: true,
+        developerId: false,
+        division: true,
+        sectionId: false,
+        totalCostArea: true,
+        totalBuildArea: true,
+        qualificationLicenceNo: false,
+        usagee: true,
+        createTime: false,
+        updateTime: false
     };
     $scope.projectData = null;
     $scope.queryParamsByProjectId = {

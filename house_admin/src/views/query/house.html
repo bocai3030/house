@@ -39,11 +39,26 @@
 <br/>
 
 <div>
-    <input type="checkbox" ng-model="fieldStates.projectId"><span>projectId</span>
-    <input type="checkbox" ng-model="fieldStates.projectName"><span>projectName</span>
-    <input type="checkbox" ng-model="fieldStates.preSellLicenseId"><span>preSellLicenseId</span>
-    <input type="checkbox" ng-model="fieldStates.createTime"><span>createTime</span>
-    <input type="checkbox" ng-model="fieldStates.updateTime"><span>updateTime</span>
+    <input type="checkbox" ng-model="fieldStates.projectId"><span>项目ID</span>
+    <input type="checkbox" ng-model="fieldStates.projectName"><span>项目名</span>
+    <input type="checkbox" ng-model="fieldStates.preSellLicenseId"><span>预售许可证号</span>
+    <input type="checkbox" ng-model="fieldStates.countryName"><span>国土证名</span>
+    <input type="checkbox" ng-model="fieldStates.countryId"><span>国土证ID</span>
+    <input type="checkbox" ng-model="fieldStates.agreeName"><span>施工许可证名</span>
+    <input type="checkbox" ng-model="fieldStates.agreeId"><span>施工许可证ID</span>
+    <input type="checkbox" ng-model="fieldStates.layoutName"><span>规划许可证名</span>
+    <input type="checkbox" ng-model="fieldStates.layoutId"><span>规划许可证ID</span>
+    <input type="checkbox" ng-model="fieldStates.projectAddress"><span>项目地址</span>
+    <input type="checkbox" ng-model="fieldStates.developer"><span>开发商</span>
+    <input type="checkbox" ng-model="fieldStates.developerId"><span>开发商ID</span>
+    <input type="checkbox" ng-model="fieldStates.division"><span>行政区划</span>
+    <input type="checkbox" ng-model="fieldStates.sectionId"><span>区</span>
+    <input type="checkbox" ng-model="fieldStates.totalCostArea"><span>总占地面积</span>
+    <input type="checkbox" ng-model="fieldStates.totalBuildArea"><span>总建筑面积</span>
+    <input type="checkbox" ng-model="fieldStates.qualificationLicenceNo"><span>资质证书编号</span>
+    <input type="checkbox" ng-model="fieldStates.usagee"><span>用途</span>
+    <input type="checkbox" ng-model="fieldStates.createTime"><span>创建时间</span>
+    <input type="checkbox" ng-model="fieldStates.updateTime"><span>更新时间</span>
 </div>
 <br/>
 <div class="table-responsive">
@@ -52,16 +67,46 @@
         <thead>
         <tr>
             <th>#</th>
-            <th ng-show="fieldStates.projectId"><a href="javascript:void(0)" ng-click="orderByField1='projectId';reverseSort1=!reverseSort1">projectId<span
-                    ng-show="orderByField1 == 'projectId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fieldStates.projectName"><a href="javascript:void(0)" ng-click="orderByField1='projectName';reverseSort1=!reverseSort1">projectName<span
-                    ng-show="orderByField1 == 'projectName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fieldStates.preSellLicenseId"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseId';reverseSort1=!reverseSort1">preSellLicenseId<span
-                    ng-show="orderByField1 == 'preSellLicenseId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fieldStates.createTime"><a href="javascript:void(0)" ng-click="orderByField1='createTime';reverseSort1=!reverseSort1">创建时间<span
-                    ng-show="orderByField1 == 'createTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fieldStates.updateTime"><a href="javascript:void(0)" ng-click="orderByField1='updateTime';reverseSort1=!reverseSort1">更新时间<span
-                    ng-show="orderByField1 == 'updateTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.projectId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.projectId';reverseSort1=!reverseSort1">项目ID<span
+                    ng-show="orderByField1 == 'projectBasicData.projectId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.projectName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.projectName';reverseSort1=!reverseSort1">项目名<span
+                    ng-show="orderByField1 == 'projectBasicData.projectName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.preSellLicenseId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.preSellLicenseId';reverseSort1=!reverseSort1">预售许可证号<span
+                    ng-show="orderByField1 == 'projectBasicData.preSellLicenseId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.countryName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.countryName';reverseSort1=!reverseSort1">国土证名<span
+                    ng-show="orderByField1 == 'projectBasicData.countryName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.countryId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.countryId';reverseSort1=!reverseSort1">国土证ID<span
+                    ng-show="orderByField1 == 'projectBasicData.countryId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.agreeName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.agreeName';reverseSort1=!reverseSort1">施工许可证名<span
+                    ng-show="orderByField1 == 'projectBasicData.agreeName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.agreeId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.agreeId';reverseSort1=!reverseSort1">施工许可证ID<span
+                    ng-show="orderByField1 == 'projectBasicData.agreeId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.layoutName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.layoutName';reverseSort1=!reverseSort1">规划许可证名<span
+                    ng-show="orderByField1 == 'projectBasicData.layoutName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.layoutId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.layoutId';reverseSort1=!reverseSort1">规划许可证ID<span
+                    ng-show="orderByField1 == 'projectBasicData.layoutId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.projectAddress"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.projectAddress';reverseSort1=!reverseSort1">项目地址<span
+                    ng-show="orderByField1 == 'projectBasicData.projectAddress'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.developer"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.developer';reverseSort1=!reverseSort1">开发商<span
+                    ng-show="orderByField1 == 'projectBasicData.developer'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.developerId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.developerId';reverseSort1=!reverseSort1">开发商ID<span
+                    ng-show="orderByField1 == 'projectBasicData.developerId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.division"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.division';reverseSort1=!reverseSort1">行政区划<span
+                    ng-show="orderByField1 == 'projectBasicData.division'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.sectionId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.sectionId';reverseSort1=!reverseSort1">区<span
+                    ng-show="orderByField1 == 'projectBasicData.sectionId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.totalCostArea"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.totalCostArea';reverseSort1=!reverseSort1">总占地面积<span
+                    ng-show="orderByField1 == 'projectBasicData.totalCostArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.totalBuildArea"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.totalBuildArea';reverseSort1=!reverseSort1">总建筑面积<span
+                    ng-show="orderByField1 == 'projectBasicData.totalBuildArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.qualificationLicenceNo"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.qualificationLicenceNo';reverseSort1=!reverseSort1">资质证书编号<span
+                    ng-show="orderByField1 == 'projectBasicData.qualificationLicenceNo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.usagee"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.usagee';reverseSort1=!reverseSort1">用途<span
+                    ng-show="orderByField1 == 'projectBasicData.usagee'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.createTime"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.createTime';reverseSort1=!reverseSort1">创建时间<span
+                    ng-show="orderByField1 == 'projectBasicData.createTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.updateTime"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.updateTime';reverseSort1=!reverseSort1">更新时间<span
+                    ng-show="orderByField1 == 'projectBasicData.updateTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
         </tr>
         </thead>
         <tbody>
@@ -70,6 +115,21 @@
             <td ng-show="fieldStates.projectId">{{pd.projectBasicData.projectId}}</td>
             <td ng-show="fieldStates.projectName">{{pd.projectBasicData.projectName}}</td>
             <td ng-show="fieldStates.preSellLicenseId">{{pd.projectBasicData.preSellLicenseId}}</td>
+            <td ng-show="fieldStates.countryName">{{pd.projectBasicData.countryName}}</td>
+            <td ng-show="fieldStates.countryId">{{pd.projectBasicData.countryId}}</td>
+            <td ng-show="fieldStates.agreeName">{{pd.projectBasicData.agreeName}}</td>
+            <td ng-show="fieldStates.agreeId">{{pd.projectBasicData.agreeId}}</td>
+            <td ng-show="fieldStates.layoutName">{{pd.projectBasicData.layoutName}}</td>
+            <td ng-show="fieldStates.layoutId">{{pd.projectBasicData.layoutId}}</td>
+            <td ng-show="fieldStates.projectAddress">{{pd.projectBasicData.projectAddress}}</td>
+            <td ng-show="fieldStates.developer">{{pd.projectBasicData.developer}}</td>
+            <td ng-show="fieldStates.developerId">{{pd.projectBasicData.developerId}}</td>
+            <td ng-show="fieldStates.division">{{pd.projectBasicData.division}}</td>
+            <td ng-show="fieldStates.sectionId">{{pd.projectBasicData.sectionId}}</td>
+            <td ng-show="fieldStates.totalCostArea">{{pd.projectBasicData.totalCostArea}}</td>
+            <td ng-show="fieldStates.totalBuildArea">{{pd.projectBasicData.totalBuildArea}}</td>
+            <td ng-show="fieldStates.qualificationLicenceNo">{{pd.projectBasicData.qualificationLicenceNo}}</td>
+            <td ng-show="fieldStates.usagee">{{pd.projectBasicData.usagee}}</td>
             <td ng-show="fieldStates.createTime">{{pd.projectBasicData.createTime}}</td>
             <td ng-show="fieldStates.updateTime">{{pd.projectBasicData.updateTime}}</td>
         </tr>
