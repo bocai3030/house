@@ -1,0 +1,96 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>HOUSE管理后台</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css css/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="js/vendor/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="js/vendor/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="js/vendor/angular-loading-bar/build/loading-bar.css"/>
+    <link rel="stylesheet" href="js/vendor/angular-toasty/css/ng-toasty.css"/>
+    <link rel="stylesheet" href="js/vendor/eeh-navigation/dist/eeh-navigation.css"/>
+    <link rel="stylesheet" href="js/vendor/datetimepicker/jquery.datetimepicker.css"/>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) css/main.css -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/obviously.css">
+    <!-- endbuild -->
+    <!-- build:js js/vendor/modernizr.js -->
+    <script src="js/vendor/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-app="adminApp">
+<!--[if lt IE 10]>
+<p class="browsehappy">您正式使用一个<strong>过时</strong>的浏览器。为了更好的体验，请<a href="http://browsehappy.com/">升级</a>您的浏览器。</p>
+<![endif]-->
+<div ui-view></div>
+<div ng-controller="toasty-controller">
+    <toasty-container toasty-defaults='{"timeout": 3000, "close-button":true, "sound": false}'></toasty-container>
+</div>
+<!-- build:js js/oldieshim.js -->
+<!--[if lt IE 9]>
+<script src="js/vendor/es5-shim/es5-shim.js"></script>
+<script src="js/vendor/json3/lib/json3.js"></script>
+<![endif]-->
+<!-- endbuild -->
+<!-- build:js js/vendor/angular.js -->
+<!-- bower:js -->
+<script type="text/javascript" src="js/vendor/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="js/vendor/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="js/vendor/datetimepicker/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="js/vendor/angular/angular.js"></script>
+<script type="text/javascript" src="js/vendor/angular-resource/angular-resource.js"></script>
+<script type="text/javascript" src="js/vendor/angular-cookies/angular-cookies.js"></script>
+<script type="text/javascript" src="js/vendor/angular-sanitize/angular-sanitize.js"></script>
+<script type="text/javascript" src="js/vendor/angular-animate/angular-animate.js"></script>
+<script type="text/javascript" src="js/vendor/angular-touch/angular-touch.js"></script>
+<script type="text/javascript" src="js/vendor/angular-translate/angular-translate.js"></script>
+<script type="text/javascript" src="js/vendor/angular-translate/angular-translate.js"></script>
+<script type="text/javascript" src="js/vendor/angular-ui-router/release/angular-ui-router.js"></script>
+<script type="text/javascript" src="js/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="js/vendor/angular-toasty/js/ng-toasty.js"></script>
+<script type="text/javascript" src="js/vendor/angular-local-storage/dist/angular-local-storage.js"></script>
+<script type="text/javascript" src="js/vendor/angular-cache-buster/angular-cache-buster.js"></script>
+<script type="text/javascript" src="js/vendor/angular-loading-bar/build/loading-bar.js"></script>
+<script type="text/javascript" src="js/vendor/eeh-navigation/dist/eeh-navigation.js"></script>
+<script type="text/javascript" src="js/vendor/eeh-navigation/dist/eeh-navigation.tpl.js"></script>
+<script type="text/javascript" src="js/vendor/angular-utils-pagination/dirPagination.js"></script>
+<script type="text/javascript" src="js/datetimepicker.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<!-- build:js js/main.js -->
+
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+<!--
+<script type="text/javascript" src="js/services/principal.js"></script>
+-->
+<script type="text/javascript" src="js/services/query/house.js"></script>
+
+<script type="text/javascript" src="js/controllers/error.js"></script>
+<script type="text/javascript" src="js/controllers/query/house.js"></script>
+
+<script type="text/javascript" src="js/controllers/main.js"></script>
+<script type="text/javascript" src="js/controllers/home.js"></script>
+<!-- endbuild -->
+</body>
+</html>

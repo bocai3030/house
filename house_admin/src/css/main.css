@@ -1,0 +1,117 @@
+body {
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+.development {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 0;
+    left: 0;
+    border: 0;
+    z-index: 9999;
+    background: url("../images/development.png") no-repeat center center;
+}
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+a {
+    outline: none;
+}
+a:focus {
+    outline: none
+}
+@media (min-width: 768px) {
+    .navbar-right {
+        float: right !important;
+        margin-right: 0px;
+    }
+}
+.login-panel {
+    margin-top: 25%;
+}
+.bot-5 {
+    margin-bottom: 5px;
+}
+.bot-15 {
+    margin-bottom: 15px;
+}
+.bot-20 {
+    margin-bottom: 20px;
+}
+.dataTable {
+    table-layout: fixed;
+}
+.dataTable th, .dataTable td, .dataTable .nowrap {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.text-error, .text-red {
+    color: red;
+}
+.hand {
+    cursor: pointer;
+}
+#threadDump .popover, #healthCheck .popover {
+    top: inherit;
+    display: block;
+    font-size: 10px;
+    max-width: 1024px;
+}
+#healthCheck .popover {
+    margin-left: -50px;
+}
+.alert .popover pre {
+    font-size: 10px;
+}
+.voffset {
+    margin-top: 2px;
+}
+.voffset1 {
+    margin-top: 5px;
+}
+.voffset2 {
+    margin-top: 10px;
+}
+.voffset3 {
+    margin-top: 15px;
+}
+.voffset4 {
+    margin-top: 30px;
+}
+.voffset5 {
+    margin-top: 40px;
+}
+.voffset6 {
+    margin-top: 60px;
+}
+.voffset7 {
+    margin-top: 80px;
+}
+.voffset8 {
+    margin-top: 100px;
+}
+.voffset9 {
+    margin-top: 150px;
+}
+.progress-bar {
+    color: #000000;
+}
+#loading-bar-spinner {
+    top: 50%;
+    left: 50%;
+}
+#loading-bar-spinner-mask {
+    z-index: 10000;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.1);
+}

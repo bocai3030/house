@@ -1,0 +1,79 @@
+<div class="row">
+    <h2 class="page-header">{{title}}</h2>
+</div>
+
+<form name="searchForm1" class="search" role="search"
+      ng-submit="getProjectDataByProjectId()">
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="projectId" class="col-md-2 control-label">projectId</label>
+        </div>
+        <div class="form-group col-md-2">
+            <input id="projectId" type="text" class="form-control" ng-model="queryParamsByProjectId.projectId" placeholder="项目ID" name="projectId" maxlength="50"/>
+        </div>
+        <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm1.$invalid || querying">
+                <i class="fa fa-search" ng-class="{'fa-spin': querying, 'fa-spinner': querying}"></i>搜索
+            </button>
+        </div>
+    </div>
+</form>
+<br/>
+
+<form name="searchForm2" class="search" role="search"
+      ng-submit="getProjectDataByProjectNameLike()">
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="projectNameLike" class="col-md-2 control-label">projectNameLike</label>
+        </div>
+        <div class="form-group col-md-2">
+            <input id="projectNameLike" type="text" class="form-control" ng-model="queryParamsByProjectNameLike.projectNameLike" placeholder="项目名" name="projectNameLike" maxlength="50"/>
+        </div>
+        <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm2.$invalid || querying">
+                <i class="fa fa-search" ng-class="{'fa-spin': querying, 'fa-spinner': querying}"></i>搜索
+            </button>
+        </div>
+    </div>
+</form>
+<br/>
+
+<div>
+    <input type="checkbox" ng-model="fieldStates.projectId"><span>projectId</span>
+    <input type="checkbox" ng-model="fieldStates.projectName"><span>projectName</span>
+    <input type="checkbox" ng-model="fieldStates.preSellLicenseId"><span>preSellLicenseId</span>
+    <input type="checkbox" ng-model="fieldStates.createTime"><span>createTime</span>
+    <input type="checkbox" ng-model="fieldStates.updateTime"><span>updateTime</span>
+</div>
+<br/>
+<div class="table-responsive">
+    <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_1"></dir-pagination-controls>
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th ng-show="fieldStates.projectId"><a href="javascript:void(0)" ng-click="orderByField1='projectId';reverseSort1=!reverseSort1">projectId<span
+                    ng-show="orderByField1 == 'projectId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.projectName"><a href="javascript:void(0)" ng-click="orderByField1='projectName';reverseSort1=!reverseSort1">projectName<span
+                    ng-show="orderByField1 == 'projectName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.preSellLicenseId"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseId';reverseSort1=!reverseSort1">preSellLicenseId<span
+                    ng-show="orderByField1 == 'preSellLicenseId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.createTime"><a href="javascript:void(0)" ng-click="orderByField1='createTime';reverseSort1=!reverseSort1">创建时间<span
+                    ng-show="orderByField1 == 'createTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fieldStates.updateTime"><a href="javascript:void(0)" ng-click="orderByField1='updateTime';reverseSort1=!reverseSort1">更新时间<span
+                    ng-show="orderByField1 == 'updateTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="pd in projectData | orderBy:orderByField1:reverseSort1 | itemsPerPage:20" pagination-id="p_1">
+            <th scope="row">{{$index+1}}</th>
+            <td ng-show="fieldStates.projectId">{{pd.projectBasicData.projectId}}</td>
+            <td ng-show="fieldStates.projectName">{{pd.projectBasicData.projectName}}</td>
+            <td ng-show="fieldStates.preSellLicenseId">{{pd.projectBasicData.preSellLicenseId}}</td>
+            <td ng-show="fieldStates.createTime">{{pd.projectBasicData.createTime}}</td>
+            <td ng-show="fieldStates.updateTime">{{pd.projectBasicData.updateTime}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_1"></dir-pagination-controls>
+</div>

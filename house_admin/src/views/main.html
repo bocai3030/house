@@ -1,0 +1,13 @@
+<div class="development" ng-show="{{ENV.name === 'dev'}}" class="development" ng-cloak=""></div>
+
+<eeh-navigation-navbar
+        menu-name="'foo'"
+        brand-src="navbarBrand.src"
+        brand-text="navbarBrand.text"
+        brand-state="navbarBrand.state">
+</eeh-navigation-navbar>
+<eeh-navigation-sidebar
+        menu-name="'bar'"
+        search-input-submit="searchSubmit">
+    <ui-view></ui-view>
+</eeh-navigation-sidebar>
