@@ -39,314 +39,325 @@
 <br/>
 
 <div>
-    <input type="checkbox" ng-model="fc.pbd.projectId"><span>项目ID</span>
-    <input type="checkbox" ng-model="fc.pbd.projectName"><span>项目名</span>
-    <input type="checkbox" ng-model="fc.pbd.preSellLicenseId"><span>预售许可证号</span>
-    <input type="checkbox" ng-model="fc.pbd.countryName"><span>国土证名</span>
-    <input type="checkbox" ng-model="fc.pbd.countryId"><span>国土证ID</span>
-    <input type="checkbox" ng-model="fc.pbd.agreeName"><span>施工许可证名</span>
-    <input type="checkbox" ng-model="fc.pbd.agreeId"><span>施工许可证ID</span>
-    <input type="checkbox" ng-model="fc.pbd.layoutName"><span>规划许可证名</span>
-    <input type="checkbox" ng-model="fc.pbd.layoutId"><span>规划许可证ID</span>
-    <input type="checkbox" ng-model="fc.pbd.projectAddress"><span>项目地址</span>
-    <input type="checkbox" ng-model="fc.pbd.developer"><span>开发商</span>
-    <input type="checkbox" ng-model="fc.pbd.developerId"><span>开发商ID</span>
-    <input type="checkbox" ng-model="fc.pbd.division"><span>行政区划</span>
-    <input type="checkbox" ng-model="fc.pbd.sectionId"><span>区</span>
-    <input type="checkbox" ng-model="fc.pbd.totalCostArea"><span>总占地面积</span>
-    <input type="checkbox" ng-model="fc.pbd.totalBuildArea"><span>总建筑面积</span>
-    <input type="checkbox" ng-model="fc.pbd.qualificationLicenceNo"><span>资质证书编号</span>
-    <input type="checkbox" ng-model="fc.pbd.usagee"><span>用途</span>
-    <input type="checkbox" ng-model="fc.pbd.createTime"><span>创建时间</span>
-    <input type="checkbox" ng-model="fc.pbd.updateTime"><span>更新时间</span>
+    <input type="checkbox" ng-model="mc.pbd"><span>项目基本信息</span>
+    <input type="checkbox" ng-model="mc.psld"><span>预售证信息</span>
+    <input type="checkbox" ng-model="mc.ebd"><span>国土证信息</span>
+</div>
+<br/>
+
+<div ng-show="mc.pbd">
+    <div>
+        <input type="checkbox" ng-model="fc.pbd.projectId"><span>项目ID</span>
+        <input type="checkbox" ng-model="fc.pbd.projectName"><span>项目名</span>
+        <input type="checkbox" ng-model="fc.pbd.preSellLicenseId"><span>预售许可证号</span>
+        <input type="checkbox" ng-model="fc.pbd.countryName"><span>国土证名</span>
+        <input type="checkbox" ng-model="fc.pbd.countryId"><span>国土证ID</span>
+        <input type="checkbox" ng-model="fc.pbd.agreeName"><span>施工许可证名</span>
+        <input type="checkbox" ng-model="fc.pbd.agreeId"><span>施工许可证ID</span>
+        <input type="checkbox" ng-model="fc.pbd.layoutName"><span>规划许可证名</span>
+        <input type="checkbox" ng-model="fc.pbd.layoutId"><span>规划许可证ID</span>
+        <input type="checkbox" ng-model="fc.pbd.projectAddress"><span>项目地址</span>
+        <input type="checkbox" ng-model="fc.pbd.developer"><span>开发商</span>
+        <input type="checkbox" ng-model="fc.pbd.developerId"><span>开发商ID</span>
+        <input type="checkbox" ng-model="fc.pbd.division"><span>行政区划</span>
+        <input type="checkbox" ng-model="fc.pbd.sectionId"><span>区</span>
+        <input type="checkbox" ng-model="fc.pbd.totalCostArea"><span>总占地面积</span>
+        <input type="checkbox" ng-model="fc.pbd.totalBuildArea"><span>总建筑面积</span>
+        <input type="checkbox" ng-model="fc.pbd.qualificationLicenceNo"><span>资质证书编号</span>
+        <input type="checkbox" ng-model="fc.pbd.usagee"><span>用途</span>
+        <input type="checkbox" ng-model="fc.pbd.createTime"><span>创建时间</span>
+        <input type="checkbox" ng-model="fc.pbd.updateTime"><span>更新时间</span>
+    </div>
+
+    <br/>
+    <div class="table-responsive">
+        <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_1"></dir-pagination-controls>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th ng-show="fc.pbd.projectId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.projectId';reverseSort1=!reverseSort1">项目ID<span
+                        ng-show="orderByField1 == 'projectBasicData.projectId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.projectName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.projectName';reverseSort1=!reverseSort1">项目名<span
+                        ng-show="orderByField1 == 'projectBasicData.projectName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.preSellLicenseId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.preSellLicenseId';reverseSort1=!reverseSort1">预售许可证号<span
+                        ng-show="orderByField1 == 'projectBasicData.preSellLicenseId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.countryName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.countryName';reverseSort1=!reverseSort1">国土证名<span
+                        ng-show="orderByField1 == 'projectBasicData.countryName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.countryId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.countryId';reverseSort1=!reverseSort1">国土证ID<span
+                        ng-show="orderByField1 == 'projectBasicData.countryId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.agreeName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.agreeName';reverseSort1=!reverseSort1">施工许可证名<span
+                        ng-show="orderByField1 == 'projectBasicData.agreeName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.agreeId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.agreeId';reverseSort1=!reverseSort1">施工许可证ID<span
+                        ng-show="orderByField1 == 'projectBasicData.agreeId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.layoutName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.layoutName';reverseSort1=!reverseSort1">规划许可证名<span
+                        ng-show="orderByField1 == 'projectBasicData.layoutName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.layoutId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.layoutId';reverseSort1=!reverseSort1">规划许可证ID<span
+                        ng-show="orderByField1 == 'projectBasicData.layoutId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.projectAddress"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.projectAddress';reverseSort1=!reverseSort1">项目地址<span
+                        ng-show="orderByField1 == 'projectBasicData.projectAddress'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.developer"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.developer';reverseSort1=!reverseSort1">开发商<span
+                        ng-show="orderByField1 == 'projectBasicData.developer'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.developerId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.developerId';reverseSort1=!reverseSort1">开发商ID<span
+                        ng-show="orderByField1 == 'projectBasicData.developerId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.division"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.division';reverseSort1=!reverseSort1">行政区划<span
+                        ng-show="orderByField1 == 'projectBasicData.division'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.sectionId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.sectionId';reverseSort1=!reverseSort1">区<span
+                        ng-show="orderByField1 == 'projectBasicData.sectionId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.totalCostArea"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.totalCostArea';reverseSort1=!reverseSort1">总占地面积<span
+                        ng-show="orderByField1 == 'projectBasicData.totalCostArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.totalBuildArea"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.totalBuildArea';reverseSort1=!reverseSort1">总建筑面积<span
+                        ng-show="orderByField1 == 'projectBasicData.totalBuildArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.qualificationLicenceNo"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.qualificationLicenceNo';reverseSort1=!reverseSort1">资质证书编号<span
+                        ng-show="orderByField1 == 'projectBasicData.qualificationLicenceNo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.usagee"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.usagee';reverseSort1=!reverseSort1">用途<span
+                        ng-show="orderByField1 == 'projectBasicData.usagee'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.createTime"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.createTime';reverseSort1=!reverseSort1">创建时间<span
+                        ng-show="orderByField1 == 'projectBasicData.createTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.pbd.updateTime"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.updateTime';reverseSort1=!reverseSort1">更新时间<span
+                        ng-show="orderByField1 == 'projectBasicData.updateTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr dir-paginate="pd in projectData | orderBy:orderByField1:reverseSort1 | itemsPerPage:20" pagination-id="p_1">
+                <th scope="row">{{$index+1}}</th>
+                <td ng-show="fc.pbd.projectId">{{pd.projectBasicData.projectId}}</td>
+                <td ng-show="fc.pbd.projectName">{{pd.projectBasicData.projectName}}</td>
+                <td ng-show="fc.pbd.preSellLicenseId">{{pd.projectBasicData.preSellLicenseId}}</td>
+                <td ng-show="fc.pbd.countryName">{{pd.projectBasicData.countryName}}</td>
+                <td ng-show="fc.pbd.countryId">{{pd.projectBasicData.countryId}}</td>
+                <td ng-show="fc.pbd.agreeName">{{pd.projectBasicData.agreeName}}</td>
+                <td ng-show="fc.pbd.agreeId">{{pd.projectBasicData.agreeId}}</td>
+                <td ng-show="fc.pbd.layoutName">{{pd.projectBasicData.layoutName}}</td>
+                <td ng-show="fc.pbd.layoutId">{{pd.projectBasicData.layoutId}}</td>
+                <td ng-show="fc.pbd.projectAddress">{{pd.projectBasicData.projectAddress}}</td>
+                <td ng-show="fc.pbd.developer">{{pd.projectBasicData.developer}}</td>
+                <td ng-show="fc.pbd.developerId">{{pd.projectBasicData.developerId}}</td>
+                <td ng-show="fc.pbd.division">{{pd.projectBasicData.division}}</td>
+                <td ng-show="fc.pbd.sectionId">{{pd.projectBasicData.sectionId}}</td>
+                <td ng-show="fc.pbd.totalCostArea">{{pd.projectBasicData.totalCostArea}}</td>
+                <td ng-show="fc.pbd.totalBuildArea">{{pd.projectBasicData.totalBuildArea}}</td>
+                <td ng-show="fc.pbd.qualificationLicenceNo">{{pd.projectBasicData.qualificationLicenceNo}}</td>
+                <td ng-show="fc.pbd.usagee">{{pd.projectBasicData.usagee}}</td>
+                <td ng-show="fc.pbd.createTime">{{pd.projectBasicData.createTime}}</td>
+                <td ng-show="fc.pbd.updateTime">{{pd.projectBasicData.updateTime}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_1"></dir-pagination-controls>
+    </div>
 </div>
 
-<br/>
-<div class="table-responsive">
-    <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_1"></dir-pagination-controls>
-    <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th ng-show="fc.pbd.projectId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.projectId';reverseSort1=!reverseSort1">项目ID<span
-                    ng-show="orderByField1 == 'projectBasicData.projectId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.projectName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.projectName';reverseSort1=!reverseSort1">项目名<span
-                    ng-show="orderByField1 == 'projectBasicData.projectName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.preSellLicenseId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.preSellLicenseId';reverseSort1=!reverseSort1">预售许可证号<span
-                    ng-show="orderByField1 == 'projectBasicData.preSellLicenseId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.countryName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.countryName';reverseSort1=!reverseSort1">国土证名<span
-                    ng-show="orderByField1 == 'projectBasicData.countryName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.countryId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.countryId';reverseSort1=!reverseSort1">国土证ID<span
-                    ng-show="orderByField1 == 'projectBasicData.countryId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.agreeName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.agreeName';reverseSort1=!reverseSort1">施工许可证名<span
-                    ng-show="orderByField1 == 'projectBasicData.agreeName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.agreeId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.agreeId';reverseSort1=!reverseSort1">施工许可证ID<span
-                    ng-show="orderByField1 == 'projectBasicData.agreeId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.layoutName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.layoutName';reverseSort1=!reverseSort1">规划许可证名<span
-                    ng-show="orderByField1 == 'projectBasicData.layoutName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.layoutId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.layoutId';reverseSort1=!reverseSort1">规划许可证ID<span
-                    ng-show="orderByField1 == 'projectBasicData.layoutId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.projectAddress"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.projectAddress';reverseSort1=!reverseSort1">项目地址<span
-                    ng-show="orderByField1 == 'projectBasicData.projectAddress'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.developer"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.developer';reverseSort1=!reverseSort1">开发商<span
-                    ng-show="orderByField1 == 'projectBasicData.developer'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.developerId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.developerId';reverseSort1=!reverseSort1">开发商ID<span
-                    ng-show="orderByField1 == 'projectBasicData.developerId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.division"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.division';reverseSort1=!reverseSort1">行政区划<span
-                    ng-show="orderByField1 == 'projectBasicData.division'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.sectionId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.sectionId';reverseSort1=!reverseSort1">区<span
-                    ng-show="orderByField1 == 'projectBasicData.sectionId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.totalCostArea"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.totalCostArea';reverseSort1=!reverseSort1">总占地面积<span
-                    ng-show="orderByField1 == 'projectBasicData.totalCostArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.totalBuildArea"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.totalBuildArea';reverseSort1=!reverseSort1">总建筑面积<span
-                    ng-show="orderByField1 == 'projectBasicData.totalBuildArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.qualificationLicenceNo"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.qualificationLicenceNo';reverseSort1=!reverseSort1">资质证书编号<span
-                    ng-show="orderByField1 == 'projectBasicData.qualificationLicenceNo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.usagee"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.usagee';reverseSort1=!reverseSort1">用途<span
-                    ng-show="orderByField1 == 'projectBasicData.usagee'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.createTime"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.createTime';reverseSort1=!reverseSort1">创建时间<span
-                    ng-show="orderByField1 == 'projectBasicData.createTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.pbd.updateTime"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.updateTime';reverseSort1=!reverseSort1">更新时间<span
-                    ng-show="orderByField1 == 'projectBasicData.updateTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr dir-paginate="pd in projectData | orderBy:orderByField1:reverseSort1 | itemsPerPage:20" pagination-id="p_1">
-            <th scope="row">{{$index+1}}</th>
-            <td ng-show="fc.pbd.projectId">{{pd.projectBasicData.projectId}}</td>
-            <td ng-show="fc.pbd.projectName">{{pd.projectBasicData.projectName}}</td>
-            <td ng-show="fc.pbd.preSellLicenseId">{{pd.projectBasicData.preSellLicenseId}}</td>
-            <td ng-show="fc.pbd.countryName">{{pd.projectBasicData.countryName}}</td>
-            <td ng-show="fc.pbd.countryId">{{pd.projectBasicData.countryId}}</td>
-            <td ng-show="fc.pbd.agreeName">{{pd.projectBasicData.agreeName}}</td>
-            <td ng-show="fc.pbd.agreeId">{{pd.projectBasicData.agreeId}}</td>
-            <td ng-show="fc.pbd.layoutName">{{pd.projectBasicData.layoutName}}</td>
-            <td ng-show="fc.pbd.layoutId">{{pd.projectBasicData.layoutId}}</td>
-            <td ng-show="fc.pbd.projectAddress">{{pd.projectBasicData.projectAddress}}</td>
-            <td ng-show="fc.pbd.developer">{{pd.projectBasicData.developer}}</td>
-            <td ng-show="fc.pbd.developerId">{{pd.projectBasicData.developerId}}</td>
-            <td ng-show="fc.pbd.division">{{pd.projectBasicData.division}}</td>
-            <td ng-show="fc.pbd.sectionId">{{pd.projectBasicData.sectionId}}</td>
-            <td ng-show="fc.pbd.totalCostArea">{{pd.projectBasicData.totalCostArea}}</td>
-            <td ng-show="fc.pbd.totalBuildArea">{{pd.projectBasicData.totalBuildArea}}</td>
-            <td ng-show="fc.pbd.qualificationLicenceNo">{{pd.projectBasicData.qualificationLicenceNo}}</td>
-            <td ng-show="fc.pbd.usagee">{{pd.projectBasicData.usagee}}</td>
-            <td ng-show="fc.pbd.createTime">{{pd.projectBasicData.createTime}}</td>
-            <td ng-show="fc.pbd.updateTime">{{pd.projectBasicData.updateTime}}</td>
-        </tr>
-        </tbody>
-    </table>
-    <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_1"></dir-pagination-controls>
+<div ng-show="mc.psld">
+    <div>
+        <input type="checkbox" ng-model="fc.psld.preSellLicenseId"><span>预售许可证号</span>
+        <input type="checkbox" ng-model="fc.psld.buildingCount"><span>预售幢数</span>
+        <input type="checkbox" ng-model="fc.psld.buildingHouse"><span>报建屋数</span>
+        <input type="checkbox" ng-model="fc.psld.builtHouse"><span>已建层数</span>
+        <input type="checkbox" ng-model="fc.psld.currentPhase"><span>本期期数</span>
+        <input type="checkbox" ng-model="fc.psld.currentPhaseBuildingArea"><span>本期报建总面积</span>
+        <input type="checkbox" ng-model="fc.psld.areaUpGround"><span>地上面积</span>
+        <input type="checkbox" ng-model="fc.psld.areaUnderGround"><span>地下面积</span>
+        <input type="checkbox" ng-model="fc.psld.unitCount"><span>本期总单元套数</span>
+        <input type="checkbox" ng-model="fc.psld.totalBuidingArea"><span>总建筑面积</span>
+        <input type="checkbox" ng-model="fc.psld.contactPersion"><span>联系人</span>
+        <input type="checkbox" ng-model="fc.psld.mortgage"><span>土地是否抵押</span>
+        <input type="checkbox" ng-model="fc.psld.supportingArea"><span>配套面积</span>
+        <input type="checkbox" ng-model="fc.psld.validateFrom"><span>有效期自</span>
+        <input type="checkbox" ng-model="fc.psld.validateTo"><span>有效期至</span>
+        <input type="checkbox" ng-model="fc.psld.licenseIssueDate"><span>发证日期</span>
+        <input type="checkbox" ng-model="fc.psld.distributeOfResidentialCount"><span>住宅套数</span>
+        <input type="checkbox" ng-model="fc.psld.distributeOfResidentialArea"><span>住宅面积</span>
+        <input type="checkbox" ng-model="fc.psld.distributeOfBussinessCount"><span>商业套数</span>
+        <input type="checkbox" ng-model="fc.psld.distributeOfBussinessArea"><span>商业面积</span>
+        <input type="checkbox" ng-model="fc.psld.distributeOfOfficeCount"><span>办公套数</span>
+        <input type="checkbox" ng-model="fc.psld.distributeOfOfficeArea"><span>办公面积</span>
+        <input type="checkbox" ng-model="fc.psld.distributeOfParkingCount"><span>车位套数</span>
+        <input type="checkbox" ng-model="fc.psld.distributeOfParkingArea"><span>车位面积</span>
+        <input type="checkbox" ng-model="fc.psld.distributeOfOtherCount"><span>其他套数</span>
+        <input type="checkbox" ng-model="fc.psld.distributeOfOtherArea"><span>其他面积</span>
+        <input type="checkbox" ng-model="fc.psld.createTime"><span>创建时间</span>
+        <input type="checkbox" ng-model="fc.psld.updateTime"><span>更新时间</span>
+    </div>
+
+    <br/>
+    <div class="table-responsive">
+        <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_2"></dir-pagination-controls>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th ng-show="fc.psld.preSellLicenseId"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.preSellLicenseId';reverseSort1=!reverseSort1">预售许可证号<span
+                        ng-show="orderByField1 == 'preSellLicenseData.preSellLicenseId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.buildingCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.buildingCount';reverseSort1=!reverseSort1">预售幢数<span
+                        ng-show="orderByField1 == 'preSellLicenseData.buildingCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.buildingHouse"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.buildingHouse';reverseSort1=!reverseSort1">报建屋数<span
+                        ng-show="orderByField1 == 'preSellLicenseData.buildingHouse'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.builtHouse"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.builtHouse';reverseSort1=!reverseSort1">已建层数<span
+                        ng-show="orderByField1 == 'preSellLicenseData.builtHouse'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.currentPhase"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.currentPhase';reverseSort1=!reverseSort1">本期期数<span
+                        ng-show="orderByField1 == 'preSellLicenseData.currentPhase'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.currentPhaseBuildingArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.currentPhaseBuildingArea';reverseSort1=!reverseSort1">本期报建总面积<span
+                        ng-show="orderByField1 == 'preSellLicenseData.currentPhaseBuildingArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.areaUpGround"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.areaUpGround';reverseSort1=!reverseSort1">地上面积<span
+                        ng-show="orderByField1 == 'preSellLicenseData.areaUpGround'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.areaUnderGround"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.areaUnderGround';reverseSort1=!reverseSort1">地下面积<span
+                        ng-show="orderByField1 == 'preSellLicenseData.areaUnderGround'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.unitCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.unitCount';reverseSort1=!reverseSort1">本期总单元套数<span
+                        ng-show="orderByField1 == 'preSellLicenseData.unitCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.totalBuidingArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.totalBuidingArea';reverseSort1=!reverseSort1">总建筑面积<span
+                        ng-show="orderByField1 == 'preSellLicenseData.totalBuidingArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.contactPersion"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.contactPersion';reverseSort1=!reverseSort1">联系人<span
+                        ng-show="orderByField1 == 'preSellLicenseData.contactPersion'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.mortgage"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.mortgage';reverseSort1=!reverseSort1">土地是否抵押<span
+                        ng-show="orderByField1 == 'preSellLicenseData.mortgage'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.supportingArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.supportingArea';reverseSort1=!reverseSort1">配套面积<span
+                        ng-show="orderByField1 == 'preSellLicenseData.supportingArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.validateFrom"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.validateFrom';reverseSort1=!reverseSort1">有效期自<span
+                        ng-show="orderByField1 == 'preSellLicenseData.validateFrom'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.validateTo"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.validateTo';reverseSort1=!reverseSort1">有效期至<span
+                        ng-show="orderByField1 == 'preSellLicenseData.validateTo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.licenseIssueDate"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.licenseIssueDate';reverseSort1=!reverseSort1">发证日期<span
+                        ng-show="orderByField1 == 'preSellLicenseData.licenseIssueDate'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.distributeOfResidentialCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfResidentialCount';reverseSort1=!reverseSort1">住宅套数<span
+                        ng-show="orderByField1 == 'preSellLicenseData.distributeOfResidentialCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.distributeOfResidentialArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfResidentialArea';reverseSort1=!reverseSort1">住宅面积<span
+                        ng-show="orderByField1 == 'preSellLicenseData.distributeOfResidentialArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.distributeOfBussinessCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfBussinessCount';reverseSort1=!reverseSort1">商业套数<span
+                        ng-show="orderByField1 == 'preSellLicenseData.distributeOfBussinessCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.distributeOfBussinessArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfBussinessArea';reverseSort1=!reverseSort1">商业面积<span
+                        ng-show="orderByField1 == 'preSellLicenseData.distributeOfBussinessArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.distributeOfOfficeCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfOfficeCount';reverseSort1=!reverseSort1">办公套数<span
+                        ng-show="orderByField1 == 'preSellLicenseData.distributeOfOfficeCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.distributeOfOfficeArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfOfficeArea';reverseSort1=!reverseSort1">办公面积<span
+                        ng-show="orderByField1 == 'preSellLicenseData.distributeOfOfficeArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.distributeOfParkingCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfParkingCount';reverseSort1=!reverseSort1">车位套数<span
+                        ng-show="orderByField1 == 'preSellLicenseData.distributeOfParkingCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.distributeOfParkingArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfParkingArea';reverseSort1=!reverseSort1">车位面积<span
+                        ng-show="orderByField1 == 'preSellLicenseData.distributeOfParkingArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.distributeOfOtherCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfOtherCount';reverseSort1=!reverseSort1">其他套数<span
+                        ng-show="orderByField1 == 'preSellLicenseData.distributeOfOtherCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.distributeOfOtherArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfOtherArea';reverseSort1=!reverseSort1">其他面积<span
+                        ng-show="orderByField1 == 'preSellLicenseData.distributeOfOtherArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.createTime"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.createTime';reverseSort1=!reverseSort1">创建时间<span
+                        ng-show="orderByField1 == 'preSellLicenseData.createTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.psld.updateTime"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.updateTime';reverseSort1=!reverseSort1">更新时间<span
+                        ng-show="orderByField1 == 'preSellLicenseData.updateTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr dir-paginate="pd in projectData | orderBy:orderByField1:reverseSort1 | itemsPerPage:20" pagination-id="p_2">
+                <th scope="row">{{$index+1}}</th>
+                <td ng-show="fc.psld.preSellLicenseId">{{pd.preSellLicenseData.preSellLicenseId}}</td>
+                <td ng-show="fc.psld.buildingCount">{{pd.preSellLicenseData.buildingCount}}</td>
+                <td ng-show="fc.psld.buildingHouse">{{pd.preSellLicenseData.buildingHouse}}</td>
+                <td ng-show="fc.psld.builtHouse">{{pd.preSellLicenseData.builtHouse}}</td>
+                <td ng-show="fc.psld.currentPhase">{{pd.preSellLicenseData.currentPhase}}</td>
+                <td ng-show="fc.psld.currentPhaseBuildingArea">{{pd.preSellLicenseData.currentPhaseBuildingArea}}</td>
+                <td ng-show="fc.psld.areaUpGround">{{pd.preSellLicenseData.areaUpGround}}</td>
+                <td ng-show="fc.psld.areaUnderGround">{{pd.preSellLicenseData.areaUnderGround}}</td>
+                <td ng-show="fc.psld.unitCount">{{pd.preSellLicenseData.unitCount}}</td>
+                <td ng-show="fc.psld.totalBuidingArea">{{pd.preSellLicenseData.totalBuidingArea}}</td>
+                <td ng-show="fc.psld.contactPersion">{{pd.preSellLicenseData.contactPersion}}</td>
+                <td ng-show="fc.psld.mortgage">{{pd.preSellLicenseData.mortgage}}</td>
+                <td ng-show="fc.psld.supportingArea">{{pd.preSellLicenseData.supportingArea}}</td>
+                <td ng-show="fc.psld.validateFrom">{{pd.preSellLicenseData.validateFrom}}</td>
+                <td ng-show="fc.psld.validateTo">{{pd.preSellLicenseData.validateTo}}</td>
+                <td ng-show="fc.psld.licenseIssueDate">{{pd.preSellLicenseData.licenseIssueDate}}</td>
+                <td ng-show="fc.psld.distributeOfResidentialCount">{{pd.preSellLicenseData.distributeOfResidentialCount}}</td>
+                <td ng-show="fc.psld.distributeOfResidentialArea">{{pd.preSellLicenseData.distributeOfResidentialArea}}</td>
+                <td ng-show="fc.psld.distributeOfBussinessCount">{{pd.preSellLicenseData.distributeOfBussinessCount}}</td>
+                <td ng-show="fc.psld.distributeOfBussinessArea">{{pd.preSellLicenseData.distributeOfBussinessArea}}</td>
+                <td ng-show="fc.psld.distributeOfOfficeCount">{{pd.preSellLicenseData.distributeOfOfficeCount}}</td>
+                <td ng-show="fc.psld.distributeOfOfficeArea">{{pd.preSellLicenseData.distributeOfOfficeArea}}</td>
+                <td ng-show="fc.psld.distributeOfParkingCount">{{pd.preSellLicenseData.distributeOfParkingCount}}</td>
+                <td ng-show="fc.psld.distributeOfParkingArea">{{pd.preSellLicenseData.distributeOfParkingArea}}</td>
+                <td ng-show="fc.psld.distributeOfOtherCount">{{pd.preSellLicenseData.distributeOfOtherCount}}</td>
+                <td ng-show="fc.psld.distributeOfOtherArea">{{pd.preSellLicenseData.distributeOfOtherArea}}</td>
+                <td ng-show="fc.psld.createTime">{{pd.preSellLicenseData.createTime}}</td>
+                <td ng-show="fc.psld.updateTime">{{pd.preSellLicenseData.updateTime}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_2"></dir-pagination-controls>
+    </div>
 </div>
 
-<br/>
-<div>
-    <input type="checkbox" ng-model="fc.psld.preSellLicenseId"><span>预售许可证号</span>
-    <input type="checkbox" ng-model="fc.psld.buildingCount"><span>预售幢数</span>
-    <input type="checkbox" ng-model="fc.psld.buildingHouse"><span>报建屋数</span>
-    <input type="checkbox" ng-model="fc.psld.builtHouse"><span>已建层数</span>
-    <input type="checkbox" ng-model="fc.psld.currentPhase"><span>本期期数</span>
-    <input type="checkbox" ng-model="fc.psld.currentPhaseBuildingArea"><span>本期报建总面积</span>
-    <input type="checkbox" ng-model="fc.psld.areaUpGround"><span>地上面积</span>
-    <input type="checkbox" ng-model="fc.psld.areaUnderGround"><span>地下面积</span>
-    <input type="checkbox" ng-model="fc.psld.unitCount"><span>本期总单元套数</span>
-    <input type="checkbox" ng-model="fc.psld.totalBuidingArea"><span>总建筑面积</span>
-    <input type="checkbox" ng-model="fc.psld.contactPersion"><span>联系人</span>
-    <input type="checkbox" ng-model="fc.psld.mortgage"><span>土地是否抵押</span>
-    <input type="checkbox" ng-model="fc.psld.supportingArea"><span>配套面积</span>
-    <input type="checkbox" ng-model="fc.psld.validateFrom"><span>有效期自</span>
-    <input type="checkbox" ng-model="fc.psld.validateTo"><span>有效期至</span>
-    <input type="checkbox" ng-model="fc.psld.licenseIssueDate"><span>发证日期</span>
-    <input type="checkbox" ng-model="fc.psld.distributeOfResidentialCount"><span>住宅套数</span>
-    <input type="checkbox" ng-model="fc.psld.distributeOfResidentialArea"><span>住宅面积</span>
-    <input type="checkbox" ng-model="fc.psld.distributeOfBussinessCount"><span>商业套数</span>
-    <input type="checkbox" ng-model="fc.psld.distributeOfBussinessArea"><span>商业面积</span>
-    <input type="checkbox" ng-model="fc.psld.distributeOfOfficeCount"><span>办公套数</span>
-    <input type="checkbox" ng-model="fc.psld.distributeOfOfficeArea"><span>办公面积</span>
-    <input type="checkbox" ng-model="fc.psld.distributeOfParkingCount"><span>车位套数</span>
-    <input type="checkbox" ng-model="fc.psld.distributeOfParkingArea"><span>车位面积</span>
-    <input type="checkbox" ng-model="fc.psld.distributeOfOtherCount"><span>其他套数</span>
-    <input type="checkbox" ng-model="fc.psld.distributeOfOtherArea"><span>其他面积</span>
-    <input type="checkbox" ng-model="fc.psld.createTime"><span>创建时间</span>
-    <input type="checkbox" ng-model="fc.psld.updateTime"><span>更新时间</span>
-</div>
+<div ng-show="mc.ebd">
+    <div>
+        <input type="checkbox" ng-model="fc.ebd.earthLicenseId"><span>国土证号ID</span>
+        <input type="checkbox" ng-model="fc.ebd.projectId"><span>项目ID</span>
+        <input type="checkbox" ng-model="fc.ebd.earthLicenseNo"><span>国土证号</span>
+        <input type="checkbox" ng-model="fc.ebd.location"><span>土地座落</span>
+        <input type="checkbox" ng-model="fc.ebd.userr"><span>土地使用者</span>
+        <input type="checkbox" ng-model="fc.ebd.earthNo"><span>地号</span>
+        <input type="checkbox" ng-model="fc.ebd.graphNo"><span>图号</span>
+        <input type="checkbox" ng-model="fc.ebd.usagee"><span>土地用途</span>
+        <input type="checkbox" ng-model="fc.ebd.levell"><span>土地等级</span>
+        <input type="checkbox" ng-model="fc.ebd.borrowFrom"><span>土地出让年限自</span>
+        <input type="checkbox" ng-model="fc.ebd.useRightKind"><span>使用权类型</span>
+        <input type="checkbox" ng-model="fc.ebd.useArea"><span>使用权面积</span>
+        <input type="checkbox" ng-model="fc.ebd.shareArea"><span>其中共用分推面积</span>
+        <input type="checkbox" ng-model="fc.ebd.licenseIssueDate"><span>发证日期</span>
+    </div>
 
-<br/>
-<div class="table-responsive">
-    <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_2"></dir-pagination-controls>
-    <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th ng-show="fc.psld.preSellLicenseId"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.preSellLicenseId';reverseSort1=!reverseSort1">预售许可证号<span
-                    ng-show="orderByField1 == 'preSellLicenseData.preSellLicenseId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.buildingCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.buildingCount';reverseSort1=!reverseSort1">预售幢数<span
-                    ng-show="orderByField1 == 'preSellLicenseData.buildingCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.buildingHouse"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.buildingHouse';reverseSort1=!reverseSort1">报建屋数<span
-                    ng-show="orderByField1 == 'preSellLicenseData.buildingHouse'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.builtHouse"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.builtHouse';reverseSort1=!reverseSort1">已建层数<span
-                    ng-show="orderByField1 == 'preSellLicenseData.builtHouse'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.currentPhase"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.currentPhase';reverseSort1=!reverseSort1">本期期数<span
-                    ng-show="orderByField1 == 'preSellLicenseData.currentPhase'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.currentPhaseBuildingArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.currentPhaseBuildingArea';reverseSort1=!reverseSort1">本期报建总面积<span
-                    ng-show="orderByField1 == 'preSellLicenseData.currentPhaseBuildingArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.areaUpGround"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.areaUpGround';reverseSort1=!reverseSort1">地上面积<span
-                    ng-show="orderByField1 == 'preSellLicenseData.areaUpGround'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.areaUnderGround"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.areaUnderGround';reverseSort1=!reverseSort1">地下面积<span
-                    ng-show="orderByField1 == 'preSellLicenseData.areaUnderGround'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.unitCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.unitCount';reverseSort1=!reverseSort1">本期总单元套数<span
-                    ng-show="orderByField1 == 'preSellLicenseData.unitCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.totalBuidingArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.totalBuidingArea';reverseSort1=!reverseSort1">总建筑面积<span
-                    ng-show="orderByField1 == 'preSellLicenseData.totalBuidingArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.contactPersion"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.contactPersion';reverseSort1=!reverseSort1">联系人<span
-                    ng-show="orderByField1 == 'preSellLicenseData.contactPersion'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.mortgage"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.mortgage';reverseSort1=!reverseSort1">土地是否抵押<span
-                    ng-show="orderByField1 == 'preSellLicenseData.mortgage'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.supportingArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.supportingArea';reverseSort1=!reverseSort1">配套面积<span
-                    ng-show="orderByField1 == 'preSellLicenseData.supportingArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.validateFrom"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.validateFrom';reverseSort1=!reverseSort1">有效期自<span
-                    ng-show="orderByField1 == 'preSellLicenseData.validateFrom'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.validateTo"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.validateTo';reverseSort1=!reverseSort1">有效期至<span
-                    ng-show="orderByField1 == 'preSellLicenseData.validateTo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.licenseIssueDate"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.licenseIssueDate';reverseSort1=!reverseSort1">发证日期<span
-                    ng-show="orderByField1 == 'preSellLicenseData.licenseIssueDate'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.distributeOfResidentialCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfResidentialCount';reverseSort1=!reverseSort1">住宅套数<span
-                    ng-show="orderByField1 == 'preSellLicenseData.distributeOfResidentialCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.distributeOfResidentialArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfResidentialArea';reverseSort1=!reverseSort1">住宅面积<span
-                    ng-show="orderByField1 == 'preSellLicenseData.distributeOfResidentialArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.distributeOfBussinessCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfBussinessCount';reverseSort1=!reverseSort1">商业套数<span
-                    ng-show="orderByField1 == 'preSellLicenseData.distributeOfBussinessCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.distributeOfBussinessArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfBussinessArea';reverseSort1=!reverseSort1">商业面积<span
-                    ng-show="orderByField1 == 'preSellLicenseData.distributeOfBussinessArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.distributeOfOfficeCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfOfficeCount';reverseSort1=!reverseSort1">办公套数<span
-                    ng-show="orderByField1 == 'preSellLicenseData.distributeOfOfficeCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.distributeOfOfficeArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfOfficeArea';reverseSort1=!reverseSort1">办公面积<span
-                    ng-show="orderByField1 == 'preSellLicenseData.distributeOfOfficeArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.distributeOfParkingCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfParkingCount';reverseSort1=!reverseSort1">车位套数<span
-                    ng-show="orderByField1 == 'preSellLicenseData.distributeOfParkingCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.distributeOfParkingArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfParkingArea';reverseSort1=!reverseSort1">车位面积<span
-                    ng-show="orderByField1 == 'preSellLicenseData.distributeOfParkingArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.distributeOfOtherCount"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfOtherCount';reverseSort1=!reverseSort1">其他套数<span
-                    ng-show="orderByField1 == 'preSellLicenseData.distributeOfOtherCount'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.distributeOfOtherArea"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.distributeOfOtherArea';reverseSort1=!reverseSort1">其他面积<span
-                    ng-show="orderByField1 == 'preSellLicenseData.distributeOfOtherArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.createTime"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.createTime';reverseSort1=!reverseSort1">创建时间<span
-                    ng-show="orderByField1 == 'preSellLicenseData.createTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.psld.updateTime"><a href="javascript:void(0)" ng-click="orderByField1='preSellLicenseData.updateTime';reverseSort1=!reverseSort1">更新时间<span
-                    ng-show="orderByField1 == 'preSellLicenseData.updateTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr dir-paginate="pd in projectData | orderBy:orderByField1:reverseSort1 | itemsPerPage:20" pagination-id="p_2">
-            <th scope="row">{{$index+1}}</th>
-            <td ng-show="fc.psld.preSellLicenseId">{{pd.preSellLicenseData.preSellLicenseId}}</td>
-            <td ng-show="fc.psld.buildingCount">{{pd.preSellLicenseData.buildingCount}}</td>
-            <td ng-show="fc.psld.buildingHouse">{{pd.preSellLicenseData.buildingHouse}}</td>
-            <td ng-show="fc.psld.builtHouse">{{pd.preSellLicenseData.builtHouse}}</td>
-            <td ng-show="fc.psld.currentPhase">{{pd.preSellLicenseData.currentPhase}}</td>
-            <td ng-show="fc.psld.currentPhaseBuildingArea">{{pd.preSellLicenseData.currentPhaseBuildingArea}}</td>
-            <td ng-show="fc.psld.areaUpGround">{{pd.preSellLicenseData.areaUpGround}}</td>
-            <td ng-show="fc.psld.areaUnderGround">{{pd.preSellLicenseData.areaUnderGround}}</td>
-            <td ng-show="fc.psld.unitCount">{{pd.preSellLicenseData.unitCount}}</td>
-            <td ng-show="fc.psld.totalBuidingArea">{{pd.preSellLicenseData.totalBuidingArea}}</td>
-            <td ng-show="fc.psld.contactPersion">{{pd.preSellLicenseData.contactPersion}}</td>
-            <td ng-show="fc.psld.mortgage">{{pd.preSellLicenseData.mortgage}}</td>
-            <td ng-show="fc.psld.supportingArea">{{pd.preSellLicenseData.supportingArea}}</td>
-            <td ng-show="fc.psld.validateFrom">{{pd.preSellLicenseData.validateFrom}}</td>
-            <td ng-show="fc.psld.validateTo">{{pd.preSellLicenseData.validateTo}}</td>
-            <td ng-show="fc.psld.licenseIssueDate">{{pd.preSellLicenseData.licenseIssueDate}}</td>
-            <td ng-show="fc.psld.distributeOfResidentialCount">{{pd.preSellLicenseData.distributeOfResidentialCount}}</td>
-            <td ng-show="fc.psld.distributeOfResidentialArea">{{pd.preSellLicenseData.distributeOfResidentialArea}}</td>
-            <td ng-show="fc.psld.distributeOfBussinessCount">{{pd.preSellLicenseData.distributeOfBussinessCount}}</td>
-            <td ng-show="fc.psld.distributeOfBussinessArea">{{pd.preSellLicenseData.distributeOfBussinessArea}}</td>
-            <td ng-show="fc.psld.distributeOfOfficeCount">{{pd.preSellLicenseData.distributeOfOfficeCount}}</td>
-            <td ng-show="fc.psld.distributeOfOfficeArea">{{pd.preSellLicenseData.distributeOfOfficeArea}}</td>
-            <td ng-show="fc.psld.distributeOfParkingCount">{{pd.preSellLicenseData.distributeOfParkingCount}}</td>
-            <td ng-show="fc.psld.distributeOfParkingArea">{{pd.preSellLicenseData.distributeOfParkingArea}}</td>
-            <td ng-show="fc.psld.distributeOfOtherCount">{{pd.preSellLicenseData.distributeOfOtherCount}}</td>
-            <td ng-show="fc.psld.distributeOfOtherArea">{{pd.preSellLicenseData.distributeOfOtherArea}}</td>
-            <td ng-show="fc.psld.createTime">{{pd.preSellLicenseData.createTime}}</td>
-            <td ng-show="fc.psld.updateTime">{{pd.preSellLicenseData.updateTime}}</td>
-        </tr>
-        </tbody>
-    </table>
-    <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_2"></dir-pagination-controls>
-</div>
-
-<br/>
-<div>
-    <input type="checkbox" ng-model="fc.ebd.earthLicenseId"><span>国土证号ID</span>
-    <input type="checkbox" ng-model="fc.ebd.projectId"><span>项目ID</span>
-    <input type="checkbox" ng-model="fc.ebd.earthLicenseNo"><span>国土证号</span>
-    <input type="checkbox" ng-model="fc.ebd.location"><span>土地座落</span>
-    <input type="checkbox" ng-model="fc.ebd.userr"><span>土地使用者</span>
-    <input type="checkbox" ng-model="fc.ebd.earthNo"><span>地号</span>
-    <input type="checkbox" ng-model="fc.ebd.graphNo"><span>图号</span>
-    <input type="checkbox" ng-model="fc.ebd.usagee"><span>土地用途</span>
-    <input type="checkbox" ng-model="fc.ebd.levell"><span>土地等级</span>
-    <input type="checkbox" ng-model="fc.ebd.borrowFrom"><span>土地出让年限自</span>
-    <input type="checkbox" ng-model="fc.ebd.useRightKind"><span>使用权类型</span>
-    <input type="checkbox" ng-model="fc.ebd.useArea"><span>使用权面积</span>
-    <input type="checkbox" ng-model="fc.ebd.shareArea"><span>其中共用分推面积</span>
-    <input type="checkbox" ng-model="fc.ebd.licenseIssueDate"><span>发证日期</span>
-</div>
-
-<br/>
-<div class="table-responsive">
-    <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_3"></dir-pagination-controls>
-    <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th ng-show="fc.ebd.earthLicenseId"><a href="javascript:void(0)" ng-click="orderByField1='earthLicenseId';reverseSort1=!reverseSort1">国土证号ID<span
-                    ng-show="orderByField1 == 'earthLicenseId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.projectId"><a href="javascript:void(0)" ng-click="orderByField1='projectId';reverseSort1=!reverseSort1">项目ID<span
-                    ng-show="orderByField1 == 'projectId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.earthLicenseNo"><a href="javascript:void(0)" ng-click="orderByField1='earthLicenseNo';reverseSort1=!reverseSort1">国土证号<span
-                    ng-show="orderByField1 == 'earthLicenseNo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.location"><a href="javascript:void(0)" ng-click="orderByField1='location';reverseSort1=!reverseSort1">土地座落<span
-                    ng-show="orderByField1 == 'location'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.userr"><a href="javascript:void(0)" ng-click="orderByField1='userr';reverseSort1=!reverseSort1">土地使用者<span
-                    ng-show="orderByField1 == 'userr'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.earthNo"><a href="javascript:void(0)" ng-click="orderByField1='earthNo';reverseSort1=!reverseSort1">地号<span
-                    ng-show="orderByField1 == 'earthNo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.graphNo"><a href="javascript:void(0)" ng-click="orderByField1='graphNo';reverseSort1=!reverseSort1">图号<span
-                    ng-show="orderByField1 == 'graphNo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.usagee"><a href="javascript:void(0)" ng-click="orderByField1='usagee';reverseSort1=!reverseSort1">土地用途<span
-                    ng-show="orderByField1 == 'usagee'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.levell"><a href="javascript:void(0)" ng-click="orderByField1='levell';reverseSort1=!reverseSort1">土地等级<span
-                    ng-show="orderByField1 == 'levell'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.borrowFrom"><a href="javascript:void(0)" ng-click="orderByField1='borrowFrom';reverseSort1=!reverseSort1">土地出让年限自<span
-                    ng-show="orderByField1 == 'borrowFrom'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.useRightKind"><a href="javascript:void(0)" ng-click="orderByField1='useRightKind';reverseSort1=!reverseSort1">使用权类型<span
-                    ng-show="orderByField1 == 'useRightKind'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.useArea"><a href="javascript:void(0)" ng-click="orderByField1='useArea';reverseSort1=!reverseSort1">使用权面积<span
-                    ng-show="orderByField1 == 'useArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.shareArea"><a href="javascript:void(0)" ng-click="orderByField1='shareArea';reverseSort1=!reverseSort1">其中共用分推面积<span
-                    ng-show="orderByField1 == 'shareArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-            <th ng-show="fc.ebd.licenseIssueDate"><a href="javascript:void(0)" ng-click="orderByField1='licenseIssueDate';reverseSort1=!reverseSort1">发证日期<span
-                    ng-show="orderByField1 == 'licenseIssueDate'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr dir-paginate="tebd in tmpEarthBasicData | orderBy:orderByField1:reverseSort1 | itemsPerPage:20" pagination-id="p_3">
-            <th scope="row">{{$index+1}}</th>
-            <td ng-show="fc.ebd.earthLicenseId">{{tebd.earthLicenseId}}</td>
-            <td ng-show="fc.ebd.projectId">{{tebd.projectId}}</td>
-            <td ng-show="fc.ebd.earthLicenseNo">{{tebd.earthLicenseNo}}</td>
-            <td ng-show="fc.ebd.location">{{tebd.location}}</td>
-            <td ng-show="fc.ebd.userr">{{tebd.userr}}</td>
-            <td ng-show="fc.ebd.earthNo">{{tebd.earthNo}}</td>
-            <td ng-show="fc.ebd.graphNo">{{tebd.graphNo}}</td>
-            <td ng-show="fc.ebd.usagee">{{tebd.usagee}}</td>
-            <td ng-show="fc.ebd.levell">{{tebd.levell}}</td>
-            <td ng-show="fc.ebd.borrowFrom">{{tebd.borrowFrom}}</td>
-            <td ng-show="fc.ebd.useRightKind">{{tebd.useRightKind}}</td>
-            <td ng-show="fc.ebd.useArea">{{tebd.useArea}}</td>
-            <td ng-show="fc.ebd.shareArea">{{tebd.shareArea}}</td>
-            <td ng-show="fc.ebd.licenseIssueDate">{{tebd.licenseIssueDate}}</td>
-        </tr>
-        </tbody>
-    </table>
-    <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_3"></dir-pagination-controls>
+    <br/>
+    <div class="table-responsive">
+        <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_3"></dir-pagination-controls>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th ng-show="fc.ebd.earthLicenseId"><a href="javascript:void(0)" ng-click="orderByField1='earthLicenseId';reverseSort1=!reverseSort1">国土证号ID<span
+                        ng-show="orderByField1 == 'earthLicenseId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.projectId"><a href="javascript:void(0)" ng-click="orderByField1='projectId';reverseSort1=!reverseSort1">项目ID<span
+                        ng-show="orderByField1 == 'projectId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.earthLicenseNo"><a href="javascript:void(0)" ng-click="orderByField1='earthLicenseNo';reverseSort1=!reverseSort1">国土证号<span
+                        ng-show="orderByField1 == 'earthLicenseNo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.location"><a href="javascript:void(0)" ng-click="orderByField1='location';reverseSort1=!reverseSort1">土地座落<span
+                        ng-show="orderByField1 == 'location'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.userr"><a href="javascript:void(0)" ng-click="orderByField1='userr';reverseSort1=!reverseSort1">土地使用者<span
+                        ng-show="orderByField1 == 'userr'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.earthNo"><a href="javascript:void(0)" ng-click="orderByField1='earthNo';reverseSort1=!reverseSort1">地号<span
+                        ng-show="orderByField1 == 'earthNo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.graphNo"><a href="javascript:void(0)" ng-click="orderByField1='graphNo';reverseSort1=!reverseSort1">图号<span
+                        ng-show="orderByField1 == 'graphNo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.usagee"><a href="javascript:void(0)" ng-click="orderByField1='usagee';reverseSort1=!reverseSort1">土地用途<span
+                        ng-show="orderByField1 == 'usagee'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.levell"><a href="javascript:void(0)" ng-click="orderByField1='levell';reverseSort1=!reverseSort1">土地等级<span
+                        ng-show="orderByField1 == 'levell'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.borrowFrom"><a href="javascript:void(0)" ng-click="orderByField1='borrowFrom';reverseSort1=!reverseSort1">土地出让年限自<span
+                        ng-show="orderByField1 == 'borrowFrom'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.useRightKind"><a href="javascript:void(0)" ng-click="orderByField1='useRightKind';reverseSort1=!reverseSort1">使用权类型<span
+                        ng-show="orderByField1 == 'useRightKind'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.useArea"><a href="javascript:void(0)" ng-click="orderByField1='useArea';reverseSort1=!reverseSort1">使用权面积<span
+                        ng-show="orderByField1 == 'useArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.shareArea"><a href="javascript:void(0)" ng-click="orderByField1='shareArea';reverseSort1=!reverseSort1">其中共用分推面积<span
+                        ng-show="orderByField1 == 'shareArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.licenseIssueDate"><a href="javascript:void(0)" ng-click="orderByField1='licenseIssueDate';reverseSort1=!reverseSort1">发证日期<span
+                        ng-show="orderByField1 == 'licenseIssueDate'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr dir-paginate="tebd in tmpEarthBasicData | orderBy:orderByField1:reverseSort1 | itemsPerPage:20" pagination-id="p_3">
+                <th scope="row">{{$index+1}}</th>
+                <td ng-show="fc.ebd.earthLicenseId">{{tebd.earthLicenseId}}</td>
+                <td ng-show="fc.ebd.projectId">{{tebd.projectId}}</td>
+                <td ng-show="fc.ebd.earthLicenseNo">{{tebd.earthLicenseNo}}</td>
+                <td ng-show="fc.ebd.location">{{tebd.location}}</td>
+                <td ng-show="fc.ebd.userr">{{tebd.userr}}</td>
+                <td ng-show="fc.ebd.earthNo">{{tebd.earthNo}}</td>
+                <td ng-show="fc.ebd.graphNo">{{tebd.graphNo}}</td>
+                <td ng-show="fc.ebd.usagee">{{tebd.usagee}}</td>
+                <td ng-show="fc.ebd.levell">{{tebd.levell}}</td>
+                <td ng-show="fc.ebd.borrowFrom">{{tebd.borrowFrom}}</td>
+                <td ng-show="fc.ebd.useRightKind">{{tebd.useRightKind}}</td>
+                <td ng-show="fc.ebd.useArea">{{tebd.useArea}}</td>
+                <td ng-show="fc.ebd.shareArea">{{tebd.shareArea}}</td>
+                <td ng-show="fc.ebd.licenseIssueDate">{{tebd.licenseIssueDate}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_3"></dir-pagination-controls>
+    </div>
 </div>

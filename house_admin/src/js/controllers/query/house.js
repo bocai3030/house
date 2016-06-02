@@ -8,6 +8,11 @@ angular.module('adminApp').config(function ($stateProvider) {
 }).controller('HouseController', function ($scope, toasty, HouseService, $http) {
     $scope.title = '房产查询';
 
+    $scope.mc = {
+        pbd: true,
+        psld: true,
+        ebd: true
+    };
     $scope.fc = {
         pbd: {
             projectId: true,
