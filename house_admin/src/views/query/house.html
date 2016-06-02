@@ -272,3 +272,81 @@
     </table>
     <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_2"></dir-pagination-controls>
 </div>
+
+<br/>
+<div>
+    <input type="checkbox" ng-model="fc.ebd.earthLicenseId"><span>国土证号ID</span>
+    <input type="checkbox" ng-model="fc.ebd.projectId"><span>项目ID</span>
+    <input type="checkbox" ng-model="fc.ebd.earthLicenseNo"><span>国土证号</span>
+    <input type="checkbox" ng-model="fc.ebd.location"><span>土地座落</span>
+    <input type="checkbox" ng-model="fc.ebd.userr"><span>土地使用者</span>
+    <input type="checkbox" ng-model="fc.ebd.earthNo"><span>地号</span>
+    <input type="checkbox" ng-model="fc.ebd.graphNo"><span>图号</span>
+    <input type="checkbox" ng-model="fc.ebd.usagee"><span>土地用途</span>
+    <input type="checkbox" ng-model="fc.ebd.levell"><span>土地等级</span>
+    <input type="checkbox" ng-model="fc.ebd.borrowFrom"><span>土地出让年限自</span>
+    <input type="checkbox" ng-model="fc.ebd.useRightKind"><span>使用权类型</span>
+    <input type="checkbox" ng-model="fc.ebd.useArea"><span>使用权面积</span>
+    <input type="checkbox" ng-model="fc.ebd.shareArea"><span>其中共用分推面积</span>
+    <input type="checkbox" ng-model="fc.ebd.licenseIssueDate"><span>发证日期</span>
+</div>
+
+<br/>
+<div class="table-responsive">
+    <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_3"></dir-pagination-controls>
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th ng-show="fc.ebd.earthLicenseId"><a href="javascript:void(0)" ng-click="orderByField1='earthLicenseId';reverseSort1=!reverseSort1">国土证号ID<span
+                    ng-show="orderByField1 == 'earthLicenseId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.projectId"><a href="javascript:void(0)" ng-click="orderByField1='projectId';reverseSort1=!reverseSort1">项目ID<span
+                    ng-show="orderByField1 == 'projectId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.earthLicenseNo"><a href="javascript:void(0)" ng-click="orderByField1='earthLicenseNo';reverseSort1=!reverseSort1">国土证号<span
+                    ng-show="orderByField1 == 'earthLicenseNo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.location"><a href="javascript:void(0)" ng-click="orderByField1='location';reverseSort1=!reverseSort1">土地座落<span
+                    ng-show="orderByField1 == 'location'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.userr"><a href="javascript:void(0)" ng-click="orderByField1='userr';reverseSort1=!reverseSort1">土地使用者<span
+                    ng-show="orderByField1 == 'userr'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.earthNo"><a href="javascript:void(0)" ng-click="orderByField1='earthNo';reverseSort1=!reverseSort1">地号<span
+                    ng-show="orderByField1 == 'earthNo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.graphNo"><a href="javascript:void(0)" ng-click="orderByField1='graphNo';reverseSort1=!reverseSort1">图号<span
+                    ng-show="orderByField1 == 'graphNo'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.usagee"><a href="javascript:void(0)" ng-click="orderByField1='usagee';reverseSort1=!reverseSort1">土地用途<span
+                    ng-show="orderByField1 == 'usagee'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.levell"><a href="javascript:void(0)" ng-click="orderByField1='levell';reverseSort1=!reverseSort1">土地等级<span
+                    ng-show="orderByField1 == 'levell'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.borrowFrom"><a href="javascript:void(0)" ng-click="orderByField1='borrowFrom';reverseSort1=!reverseSort1">土地出让年限自<span
+                    ng-show="orderByField1 == 'borrowFrom'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.useRightKind"><a href="javascript:void(0)" ng-click="orderByField1='useRightKind';reverseSort1=!reverseSort1">使用权类型<span
+                    ng-show="orderByField1 == 'useRightKind'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.useArea"><a href="javascript:void(0)" ng-click="orderByField1='useArea';reverseSort1=!reverseSort1">使用权面积<span
+                    ng-show="orderByField1 == 'useArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.shareArea"><a href="javascript:void(0)" ng-click="orderByField1='shareArea';reverseSort1=!reverseSort1">其中共用分推面积<span
+                    ng-show="orderByField1 == 'shareArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.ebd.licenseIssueDate"><a href="javascript:void(0)" ng-click="orderByField1='licenseIssueDate';reverseSort1=!reverseSort1">发证日期<span
+                    ng-show="orderByField1 == 'licenseIssueDate'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="tebd in tmpEarthBasicData | orderBy:orderByField1:reverseSort1 | itemsPerPage:20" pagination-id="p_3">
+            <th scope="row">{{$index+1}}</th>
+            <td ng-show="fc.ebd.earthLicenseId">{{tebd.earthLicenseId}}</td>
+            <td ng-show="fc.ebd.projectId">{{tebd.projectId}}</td>
+            <td ng-show="fc.ebd.earthLicenseNo">{{tebd.earthLicenseNo}}</td>
+            <td ng-show="fc.ebd.location">{{tebd.location}}</td>
+            <td ng-show="fc.ebd.userr">{{tebd.userr}}</td>
+            <td ng-show="fc.ebd.earthNo">{{tebd.earthNo}}</td>
+            <td ng-show="fc.ebd.graphNo">{{tebd.graphNo}}</td>
+            <td ng-show="fc.ebd.usagee">{{tebd.usagee}}</td>
+            <td ng-show="fc.ebd.levell">{{tebd.levell}}</td>
+            <td ng-show="fc.ebd.borrowFrom">{{tebd.borrowFrom}}</td>
+            <td ng-show="fc.ebd.useRightKind">{{tebd.useRightKind}}</td>
+            <td ng-show="fc.ebd.useArea">{{tebd.useArea}}</td>
+            <td ng-show="fc.ebd.shareArea">{{tebd.shareArea}}</td>
+            <td ng-show="fc.ebd.licenseIssueDate">{{tebd.licenseIssueDate}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_3"></dir-pagination-controls>
+</div>

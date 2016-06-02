@@ -60,9 +60,34 @@ angular.module('adminApp').config(function ($stateProvider) {
             distributeOfOtherArea: false,
             createTime: false,
             updateTime: false
+        },
+        ebd: {
+            earthLicenseId: true,
+            projectId: true,
+            earthLicenseNo: true,
+            location: false,
+            userr: false,
+            earthNo: false,
+            graphNo: false,
+            usagee: true,
+            levell: false,
+            borrowFrom: true,
+            useRightKind: false,
+            useArea: false,
+            shareArea: false,
+            licenseIssueDate: true
         }
     };
+
     $scope.projectData = null;
+    $scope.tmpEarthBasicData = [];
+    $scope.setTmpEarthBasicData = function () {
+        $scope.tmpEarthBasicData = [];
+        for(var i = 0; i < $scope.projectData.length; ++i) {
+            $scope.tmpEarthBasicData = $scope.tmpEarthBasicData.concat($scope.projectData[i].earthBasicDatas);
+        }
+    };
+
     $scope.queryParamsByProjectId = {
         projectId: null
     };
@@ -76,6 +101,7 @@ angular.module('adminApp').config(function ($stateProvider) {
             HouseService.getProjectDataByProjectId($scope.queryParamsByProjectId).$promise.then(function (data) {
                 $scope.querying = false;
                 $scope.projectData = data;
+                $scope.setTmpEarthBasicData();
             }, function (data) {
                 $scope.querying = false;
                 toasty.pop.error({
@@ -92,6 +118,7 @@ angular.module('adminApp').config(function ($stateProvider) {
             HouseService.getProjectDataByProjectNameLike($scope.queryParamsByProjectNameLike).$promise.then(function (data) {
                 $scope.querying = false;
                 $scope.projectData = data;
+                $scope.setTmpEarthBasicData();
             }, function (data) {
                 $scope.querying = false;
                 toasty.pop.error({

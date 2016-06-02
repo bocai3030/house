@@ -45,6 +45,9 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 		if (this.earthLicenseId != null) {
 			result = 31 * result + this.earthLicenseId.hashCode();
 		}
+		if (this.projectId != null) {
+			result = 31 * result + this.projectId.hashCode();
+		}
 		if (this.earthLicenseNo != null) {
 			result = 31 * result + this.earthLicenseNo.hashCode();
 		}
