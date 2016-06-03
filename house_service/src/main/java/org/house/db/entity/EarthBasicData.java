@@ -37,7 +37,11 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 	protected String useRightKind; // 使用权类型
 	protected String useArea; // 使用权面积
 	protected String shareArea; // 其中共用分推面积
-	protected String licenseIssueDate; // 发证日期
+	protected String licenseOffice; // 发证机关
+	@Temporal(TemporalType.DATE)
+	@JsonSerialize(using = DateSerializer.class)
+	@JsonFormat(pattern = C.DATE_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
+	protected Date licenseIssueDate; // 发证日期
 
 	@Override
 	public int hashCode() {
@@ -72,6 +76,7 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 					&& ObjectUtils.nullSafeEquals(this.useRightKind, anObject.getUseRightKind())
 					&& ObjectUtils.nullSafeEquals(this.useArea, anObject.getUseArea())
 					&& ObjectUtils.nullSafeEquals(this.shareArea, anObject.getShareArea())
+					&& ObjectUtils.nullSafeEquals(this.licenseOffice, anObject.getLicenseOffice())
 					&& ObjectUtils.nullSafeEquals(this.licenseIssueDate, anObject.getLicenseIssueDate())) {
 				return true;
 			}
@@ -93,6 +98,7 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 		this.useRightKind = theObj.useRightKind;
 		this.useArea = theObj.useArea;
 		this.shareArea = theObj.shareArea;
+		this.licenseOffice = theObj.licenseOffice;
 		this.licenseIssueDate = theObj.licenseIssueDate;
 	}
 
@@ -200,11 +206,19 @@ public class EarthBasicData extends AbstractDbBean implements Serializable {
 		this.shareArea = shareArea;
 	}
 
-	public String getLicenseIssueDate() {
+	public String getLicenseOffice() {
+		return this.licenseOffice;
+	}
+
+	public void setLicenseOffice(final String licenseOffice) {
+		this.licenseOffice = licenseOffice;
+	}
+
+	public Date getLicenseIssueDate() {
 		return this.licenseIssueDate;
 	}
 
-	public void setLicenseIssueDate(final String licenseIssueDate) {
+	public void setLicenseIssueDate(final Date licenseIssueDate) {
 		this.licenseIssueDate = licenseIssueDate;
 	}
 }

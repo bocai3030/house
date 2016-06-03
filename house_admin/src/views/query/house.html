@@ -374,7 +374,10 @@
         <input type="checkbox" ng-model="fc.ebd.useRightKind"><span>使用权类型</span>
         <input type="checkbox" ng-model="fc.ebd.useArea"><span>使用权面积</span>
         <input type="checkbox" ng-model="fc.ebd.shareArea"><span>其中共用分推面积</span>
+        <input type="checkbox" ng-model="fc.ebd.licenseOffice"><span>发证机关</span>
         <input type="checkbox" ng-model="fc.ebd.licenseIssueDate"><span>发证日期</span>
+        <input type="checkbox" ng-model="fc.ebd.createTime"><span>创建时间</span>
+        <input type="checkbox" ng-model="fc.ebd.updateTime"><span>更新时间</span>
     </div>
 
     <br/>
@@ -410,8 +413,14 @@
                         ng-show="orderByField1 == 'useArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
                 <th ng-show="fc.ebd.shareArea"><a href="javascript:void(0)" ng-click="orderByField1='shareArea';reverseSort1=!reverseSort1">其中共用分推面积<span
                         ng-show="orderByField1 == 'shareArea'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.licenseOffice"><a href="javascript:void(0)" ng-click="orderByField1='licenseOffice';reverseSort1=!reverseSort1">发证机关<span
+                        ng-show="orderByField1 == 'licenseOffice'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
                 <th ng-show="fc.ebd.licenseIssueDate"><a href="javascript:void(0)" ng-click="orderByField1='licenseIssueDate';reverseSort1=!reverseSort1">发证日期<span
                         ng-show="orderByField1 == 'licenseIssueDate'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.createTime"><a href="javascript:void(0)" ng-click="orderByField1='createTime';reverseSort1=!reverseSort1">创建时间<span
+                        ng-show="orderByField1 == 'createTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+                <th ng-show="fc.ebd.updateTime"><a href="javascript:void(0)" ng-click="orderByField1='updateTime';reverseSort1=!reverseSort1">更新时间<span
+                        ng-show="orderByField1 == 'updateTime'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
             </tr>
             </thead>
             <tbody>
@@ -430,7 +439,10 @@
                 <td ng-show="fc.ebd.useRightKind">{{tebd.useRightKind}}</td>
                 <td ng-show="fc.ebd.useArea">{{tebd.useArea}}</td>
                 <td ng-show="fc.ebd.shareArea">{{tebd.shareArea}}</td>
+                <td ng-show="fc.ebd.licenseOffice">{{tebd.licenseOffice}}</td>
                 <td ng-show="fc.ebd.licenseIssueDate">{{tebd.licenseIssueDate}}</td>
+                <td ng-show="fc.ebd.createTime">{{tebd.createTime}}</td>
+                <td ng-show="fc.ebd.updateTime">{{tebd.updateTime}}</td>
             </tr>
             </tbody>
         </table>

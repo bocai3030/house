@@ -37,7 +37,8 @@ CREATE TABLE `earth_basic_data` (
   `use_right_kind` varchar(255) NOT NULL DEFAULT '' COMMENT '使用权类型',
   `use_area` varchar(255) NOT NULL DEFAULT '' COMMENT '使用权面积',
   `share_area` varchar(255) NOT NULL DEFAULT '' COMMENT '其中共用分推面积',
-  `license_issue_date` varchar(255) NOT NULL DEFAULT '' COMMENT '发证日期',
+  `license_office` varchar(255) NOT NULL DEFAULT '' COMMENT '发证机关',
+  `license_issue_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发证日期',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -56,4 +57,4 @@ CREATE TABLE `earth_basic_data` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-31  0:58:50
+-- Dump completed on 2016-06-03 23:22:40

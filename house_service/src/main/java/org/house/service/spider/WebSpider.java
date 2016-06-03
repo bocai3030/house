@@ -34,7 +34,7 @@ public class WebSpider {
 			lastCallTime = System.currentTimeMillis();
 		}
 		while (true) {
-			if ((System.currentTimeMillis() - lastCallTime) < 300) {
+			if (System.currentTimeMillis() - lastCallTime < 300) {
 				try {
 					Thread.sleep(200);
 				} catch (final InterruptedException e) {
@@ -125,7 +125,7 @@ public class WebSpider {
 
 			final int idx3 = content.indexOf(tag2, idx2 + tag1.length());
 			final int idx4 = content.indexOf(tag3, idx3 + tag2.length());
-			if ((idx3 + tag2.length()) > idx4) {
+			if (idx3 + tag2.length() > idx4) {
 				break; // 表示匹配结束
 			}
 			final String preSellLicenseId = content.substring(idx3 + tag2.length(), idx4);
@@ -511,8 +511,19 @@ public class WebSpider {
 
 		final int idx24 = content.indexOf(tag2, idx23 + tag3.length());
 		final int idx25 = content.indexOf(tag3, idx24 + tag2.length());
-		final String licenseIssueDate = content.substring(idx24 + tag2.length(), idx25);
-		earthBasicData.setLicenseIssueDate(licenseIssueDate);
+		final String licenseOffice = content.substring(idx24 + tag2.length(), idx25);
+		earthBasicData.setLicenseOffice(licenseOffice);
+
+		final int idx26 = content.indexOf(tag2, idx25 + tag3.length());
+		final int idx27 = content.indexOf(tag3, idx26 + tag2.length());
+		final String licenseIssueDate = content.substring(idx26 + tag2.length(), idx27);
+		Date lidDate = null;
+		try {
+			lidDate = new SimpleDateFormat("yyyy-MM-dd").parse(licenseIssueDate);
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
+		earthBasicData.setLicenseIssueDate(lidDate);
 
 		return earthBasicData;
 	}

@@ -89,7 +89,10 @@ angular.module('adminApp').config(function ($stateProvider) {
             useRightKind: false,
             useArea: false,
             shareArea: false,
-            licenseIssueDate: true
+            licenseOffice: false,
+            licenseIssueDate: true,
+            createTime: false,
+            updateTime: false
         }
     };
 
