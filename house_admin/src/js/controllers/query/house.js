@@ -185,4 +185,25 @@ angular.module('adminApp').config(function ($stateProvider) {
             });
         }
     };
+
+    $scope.queryParamsByDeveloperLike = {
+        developerLike: null
+    };
+    $scope.getProjectDataByDeveloperLike = function () {
+        if (!$scope.querying) {
+            $scope.querying = true;
+            HouseService.getProjectDataByDeveloperLike($scope.queryParamsByDeveloperLike).$promise.then(function (data) {
+                $scope.querying = false;
+                $scope.projectData = data;
+                $scope.setTmpEarthBasicData();
+            }, function (data) {
+                $scope.querying = false;
+                toasty.pop.error({
+                    title: '操作失败',
+                    msg: '对不起，查询失败，请重试！',
+                    sound: true
+                });
+            });
+        }
+    };
 });
