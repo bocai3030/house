@@ -8,6 +8,15 @@ angular.module('adminApp').config(function ($stateProvider) {
 }).controller('HouseController', function ($scope, toasty, HouseService, $http) {
     $scope.title = '房产查询';
 
+    $scope.qc = {
+        byProjectId: true,
+        byProjectNameLike: true,
+        byPreSellLicenseId: true,
+        byProjectAddressLike: false,
+        byDeveloperLike: false,
+        byDivision: false,
+        byEarthBorrowFromBetween: true
+    };
     $scope.mc = {
         pbd: true,
         psld: true,
@@ -96,10 +105,6 @@ angular.module('adminApp').config(function ($stateProvider) {
     $scope.queryParamsByProjectId = {
         projectId: null
     };
-    $scope.queryParamsByProjectNameLike = {
-        projectNameLike: null
-    };
-
     $scope.getProjectDataByProjectId = function () {
         if (!$scope.querying) {
             $scope.querying = true;
@@ -116,6 +121,10 @@ angular.module('adminApp').config(function ($stateProvider) {
                 });
             });
         }
+    };
+
+    $scope.queryParamsByProjectNameLike = {
+        projectNameLike: null
     };
     $scope.getProjectDataByProjectNameLike = function () {
         if (!$scope.querying) {
@@ -135,4 +144,24 @@ angular.module('adminApp').config(function ($stateProvider) {
         }
     };
 
+    $scope.queryParamsByPreSellLicenseId = {
+        preSellLicenseId: null
+    };
+    $scope.getProjectDataByPreSellLicenseId = function () {
+        if (!$scope.querying) {
+            $scope.querying = true;
+            HouseService.getProjectDataByPreSellLicenseId($scope.queryParamsByPreSellLicenseId).$promise.then(function (data) {
+                $scope.querying = false;
+                $scope.projectData = data;
+                $scope.setTmpEarthBasicData();
+            }, function (data) {
+                $scope.querying = false;
+                toasty.pop.error({
+                    title: '操作失败',
+                    msg: '对不起，查询失败，请重试！',
+                    sound: true
+                });
+            });
+        }
+    };
 });

@@ -10,6 +10,11 @@ angular.module('adminApp').factory('HouseService', function ($resource, ENV) {
             url: ENV.apiUrl + '/getProjectDataByProjectNameLike',
             method: 'GET',
             isArray: true
+        },
+        'getProjectDataByPreSellLicenseId': {
+            url: ENV.apiUrl + '/getProjectDataByPreSellLicenseId',
+            method: 'GET',
+            isArray: true
         }
     });
 });
