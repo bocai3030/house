@@ -37,6 +37,9 @@ public class QueryController {
 		final List<Map<String, Object>> reList = Lists.newArrayList();
 
 		for (final ProjectBasicData projectBasicData : projectBasicDatas) {
+			if (projectBasicData == null) {
+				continue;
+			}
 			final PreSellLicenseData preSellLicenseData = this.preSellLicenseDataRepository
 					.findByPreSellLicenseId(projectBasicData.getPreSellLicenseId());
 
