@@ -30,6 +30,11 @@ angular.module('adminApp').factory('HouseService', function ($resource, ENV) {
             url: ENV.apiUrl + '/getProjectDataByDivision',
             method: 'GET',
             isArray: true
+        },
+        'getProjectDataByEarthBorrowFromBetween': {
+            url: ENV.apiUrl + '/getProjectDataByEarthBorrowFromBetween',
+            method: 'GET',
+            isArray: true
         }
     });
 });

@@ -1,5 +1,6 @@
 package org.house.service.internal;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -106,8 +107,18 @@ public class QueryController {
 	}
 
 	@RequestMapping(value = "/getProjectDataByEarthBorrowFromBetween", produces = "application/json")
-	public Object getProjectDataByEarthBorrowFromBetween(@DateTimeFormat(pattern = "yyyy-MM-dd") final Date borrowFrom,
-			@DateTimeFormat(pattern = "yyyy-MM-dd") final Date borrowTo) {
+	public Object getProjectDataByEarthBorrowFromBetween(@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowFrom,
+			@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowTo) {
+		try {
+			if (borrowFrom == null) {
+				borrowFrom = new SimpleDateFormat("yyyy-MM-dd").parse("1980-01-01");
+			}
+			if (borrowTo == null) {
+				borrowTo = new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-01");
+			}
+		} catch (final Exception e) {
+		}
+
 		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
 
 		final List<EarthBasicData> earthBasicDatas = this.earthBasicDataRepository.findByBorrowFromBetween(borrowFrom, borrowTo);
