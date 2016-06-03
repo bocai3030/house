@@ -25,6 +25,11 @@ angular.module('adminApp').factory('HouseService', function ($resource, ENV) {
             url: ENV.apiUrl + '/getProjectDataByDeveloperLike',
             method: 'GET',
             isArray: true
+        },
+        'getProjectDataByDivision': {
+            url: ENV.apiUrl + '/getProjectDataByDivision',
+            method: 'GET',
+            isArray: true
         }
     });
 });

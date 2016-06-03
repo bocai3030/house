@@ -83,6 +83,20 @@
     <br/>
 </form>
 
+<form ng-show="qc.byDivision" name="searchForm6" class="search" role="search" ng-submit="getProjectDataByDivision()">
+    <div class="row">
+        <div class="form-group col-md-2">
+            <input id="division" type="text" class="form-control" ng-model="queryParamsByDivision.division" placeholder="行政区划" name="division" maxlength="50"/>
+        </div>
+        <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm6.$invalid || querying">
+                <i class="fa fa-search" ng-class="{'fa-spin': querying, 'fa-spinner': querying}"></i>查询
+            </button>
+        </div>
+    </div>
+    <br/>
+</form>
+
 <div>
     <input type="checkbox" ng-model="mc.pbd"><span>项目基本信息</span>
     <input type="checkbox" ng-model="mc.psld"><span>预售证信息</span>
