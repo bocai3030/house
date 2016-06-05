@@ -100,10 +100,10 @@
 <form ng-show="qc.byEarthBorrowFromBetween" name="searchForm7" class="search" role="search" ng-submit="getProjectDataByEarthBorrowFromBetween()">
     <div class="row">
         <div class="form-group col-md-2">
-            <input id="borrowFrom" type="text" class="form-control" ng-model="queryParamsByEarthBorrowFromBetween.borrowFrom" placeholder="最早出让时间" name="borrowFrom" maxlength="50"/>
+            <input id="borrowFrom" type="text" class="form-control" datetimepicker ng-model="queryParamsByEarthBorrowFromBetween.borrowFrom" placeholder="最早出让时间" name="borrowFrom" maxlength="50"/>
         </div>
         <div class="form-group col-md-2">
-            <input id="borrowTo" type="text" class="form-control" ng-model="queryParamsByEarthBorrowFromBetween.borrowTo" placeholder="最晚出让时间" name="borrowTo" maxlength="50"/>
+            <input id="borrowTo" type="text" class="form-control" datetimepicker ng-model="queryParamsByEarthBorrowFromBetween.borrowTo" placeholder="最晚出让时间" name="borrowTo" maxlength="50"/>
         </div>
         <div class="form-group col-md-6">
             <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm7.$invalid || querying">
