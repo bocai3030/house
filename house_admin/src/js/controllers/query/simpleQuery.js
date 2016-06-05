@@ -5,7 +5,7 @@ angular.module('adminApp').config(function ($stateProvider) {
         templateUrl: 'views/query/simpleQuery.html',
         controller: 'SimpleQueryController'
     });
-}).controller('SimpleQueryController', function ($scope, toasty, SimpleQueryService, $http) {
+}).controller('SimpleQueryController', function ($scope, toasty, CommonQueryService, SimpleQueryService, $http) {
     $scope.title = '简单房产查询';
 
     $scope.qc = {
@@ -23,6 +23,9 @@ angular.module('adminApp').config(function ($stateProvider) {
         ebd: true
     };
     $scope.fc = {
+        pt: {
+            focusStatus: true
+        },
         pbd: {
             projectId: true,
             projectName: true,
@@ -102,6 +105,14 @@ angular.module('adminApp').config(function ($stateProvider) {
         $scope.tmpEarthBasicData = [];
         for(var i = 0; i < $scope.projectData.length; ++i) {
             $scope.tmpEarthBasicData = $scope.tmpEarthBasicData.concat($scope.projectData[i].earthBasicDatas);
+            $scope.projectData[i].projectTag = {};
+            CommonQueryService.getProjectTagByProjectId({projectId:$scope.projectData[i].projectBasicData.projectId}).$promise.then((function(index){
+                return function(data) {
+                    if('focusStatus' in data) {
+                        $scope.projectData[index].projectTag.focusStatus = data.focusStatus;
+                    }
+                }
+            })(i));
         }
     };
 

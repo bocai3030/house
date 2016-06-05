@@ -12,6 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.house.util.C;
+import org.house.util.JsonHelper;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -71,5 +72,10 @@ public abstract class AbstractDbBean {
 	@PreUpdate
 	protected void preUpdate() {
 		this.updateTime = new Date();
+	}
+
+	@Override
+	public String toString() {
+		return JsonHelper.gson.toJson(this);
 	}
 }

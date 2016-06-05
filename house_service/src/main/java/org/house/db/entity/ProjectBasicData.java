@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.house.util.JsonHelper;
 import org.springframework.util.ObjectUtils;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -38,10 +37,10 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 	public int hashCode() {
 		int result = 17;
 		if (this.projectId != null) {
-			result = (31 * result) + this.projectId.hashCode();
+			result = 31 * result + this.projectId.hashCode();
 		}
 		if (this.projectName != null) {
-			result = (31 * result) + this.projectName.hashCode();
+			result = 31 * result + this.projectName.hashCode();
 		}
 		return result;
 	}
@@ -240,10 +239,5 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 
 	public void setSectionId(final String sectionId) {
 		this.sectionId = sectionId;
-	}
-
-	@Override
-	public String toString() {
-		return JsonHelper.gson.toJson(this);
 	}
 }

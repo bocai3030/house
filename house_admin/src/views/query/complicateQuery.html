@@ -36,6 +36,7 @@
 
 <div ng-show="mc.pbd">
     <div>
+        <input type="checkbox" ng-model="fc.pt.focusStatus"><span>标签</span>
         <input type="checkbox" ng-model="fc.pbd.projectId"><span>项目ID</span>
         <input type="checkbox" ng-model="fc.pbd.projectName"><span>项目名</span>
         <input type="checkbox" ng-model="fc.pbd.preSellLicenseId"><span>预售许可证号</span>
@@ -65,6 +66,8 @@
             <thead>
             <tr>
                 <th>#</th>
+                <th ng-show="fc.pt.focusStatus"><a href="javascript:void(0)" ng-click="orderByField1='projectTag.focusStatus';reverseSort1=!reverseSort1">标签<span
+                        ng-show="orderByField1 == 'projectTag.focusStatus'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
                 <th ng-show="fc.pbd.projectId"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.projectId';reverseSort1=!reverseSort1">项目ID<span
                         ng-show="orderByField1 == 'projectBasicData.projectId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
                 <th ng-show="fc.pbd.projectName"><a href="javascript:void(0)" ng-click="orderByField1='projectBasicData.projectName';reverseSort1=!reverseSort1">项目名<span
@@ -110,6 +113,7 @@
             <tbody>
             <tr dir-paginate="pd in projectData | orderBy:orderByField1:reverseSort1 | itemsPerPage:20" pagination-id="p_1">
                 <th scope="row">{{$index+1}}</th>
+                <td ng-show="fc.pt.focusStatus">{{pd.projectTag.focusStatus}}</td>
                 <td ng-show="fc.pbd.projectId">{{pd.projectBasicData.projectId}}</td>
                 <td ng-show="fc.pbd.projectName">{{pd.projectBasicData.projectName}}</td>
                 <td ng-show="fc.pbd.preSellLicenseId">{{pd.projectBasicData.preSellLicenseId}}</td>
