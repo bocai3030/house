@@ -1,12 +1,12 @@
 'use strict';
 angular.module('adminApp').config(function ($stateProvider) {
-    $stateProvider.state('site.house', {
-        url: 'house',
-        templateUrl: 'views/query/house.html',
-        controller: 'HouseController'
+    $stateProvider.state('site.simple', {
+        url: 'query/simple',
+        templateUrl: 'views/query/simpleQuery.html',
+        controller: 'SimpleQueryController'
     });
-}).controller('HouseController', function ($scope, toasty, HouseService, $http) {
-    $scope.title = '房产查询';
+}).controller('SimpleQueryController', function ($scope, toasty, SimpleQueryService, $http) {
+    $scope.title = '简单房产查询';
 
     $scope.qc = {
         byProjectId: true,
@@ -111,7 +111,7 @@ angular.module('adminApp').config(function ($stateProvider) {
     $scope.getProjectDataByProjectId = function () {
         if (!$scope.querying) {
             $scope.querying = true;
-            HouseService.getProjectDataByProjectId($scope.queryParamsByProjectId).$promise.then(function (data) {
+            SimpleQueryService.getProjectDataByProjectId($scope.queryParamsByProjectId).$promise.then(function (data) {
                 $scope.querying = false;
                 $scope.projectData = data;
                 $scope.setTmpEarthBasicData();
@@ -132,7 +132,7 @@ angular.module('adminApp').config(function ($stateProvider) {
     $scope.getProjectDataByProjectNameLike = function () {
         if (!$scope.querying) {
             $scope.querying = true;
-            HouseService.getProjectDataByProjectNameLike($scope.queryParamsByProjectNameLike).$promise.then(function (data) {
+            SimpleQueryService.getProjectDataByProjectNameLike($scope.queryParamsByProjectNameLike).$promise.then(function (data) {
                 $scope.querying = false;
                 $scope.projectData = data;
                 $scope.setTmpEarthBasicData();
@@ -153,7 +153,7 @@ angular.module('adminApp').config(function ($stateProvider) {
     $scope.getProjectDataByPreSellLicenseId = function () {
         if (!$scope.querying) {
             $scope.querying = true;
-            HouseService.getProjectDataByPreSellLicenseId($scope.queryParamsByPreSellLicenseId).$promise.then(function (data) {
+            SimpleQueryService.getProjectDataByPreSellLicenseId($scope.queryParamsByPreSellLicenseId).$promise.then(function (data) {
                 $scope.querying = false;
                 $scope.projectData = data;
                 $scope.setTmpEarthBasicData();
@@ -174,7 +174,7 @@ angular.module('adminApp').config(function ($stateProvider) {
     $scope.getProjectDataByProjectAddressLike = function () {
         if (!$scope.querying) {
             $scope.querying = true;
-            HouseService.getProjectDataByProjectAddressLike($scope.queryParamsByProjectAddressLike).$promise.then(function (data) {
+            SimpleQueryService.getProjectDataByProjectAddressLike($scope.queryParamsByProjectAddressLike).$promise.then(function (data) {
                 $scope.querying = false;
                 $scope.projectData = data;
                 $scope.setTmpEarthBasicData();
@@ -195,7 +195,7 @@ angular.module('adminApp').config(function ($stateProvider) {
     $scope.getProjectDataByDeveloperLike = function () {
         if (!$scope.querying) {
             $scope.querying = true;
-            HouseService.getProjectDataByDeveloperLike($scope.queryParamsByDeveloperLike).$promise.then(function (data) {
+            SimpleQueryService.getProjectDataByDeveloperLike($scope.queryParamsByDeveloperLike).$promise.then(function (data) {
                 $scope.querying = false;
                 $scope.projectData = data;
                 $scope.setTmpEarthBasicData();
@@ -216,7 +216,7 @@ angular.module('adminApp').config(function ($stateProvider) {
     $scope.getProjectDataByDivision = function () {
         if (!$scope.querying) {
             $scope.querying = true;
-            HouseService.getProjectDataByDivision($scope.queryParamsByDivision).$promise.then(function (data) {
+            SimpleQueryService.getProjectDataByDivision($scope.queryParamsByDivision).$promise.then(function (data) {
                 $scope.querying = false;
                 $scope.projectData = data;
                 $scope.setTmpEarthBasicData();
@@ -238,7 +238,7 @@ angular.module('adminApp').config(function ($stateProvider) {
     $scope.getProjectDataByEarthBorrowFromBetween = function () {
         if (!$scope.querying) {
             $scope.querying = true;
-            HouseService.getProjectDataByEarthBorrowFromBetween($scope.queryParamsByEarthBorrowFromBetween).$promise.then(function (data) {
+            SimpleQueryService.getProjectDataByEarthBorrowFromBetween($scope.queryParamsByEarthBorrowFromBetween).$promise.then(function (data) {
                 $scope.querying = false;
                 $scope.projectData = data;
                 $scope.setTmpEarthBasicData();

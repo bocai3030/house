@@ -25,8 +25,8 @@ import com.google.common.collect.Sets;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/internal")
-public class QueryController {
+@RequestMapping("/api/internal/simplequery")
+public class SimpleQueryController {
 	@Autowired
 	private ProjectBasicDataRepository projectBasicDataRepository;
 	@Autowired
