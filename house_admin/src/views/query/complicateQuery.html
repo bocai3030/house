@@ -10,7 +10,7 @@
 <form ng-show="qc.byDivisionAndEarthBorrowFromBetween" name="searchForm1" class="search" role="search" ng-submit="getProjectDataByDivisionAndEarthBorrowFromBetween()">
     <div class="row">
         <div class="form-group col-md-2">
-            <input id="division" type="text" class="form-control" ng-model="queryParamsByDivisionAndEarthBorrowFromBetween.division" placeholder="行政区划" name="division" maxlength="50"/>
+            <input id="division" type="text" class="form-control" ng-model="queryParamsByDivisionAndEarthBorrowFromBetween.division" placeholder="行政区划" name="division" minlength="2" maxlength="20" required/>
         </div>
         <div class="form-group col-md-2">
             <input id="borrowFrom" type="text" class="form-control" ng-model="queryParamsByDivisionAndEarthBorrowFromBetween.borrowFrom" placeholder="最早出让时间" name="borrowFrom" maxlength="50"/>

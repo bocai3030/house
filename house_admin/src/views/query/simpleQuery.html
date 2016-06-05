@@ -16,7 +16,7 @@
 <form ng-show="qc.byProjectId" name="searchForm1" class="search" role="search" ng-submit="getProjectDataByProjectId()">
     <div class="row">
         <div class="form-group col-md-2">
-            <input id="projectId" type="text" class="form-control" ng-model="queryParamsByProjectId.projectId" placeholder="项目ID" name="projectId" maxlength="50"/>
+            <input id="projectId" type="text" class="form-control" ng-model="queryParamsByProjectId.projectId" placeholder="项目ID" name="projectId" maxlength="50" required/>
         </div>
         <div class="form-group col-md-6">
             <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm1.$invalid || querying">
@@ -30,7 +30,7 @@
 <form ng-show="qc.byProjectNameLike" name="searchForm2" class="search" role="search" ng-submit="getProjectDataByProjectNameLike()">
     <div class="row">
         <div class="form-group col-md-2">
-            <input id="projectNameLike" type="text" class="form-control" ng-model="queryParamsByProjectNameLike.projectNameLike" placeholder="项目名" name="projectNameLike" maxlength="50"/>
+            <input id="projectNameLike" type="text" class="form-control" ng-model="queryParamsByProjectNameLike.projectNameLike" placeholder="项目名" name="projectNameLike" minlength="2" maxlength="50" required/>
         </div>
         <div class="form-group col-md-6">
             <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm2.$invalid || querying">
@@ -44,7 +44,7 @@
 <form ng-show="qc.byPreSellLicenseId" name="searchForm3" class="search" role="search" ng-submit="getProjectDataByPreSellLicenseId()">
     <div class="row">
         <div class="form-group col-md-2">
-            <input id="preSellLicenseId" type="text" class="form-control" ng-model="queryParamsByPreSellLicenseId.preSellLicenseId" placeholder="预售许可证号" name="preSellLicenseId" maxlength="50"/>
+            <input id="preSellLicenseId" type="text" class="form-control" ng-model="queryParamsByPreSellLicenseId.preSellLicenseId" placeholder="预售许可证号" name="preSellLicenseId" minlength="2" maxlength="50" required/>
         </div>
         <div class="form-group col-md-6">
             <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm3.$invalid || querying">
@@ -58,7 +58,7 @@
 <form ng-show="qc.byProjectAddressLike" name="searchForm4" class="search" role="search" ng-submit="getProjectDataByProjectAddressLike()">
     <div class="row">
         <div class="form-group col-md-2">
-            <input id="projectAddressLike" type="text" class="form-control" ng-model="queryParamsByProjectAddressLike.projectAddressLike" placeholder="项目地址" name="projectAddressLike" maxlength="50"/>
+            <input id="projectAddressLike" type="text" class="form-control" ng-model="queryParamsByProjectAddressLike.projectAddressLike" placeholder="项目地址" name="projectAddressLike" minlength="2" maxlength="50" required/>
         </div>
         <div class="form-group col-md-6">
             <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm4.$invalid || querying">
@@ -72,7 +72,7 @@
 <form ng-show="qc.byDeveloperLike" name="searchForm5" class="search" role="search" ng-submit="getProjectDataByDeveloperLike()">
     <div class="row">
         <div class="form-group col-md-2">
-            <input id="developerLike" type="text" class="form-control" ng-model="queryParamsByDeveloperLike.developerLike" placeholder="开发商" name="developerLike" maxlength="50"/>
+            <input id="developerLike" type="text" class="form-control" ng-model="queryParamsByDeveloperLike.developerLike" placeholder="开发商" name="developerLike" minlength="2" maxlength="50" required/>
         </div>
         <div class="form-group col-md-6">
             <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm5.$invalid || querying">
@@ -86,7 +86,7 @@
 <form ng-show="qc.byDivision" name="searchForm6" class="search" role="search" ng-submit="getProjectDataByDivision()">
     <div class="row">
         <div class="form-group col-md-2">
-            <input id="division" type="text" class="form-control" ng-model="queryParamsByDivision.division" placeholder="行政区划" name="division" maxlength="50"/>
+            <input id="division" type="text" class="form-control" ng-model="queryParamsByDivision.division" placeholder="行政区划" name="division" minlength="2" maxlength="20" required/>
         </div>
         <div class="form-group col-md-6">
             <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm6.$invalid || querying">

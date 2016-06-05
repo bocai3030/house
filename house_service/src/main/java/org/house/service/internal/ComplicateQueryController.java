@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.base.Strings;
@@ -65,8 +66,8 @@ public class ComplicateQueryController {
 	}
 
 	@RequestMapping(value = "/getProjectDataByDivisionAndEarthBorrowFromBetween", produces = "application/json")
-	public Object getProjectDataByDivisionAndEarthBorrowFromBetween(final String division, @DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowFrom,
-			@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowTo) {
+	public Object getProjectDataByDivisionAndEarthBorrowFromBetween(@RequestParam(required = true, defaultValue = "番禺区") final String division,
+			@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowFrom, @DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowTo) {
 		// query by borrowFrom first then division
 		// TODO find time to learn spring jpa multitable query
 

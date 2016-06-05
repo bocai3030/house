@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.base.Strings;
@@ -65,42 +66,42 @@ public class SimpleQueryController {
 	}
 
 	@RequestMapping(value = "/getProjectDataByProjectId", produces = "application/json")
-	public Object getProjectDataByProjectId(final String projectId) {
+	public Object getProjectDataByProjectId(@RequestParam(required = true) final String projectId) {
 		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
 		projectBasicDatas.add(this.projectBasicDataRepository.findByProjectId(projectId));
 		return this.getFullProjectData(projectBasicDatas);
 	}
 
 	@RequestMapping(value = "/getProjectDataByProjectNameLike", produces = "application/json")
-	public Object getProjectDataByProjectNameLike(final String projectNameLike) {
+	public Object getProjectDataByProjectNameLike(@RequestParam(required = true) final String projectNameLike) {
 		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
 		projectBasicDatas.addAll(this.projectBasicDataRepository.findByProjectNameLike("%" + projectNameLike + "%"));
 		return this.getFullProjectData(projectBasicDatas);
 	}
 
 	@RequestMapping(value = "/getProjectDataByPreSellLicenseId", produces = "application/json")
-	public Object getProjectDataByPreSellLicenseId(final String preSellLicenseId) {
+	public Object getProjectDataByPreSellLicenseId(@RequestParam(required = true) final String preSellLicenseId) {
 		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
 		projectBasicDatas.add(this.projectBasicDataRepository.findByPreSellLicenseId(preSellLicenseId));
 		return this.getFullProjectData(projectBasicDatas);
 	}
 
 	@RequestMapping(value = "/getProjectDataByProjectAddressLike", produces = "application/json")
-	public Object getProjectDataByProjectAddressLike(final String projectAddressLike) {
+	public Object getProjectDataByProjectAddressLike(@RequestParam(required = true) final String projectAddressLike) {
 		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
 		projectBasicDatas.addAll(this.projectBasicDataRepository.findByProjectAddressLike("%" + projectAddressLike + "%"));
 		return this.getFullProjectData(projectBasicDatas);
 	}
 
 	@RequestMapping(value = "/getProjectDataByDeveloperLike", produces = "application/json")
-	public Object getProjectDataByDeveloperLike(final String developerLike) {
+	public Object getProjectDataByDeveloperLike(@RequestParam(required = true) final String developerLike) {
 		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
 		projectBasicDatas.addAll(this.projectBasicDataRepository.findByDeveloperLike("%" + developerLike + "%"));
 		return this.getFullProjectData(projectBasicDatas);
 	}
 
 	@RequestMapping(value = "/getProjectDataByDivision", produces = "application/json")
-	public Object getProjectDataByDivision(final String division) {
+	public Object getProjectDataByDivision(@RequestParam(required = true, defaultValue = "番禺区") final String division) {
 		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
 		projectBasicDatas.addAll(this.projectBasicDataRepository.findByDivision(division));
 		return this.getFullProjectData(projectBasicDatas);
