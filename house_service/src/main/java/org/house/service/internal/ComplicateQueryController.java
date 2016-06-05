@@ -25,8 +25,8 @@ import com.google.common.collect.Sets;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/internal/simpleQuery")
-public class SimpleQueryController {
+@RequestMapping("/api/internal/complicateQuery")
+public class ComplicateQueryController {
 	@Autowired
 	private ProjectBasicDataRepository projectBasicDataRepository;
 	@Autowired
@@ -64,51 +64,12 @@ public class SimpleQueryController {
 		return reList;
 	}
 
-	@RequestMapping(value = "/getProjectDataByProjectId", produces = "application/json")
-	public Object getProjectDataByProjectId(final String projectId) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		projectBasicDatas.add(this.projectBasicDataRepository.findByProjectId(projectId));
-		return this.getFullProjectData(projectBasicDatas);
-	}
-
-	@RequestMapping(value = "/getProjectDataByProjectNameLike", produces = "application/json")
-	public Object getProjectDataByProjectNameLike(final String projectNameLike) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		projectBasicDatas.addAll(this.projectBasicDataRepository.findByProjectNameLike("%" + projectNameLike + "%"));
-		return this.getFullProjectData(projectBasicDatas);
-	}
-
-	@RequestMapping(value = "/getProjectDataByPreSellLicenseId", produces = "application/json")
-	public Object getProjectDataByPreSellLicenseId(final String preSellLicenseId) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		projectBasicDatas.add(this.projectBasicDataRepository.findByPreSellLicenseId(preSellLicenseId));
-		return this.getFullProjectData(projectBasicDatas);
-	}
-
-	@RequestMapping(value = "/getProjectDataByProjectAddressLike", produces = "application/json")
-	public Object getProjectDataByProjectAddressLike(final String projectAddressLike) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		projectBasicDatas.addAll(this.projectBasicDataRepository.findByProjectAddressLike("%" + projectAddressLike + "%"));
-		return this.getFullProjectData(projectBasicDatas);
-	}
-
-	@RequestMapping(value = "/getProjectDataByDeveloperLike", produces = "application/json")
-	public Object getProjectDataByDeveloperLike(final String developerLike) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		projectBasicDatas.addAll(this.projectBasicDataRepository.findByDeveloperLike("%" + developerLike + "%"));
-		return this.getFullProjectData(projectBasicDatas);
-	}
-
-	@RequestMapping(value = "/getProjectDataByDivision", produces = "application/json")
-	public Object getProjectDataByDivision(final String division) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		projectBasicDatas.addAll(this.projectBasicDataRepository.findByDivision(division));
-		return this.getFullProjectData(projectBasicDatas);
-	}
-
-	@RequestMapping(value = "/getProjectDataByEarthBorrowFromBetween", produces = "application/json")
-	public Object getProjectDataByEarthBorrowFromBetween(@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowFrom,
+	@RequestMapping(value = "/getProjectDataByDivisionAndEarthBorrowFromBetween", produces = "application/json")
+	public Object getProjectDataByDivisionAndEarthBorrowFromBetween(final String division, @DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowFrom,
 			@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowTo) {
+		// query by borrowFrom first then division
+		// TODO find time to learn spring jpa multitable query
+
 		try {
 			if (borrowFrom == null) {
 				borrowFrom = new SimpleDateFormat("yyyy-MM-dd").parse("1980-01-01");
@@ -126,7 +87,7 @@ public class SimpleQueryController {
 		for (final EarthBasicData earthBasicData : earthBasicDatas) {
 			if (!set.contains(earthBasicData.getProjectId())) {
 				final ProjectBasicData projectBasicData = this.projectBasicDataRepository.findByProjectId(earthBasicData.getProjectId());
-				if (projectBasicData != null) {
+				if (projectBasicData != null && projectBasicData.getDivision().equals(division)) {
 					projectBasicDatas.add(projectBasicData);
 				}
 				set.add(earthBasicData.getProjectId());
@@ -135,5 +96,4 @@ public class SimpleQueryController {
 
 		return this.getFullProjectData(projectBasicDatas);
 	}
-
 }

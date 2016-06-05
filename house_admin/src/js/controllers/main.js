@@ -11,6 +11,11 @@ angular.module('adminApp').controller('MainCtrl', function ($scope, eehNavigatio
             iconClass: 'fa-flag',
             state: 'site.simple'
         })
+        .menuItem('bar.query.complicate',{
+            text: '复杂查询',
+            iconClass: 'fa-flag',
+            state: 'site.complicate'
+        })
     ;
     $scope.navbarBrand = {
         src: 'favicon.ico',
