@@ -9,9 +9,11 @@ import java.util.Set;
 import org.house.db.entity.EarthBasicData;
 import org.house.db.entity.PreSellLicenseData;
 import org.house.db.entity.ProjectBasicData;
+import org.house.db.entity.ProjectTag;
 import org.house.db.repository.EarthBasicDataRepository;
 import org.house.db.repository.PreSellLicenseDataRepository;
 import org.house.db.repository.ProjectBasicDataRepository;
+import org.house.db.repository.ProjectTagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,6 +36,8 @@ public class ComplicateQueryController {
 	private PreSellLicenseDataRepository preSellLicenseDataRepository;
 	@Autowired
 	private EarthBasicDataRepository earthBasicDataRepository;
+	@Autowired
+	private ProjectTagRepository projectTagRepository;
 
 	private Object getFullProjectData(final List<ProjectBasicData> projectBasicDatas) {
 		final List<Map<String, Object>> reList = Lists.newArrayList();
@@ -67,7 +71,8 @@ public class ComplicateQueryController {
 
 	@RequestMapping(value = "/getProjectData", produces = "application/json")
 	public Object getProjectData(@RequestParam(required = true, defaultValue = "番禺区") final String division,
-			@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowFrom, @DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowTo) {
+			@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowFrom, @DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowTo,
+			final String focusStatus) {
 		// TODO find time to learn spring jpa multitable query
 
 		try {
@@ -82,6 +87,7 @@ public class ComplicateQueryController {
 
 		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
 
+		// 1st: by borrowFrom and division
 		final List<EarthBasicData> earthBasicDatas = this.earthBasicDataRepository.findByBorrowFromBetween(borrowFrom, borrowTo);
 		final Set<String> set = Sets.newHashSet();
 		for (final EarthBasicData earthBasicData : earthBasicDatas) {
@@ -91,6 +97,18 @@ public class ComplicateQueryController {
 					projectBasicDatas.add(projectBasicData);
 				}
 				set.add(earthBasicData.getProjectId());
+			}
+		}
+
+		// 2nd: by focusStatus
+		if (!Strings.isNullOrEmpty(focusStatus)) {
+			final List<ProjectBasicData> projectBasicDatasTmp = Lists.newArrayList(projectBasicDatas);
+			projectBasicDatas.clear();
+			for (final ProjectBasicData projectBasicData : projectBasicDatasTmp) {
+				final ProjectTag projectTag = this.projectTagRepository.findByProjectId(projectBasicData.getProjectId());
+				if (projectTag != null && focusStatus.equals(projectTag.getFocusStatus())) {
+					projectBasicDatas.add(projectBasicData);
+				}
 			}
 		}
 
