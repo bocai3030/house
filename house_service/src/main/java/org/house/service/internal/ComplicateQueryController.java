@@ -71,8 +71,8 @@ public class ComplicateQueryController {
 
 	@RequestMapping(value = "/getProjectData", produces = "application/json")
 	public Object getProjectData(@RequestParam(required = true, defaultValue = "番禺区") final String division,
-			@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowFrom, @DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowTo,
-			final String focusStatus) {
+			@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowFrom, @DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowTo, final String focusStatus,
+			@RequestParam(defaultValue = "false") final Boolean onlyResidential) {
 		// TODO find time to learn spring jpa multitable query
 
 		try {
@@ -112,6 +112,19 @@ public class ComplicateQueryController {
 				if (projectTag == null && focusStatus.length() == 0) {
 					projectBasicDatas.add(projectBasicData);
 				} else if (focusStatus.length() >= 0 && focusStatus.equals(projectTag.getFocusStatus())) {
+					projectBasicDatas.add(projectBasicData);
+				}
+			}
+		}
+
+		// 3rd: filter by onlyResidential
+		if (onlyResidential) {
+			final List<ProjectBasicData> projectBasicDatasTmp = Lists.newArrayList(projectBasicDatas);
+			projectBasicDatas.clear();
+			for (final ProjectBasicData projectBasicData : projectBasicDatasTmp) {
+				final PreSellLicenseData preSellLicenseData = this.preSellLicenseDataRepository
+						.findByPreSellLicenseId(projectBasicData.getPreSellLicenseId());
+				if (preSellLicenseData == null /* loose restriction */ || preSellLicenseData.getDistributeOfResidentialCount() > 0) {
 					projectBasicDatas.add(projectBasicData);
 				}
 			}

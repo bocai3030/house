@@ -31,6 +31,9 @@
             <input id="focusStatus" type="text" class="form-control" ng-click="clearFocusStatus()" ng-model="queryParams.focusStatus" readonly placeholder="从关注状态列表点选" name="focusStatus" maxlength="50"/>
         </div>
         <div class="form-group col-md-2">
+            <input id="onlyResidential" type="checkbox" class="form-control" ng-model="queryParams.onlyResidential" name="onlyResidential"/><span>仅查住宅房产</span>
+        </div>
+        <div class="form-group col-md-2">
             <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm1.$invalid || querying">
                 <i class="fa fa-search" ng-class="{'fa-spin': querying, 'fa-spinner': querying}"></i>查询
             </button>

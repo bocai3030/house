@@ -148,7 +148,8 @@ angular.module('adminApp').config(function ($stateProvider) {
         division: null,
         borrowFrom: null,
         borrowTo: null,
-        focusStatus: null
+        focusStatus: null,
+        onlyResidential: true
     };
     $scope.getProjectData = function () {
         if (!$scope.querying) {
