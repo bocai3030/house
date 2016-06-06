@@ -100,13 +100,18 @@ public class ComplicateQueryController {
 			}
 		}
 
-		// 2nd: by focusStatus
-		if (!Strings.isNullOrEmpty(focusStatus)) {
+		// 2nd: by focusStatus,<br>
+		// =null:non about focusStatus,<br>
+		// ='':focusStatus not marked,<br>
+		// ='other str':focusStatus equals it
+		if (focusStatus != null) {
 			final List<ProjectBasicData> projectBasicDatasTmp = Lists.newArrayList(projectBasicDatas);
 			projectBasicDatas.clear();
 			for (final ProjectBasicData projectBasicData : projectBasicDatasTmp) {
 				final ProjectTag projectTag = this.projectTagRepository.findByProjectId(projectBasicData.getProjectId());
-				if (projectTag != null && focusStatus.equals(projectTag.getFocusStatus())) {
+				if (projectTag == null && focusStatus.length() == 0) {
+					projectBasicDatas.add(projectBasicData);
+				} else if (focusStatus.length() >= 0 && focusStatus.equals(projectTag.getFocusStatus())) {
 					projectBasicDatas.add(projectBasicData);
 				}
 			}
