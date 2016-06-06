@@ -103,11 +103,42 @@ angular.module('adminApp').config(function ($stateProvider) {
             CommonQueryService.getProjectTagByProjectId({projectId:$scope.projectData[i].projectBasicData.projectId}).$promise.then((function(index){
                 return function(data) {
                     if('focusStatus' in data) {
-                        $scope.projectData[index].projectTag.focusStatus = data.focusStatus;
+                        $scope.projectData[index].projectTag = data;
                     }
                 }
             })(i));
         }
+    };
+
+    $scope.changeProjectTagEditStatus = function(projectTag) {
+        projectTag.editStatus = !projectTag.editStatus;
+    };
+    $scope.updateProjectTagByProjectId = function(projectTag) {
+        CommonQueryService.updateProjectTagByProjectId($.param({projectId:projectTag.projectId, focusStatus:projectTag.focusStatus})).$promise.then(function (data) {
+            if('status' in data) {
+                toasty.pop.info({
+                    title: '操作成功',
+                    msg: '更新成功！',
+                    sound: true
+                });
+                CommonQueryService.getProjectTagByProjectId({projectId:projectTag.projectId}).$promise.then(function (data) {
+                    projectTag.focusStatus=data.focusStatus;
+                }, function (data) {
+                    toasty.pop.error({
+                        title: '操作失败',
+                        msg: '对不起，查询失败，请重试！',
+                        sound: true
+                    });
+                });
+            }
+        }, function (data) {
+            toasty.pop.error({
+                title: '操作失败',
+                msg: '对不起，更新失败，请重试！',
+                sound: true
+            });
+        });
+        $scope.changeProjectTagEditStatus(projectTag);
     };
 
     $scope.queryParamsByDivisionAndEarthBorrowFromBetween = {
