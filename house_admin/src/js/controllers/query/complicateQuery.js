@@ -104,6 +104,9 @@ angular.module('adminApp').config(function ($stateProvider) {
                 return function(data) {
                     if('focusStatus' in data) {
                         $scope.projectData[index].projectTag = data;
+                    } else {
+                        $scope.projectData[index].projectTag = {};
+                        $scope.projectData[index].projectTag.projectId = $scope.projectData[index].projectBasicData.projectId;
                     }
                 }
             })(i));
