@@ -9,7 +9,7 @@ angular.module('adminApp').config(function ($stateProvider) {
     $scope.title = '复杂房产查询';
 
     $scope.qc = {
-        byDivisionAndEarthBorrowFromBetween: true
+        byAll: true
     };
     $scope.mc = {
         pbd: true,
@@ -144,15 +144,15 @@ angular.module('adminApp').config(function ($stateProvider) {
         $scope.changeProjectTagEditStatus(projectTag);
     };
 
-    $scope.queryParamsByDivisionAndEarthBorrowFromBetween = {
+    $scope.queryParams = {
         division: null,
         borrowFrom: null,
         borrowTo: null
     };
-    $scope.getProjectDataByDivisionAndEarthBorrowFromBetween = function () {
+    $scope.getProjectData = function () {
         if (!$scope.querying) {
             $scope.querying = true;
-            ComplicateQueryService.getProjectDataByDivisionAndEarthBorrowFromBetween($scope.queryParamsByDivisionAndEarthBorrowFromBetween).$promise.then(function (data) {
+            ComplicateQueryService.getProjectData($scope.queryParams).$promise.then(function (data) {
                 $scope.querying = false;
                 $scope.projectData = data;
                 $scope.setTmpEarthBasicData();

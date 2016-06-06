@@ -65,10 +65,9 @@ public class ComplicateQueryController {
 		return reList;
 	}
 
-	@RequestMapping(value = "/getProjectDataByDivisionAndEarthBorrowFromBetween", produces = "application/json")
-	public Object getProjectDataByDivisionAndEarthBorrowFromBetween(@RequestParam(required = true, defaultValue = "番禺区") final String division,
+	@RequestMapping(value = "/getProjectData", produces = "application/json")
+	public Object getProjectData(@RequestParam(required = true, defaultValue = "番禺区") final String division,
 			@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowFrom, @DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowTo) {
-		// query by borrowFrom first then division
 		// TODO find time to learn spring jpa multitable query
 
 		try {
