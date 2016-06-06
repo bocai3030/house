@@ -114,4 +114,9 @@ public class ComplicateQueryController {
 
 		return this.getFullProjectData(projectBasicDatas);
 	}
+
+	@RequestMapping(value = "/getAllFocusStatuses", produces = "application/json")
+	public Object getAllFocusStatuses() {
+		return this.projectTagRepository.findDistinctFocusStatus();
+	}
 }

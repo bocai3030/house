@@ -7,6 +7,15 @@
 </div>
 <br/>
 
+<div>
+    <label>所有关注状态:</label>
+    <button ng-click="updateFocusStatus(focusStatus)" ng-repeat="focusStatus in focusStatuses">{{focusStatus}}</button>
+    <button ng-click="updateFocusStatus('')">除此之外的状态</button>
+    <label ng-show="queryParams.focusStatus == null">未选中任何focusStatus</label>
+    <label ng-show="queryParams.focusStatus != null">点击focusStatus只读输入框可清除选择</label>
+</div>
+<br/>
+
 <form ng-show="qc.byAll" name="searchForm1" class="search" role="search" ng-submit="getProjectData()">
     <div class="row">
         <div class="form-group col-md-2">
@@ -19,9 +28,9 @@
             <input id="borrowTo" type="text" class="form-control" datetimepicker ng-model="queryParams.borrowTo" placeholder="最晚出让时间" name="borrowTo" maxlength="50"/>
         </div>
         <div class="form-group col-md-2">
-            <input id="focusStatus" type="text" class="form-control" ng-model="queryParams.focusStatus" placeholder="关注状态" name="focusStatus" maxlength="50"/>
+            <input id="focusStatus" type="text" class="form-control" ng-click="clearFocusStatus()" ng-model="queryParams.focusStatus" readonly placeholder="从关注状态列表点选" name="focusStatus" maxlength="50"/>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-2">
             <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm1.$invalid || querying">
                 <i class="fa fa-search" ng-class="{'fa-spin': querying, 'fa-spinner': querying}"></i>查询
             </button>

@@ -167,4 +167,19 @@ angular.module('adminApp').config(function ($stateProvider) {
             });
         }
     };
+
+    $scope.focusStatuses = [];
+    $scope.getAllFocusStatuses = function () {
+        ComplicateQueryService.getAllFocusStatuses().$promise.then(function (data) {
+            $scope.focusStatuses = data;
+        }, function (data) {
+        });
+    };
+    $scope.updateFocusStatus = function (newFocusStatus) {
+        $scope.queryParams.focusStatus = newFocusStatus;
+    };
+    $scope.clearFocusStatus = function () {
+        $scope.queryParams.focusStatus = null;
+    };
+    $scope.getAllFocusStatuses();
 });

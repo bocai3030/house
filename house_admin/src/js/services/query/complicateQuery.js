@@ -5,6 +5,11 @@ angular.module('adminApp').factory('ComplicateQueryService', function ($resource
             url: ENV.apiUrl + '/complicateQuery/getProjectData',
             method: 'GET',
             isArray: true
+        },
+        'getAllFocusStatuses': {
+            url: ENV.apiUrl + '/complicateQuery/getAllFocusStatuses',
+            method: 'GET',
+            isArray: true
         }
     });
 });
