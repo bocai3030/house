@@ -517,7 +517,7 @@ public class WebSpider {
 		final int idx26 = content.indexOf(tag2, idx25 + tag3.length());
 		final int idx27 = content.indexOf(tag3, idx26 + tag2.length());
 		final String licenseIssueDate = content.substring(idx26 + tag2.length(), idx27);
-		Date lidDate = null;
+		Date lidDate = new Date(0); // licenseIssueDate可能为空
 		try {
 			lidDate = new SimpleDateFormat("yyyy-MM-dd").parse(licenseIssueDate);
 		} catch (final ParseException e) {
