@@ -204,7 +204,7 @@
                     <label ng-show="!pd.projectTag.editStatus">{{pd.projectTag.focusStatus}}</label>
                     <button ng-show="!pd.projectTag.editStatus" ng-click="changeProjectTagEditStatus(pd.projectTag)">编辑</button>
                     <input ng-show="pd.projectTag.editStatus" type="text" ng-model="pd.projectTag.focusStatus"/>
-                    <button ng-show="pd.projectTag.editStatus" ng-click="updateProjectTagByProjectId(pd.projectTag)">更新</button>
+                    <button ng-show="pd.projectTag.editStatus" ng-click="updateFocusStatusByProjectId(pd.projectTag)">更新</button>
                     <button ng-show="pd.projectTag.editStatus" ng-click="changeProjectTagEditStatus(pd.projectTag)">取消</button>
                 </td>
                 <td ng-show="fc.pbd.projectId">{{pd.projectBasicData.projectId}}</td>

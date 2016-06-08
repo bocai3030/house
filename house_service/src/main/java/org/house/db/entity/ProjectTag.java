@@ -16,6 +16,7 @@ public class ProjectTag extends AbstractDbBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String projectId; // 项目ID
 	protected String focusStatus; // 关注状态
+	protected String remark; // 备注
 
 	@Override
 	public int hashCode() {
@@ -25,6 +26,9 @@ public class ProjectTag extends AbstractDbBean implements Serializable {
 		}
 		if (this.focusStatus != null) {
 			result = 31 * result + this.focusStatus.hashCode();
+		}
+		if (this.remark != null) {
+			result = 31 * result + this.remark.hashCode();
 		}
 		return result;
 	}
@@ -37,7 +41,8 @@ public class ProjectTag extends AbstractDbBean implements Serializable {
 		if (obj instanceof ProjectTag) {
 			final ProjectTag anObject = (ProjectTag) obj;
 			if (ObjectUtils.nullSafeEquals(this.projectId, anObject.getProjectId())
-					&& ObjectUtils.nullSafeEquals(this.focusStatus, anObject.getFocusStatus())) {
+					&& ObjectUtils.nullSafeEquals(this.focusStatus, anObject.getFocusStatus())
+					&& ObjectUtils.nullSafeEquals(this.remark, anObject.getRemark())) {
 				return true;
 			}
 		}
@@ -47,6 +52,7 @@ public class ProjectTag extends AbstractDbBean implements Serializable {
 	public void fromObj(final ProjectTag theObj) {
 		// this.projectId = theObj.projectId; // NO ID
 		this.focusStatus = theObj.focusStatus;
+		this.remark = theObj.remark;
 	}
 
 	public String getProjectId() {
@@ -64,4 +70,13 @@ public class ProjectTag extends AbstractDbBean implements Serializable {
 	public void setFocusStatus(final String focusStatus) {
 		this.focusStatus = focusStatus;
 	}
+
+	public String getRemark() {
+		return this.remark;
+	}
+
+	public void setRemark(final String remark) {
+		this.remark = remark;
+	}
+
 }

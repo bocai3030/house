@@ -23,14 +23,15 @@ public class CommonQueryController {
 		return this.projectTagRepository.findByProjectId(projectId);
 	}
 
-	@RequestMapping(value = "/updateProjectTagByProjectId", method = RequestMethod.POST, produces = "application/json")
-	public Object updateProjectTagByProjectId(@RequestParam(required = true) final String projectId,
+	@RequestMapping(value = "/updateFocusStatusByProjectId", method = RequestMethod.POST, produces = "application/json")
+	public Object updateFocusStatusByProjectId(@RequestParam(required = true) final String projectId,
 			@RequestParam(required = true) final String focusStatus) {
 		ProjectTag projectTag = this.projectTagRepository.findByProjectId(projectId);
 		if (projectTag == null) {
 			projectTag = new ProjectTag();
 			projectTag.setProjectId(projectId);
 			projectTag.setFocusStatus(focusStatus);
+			projectTag.setRemark("");
 		} else if (!projectTag.getFocusStatus().equals(focusStatus)) {
 			projectTag.setFocusStatus(focusStatus);
 		}

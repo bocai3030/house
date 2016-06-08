@@ -122,8 +122,8 @@ angular.module('adminApp').config(function ($stateProvider) {
     $scope.changeProjectTagEditStatus = function(projectTag) {
         projectTag.editStatus = !projectTag.editStatus;
     };
-    $scope.updateProjectTagByProjectId = function(projectTag) {
-        CommonQueryService.updateProjectTagByProjectId($.param({projectId:projectTag.projectId, focusStatus:projectTag.focusStatus})).$promise.then(function (data) {
+    $scope.updateFocusStatusByProjectId = function(projectTag) {
+        CommonQueryService.updateFocusStatusByProjectId($.param({projectId:projectTag.projectId, focusStatus:projectTag.focusStatus})).$promise.then(function (data) {
             if('status' in data) {
                 toasty.pop.info({
                     title: '操作成功',

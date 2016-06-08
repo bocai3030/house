@@ -26,12 +26,13 @@ CREATE TABLE `project_tag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` varchar(255) NOT NULL COMMENT '项目ID',
   `focus_status` varchar(255) NOT NULL DEFAULT '' COMMENT '关注状态',
+  `remark` varchar(255) NOT NULL DEFAULT '' COMMENT '备注',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `project_id_UNIQUE` (`project_id`),
   KEY `focus_status_INDEX` (`focus_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -43,4 +44,4 @@ CREATE TABLE `project_tag` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-05 23:46:10
+-- Dump completed on 2016-06-08 23:55:01

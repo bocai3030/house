@@ -5,8 +5,8 @@ angular.module('adminApp').factory('CommonQueryService', function ($resource, EN
             url: ENV.apiUrl + '/commonQuery/getProjectTagByProjectId',
             method: 'GET'
         },
-        'updateProjectTagByProjectId': {
-            url: ENV.apiUrl + '/commonQuery/updateProjectTagByProjectId',
+        'updateFocusStatusByProjectId': {
+            url: ENV.apiUrl + '/commonQuery/updateFocusStatusByProjectId',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'POST'
         }
