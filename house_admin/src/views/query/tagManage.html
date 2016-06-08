@@ -1,0 +1,67 @@
+<div class="row">
+    <h2 class="page-header">{{title}}</h2>
+</div>
+
+<form name="searchForm1" class="search" role="search" ng-submit="getProjectHasTags()">
+    <div class="row">
+        <div class="form-group col-md-2">
+            <input id="focusStatus" type="text" class="form-control" ng-model="queryParams.focusStatus" placeholder="关注状态" name="focusStatus" maxlength="50"/>
+        </div>
+        <div class="form-group col-md-2">
+            <button type="submit" class="btn btn-default btn-primary pull-left" ng-disabled="searchForm1.$invalid || querying">
+                <i class="fa fa-search" ng-class="{'fa-spin': querying, 'fa-spinner': querying}"></i>查询
+            </button>
+        </div>
+    </div>
+    <br/>
+</form>
+
+<div>
+    <input type="checkbox" ng-model="fc.pbd.projectId"><span>项目ID</span>
+    <input type="checkbox" ng-model="fc.pbd.projectName"><span>项目名</span>
+    <input type="checkbox" ng-model="fc.pt.focusStatus"><span>标签</span>
+    <input type="checkbox" ng-model="fc.pt.remark"><span>备注</span>
+</div>
+
+<br/>
+<div class="table-responsive">
+    <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_1"></dir-pagination-controls>
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th ng-show="fc.pbd.projectId"><a href="javascript:void(0)" ng-click="orderByField1='projectId';reverseSort1=!reverseSort1">项目ID<span
+                    ng-show="orderByField1 == 'projectId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.pbd.projectName"><a href="javascript:void(0)" ng-click="orderByField1='projectName';reverseSort1=!reverseSort1">项目名<span
+                    ng-show="orderByField1 == 'projectName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.pt.focusStatus"><a href="javascript:void(0)" ng-click="orderByField1='projectTag.focusStatus';reverseSort1=!reverseSort1">标签<span
+                    ng-show="orderByField1 == 'projectTag.focusStatus'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.pt.remark"><a href="javascript:void(0)" ng-click="orderByField1='projectTag.remark';reverseSort1=!reverseSort1">备注<span
+                    ng-show="orderByField1 == 'projectTag.remark'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="tagData in tagDatas | orderBy:orderByField1:reverseSort1 | itemsPerPage:20" pagination-id="p_1">
+            <th scope="row">{{$index+1}}</th>
+            <td ng-show="fc.pbd.projectId">{{tagData.projectId}}</td>
+            <td ng-show="fc.pbd.projectName">{{tagData.projectName}}</td>
+            <td ng-show="fc.pt.focusStatus">
+                <label ng-show="!tagData.projectTag.editStatus1">{{tagData.projectTag.focusStatus}}</label>
+                <button ng-show="!tagData.projectTag.editStatus1" ng-click="setFocusStatusInEdit(tagData.projectTag)">编辑</button>
+                <input ng-show="tagData.projectTag.editStatus1" type="text" ng-model="tagData.projectTag.saveFocusStatus"/>
+            </td>
+            <td ng-show="fc.pt.remark">
+                <label ng-show="!tagData.projectTag.editStatus2">{{tagData.projectTag.remark}}</label>
+                <button ng-show="!tagData.projectTag.editStatus2" ng-click="setRemarkInEdit(tagData.projectTag)">编辑</button>
+                <input ng-show="tagData.projectTag.editStatus2" type="text" ng-model="tagData.projectTag.saveRemark"/>
+            </td>
+            <td>
+                <button ng-show="tagData.projectTag.editStatus1 || tagData.projectTag.editStatus2" ng-click="updateProjectTagByProjectId(tagData)">更新</button>
+                <button ng-show="tagData.projectTag.editStatus1 || tagData.projectTag.editStatus2" ng-click="cancelEdit(tagData.projectTag)">取消</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" pagination-id="p_1"></dir-pagination-controls>
+</div>

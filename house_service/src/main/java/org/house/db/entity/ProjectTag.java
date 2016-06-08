@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.util.ObjectUtils;
 
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @Table(name = "project_tag")
 public class ProjectTag extends AbstractDbBean implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@NotNull
 	protected String projectId; // 项目ID
 	protected String focusStatus; // 关注状态
 	protected String remark; // 备注

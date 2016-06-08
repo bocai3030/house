@@ -9,6 +9,19 @@ angular.module('adminApp').factory('CommonQueryService', function ($resource, EN
             url: ENV.apiUrl + '/commonQuery/updateFocusStatusByProjectId',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'POST'
+        },
+        'getProjectHasTag': {
+            url: ENV.apiUrl + '/commonQuery/getProjectHasTag',
+            method: 'GET'
+        },
+        'getProjectHasTags': {
+            url: ENV.apiUrl + '/commonQuery/getProjectHasTags',
+            method: 'GET',
+            isArray: true
+        },
+        'updateProjectTagByProjectId': {
+            url: ENV.apiUrl + '/commonQuery/updateProjectTagByProjectId',
+            method: 'POST'
         }
     });
 });

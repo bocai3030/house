@@ -16,6 +16,11 @@ angular.module('adminApp').controller('MainCtrl', function ($scope, eehNavigatio
             iconClass: 'fa-flag',
             state: 'site.complicate'
         })
+        .menuItem('bar.query.tag',{
+            text: '标签管理',
+            iconClass: 'fa-flag',
+            state: 'site.tag'
+        })
     ;
     $scope.navbarBrand = {
         src: 'favicon.ico',
