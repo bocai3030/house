@@ -111,7 +111,7 @@ public class ComplicateQueryController {
 				final ProjectTag projectTag = this.projectTagRepository.findByProjectId(projectBasicData.getProjectId());
 				if (projectTag == null && focusStatus.length() == 0) {
 					projectBasicDatas.add(projectBasicData);
-				} else if (focusStatus.length() >= 0 && focusStatus.equals(projectTag.getFocusStatus())) {
+				} else if (projectTag != null && focusStatus.length() >= 0 && focusStatus.equals(projectTag.getFocusStatus())) {
 					projectBasicDatas.add(projectBasicData);
 				}
 			}
