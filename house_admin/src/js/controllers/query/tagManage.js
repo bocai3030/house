@@ -5,7 +5,7 @@ angular.module('adminApp').config(function ($stateProvider) {
         templateUrl: 'views/query/tagManage.html',
         controller: 'TagManageController'
     });
-}).controller('TagManageController', function ($scope, toasty, CommonQueryService, $http) {
+}).controller('TagManageController', function ($scope, toasty, CommonQueryService, ComplicateQueryService, $http) {
     $scope.title = '房产标签管理';
 
     $scope.fc = {
@@ -38,6 +38,18 @@ angular.module('adminApp').config(function ($stateProvider) {
                 });
             });
         }
+    };
+
+    $scope.focusStatuses = [];
+    $scope.getAllFocusStatuses = function () {
+        ComplicateQueryService.getAllFocusStatuses().$promise.then(function (data) {
+            $scope.focusStatuses = data;
+        }, function (data) {
+        });
+    };
+    $scope.getAllFocusStatuses();
+    $scope.updateFocusStatus = function (newFocusStatus) {
+        $scope.queryParams.focusStatus = newFocusStatus;
     };
 
     $scope.setFocusStatusInEdit = function(projectTag) {

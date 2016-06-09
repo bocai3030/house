@@ -2,6 +2,14 @@
     <h2 class="page-header">{{title}}</h2>
 </div>
 
+<div>
+    <button ng-click="getAllFocusStatuses()">刷新</button>
+    <label>所有关注状态:</label>
+    <button ng-click="updateFocusStatus(focusStatus)" ng-repeat="focusStatus in focusStatuses">{{focusStatus}}</button>
+</div>
+<br/>
+
+
 <form name="searchForm1" class="search" role="search" ng-submit="getProjectHasTags()">
     <div class="row">
         <div class="form-group col-md-2">
