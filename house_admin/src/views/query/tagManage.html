@@ -27,6 +27,7 @@
 <div>
     <input type="checkbox" ng-model="fc.pbd.projectId"><span>项目ID</span>
     <input type="checkbox" ng-model="fc.pbd.projectName"><span>项目名</span>
+    <input type="checkbox" ng-model="fc.pbd.projectAddress"><span>项目地址</span>
     <input type="checkbox" ng-model="fc.pt.focusStatus"><span>标签</span>
     <input type="checkbox" ng-model="fc.pt.remark"><span>备注</span>
 </div>
@@ -42,6 +43,8 @@
                     ng-show="orderByField1 == 'projectId'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
             <th ng-show="fc.pbd.projectName"><a href="javascript:void(0)" ng-click="orderByField1='projectName';reverseSort1=!reverseSort1">项目名<span
                     ng-show="orderByField1 == 'projectName'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
+            <th ng-show="fc.pbd.projectAddress"><a href="javascript:void(0)" ng-click="orderByField1='projectAddress';reverseSort1=!reverseSort1">项目地址<span
+                    ng-show="orderByField1 == 'projectAddress'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
             <th ng-show="fc.pt.focusStatus"><a href="javascript:void(0)" ng-click="orderByField1='projectTag.focusStatus';reverseSort1=!reverseSort1">标签<span
                     ng-show="orderByField1 == 'projectTag.focusStatus'"><span ng-show="!reverseSort1">^</span><span ng-show="reverseSort1">v</span></span></a></th>
             <th ng-show="fc.pt.remark"><a href="javascript:void(0)" ng-click="orderByField1='projectTag.remark';reverseSort1=!reverseSort1">备注<span
@@ -54,6 +57,7 @@
             <th scope="row">{{$index+1}}</th>
             <td ng-show="fc.pbd.projectId">{{tagData.projectId}}</td>
             <td ng-show="fc.pbd.projectName">{{tagData.projectName}}</td>
+            <td ng-show="fc.pbd.projectAddress">{{tagData.projectAddress}}</td>
             <td ng-show="fc.pt.focusStatus">
                 <label ng-show="!tagData.projectTag.editStatus1">{{tagData.projectTag.focusStatus}}</label>
                 <button ng-show="!tagData.projectTag.editStatus1" ng-click="setFocusStatusInEdit(tagData.projectTag)">编辑</button>

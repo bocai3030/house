@@ -11,7 +11,8 @@ angular.module('adminApp').config(function ($stateProvider) {
     $scope.fc = {
         pbd: {
             projectId: true,
-            projectName: true
+            projectName: true,
+            projectAddress: true
         },
         pt: {
             focusStatus: true,

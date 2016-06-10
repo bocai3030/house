@@ -6,6 +6,7 @@ public class ProjectHasTag {
 	protected String projectId; // 项目ID
 	protected String projectName; // 所属项目名称
 	protected ProjectTag projectTag;
+	protected String projectAddress; // 项目地址
 
 	public String getProjectId() {
 		return this.projectId;
@@ -29,6 +30,14 @@ public class ProjectHasTag {
 
 	public void setProjectTag(final ProjectTag projectTag) {
 		this.projectTag = projectTag;
+	}
+
+	public String getProjectAddress() {
+		return this.projectAddress;
+	}
+
+	public void setProjectAddress(final String projectAddress) {
+		this.projectAddress = projectAddress;
 	}
 
 }

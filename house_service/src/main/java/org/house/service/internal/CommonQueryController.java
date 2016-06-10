@@ -66,6 +66,7 @@ public class CommonQueryController {
 		final ProjectHasTag projectHasTag = new ProjectHasTag();
 		projectHasTag.setProjectId(projectBasicData.getProjectId());
 		projectHasTag.setProjectName(projectBasicData.getProjectName());
+		projectHasTag.setProjectAddress(projectBasicData.getProjectAddress());
 		projectHasTag.setProjectTag(projectTag);
 		return projectHasTag;
 	}
@@ -89,6 +90,7 @@ public class CommonQueryController {
 			final ProjectHasTag projectHasTag = new ProjectHasTag();
 			projectHasTag.setProjectId(projectBasicData.getProjectId());
 			projectHasTag.setProjectName(projectBasicData.getProjectName());
+			projectHasTag.setProjectAddress(projectBasicData.getProjectAddress());
 			projectHasTag.setProjectTag(projectTag);
 
 			re.add(projectHasTag);
