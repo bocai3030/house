@@ -5,3 +5,17 @@ spring:
     encoding.force: true
   jpa:
     show-sql: false
+server:
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 100
+  tomcat:
+    accesslog:
+      directory: logs
+      enabled: true
+      pattern: common
+      prefix: access_log
+      suffix: .log
+    basedir: .
+    max-threads: 200
