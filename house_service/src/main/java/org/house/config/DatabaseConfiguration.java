@@ -1,69 +1,62 @@
 package org.house.config;
 
-import java.util.Arrays;
-
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.bind.RelaxedPropertyResolver;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContextException;
-import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-public class DatabaseConfiguration implements EnvironmentAware {
-
+public class DatabaseConfiguration {
 	private final Logger LOGGER = LoggerFactory.getLogger(DatabaseConfiguration.class);
 
-	private RelaxedPropertyResolver propertyResolver;
+	@Value("${spring.datasource.dataSourceClassName}")
+	private String dataSourceClassName;
+	@Value("${spring.datasource.url}")
+	private String url;
+	@Value("${spring.datasource.username}")
+	private String username;
+	@Value("${spring.datasource.password}")
+	private String password;
+	@Value("${spring.datasource.autoReconnect}")
+	private String autoReconnect;
 
-	private Environment env;
-
-	@Override
-	public void setEnvironment(final Environment env) {
-		this.env = env;
-		this.propertyResolver = new RelaxedPropertyResolver(env, "spring.datasource.");
-	}
+	@Value("${spring.datasource.cachePrepStmts}")
+	private String cachePrepStmts;
+	@Value("${spring.datasource.prepStmtCacheSize}")
+	private String prepStmtCacheSize;
+	@Value("${spring.datasource.prepStmtCacheSqlLimit}")
+	private String prepStmtCacheSqlLimit;
+	@Value("${spring.datasource.useServerPrepStmts}")
+	private String useServerPrepStmts;
 
 	@Bean(destroyMethod = "shutdown")
 	public DataSource dataSource() {
 		this.LOGGER.debug("Configuring Datasource");
-		if (this.propertyResolver.getProperty("url") == null
-				&& this.propertyResolver.getProperty("databaseName") == null) {
+		if (this.url == null) {
 			this.LOGGER.error(
-					"Your database connection pool configuration is incorrect! The application"
-							+ "cannot start. Please check your Spring profile, current profiles are: {}",
-					Arrays.toString(this.env.getActiveProfiles()));
-
+					"Your database connection pool configuration is incorrect! The application cannot start. Please check your Spring profile.");
 			throw new ApplicationContextException("Database connection pool is not configured correctly");
 		}
-		final HikariConfig config = new HikariConfig();
-		config.setDataSourceClassName(this.propertyResolver.getProperty("dataSourceClassName"));
-		if (this.propertyResolver.getProperty("url") == null || "".equals(this.propertyResolver.getProperty("url"))) {
-			config.addDataSourceProperty("databaseName", this.propertyResolver.getProperty("databaseName"));
-			config.addDataSourceProperty("serverName", this.propertyResolver.getProperty("serverName"));
-		} else {
-			config.addDataSourceProperty("url", this.propertyResolver.getProperty("url"));
-		}
-		config.addDataSourceProperty("user", this.propertyResolver.getProperty("username"));
-		config.addDataSourceProperty("password", this.propertyResolver.getProperty("password"));
-		config.addDataSourceProperty("autoReconnect", this.propertyResolver.getProperty("autoReconnect", "true"));
 
-		if ("com.mysql.jdbc.jdbc2.optional.MysqlDataSource"
-				.equals(this.propertyResolver.getProperty("dataSourceClassName"))) {
-			config.addDataSourceProperty("cachePrepStmts", this.propertyResolver.getProperty("cachePrepStmts", "true"));
-			config.addDataSourceProperty("prepStmtCacheSize",
-					this.propertyResolver.getProperty("prepStmtCacheSize", "250"));
-			config.addDataSourceProperty("prepStmtCacheSqlLimit",
-					this.propertyResolver.getProperty("prepStmtCacheSqlLimit", "2048"));
-			config.addDataSourceProperty("useServerPrepStmts",
-					this.propertyResolver.getProperty("useServerPrepStmts", "true"));
+		final HikariConfig config = new HikariConfig();
+		config.setDataSourceClassName(this.dataSourceClassName);
+		config.addDataSourceProperty("url", this.url);
+		config.addDataSourceProperty("user", this.username);
+		config.addDataSourceProperty("password", this.password);
+		config.addDataSourceProperty("autoReconnect", this.autoReconnect);
+
+		if ("com.mysql.jdbc.jdbc2.optional.MysqlDataSource".equals(this.dataSourceClassName)) {
+			config.addDataSourceProperty("cachePrepStmts", this.cachePrepStmts);
+			config.addDataSourceProperty("prepStmtCacheSize", this.prepStmtCacheSize);
+			config.addDataSourceProperty("prepStmtCacheSqlLimit", this.prepStmtCacheSqlLimit);
+			config.addDataSourceProperty("useServerPrepStmts", this.useServerPrepStmts);
 		}
 		return new HikariDataSource(config);
 	}
