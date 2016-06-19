@@ -5,11 +5,17 @@ spring:
     dataSourceClassName: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
     url: jdbc:mysql://localhost:3306/house?useUnicode=true&characterEncoding=utf8
     username: root
-    password: 1
+    password: 11111111
+    autoReconnect: true
     cachePrepStmts: true
     prepStmtCacheSize: 250
     prepStmtCacheSqlLimit: 2048
     useServerPrepStmts: true
-    autoReconnect: true
+  customConnector:
+    port: 8080
+    protocol: Http11Protocol
+    connectionTimeout: 60000
+    maxKeepAliveRequests: 100
+    keepAliveTimeout: 60000
 application:
   debug: false
