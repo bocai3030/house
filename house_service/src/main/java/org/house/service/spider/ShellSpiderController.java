@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.client.ClientProtocolException;
 import org.house.db.entity.jpa.EarthBasicData;
-import org.house.db.entity.jpa.PreSellLicenseData;
+import org.house.db.entity.jpa.PreSellLicenseDataJpa;
 import org.house.db.entity.jpa.ProjectBasicDataJpa;
 import org.house.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +31,9 @@ public class ShellSpiderController {
 			Utils.writlnAndFlushResponse(response,
 					"updating projectId:" + projectBasicDataJpa.getProjectId() + ", projectName:" + projectBasicDataJpa.getProjectName());
 
-			final PreSellLicenseData preSellLicenseData = this.spiderController.updatePreSellLicenseData(projectBasicDataJpa.getProjectId(),
+			final PreSellLicenseDataJpa preSellLicenseDataJpa = this.spiderController.updatePreSellLicenseData(projectBasicDataJpa.getProjectId(),
 					projectBasicDataJpa.getPreSellLicenseId());
-			Utils.writlnAndFlushResponse(response, "updated preSellLicenseData, id:" + preSellLicenseData.getPreSellLicenseId());
+			Utils.writlnAndFlushResponse(response, "updated preSellLicenseData, id:" + preSellLicenseDataJpa.getPreSellLicenseId());
 
 			final String countryName = projectBasicDataJpa.getCountryName();
 			final String countryId = projectBasicDataJpa.getCountryId();
@@ -61,9 +61,9 @@ public class ShellSpiderController {
 		Utils.writlnAndFlushResponse(response,
 				"updating projectId:" + projectBasicDataJpa.getProjectId() + ", projectName:" + projectBasicDataJpa.getProjectName());
 
-		final PreSellLicenseData preSellLicenseData = this.spiderController.updatePreSellLicenseData(projectBasicDataJpa.getProjectId(),
+		final PreSellLicenseDataJpa preSellLicenseDataJpa = this.spiderController.updatePreSellLicenseData(projectBasicDataJpa.getProjectId(),
 				projectBasicDataJpa.getPreSellLicenseId());
-		Utils.writlnAndFlushResponse(response, "updated preSellLicenseData, id:" + preSellLicenseData.getPreSellLicenseId());
+		Utils.writlnAndFlushResponse(response, "updated preSellLicenseData, id:" + preSellLicenseDataJpa.getPreSellLicenseId());
 
 		final String countryName = projectBasicDataJpa.getCountryName();
 		final String countryId = projectBasicDataJpa.getCountryId();

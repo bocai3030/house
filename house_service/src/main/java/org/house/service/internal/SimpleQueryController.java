@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.house.db.entity.jpa.EarthBasicData;
-import org.house.db.entity.jpa.PreSellLicenseData;
+import org.house.db.entity.jpa.PreSellLicenseDataJpa;
 import org.house.db.entity.jpa.ProjectBasicDataJpa;
 import org.house.db.repository.jpa.EarthBasicDataRepository;
-import org.house.db.repository.jpa.PreSellLicenseDataRepository;
+import org.house.db.repository.jpa.PreSellLicenseDataJpaRepository;
 import org.house.db.repository.jpa.ProjectBasicDataJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,7 +31,7 @@ public class SimpleQueryController {
 	@Autowired
 	private ProjectBasicDataJpaRepository projectBasicDataJpaRepository;
 	@Autowired
-	private PreSellLicenseDataRepository preSellLicenseDataRepository;
+	private PreSellLicenseDataJpaRepository preSellLicenseDataJpaRepository;
 	@Autowired
 	private EarthBasicDataRepository earthBasicDataRepository;
 
@@ -42,7 +42,7 @@ public class SimpleQueryController {
 			if (projectBasicDataJpa == null) {
 				continue;
 			}
-			final PreSellLicenseData preSellLicenseData = this.preSellLicenseDataRepository
+			final PreSellLicenseDataJpa preSellLicenseDataJpa = this.preSellLicenseDataJpaRepository
 					.findByPreSellLicenseId(projectBasicDataJpa.getPreSellLicenseId());
 
 			final List<EarthBasicData> earthBasicDatas = Lists.newArrayList();
@@ -56,7 +56,7 @@ public class SimpleQueryController {
 
 			final Map<String, Object> re = Maps.newHashMap();
 			re.put("projectBasicData", projectBasicDataJpa);
-			re.put("preSellLicenseData", preSellLicenseData);
+			re.put("preSellLicenseData", preSellLicenseDataJpa);
 			re.put("earthBasicDatas", earthBasicDatas);
 
 			reList.add(re);

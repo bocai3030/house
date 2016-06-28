@@ -18,7 +18,7 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.house.db.entity.jpa.EarthBasicData;
-import org.house.db.entity.jpa.PreSellLicenseData;
+import org.house.db.entity.jpa.PreSellLicenseDataJpa;
 import org.house.db.entity.jpa.ProjectBasicDataJpa;
 import org.house.util.Utils;
 
@@ -266,7 +266,7 @@ public class WebSpider {
 		projectBasicDataJpa.setUsagee(usagee);
 	}
 
-	public static PreSellLicenseData getPreSellLicenseData(final String projectId, final String preSellLicenseId) {
+	public static PreSellLicenseDataJpa getPreSellLicenseData(final String projectId, final String preSellLicenseId) {
 		final HttpGet httpGet = new HttpGet("http://www.laho.gov.cn/g4cdata/search/project/preSell.jsp?pjID=" + projectId + "&presell="
 				+ preSellLicenseId + "&maxPrice=&groundPrice=");
 		setAjaxRequestHeader(httpGet);
@@ -276,8 +276,8 @@ public class WebSpider {
 			return null;
 		}
 
-		final PreSellLicenseData preSellLicenseData = new PreSellLicenseData();
-		preSellLicenseData.setPreSellLicenseId(preSellLicenseId);
+		final PreSellLicenseDataJpa preSellLicenseDataJpa = new PreSellLicenseDataJpa();
+		preSellLicenseDataJpa.setPreSellLicenseId(preSellLicenseId);
 
 		final String tag1 = "预售幢数";
 		final String tag2 = "tab_style01_td\">";
@@ -294,132 +294,132 @@ public class WebSpider {
 		final int idx2 = content.indexOf(tag2, idx1 + tag1.length());
 		final int idx3 = content.indexOf(tag3, idx2 + tag2.length());
 		final int buildingCount = Utils.tryParseInteger(content.substring(idx2 + tag2.length() + tag4.length(), idx3));
-		preSellLicenseData.setBuildingCount(buildingCount);
+		preSellLicenseDataJpa.setBuildingCount(buildingCount);
 
 		final int idx4 = content.indexOf(tag9, idx3 + tag3.length());
 		final int idx5 = content.indexOf(tag3, idx4 + tag9.length());
 		final String buildingHouse = content.substring(idx4 + tag9.length() + tag4.length(), idx5);
-		preSellLicenseData.setBuildingHouse(buildingHouse);
+		preSellLicenseDataJpa.setBuildingHouse(buildingHouse);
 
 		final int idx6 = content.indexOf(tag2, idx5 + tag3.length());
 		final int idx7 = content.indexOf(tag3, idx6 + tag2.length());
 		final String builtHouse = content.substring(idx6 + tag2.length() + tag4.length(), idx7);
-		preSellLicenseData.setBuiltHouse(builtHouse);
+		preSellLicenseDataJpa.setBuiltHouse(builtHouse);
 
 		final int idx8 = content.indexOf(tag2, idx7 + tag3.length());
 		final int idx9 = content.indexOf(tag3, idx8 + tag2.length());
 		final int currentPhase = Utils.tryParseInteger(content.substring(idx8 + tag2.length() + tag4.length(), idx9));
-		preSellLicenseData.setCurrentPhase(currentPhase);
+		preSellLicenseDataJpa.setCurrentPhase(currentPhase);
 
 		final int idx10 = content.indexOf(tag2, idx9 + tag3.length());
 		final int idx11 = content.indexOf(tag3, idx10 + tag2.length());
 		final String currentPhaseBuildingArea = content.substring(idx10 + tag2.length() + tag4.length(), idx11);
-		preSellLicenseData.setCurrentPhaseBuildingArea(currentPhaseBuildingArea);
+		preSellLicenseDataJpa.setCurrentPhaseBuildingArea(currentPhaseBuildingArea);
 
 		final int idx12 = content.indexOf(tag2, idx11 + tag3.length());
 		final int idx13 = content.indexOf(tag3, idx12 + tag2.length());
 		final String areaUpGround = content.substring(idx12 + tag2.length() + tag4.length(), idx13);
-		preSellLicenseData.setAreaUpGround(areaUpGround);
+		preSellLicenseDataJpa.setAreaUpGround(areaUpGround);
 
 		final int idx14 = content.indexOf(tag2, idx13 + tag3.length());
 		final int idx15 = content.indexOf(tag3, idx14 + tag2.length());
 		final String areaUnderGround = content.substring(idx14 + tag2.length() + tag4.length(), idx15);
-		preSellLicenseData.setAreaUnderGround(areaUnderGround);
+		preSellLicenseDataJpa.setAreaUnderGround(areaUnderGround);
 
 		final int idx16 = content.indexOf(tag2, idx15 + tag3.length());
 		final int idx17 = content.indexOf(tag3, idx16 + tag2.length());
 		final int unitCount = Utils.tryParseInteger(content.substring(idx16 + tag2.length() + tag4.length(), idx17));
-		preSellLicenseData.setUnitCount(unitCount);
+		preSellLicenseDataJpa.setUnitCount(unitCount);
 
 		final int idx18 = content.indexOf(tag2, idx17 + tag3.length());
 		final int idx19 = content.indexOf(tag3, idx18 + tag2.length());
 		final String totalBuidingArea = content.substring(idx18 + tag2.length() + tag4.length(), idx19);
-		preSellLicenseData.setTotalBuidingArea(totalBuidingArea);
+		preSellLicenseDataJpa.setTotalBuidingArea(totalBuidingArea);
 
 		final int idx20 = content.indexOf(tag2, idx19 + tag3.length());
 		final int idx21 = content.indexOf(tag3, idx20 + tag2.length());
 		final String contactPersion = content.substring(idx20 + tag2.length() + tag4.length(), idx21);
-		preSellLicenseData.setContactPersion(contactPersion);
+		preSellLicenseDataJpa.setContactPersion(contactPersion);
 
 		final int idx22 = content.indexOf(tag2, idx21 + tag3.length());
 		final int idx23 = content.indexOf(tag3, idx22 + tag2.length());
 		final String mortgage = content.substring(idx22 + tag2.length() + tag4.length(), idx23);
-		preSellLicenseData.setMortgage(mortgage);
+		preSellLicenseDataJpa.setMortgage(mortgage);
 
 		final int idx24 = content.indexOf(tag2, idx23 + tag3.length());
 		final int idx25 = content.indexOf(tag3, idx24 + tag2.length());
 		final String supportingArea = content.substring(idx24 + tag2.length() + tag4.length(), idx25);
-		preSellLicenseData.setSupportingArea(supportingArea);
+		preSellLicenseDataJpa.setSupportingArea(supportingArea);
 
 		final int idx26 = content.indexOf(tag5, idx25 + tag3.length());
 		final int idx27 = content.indexOf(tag3, idx26 + tag5.length());
 		final String validateFrom = content.substring(idx26 + tag5.length() + tag4.length(), idx27);
-		preSellLicenseData.setValidateFrom(validateFrom);
+		preSellLicenseDataJpa.setValidateFrom(validateFrom);
 
 		final int idx28 = content.indexOf(tag5, idx27 + tag3.length());
 		final int idx29 = content.indexOf(tag3, idx28 + tag5.length());
 		final String validateTo = content.substring(idx28 + tag5.length() + tag4.length(), idx29);
-		preSellLicenseData.setValidateTo(validateTo);
+		preSellLicenseDataJpa.setValidateTo(validateTo);
 
 		final int idx30 = content.indexOf(tag2, idx29 + tag3.length());
 		final int idx31 = content.indexOf(tag3, idx30 + tag2.length());
 		final String licenseIssueDate = content.substring(idx30 + tag2.length() + tag4.length(), idx31);
-		preSellLicenseData.setLicenseIssueDate(licenseIssueDate);
+		preSellLicenseDataJpa.setLicenseIssueDate(licenseIssueDate);
 
 		final int idx32 = content.indexOf(tag6, idx31 + tag3.length());
 
 		final int idx33 = content.indexOf(tag2, idx32 + tag6.length());
 		final int idx34 = content.indexOf(tag7, idx33 + tag2.length());
 		final int distributeOfResidentialCount = Utils.tryParseInteger(content.substring(idx33 + tag2.length(), idx34));
-		preSellLicenseData.setDistributeOfResidentialCount(distributeOfResidentialCount);
+		preSellLicenseDataJpa.setDistributeOfResidentialCount(distributeOfResidentialCount);
 
 		final int idx35 = content.indexOf(tag2, idx34 + tag7.length());
 		final int idx36 = content.indexOf(tag7, idx35 + tag2.length());
 		final int distributeOfBussinessCount = Utils.tryParseInteger(content.substring(idx35 + tag2.length(), idx36));
-		preSellLicenseData.setDistributeOfBussinessCount(distributeOfBussinessCount);
+		preSellLicenseDataJpa.setDistributeOfBussinessCount(distributeOfBussinessCount);
 
 		final int idx37 = content.indexOf(tag2, idx36 + tag7.length());
 		final int idx38 = content.indexOf(tag7, idx37 + tag2.length());
 		final int distributeOfOfficeCount = Utils.tryParseInteger(content.substring(idx37 + tag2.length(), idx38));
-		preSellLicenseData.setDistributeOfOfficeCount(distributeOfOfficeCount);
+		preSellLicenseDataJpa.setDistributeOfOfficeCount(distributeOfOfficeCount);
 
 		final int idx39 = content.indexOf(tag2, idx38 + tag7.length());
 		final int idx40 = content.indexOf(tag7, idx39 + tag2.length());
 		final int distributeOfParkingCount = Utils.tryParseInteger(content.substring(idx39 + tag2.length(), idx40));
-		preSellLicenseData.setDistributeOfParkingCount(distributeOfParkingCount);
+		preSellLicenseDataJpa.setDistributeOfParkingCount(distributeOfParkingCount);
 
 		final int idx41 = content.indexOf(tag2, idx40 + tag7.length());
 		final int idx42 = content.indexOf(tag7, idx41 + tag2.length());
 		final int distributeOfOtherCount = Utils.tryParseInteger(content.substring(idx41 + tag2.length(), idx42));
-		preSellLicenseData.setDistributeOfOtherCount(distributeOfOtherCount);
+		preSellLicenseDataJpa.setDistributeOfOtherCount(distributeOfOtherCount);
 
 		final int idx43 = content.indexOf(tag8, idx42 + tag7.length());
 
 		final int idx44 = content.indexOf(tag2, idx43 + tag8.length());
 		final int idx45 = content.indexOf(tag7, idx44 + tag2.length());
 		final String distributeOfResidentialArea = content.substring(idx44 + tag2.length(), idx45);
-		preSellLicenseData.setDistributeOfResidentialArea(distributeOfResidentialArea);
+		preSellLicenseDataJpa.setDistributeOfResidentialArea(distributeOfResidentialArea);
 
 		final int idx46 = content.indexOf(tag2, idx45 + tag7.length());
 		final int idx47 = content.indexOf(tag7, idx46 + tag2.length());
 		final String distributeOfBussinessArea = content.substring(idx46 + tag2.length(), idx47);
-		preSellLicenseData.setDistributeOfBussinessArea(distributeOfBussinessArea);
+		preSellLicenseDataJpa.setDistributeOfBussinessArea(distributeOfBussinessArea);
 
 		final int idx48 = content.indexOf(tag2, idx47 + tag7.length());
 		final int idx49 = content.indexOf(tag7, idx48 + tag2.length());
 		final String distributeOfOfficeArea = content.substring(idx48 + tag2.length(), idx49);
-		preSellLicenseData.setDistributeOfOfficeArea(distributeOfOfficeArea);
+		preSellLicenseDataJpa.setDistributeOfOfficeArea(distributeOfOfficeArea);
 
 		final int idx50 = content.indexOf(tag2, idx49 + tag7.length());
 		final int idx51 = content.indexOf(tag7, idx50 + tag2.length());
 		final String distributeOfParkingArea = content.substring(idx50 + tag2.length(), idx51);
-		preSellLicenseData.setDistributeOfParkingArea(distributeOfParkingArea);
+		preSellLicenseDataJpa.setDistributeOfParkingArea(distributeOfParkingArea);
 
 		final int idx52 = content.indexOf(tag2, idx51 + tag7.length());
 		final int idx53 = content.indexOf(tag7, idx52 + tag2.length());
 		final String distributeOfOtherArea = content.substring(idx52 + tag2.length(), idx53);
-		preSellLicenseData.setDistributeOfOtherArea(distributeOfOtherArea);
-		return preSellLicenseData;
+		preSellLicenseDataJpa.setDistributeOfOtherArea(distributeOfOtherArea);
+		return preSellLicenseDataJpa;
 	}
 
 	public static EarthBasicData getEarthBasicData(final String countryName, final String countryId, final String queryCountryId, final int flag)

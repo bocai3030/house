@@ -4,10 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.house.db.entity.jpa.EarthBasicData;
-import org.house.db.entity.jpa.PreSellLicenseData;
+import org.house.db.entity.jpa.PreSellLicenseDataJpa;
 import org.house.db.entity.jpa.ProjectBasicDataJpa;
 import org.house.db.repository.jpa.EarthBasicDataRepository;
-import org.house.db.repository.jpa.PreSellLicenseDataRepository;
+import org.house.db.repository.jpa.PreSellLicenseDataJpaRepository;
 import org.house.db.repository.jpa.ProjectBasicDataJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,7 @@ public class SpiderController {
 	@Autowired
 	private ProjectBasicDataJpaRepository projectBasicDataJpaRepository;
 	@Autowired
-	private PreSellLicenseDataRepository preSellLicenseDataRepository;
+	private PreSellLicenseDataJpaRepository preSellLicenseDataJpaRepository;
 	@Autowired
 	private EarthBasicDataRepository earthBasicDataRepository;
 
@@ -60,19 +60,19 @@ public class SpiderController {
 	}
 
 	@RequestMapping(value = "/updatePreSellLicenseData", produces = "application/json")
-	public PreSellLicenseData updatePreSellLicenseData(final String projectId, final String preSellLicenseId) {
-		final PreSellLicenseData preSellLicenseData = WebSpider.getPreSellLicenseData(projectId, preSellLicenseId);
+	public PreSellLicenseDataJpa updatePreSellLicenseData(final String projectId, final String preSellLicenseId) {
+		final PreSellLicenseDataJpa preSellLicenseDataJpa = WebSpider.getPreSellLicenseData(projectId, preSellLicenseId);
 
-		final PreSellLicenseData preSellLicenseDataInDb = this.preSellLicenseDataRepository.findByPreSellLicenseId(preSellLicenseId);
-		if (preSellLicenseDataInDb == null) {
-			this.preSellLicenseDataRepository.save(preSellLicenseData);
-		} else if (!preSellLicenseDataInDb.equals(preSellLicenseData)) {
-			preSellLicenseDataInDb.fromObj(preSellLicenseData);
-			this.preSellLicenseDataRepository.save(preSellLicenseDataInDb);
+		final PreSellLicenseDataJpa preSellLicenseDataJpaInDb = this.preSellLicenseDataJpaRepository.findByPreSellLicenseId(preSellLicenseId);
+		if (preSellLicenseDataJpaInDb == null) {
+			this.preSellLicenseDataJpaRepository.save(preSellLicenseDataJpa);
+		} else if (!preSellLicenseDataJpaInDb.equals(preSellLicenseDataJpa)) {
+			preSellLicenseDataJpaInDb.fromObj(preSellLicenseDataJpa);
+			this.preSellLicenseDataJpaRepository.save(preSellLicenseDataJpaInDb);
 		} else {
 		}
 
-		return preSellLicenseData;
+		return preSellLicenseDataJpa;
 	}
 
 	@RequestMapping(value = "/updateEarthBasicData", produces = "application/json")

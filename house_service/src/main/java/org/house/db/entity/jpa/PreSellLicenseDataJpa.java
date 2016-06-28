@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @JsonAutoDetect
 @Entity
 @Table(name = "pre_sell_license_data")
-public class PreSellLicenseData extends AbstractJpaBean implements Serializable {
+public class PreSellLicenseDataJpa extends AbstractJpaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String preSellLicenseId; // 预售许可证号
 	protected int buildingCount; // 预售幢数
@@ -55,8 +55,8 @@ public class PreSellLicenseData extends AbstractJpaBean implements Serializable 
 		if (this == obj) {
 			return true;
 		}
-		if (obj instanceof PreSellLicenseData) {
-			final PreSellLicenseData anObject = (PreSellLicenseData) obj;
+		if (obj instanceof PreSellLicenseDataJpa) {
+			final PreSellLicenseDataJpa anObject = (PreSellLicenseDataJpa) obj;
 			if (ObjectUtils.nullSafeEquals(this.preSellLicenseId, anObject.getPreSellLicenseId())
 					&& ObjectUtils.nullSafeEquals(this.buildingCount, anObject.getBuildingCount())
 					&& ObjectUtils.nullSafeEquals(this.buildingHouse, anObject.getBuildingHouse())
@@ -89,7 +89,7 @@ public class PreSellLicenseData extends AbstractJpaBean implements Serializable 
 		return false;
 	}
 
-	public void fromObj(final PreSellLicenseData theObj) {
+	public void fromObj(final PreSellLicenseDataJpa theObj) {
 		// this.preSellLicenseNo = theObj.preSellLicenseNo; // NO ID
 		this.buildingCount = theObj.buildingCount;
 		this.buildingHouse = theObj.buildingHouse;
