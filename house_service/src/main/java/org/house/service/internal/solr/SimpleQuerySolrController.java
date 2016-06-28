@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.house.db.entity.jpa.EarthBasicDataJpa;
-import org.house.db.entity.jpa.PreSellLicenseDataJpa;
+import org.house.db.entity.solr.PreSellLicenseDataSolr;
 import org.house.db.entity.solr.ProjectBasicDataSolr;
 import org.house.db.repository.jpa.EarthBasicDataJpaRepository;
-import org.house.db.repository.jpa.PreSellLicenseDataJpaRepository;
+import org.house.db.repository.solr.PreSellLicenseDataSolrRepository;
 import org.house.db.repository.solr.ProjectBasicDataSolrRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,7 +31,7 @@ public class SimpleQuerySolrController {
 	@Autowired
 	private ProjectBasicDataSolrRepository projectBasicDataSolrRepository;
 	@Autowired
-	private PreSellLicenseDataJpaRepository preSellLicenseDataJpaRepository;
+	private PreSellLicenseDataSolrRepository preSellLicenseDataSolrRepository;
 	@Autowired
 	private EarthBasicDataJpaRepository earthBasicDataJpaRepository;
 
@@ -42,7 +42,7 @@ public class SimpleQuerySolrController {
 			if (projectBasicDataSolr == null) {
 				continue;
 			}
-			final PreSellLicenseDataJpa preSellLicenseDataJpa = this.preSellLicenseDataJpaRepository
+			final PreSellLicenseDataSolr preSellLicenseDataSolr = this.preSellLicenseDataSolrRepository
 					.findByPreSellLicenseId(projectBasicDataSolr.getPreSellLicenseId());
 
 			final List<EarthBasicDataJpa> earthBasicDataJpas = Lists.newArrayList();
@@ -56,7 +56,7 @@ public class SimpleQuerySolrController {
 
 			final Map<String, Object> re = Maps.newHashMap();
 			re.put("projectBasicData", projectBasicDataSolr);
-			re.put("preSellLicenseData", preSellLicenseDataJpa);
+			re.put("preSellLicenseData", preSellLicenseDataSolr);
 			re.put("earthBasicDatas", earthBasicDataJpas);
 
 			reList.add(re);

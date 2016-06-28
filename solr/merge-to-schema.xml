@@ -1,6 +1,7 @@
-   <field name="id" type="int" indexed="true" stored="true" required="true" multiValued="false" />
+   <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" />
    <field name="create_time" type="date" indexed="true" stored="true"/>
    <field name="update_time" type="date" indexed="true" stored="true"/>
+
    <field name="project_id" type="string" indexed="true" stored="true"/>
    <field name="project_name" type="string" indexed="true" stored="true"/>
    <field name="pre_sell_license_id" type="string" indexed="true" stored="true"/>
@@ -19,3 +20,29 @@
    <field name="total_build_area" type="string" indexed="true" stored="true"/>
    <field name="qualification_licence_no" type="string" indexed="true" stored="true"/>
    <field name="usagee" type="string" indexed="true" stored="true"/>
+
+   <field name="building_count" type="int" indexed="true" stored="true"/>
+   <field name="building_house" type="string" indexed="true" stored="true"/>
+   <field name="built_house" type="string" indexed="true" stored="true"/>
+   <field name="current_phase" type="int" indexed="true" stored="true"/>
+   <field name="current_phase_building_area" type="string" indexed="true" stored="true"/>
+   <field name="area_up_ground" type="string" indexed="true" stored="true"/>
+   <field name="area_under_ground" type="string" indexed="true" stored="true"/>
+   <field name="unit_count" type="int" indexed="true" stored="true"/>
+   <field name="total_buiding_area" type="string" indexed="true" stored="true"/>
+   <field name="contact_persion" type="string" indexed="true" stored="true"/>
+   <field name="mortgage" type="string" indexed="true" stored="true"/>
+   <field name="supporting_area" type="string" indexed="true" stored="true"/>
+   <field name="validate_from" type="string" indexed="true" stored="true"/>
+   <field name="validate_to" type="string" indexed="true" stored="true"/>
+   <field name="license_issue_date" type="string" indexed="true" stored="true"/>
+   <field name="distribute_of_residential_count" type="int" indexed="true" stored="true"/>
+   <field name="distribute_of_residential_area" type="string" indexed="true" stored="true"/>
+   <field name="distribute_of_bussiness_count" type="int" indexed="true" stored="true"/>
+   <field name="distribute_of_bussiness_area" type="string" indexed="true" stored="true"/>
+   <field name="distribute_of_office_count" type="int" indexed="true" stored="true"/>
+   <field name="distribute_of_office_area" type="string" indexed="true" stored="true"/>
+   <field name="distribute_of_parking_count" type="int" indexed="true" stored="true"/>
+   <field name="distribute_of_parking_area" type="string" indexed="true" stored="true"/>
+   <field name="distribute_of_other_count" type="int" indexed="true" stored="true"/>
+   <field name="distribute_of_other_area" type="string" indexed="true" stored="true"/>

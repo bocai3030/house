@@ -28,7 +28,7 @@ public abstract class AbstractSolrBean {
 	@GeneratedValue()
 	@JsonIgnore
 	@Field
-	protected Long id;
+	protected String id;
 
 	@Column(updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -43,11 +43,11 @@ public abstract class AbstractSolrBean {
 	@Field("update_time")
 	protected Date updateTime;
 
-	public Long getId() {
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(final Long id) {
+	public void setId(final String id) {
 		this.id = id;
 	}
 
