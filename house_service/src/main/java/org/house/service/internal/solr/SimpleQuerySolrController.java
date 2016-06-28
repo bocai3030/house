@@ -75,7 +75,7 @@ public class SimpleQuerySolrController {
 	@RequestMapping(value = "/getProjectDataByProjectNameLike", produces = "application/json")
 	public Object getProjectDataByProjectNameLike(@RequestParam(required = true) final String projectNameLike) {
 		final List<ProjectBasicDataSolr> projectBasicDataSolrs = Lists.newArrayList();
-		projectBasicDataSolrs.addAll(this.projectBasicDataSolrRepository.findByProjectNameLike(projectNameLike));
+		projectBasicDataSolrs.addAll(this.projectBasicDataSolrRepository.findByProjectNameContaining(projectNameLike));
 		return this.getFullProjectData(projectBasicDataSolrs);
 	}
 
@@ -89,14 +89,14 @@ public class SimpleQuerySolrController {
 	@RequestMapping(value = "/getProjectDataByProjectAddressLike", produces = "application/json")
 	public Object getProjectDataByProjectAddressLike(@RequestParam(required = true) final String projectAddressLike) {
 		final List<ProjectBasicDataSolr> projectBasicDataSolrs = Lists.newArrayList();
-		projectBasicDataSolrs.addAll(this.projectBasicDataSolrRepository.findByProjectAddressLike("*" + projectAddressLike + "*"));
+		projectBasicDataSolrs.addAll(this.projectBasicDataSolrRepository.findByProjectAddressContaining(projectAddressLike));
 		return this.getFullProjectData(projectBasicDataSolrs);
 	}
 
 	@RequestMapping(value = "/getProjectDataByDeveloperLike", produces = "application/json")
 	public Object getProjectDataByDeveloperLike(@RequestParam(required = true) final String developerLike) {
 		final List<ProjectBasicDataSolr> projectBasicDataSolrs = Lists.newArrayList();
-		projectBasicDataSolrs.addAll(this.projectBasicDataSolrRepository.findByDeveloperLike("*" + developerLike + "*"));
+		projectBasicDataSolrs.addAll(this.projectBasicDataSolrRepository.findByDeveloperContaining(developerLike));
 		return this.getFullProjectData(projectBasicDataSolrs);
 	}
 
