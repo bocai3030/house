@@ -1,4 +1,5 @@
    <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" />
+   <field name="entity_name" type="string" indexed="true" stored="true"/>
    <field name="create_time" type="date" indexed="true" stored="true"/>
    <field name="update_time" type="date" indexed="true" stored="true"/>
 
@@ -35,7 +36,7 @@
    <field name="supporting_area" type="string" indexed="true" stored="true"/>
    <field name="validate_from" type="string" indexed="true" stored="true"/>
    <field name="validate_to" type="string" indexed="true" stored="true"/>
-   <field name="license_issue_date" type="string" indexed="true" stored="true"/>
+   <field name="license_issue_date" type="date" indexed="true" stored="true"/>
    <field name="distribute_of_residential_count" type="int" indexed="true" stored="true"/>
    <field name="distribute_of_residential_area" type="string" indexed="true" stored="true"/>
    <field name="distribute_of_bussiness_count" type="int" indexed="true" stored="true"/>
@@ -46,3 +47,16 @@
    <field name="distribute_of_parking_area" type="string" indexed="true" stored="true"/>
    <field name="distribute_of_other_count" type="int" indexed="true" stored="true"/>
    <field name="distribute_of_other_area" type="string" indexed="true" stored="true"/>
+
+   <field name="earth_license_id" type="string" indexed="true" stored="true"/>
+   <field name="earth_license_no" type="string" indexed="true" stored="true"/>
+   <field name="location" type="string" indexed="true" stored="true"/>
+   <field name="userr" type="string" indexed="true" stored="true"/>
+   <field name="earth_no" type="string" indexed="true" stored="true"/>
+   <field name="graph_no" type="string" indexed="true" stored="true"/>
+   <field name="levell" type="string" indexed="true" stored="true"/>
+   <field name="borrow_from" type="date" indexed="true" stored="true"/>
+   <field name="use_right_kind" type="string" indexed="true" stored="true"/>
+   <field name="use_area" type="string" indexed="true" stored="true"/>
+   <field name="share_area" type="string" indexed="true" stored="true"/>
+   <field name="license_office" type="string" indexed="true" stored="true"/>

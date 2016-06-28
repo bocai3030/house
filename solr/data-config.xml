@@ -3,11 +3,12 @@
     <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://127.0.0.1:3306/house" user="root" password="11111111" batchSize="-1" />
 　　<document name="house">
         <entity name="project_basic_data" pk="id"
-                query="select concat('pbd_', id) as id,create_time,update_time,project_id,project_name,pre_sell_license_id,country_name,country_id,agree_name,agree_id,layout_name,layout_id,project_address,developer,developer_id,division,section_id,total_cost_area,total_build_area,qualification_licence_no,usagee from project_basic_data"
-                deltaImportQuery="select concat('pbd_', id) as id,create_time,update_time,project_id,project_name,pre_sell_license_id,country_name,country_id,agree_name,agree_id,layout_name,layout_id,project_address,developer,developer_id,division,section_id,total_cost_area,total_build_area,qualification_licence_no,usagee from project_basic_data where id='${dih.delta.id}'"
+                query="select concat('pbd_', id) as id,'project_basic_data' as entity_name,create_time,update_time,project_id,project_name,pre_sell_license_id,country_name,country_id,agree_name,agree_id,layout_name,layout_id,project_address,developer,developer_id,division,section_id,total_cost_area,total_build_area,qualification_licence_no,usagee from project_basic_data"
+                deltaImportQuery="select concat('pbd_', id) as id,'project_basic_data' as entity_name,create_time,update_time,project_id,project_name,pre_sell_license_id,country_name,country_id,agree_name,agree_id,layout_name,layout_id,project_address,developer,developer_id,division,section_id,total_cost_area,total_build_area,qualification_licence_no,usagee from project_basic_data where id='${dih.delta.id}'"
                 deltaQuery="select id from project_basic_data where update_time>'${dataimporter.last_index_time}'"
          >
 　　　     <field column="id" name="id"/>
+　　　     <field column="entity_name" name="entity_name"/>
            <field column="create_time" name="create_time"/>
            <field column="update_time" name="update_time"/>
            <field column="project_id" name="project_id"/>
@@ -30,11 +31,12 @@
            <field column="usagee" name="usagee"/>
 　　　  </entity>
         <entity name="pre_sell_license_data" pk="id"
-                query="select concat('psld_', id) as id,create_time,update_time,pre_sell_license_id,building_count,building_house,built_house,current_phase,current_phase_building_area,area_up_ground,area_under_ground,unit_count,total_buiding_area,contact_persion,mortgage,supporting_area,validate_from,validate_to,license_issue_date,distribute_of_residential_count,distribute_of_residential_area,distribute_of_bussiness_count,distribute_of_bussiness_area,distribute_of_office_count,distribute_of_office_area,distribute_of_parking_count,distribute_of_parking_area,distribute_of_other_count,distribute_of_other_area from pre_sell_license_data"
-                deltaImportQuery="select concat('psld_', id) as id,create_time,update_time,pre_sell_license_id,building_count,building_house,built_house,current_phase,current_phase_building_area,area_up_ground,area_under_ground,unit_count,total_buiding_area,contact_persion,mortgage,supporting_area,validate_from,validate_to,license_issue_date,distribute_of_residential_count,distribute_of_residential_area,distribute_of_bussiness_count,distribute_of_bussiness_area,distribute_of_office_count,distribute_of_office_area,distribute_of_parking_count,distribute_of_parking_area,distribute_of_other_count,distribute_of_other_area from pre_sell_license_data where id='${dih.delta.id}'"
+                query="select concat('psld_', id) as id,'pre_sell_license_data' as entity_name,create_time,update_time,pre_sell_license_id,building_count,building_house,built_house,current_phase,current_phase_building_area,area_up_ground,area_under_ground,unit_count,total_buiding_area,contact_persion,mortgage,supporting_area,validate_from,validate_to,license_issue_date,distribute_of_residential_count,distribute_of_residential_area,distribute_of_bussiness_count,distribute_of_bussiness_area,distribute_of_office_count,distribute_of_office_area,distribute_of_parking_count,distribute_of_parking_area,distribute_of_other_count,distribute_of_other_area from pre_sell_license_data"
+                deltaImportQuery="select concat('psld_', id) as id,'pre_sell_license_data' as entity_name,create_time,update_time,pre_sell_license_id,building_count,building_house,built_house,current_phase,current_phase_building_area,area_up_ground,area_under_ground,unit_count,total_buiding_area,contact_persion,mortgage,supporting_area,validate_from,validate_to,license_issue_date,distribute_of_residential_count,distribute_of_residential_area,distribute_of_bussiness_count,distribute_of_bussiness_area,distribute_of_office_count,distribute_of_office_area,distribute_of_parking_count,distribute_of_parking_area,distribute_of_other_count,distribute_of_other_area from pre_sell_license_data where id='${dih.delta.id}'"
                 deltaQuery="select id from pre_sell_license_data where update_time>'${dataimporter.last_index_time}'"
          >
 　　　     <field column="id" name="id"/>
+　　　     <field column="entity_name" name="entity_name"/>
            <field column="create_time" name="create_time"/>
            <field column="update_time" name="update_time"/>
            <field column="pre_sell_license_id" name="pre_sell_license_id"/>
@@ -63,6 +65,31 @@
            <field column="distribute_of_parking_area" name="distribute_of_parking_area"/>
            <field column="distribute_of_other_count" name="distribute_of_other_count"/>
            <field column="distribute_of_other_area" name="distribute_of_other_area"/>
+        </entity>
+        <entity name="earth_basic_data" pk="id"
+                query="select concat('ebd_', id) as id,'earth_basic_data' as entity_name,create_time,update_time,earth_license_id,project_id,earth_license_no,location,userr,earth_no,graph_no,usagee,levell,borrow_from,use_right_kind,use_area,share_area,license_office,license_issue_date from earth_basic_data"
+                deltaImportQuery="select concat('ebd_', id) as id,'earth_basic_data' as entity_name,create_time,update_time,earth_license_id,project_id,earth_license_no,location,userr,earth_no,graph_no,usagee,levell,borrow_from,use_right_kind,use_area,share_area,license_office,license_issue_date from earth_basic_data where id='${dih.delta.id}'"
+                deltaQuery="select id from earth_basic_data where update_time>'${dataimporter.last_index_time}'"
+         >
+　　　     <field column="id" name="id"/>
+　　　     <field column="entity_name" name="entity_name"/>
+           <field column="create_time" name="create_time"/>
+           <field column="update_time" name="update_time"/>
+           <field column="earth_license_id" name="earth_license_id"/>
+           <field column="project_id" name="project_id"/>
+           <field column="earth_license_no" name="earth_license_no"/>
+           <field column="location" name="location"/>
+           <field column="userr" name="userr"/>
+           <field column="earth_no" name="earth_no"/>
+           <field column="graph_no" name="graph_no"/>
+           <field column="usagee" name="usagee"/>
+           <field column="levell" name="levell"/>
+           <field column="borrow_from" name="borrow_from"/>
+           <field column="use_right_kind" name="use_right_kind"/>
+           <field column="use_area" name="use_area"/>
+           <field column="share_area" name="share_area"/>
+           <field column="license_office" name="license_office"/>
+           <field column="license_issue_date" name="license_issue_date"/>
         </entity>
 　　</document>
 </dataConfig>

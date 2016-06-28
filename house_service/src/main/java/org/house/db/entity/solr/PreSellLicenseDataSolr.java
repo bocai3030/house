@@ -1,17 +1,22 @@
 package org.house.db.entity.solr;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.solr.client.solrj.beans.Field;
+import org.house.util.C;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 import org.springframework.util.ObjectUtils;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 @JsonAutoDetect
-@Entity
 @SolrDocument(solrCoreName = "collection1")
 public class PreSellLicenseDataSolr extends AbstractSolrBean implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -45,8 +50,11 @@ public class PreSellLicenseDataSolr extends AbstractSolrBean implements Serializ
 	protected String validateFrom; // 有效期自
 	@Field("validate_to")
 	protected String validateTo; // 有效期至
+	@Temporal(TemporalType.DATE)
+	@JsonSerialize(using = DateSerializer.class)
+	@JsonFormat(pattern = C.DATE_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
 	@Field("license_issue_date")
-	protected String licenseIssueDate; // 发证日期
+	protected Date licenseIssueDate; // 发证日期
 	@Field("distribute_of_residential_count")
 	protected int distributeOfResidentialCount; // 住宅套数
 	@Field("distribute_of_residential_area")
@@ -265,11 +273,11 @@ public class PreSellLicenseDataSolr extends AbstractSolrBean implements Serializ
 		this.validateTo = validateTo;
 	}
 
-	public String getLicenseIssueDate() {
+	public Date getLicenseIssueDate() {
 		return this.licenseIssueDate;
 	}
 
-	public void setLicenseIssueDate(final String licenseIssueDate) {
+	public void setLicenseIssueDate(final Date licenseIssueDate) {
 		this.licenseIssueDate = licenseIssueDate;
 	}
 

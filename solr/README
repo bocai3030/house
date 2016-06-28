@@ -16,3 +16,4 @@
 9) run "java -jar start.jar" to init solr, then shutdown it.
 10) copy mysql-connector-java-5.1.38.jar(find it somewhere) and ../dist/solr-dataimporthandler-4.10.4.jar to solr-4.10.4/example/solr-webapp/lib/
 11) run "java -jar start.jar"
+12) put updatesolr.sh to crontab

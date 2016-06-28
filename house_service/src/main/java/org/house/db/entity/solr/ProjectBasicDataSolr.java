@@ -2,8 +2,6 @@ package org.house.db.entity.solr;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-
 import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 import org.springframework.util.ObjectUtils;
@@ -11,7 +9,6 @@ import org.springframework.util.ObjectUtils;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect
-@Entity
 @SolrDocument(solrCoreName = "collection1")
 public class ProjectBasicDataSolr extends AbstractSolrBean implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.house.db.entity.jpa.EarthBasicDataJpa;
+import org.house.db.entity.solr.EarthBasicDataSolr;
 import org.house.db.entity.solr.PreSellLicenseDataSolr;
 import org.house.db.entity.solr.ProjectBasicDataSolr;
-import org.house.db.repository.jpa.EarthBasicDataJpaRepository;
+import org.house.db.repository.solr.EarthBasicDataSolrRepository;
 import org.house.db.repository.solr.PreSellLicenseDataSolrRepository;
 import org.house.db.repository.solr.ProjectBasicDataSolrRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class SimpleQuerySolrController {
 	@Autowired
 	private PreSellLicenseDataSolrRepository preSellLicenseDataSolrRepository;
 	@Autowired
-	private EarthBasicDataJpaRepository earthBasicDataJpaRepository;
+	private EarthBasicDataSolrRepository earthBasicDataSolrRepository;
 
 	private Object getFullProjectData(final List<ProjectBasicDataSolr> projectBasicDataSolrs) {
 		final List<Map<String, Object>> reList = Lists.newArrayList();
@@ -45,19 +45,19 @@ public class SimpleQuerySolrController {
 			final PreSellLicenseDataSolr preSellLicenseDataSolr = this.preSellLicenseDataSolrRepository
 					.findByPreSellLicenseId(projectBasicDataSolr.getPreSellLicenseId());
 
-			final List<EarthBasicDataJpa> earthBasicDataJpas = Lists.newArrayList();
+			final List<EarthBasicDataSolr> earthBasicDataSolrs = Lists.newArrayList();
 			final String[] earthLicenseIds = projectBasicDataSolr.getCountryId().split(",");
 			for (int i = 0; i < earthLicenseIds.length; i++) {
 				if (!Strings.isNullOrEmpty(earthLicenseIds[i])) {
-					final EarthBasicDataJpa earthBasicDataJpa = this.earthBasicDataJpaRepository.findByEarthLicenseId(earthLicenseIds[i]);
-					earthBasicDataJpas.add(earthBasicDataJpa);
+					final EarthBasicDataSolr earthBasicDataSolr = this.earthBasicDataSolrRepository.findByEarthLicenseId(earthLicenseIds[i]);
+					earthBasicDataSolrs.add(earthBasicDataSolr);
 				}
 			}
 
 			final Map<String, Object> re = Maps.newHashMap();
 			re.put("projectBasicData", projectBasicDataSolr);
 			re.put("preSellLicenseData", preSellLicenseDataSolr);
-			re.put("earthBasicDatas", earthBasicDataJpas);
+			re.put("earthBasicDatas", earthBasicDataSolrs);
 
 			reList.add(re);
 		}
@@ -122,16 +122,16 @@ public class SimpleQuerySolrController {
 
 		final List<ProjectBasicDataSolr> projectBasicDataSolrs = Lists.newArrayList();
 
-		final List<EarthBasicDataJpa> earthBasicDataJpas = this.earthBasicDataJpaRepository.findByBorrowFromBetween(borrowFrom, borrowTo);
+		final List<EarthBasicDataSolr> earthBasicDataSolrs = this.earthBasicDataSolrRepository.findByBorrowFromBetween(borrowFrom, borrowTo);
 		final Set<String> set = Sets.newHashSet();
-		for (final EarthBasicDataJpa earthBasicDataJpa : earthBasicDataJpas) {
-			if (!set.contains(earthBasicDataJpa.getProjectId())) {
+		for (final EarthBasicDataSolr earthBasicDataSolr : earthBasicDataSolrs) {
+			if (!set.contains(earthBasicDataSolr.getProjectId())) {
 				final ProjectBasicDataSolr projectBasicDataSolr = this.projectBasicDataSolrRepository
-						.findByProjectId(earthBasicDataJpa.getProjectId());
+						.findByProjectId(earthBasicDataSolr.getProjectId());
 				if (projectBasicDataSolr != null) {
 					projectBasicDataSolrs.add(projectBasicDataSolr);
 				}
-				set.add(earthBasicDataJpa.getProjectId());
+				set.add(earthBasicDataSolr.getProjectId());
 			}
 		}
 

@@ -2,7 +2,7 @@
 
 DBHOST=localhost
 DBUSER=root
-DBPWD=1
+DBPWD=11111111
 DBNAME=house
 
 mysqldump -d -h $DBHOST -u $DBUSER -p$DBPWD $DBNAME project_basic_data > ./house_project_basic_data.sql

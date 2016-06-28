@@ -364,7 +364,13 @@ public class WebSpider {
 		final int idx30 = content.indexOf(tag2, idx29 + tag3.length());
 		final int idx31 = content.indexOf(tag3, idx30 + tag2.length());
 		final String licenseIssueDate = content.substring(idx30 + tag2.length() + tag4.length(), idx31);
-		preSellLicenseDataJpa.setLicenseIssueDate(licenseIssueDate);
+		Date lidDate = new Date(0); // licenseIssueDate可能为空
+		try {
+			lidDate = new SimpleDateFormat("yyyy-MM-dd").parse(licenseIssueDate);
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
+		preSellLicenseDataJpa.setLicenseIssueDate(lidDate);
 
 		final int idx32 = content.indexOf(tag6, idx31 + tag3.length());
 

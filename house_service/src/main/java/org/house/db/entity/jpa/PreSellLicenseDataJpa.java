@@ -1,13 +1,20 @@
 package org.house.db.entity.jpa;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.house.util.C;
 import org.springframework.util.ObjectUtils;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 @JsonAutoDetect
 @Entity
@@ -29,7 +36,10 @@ public class PreSellLicenseDataJpa extends AbstractJpaBean implements Serializab
 	protected String supportingArea; // 配套面积
 	protected String validateFrom; // 有效期自
 	protected String validateTo; // 有效期至
-	protected String licenseIssueDate; // 发证日期
+	@Temporal(TemporalType.DATE)
+	@JsonSerialize(using = DateSerializer.class)
+	@JsonFormat(pattern = C.DATE_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
+	protected Date licenseIssueDate; // 发证日期
 	protected int distributeOfResidentialCount; // 住宅套数
 	protected String distributeOfResidentialArea; // 住宅面积
 	protected int distributeOfBussinessCount; // 商业套数
@@ -238,11 +248,11 @@ public class PreSellLicenseDataJpa extends AbstractJpaBean implements Serializab
 		this.validateTo = validateTo;
 	}
 
-	public String getLicenseIssueDate() {
+	public Date getLicenseIssueDate() {
 		return this.licenseIssueDate;
 	}
 
-	public void setLicenseIssueDate(final String licenseIssueDate) {
+	public void setLicenseIssueDate(final Date licenseIssueDate) {
 		this.licenseIssueDate = licenseIssueDate;
 	}
 
