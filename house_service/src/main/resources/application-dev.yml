@@ -17,5 +17,10 @@ spring:
     connectionTimeout: 60000
     maxKeepAliveRequests: 100
     keepAliveTimeout: 60000
+    data:
+  solr:
+    host: http://127.0.0.1:8983/solr
+    repositories:
+      enabled: true
 application:
   debug: false

@@ -1,0 +1,21 @@
+   <field name="id" type="int" indexed="true" stored="true" required="true" multiValued="false" />
+   <field name="create_time" type="date" indexed="true" stored="true"/>
+   <field name="update_time" type="date" indexed="true" stored="true"/>
+   <field name="project_id" type="string" indexed="true" stored="true"/>
+   <field name="project_name" type="string" indexed="true" stored="true"/>
+   <field name="pre_sell_license_id" type="string" indexed="true" stored="true"/>
+   <field name="country_name" type="string" indexed="true" stored="true"/>
+   <field name="country_id" type="string" indexed="true" stored="true"/>
+   <field name="agree_name" type="string" indexed="true" stored="true"/>
+   <field name="agree_id" type="string" indexed="true" stored="true"/>
+   <field name="layout_name" type="string" indexed="true" stored="true"/>
+   <field name="layout_id" type="string" indexed="true" stored="true"/>
+   <field name="project_address" type="string" indexed="true" stored="true"/>
+   <field name="developer" type="string" indexed="true" stored="true"/>
+   <field name="developer_id" type="string" indexed="true" stored="true"/>
+   <field name="division" type="string" indexed="true" stored="true"/>
+   <field name="section_id" type="string" indexed="true" stored="true"/>
+   <field name="total_cost_area" type="string" indexed="true" stored="true"/>
+   <field name="total_build_area" type="string" indexed="true" stored="true"/>
+   <field name="qualification_licence_no" type="string" indexed="true" stored="true"/>
+   <field name="usagee" type="string" indexed="true" stored="true"/>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataConfig>
+    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://127.0.0.1:3306/house" user="root" password="11111111" batchSize="-1" />
+　　<document name="house">
+        <entity name="project_basic_data" pk="id"
+                query="select * from project_basic_data"
+                deltaImportQuery="select * from project_basic_data where id='${dih.delta.id}'"
+                deltaQuery="select id from project_basic_data where update_time>'${dataimporter.last_index_time}'"
+         >
+　　　     <field column="id" name="id"/>
+           <field column="create_time" name="create_time"/>
+           <field column="update_time" name="update_time"/>
+           <field column="project_id" name="project_id"/>
+           <field column="project_name" name="project_name"/>
+           <field column="pre_sell_license_id" name="pre_sell_license_id"/>
+           <field column="country_name" name="country_name"/>
+           <field column="country_id" name="country_id"/>
+           <field column="agree_name" name="agree_name"/>
+           <field column="agree_id" name="agree_id"/>
+           <field column="layout_name" name="layout_name"/>
+           <field column="layout_id" name="layout_id"/>
+           <field column="project_address" name="project_address"/>
+           <field column="developer" name="developer"/>
+           <field column="developer_id" name="developer_id"/>
+           <field column="division" name="division"/>
+           <field column="section_id" name="section_id"/>
+           <field column="total_cost_area" name="total_cost_area"/>
+           <field column="total_build_area" name="total_build_area"/>
+           <field column="qualification_licence_no" name="qualification_licence_no"/>
+           <field column="usagee" name="usagee"/>
+　　　  </entity>
+　　</document>
+</dataConfig>

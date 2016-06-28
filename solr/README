@@ -1,0 +1,18 @@
+1) download solr at http://archive.apache.org/dist/lucene/solr/4.10.4/solr-4.10.4.zip
+2) unzip solr-4.10.4.zip
+3) cd solr-4.10.4/example/solr/collection1/conf
+4) vim vim solrconfig.xml, add follow before /select requestHandler:
+  <requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
+    <lst name="defaults">
+      <str name="config">data-config.xml</str>
+　  </lst>
+  </requestHandler>
+5) copy file data-config.xml in current directory to solr-4.4.0/example/solr/collection1/conf/
+6) edit file schema.xml in solr-4.10.4/example/solr/collection1/conf, replace the line define field id with the content in file merge-to-schema.xml
+7) edit file elevate.xml in solr-4.10.4/example/solr/collection1/conf, comment following two lines:
+<doc id="MA147LL/A" />
+<doc id="IW-02" exclude="true" />
+8) cd solr-4.10.4/example
+9) run "java -jar start.jar" to init solr, then shutdown it.
+10) copy mysql-connector-java-5.1.38.jar(find it somewhere) and ../dist/solr-dataimporthandler-4.10.4.jar to solr-4.10.4/example/solr-webapp/lib/
+11) run "java -jar start.jar"
