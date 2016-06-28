@@ -9,11 +9,9 @@ import java.util.Set;
 import org.house.db.entity.jpa.EarthBasicDataJpa;
 import org.house.db.entity.jpa.PreSellLicenseDataJpa;
 import org.house.db.entity.jpa.ProjectBasicDataJpa;
-import org.house.db.entity.jpa.ProjectTagJpa;
 import org.house.db.repository.jpa.EarthBasicDataJpaRepository;
 import org.house.db.repository.jpa.PreSellLicenseDataJpaRepository;
 import org.house.db.repository.jpa.ProjectBasicDataJpaRepository;
-import org.house.db.repository.jpa.ProjectTagJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,16 +26,14 @@ import com.google.common.collect.Sets;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/internal/jpa/complicateQuery")
-public class ComplicateQueryController {
+@RequestMapping("/api/internal/jpa/simpleQuery")
+public class SimpleQueryJpaController {
 	@Autowired
 	private ProjectBasicDataJpaRepository projectBasicDataJpaRepository;
 	@Autowired
 	private PreSellLicenseDataJpaRepository preSellLicenseDataJpaRepository;
 	@Autowired
 	private EarthBasicDataJpaRepository earthBasicDataJpaRepository;
-	@Autowired
-	private ProjectTagJpaRepository projectTagJpaRepository;
 
 	private Object getFullProjectData(final List<ProjectBasicDataJpa> projectBasicDataJpas) {
 		final List<Map<String, Object>> reList = Lists.newArrayList();
@@ -69,12 +65,51 @@ public class ComplicateQueryController {
 		return reList;
 	}
 
-	@RequestMapping(value = "/getProjectData", produces = "application/json")
-	public Object getProjectData(@RequestParam(required = true, defaultValue = "番禺区") final String division,
-			@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowFrom, @DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowTo, final String focusStatus,
-			@RequestParam(defaultValue = "false") final Boolean onlyResidential) {
-		// TODO find time to learn spring jpa multitable query
+	@RequestMapping(value = "/getProjectDataByProjectId", produces = "application/json")
+	public Object getProjectDataByProjectId(@RequestParam(required = true) final String projectId) {
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
+		projectBasicDataJpas.add(this.projectBasicDataJpaRepository.findByProjectId(projectId));
+		return this.getFullProjectData(projectBasicDataJpas);
+	}
 
+	@RequestMapping(value = "/getProjectDataByProjectNameLike", produces = "application/json")
+	public Object getProjectDataByProjectNameLike(@RequestParam(required = true) final String projectNameLike) {
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
+		projectBasicDataJpas.addAll(this.projectBasicDataJpaRepository.findByProjectNameLike("%" + projectNameLike + "%"));
+		return this.getFullProjectData(projectBasicDataJpas);
+	}
+
+	@RequestMapping(value = "/getProjectDataByPreSellLicenseId", produces = "application/json")
+	public Object getProjectDataByPreSellLicenseId(@RequestParam(required = true) final String preSellLicenseId) {
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
+		projectBasicDataJpas.add(this.projectBasicDataJpaRepository.findByPreSellLicenseId(preSellLicenseId));
+		return this.getFullProjectData(projectBasicDataJpas);
+	}
+
+	@RequestMapping(value = "/getProjectDataByProjectAddressLike", produces = "application/json")
+	public Object getProjectDataByProjectAddressLike(@RequestParam(required = true) final String projectAddressLike) {
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
+		projectBasicDataJpas.addAll(this.projectBasicDataJpaRepository.findByProjectAddressLike("%" + projectAddressLike + "%"));
+		return this.getFullProjectData(projectBasicDataJpas);
+	}
+
+	@RequestMapping(value = "/getProjectDataByDeveloperLike", produces = "application/json")
+	public Object getProjectDataByDeveloperLike(@RequestParam(required = true) final String developerLike) {
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
+		projectBasicDataJpas.addAll(this.projectBasicDataJpaRepository.findByDeveloperLike("%" + developerLike + "%"));
+		return this.getFullProjectData(projectBasicDataJpas);
+	}
+
+	@RequestMapping(value = "/getProjectDataByDivision", produces = "application/json")
+	public Object getProjectDataByDivision(@RequestParam(required = true, defaultValue = "番禺区") final String division) {
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
+		projectBasicDataJpas.addAll(this.projectBasicDataJpaRepository.findByDivision(division));
+		return this.getFullProjectData(projectBasicDataJpas);
+	}
+
+	@RequestMapping(value = "/getProjectDataByEarthBorrowFromBetween", produces = "application/json")
+	public Object getProjectDataByEarthBorrowFromBetween(@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowFrom,
+			@DateTimeFormat(pattern = "yyyy-MM-dd") Date borrowTo) {
 		try {
 			if (borrowFrom == null) {
 				borrowFrom = new SimpleDateFormat("yyyy-MM-dd").parse("1980-01-01");
@@ -87,54 +122,19 @@ public class ComplicateQueryController {
 
 		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
 
-		// 1st: by borrowFrom and division
 		final List<EarthBasicDataJpa> earthBasicDataJpas = this.earthBasicDataJpaRepository.findByBorrowFromBetween(borrowFrom, borrowTo);
 		final Set<String> set = Sets.newHashSet();
 		for (final EarthBasicDataJpa earthBasicDataJpa : earthBasicDataJpas) {
 			if (!set.contains(earthBasicDataJpa.getProjectId())) {
 				final ProjectBasicDataJpa projectBasicDataJpa = this.projectBasicDataJpaRepository.findByProjectId(earthBasicDataJpa.getProjectId());
-				if (projectBasicDataJpa != null && projectBasicDataJpa.getDivision().equals(division)) {
+				if (projectBasicDataJpa != null) {
 					projectBasicDataJpas.add(projectBasicDataJpa);
 				}
 				set.add(earthBasicDataJpa.getProjectId());
 			}
 		}
 
-		// 2nd: by focusStatus,<br>
-		// =null:non about focusStatus,<br>
-		// ='':focusStatus not marked,<br>
-		// ='other str':focusStatus equals it
-		if (focusStatus != null) {
-			final List<ProjectBasicDataJpa> projectBasicDataJpasTmp = Lists.newArrayList(projectBasicDataJpas);
-			projectBasicDataJpas.clear();
-			for (final ProjectBasicDataJpa projectBasicDataJpa : projectBasicDataJpasTmp) {
-				final ProjectTagJpa projectTagJpa = this.projectTagJpaRepository.findByProjectId(projectBasicDataJpa.getProjectId());
-				if (projectTagJpa == null && focusStatus.length() == 0) {
-					projectBasicDataJpas.add(projectBasicDataJpa);
-				} else if (projectTagJpa != null && focusStatus.length() >= 0 && focusStatus.equals(projectTagJpa.getFocusStatus())) {
-					projectBasicDataJpas.add(projectBasicDataJpa);
-				}
-			}
-		}
-
-		// 3rd: filter by onlyResidential
-		if (onlyResidential) {
-			final List<ProjectBasicDataJpa> projectBasicDataJpasTmp = Lists.newArrayList(projectBasicDataJpas);
-			projectBasicDataJpas.clear();
-			for (final ProjectBasicDataJpa projectBasicDataJpa : projectBasicDataJpasTmp) {
-				final PreSellLicenseDataJpa preSellLicenseDataJpa = this.preSellLicenseDataJpaRepository
-						.findByPreSellLicenseId(projectBasicDataJpa.getPreSellLicenseId());
-				if (preSellLicenseDataJpa == null /* loose restriction */ || preSellLicenseDataJpa.getDistributeOfResidentialCount() > 0) {
-					projectBasicDataJpas.add(projectBasicDataJpa);
-				}
-			}
-		}
-
 		return this.getFullProjectData(projectBasicDataJpas);
 	}
 
-	@RequestMapping(value = "/getAllFocusStatuses", produces = "application/json")
-	public Object getAllFocusStatuses() {
-		return this.projectTagJpaRepository.findDistinctFocusStatus();
-	}
 }

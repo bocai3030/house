@@ -24,7 +24,7 @@ import com.google.common.collect.Lists;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/internal/jpa/commonQuery")
-public class CommonQueryController {
+public class CommonQueryJpaController {
 	@Autowired
 	private ProjectBasicDataJpaRepository projectBasicDataJpaRepository;
 	@Autowired
