@@ -11,6 +11,6 @@ public interface ProjectTagJpaRepository extends JpaRepository<ProjectTagJpa, In
 
 	List<ProjectTagJpa> findByFocusStatusLike(String focusStatusLike);
 
-	@Query("SELECT DISTINCT focusStatus from ProjectTag")
+	@Query("SELECT DISTINCT focusStatus from ProjectTagJpa")
 	List<String> findDistinctFocusStatus();
 }
