@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 @JsonAutoDetect
 @Entity
 @Table(name = "earth_basic_data")
-public class EarthBasicData extends AbstractJpaBean implements Serializable {
+public class EarthBasicDataJpa extends AbstractJpaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String earthLicenseId; // 国土证号ID
 	protected String projectId;
@@ -63,8 +63,8 @@ public class EarthBasicData extends AbstractJpaBean implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (obj instanceof EarthBasicData) {
-			final EarthBasicData anObject = (EarthBasicData) obj;
+		if (obj instanceof EarthBasicDataJpa) {
+			final EarthBasicDataJpa anObject = (EarthBasicDataJpa) obj;
 			if (ObjectUtils.nullSafeEquals(this.earthLicenseId, anObject.getEarthLicenseId())
 					&& ObjectUtils.nullSafeEquals(this.projectId, anObject.getProjectId())
 					&& ObjectUtils.nullSafeEquals(this.earthLicenseNo, anObject.getEarthLicenseNo())
@@ -84,7 +84,7 @@ public class EarthBasicData extends AbstractJpaBean implements Serializable {
 		return false;
 	}
 
-	public void fromObj(final EarthBasicData theObj) {
+	public void fromObj(final EarthBasicDataJpa theObj) {
 		// this.earthLicenseId = theObj.earthLicenseId; // NO ID
 		this.projectId = theObj.projectId;
 		this.earthLicenseNo = theObj.earthLicenseNo;

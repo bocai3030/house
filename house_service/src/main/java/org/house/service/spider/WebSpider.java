@@ -17,7 +17,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.house.db.entity.jpa.EarthBasicData;
+import org.house.db.entity.jpa.EarthBasicDataJpa;
 import org.house.db.entity.jpa.PreSellLicenseDataJpa;
 import org.house.db.entity.jpa.ProjectBasicDataJpa;
 import org.house.util.Utils;
@@ -422,7 +422,7 @@ public class WebSpider {
 		return preSellLicenseDataJpa;
 	}
 
-	public static EarthBasicData getEarthBasicData(final String countryName, final String countryId, final String queryCountryId, final int flag)
+	public static EarthBasicDataJpa getEarthBasicData(final String countryName, final String countryId, final String queryCountryId, final int flag)
 			throws UnsupportedEncodingException {
 		final HttpPost httpPost = new HttpPost("http://www.laho.gov.cn/g4cdata/search/project/country.jsp");
 		setAjaxRequestHeader(httpPost);
@@ -439,8 +439,8 @@ public class WebSpider {
 			return null;
 		}
 
-		final EarthBasicData earthBasicData = new EarthBasicData();
-		earthBasicData.setEarthLicenseId(queryCountryId);
+		final EarthBasicDataJpa earthBasicDataJpa = new EarthBasicDataJpa();
+		earthBasicDataJpa.setEarthLicenseId(queryCountryId);
 
 		final String tag1 = "国土证号";
 		final String tag2 = "tab_style01_td\">";
@@ -451,37 +451,37 @@ public class WebSpider {
 		final int idx2 = content.indexOf(tag2, idx1 + tag1.length());
 		final int idx3 = content.indexOf(tag3, idx2 + tag2.length());
 		final String earthLicenseNo = content.substring(idx2 + tag2.length(), idx3);
-		earthBasicData.setEarthLicenseNo(earthLicenseNo);
+		earthBasicDataJpa.setEarthLicenseNo(earthLicenseNo);
 
 		final int idx4 = content.indexOf(tag2, idx3 + tag3.length());
 		final int idx5 = content.indexOf(tag3, idx4 + tag2.length());
 		final String location = content.substring(idx4 + tag2.length(), idx5);
-		earthBasicData.setLocation(location);
+		earthBasicDataJpa.setLocation(location);
 
 		final int idx6 = content.indexOf(tag2, idx5 + tag3.length());
 		final int idx7 = content.indexOf(tag3, idx6 + tag2.length());
 		final String userr = content.substring(idx6 + tag2.length(), idx7);
-		earthBasicData.setUserr(userr);
+		earthBasicDataJpa.setUserr(userr);
 
 		final int idx8 = content.indexOf(tag2, idx7 + tag3.length());
 		final int idx9 = content.indexOf(tag3, idx8 + tag2.length());
 		final String earthNo = content.substring(idx8 + tag2.length(), idx9);
-		earthBasicData.setEarthNo(earthNo);
+		earthBasicDataJpa.setEarthNo(earthNo);
 
 		final int idx10 = content.indexOf(tag2, idx9 + tag3.length());
 		final int idx11 = content.indexOf(tag3, idx10 + tag2.length());
 		final String graphNo = content.substring(idx10 + tag2.length(), idx11);
-		earthBasicData.setGraphNo(graphNo);
+		earthBasicDataJpa.setGraphNo(graphNo);
 
 		final int idx12 = content.indexOf(tag2, idx11 + tag3.length());
 		final int idx13 = content.indexOf(tag3, idx12 + tag2.length());
 		final String usagee = content.substring(idx12 + tag2.length(), idx13);
-		earthBasicData.setUsagee(usagee);
+		earthBasicDataJpa.setUsagee(usagee);
 
 		final int idx14 = content.indexOf(tag2, idx13 + tag3.length());
 		final int idx15 = content.indexOf(tag3, idx14 + tag2.length());
 		final String levell = content.substring(idx14 + tag2.length(), idx15);
-		earthBasicData.setLevell(levell);
+		earthBasicDataJpa.setLevell(levell);
 
 		final int idx16 = content.indexOf(tag2, idx15 + tag3.length());
 		final int idx17 = content.indexOf(tag3, idx16 + tag2.length());
@@ -492,27 +492,27 @@ public class WebSpider {
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
-		earthBasicData.setBorrowFrom(bfDate);
+		earthBasicDataJpa.setBorrowFrom(bfDate);
 
 		final int idx18 = content.indexOf(tag2, idx17 + tag3.length());
 		final int idx19 = content.indexOf(tag3, idx18 + tag2.length());
 		final String useRightKind = content.substring(idx18 + tag2.length(), idx19);
-		earthBasicData.setUseRightKind(useRightKind);
+		earthBasicDataJpa.setUseRightKind(useRightKind);
 
 		final int idx20 = content.indexOf(tag2, idx19 + tag3.length());
 		final int idx21 = content.indexOf(tag3, idx20 + tag2.length());
 		final String useArea = content.substring(idx20 + tag2.length(), idx21);
-		earthBasicData.setUseArea(useArea);
+		earthBasicDataJpa.setUseArea(useArea);
 
 		final int idx22 = content.indexOf(tag2, idx21 + tag3.length());
 		final int idx23 = content.indexOf(tag3, idx22 + tag2.length());
 		final String shareArea = content.substring(idx22 + tag2.length(), idx23);
-		earthBasicData.setShareArea(shareArea);
+		earthBasicDataJpa.setShareArea(shareArea);
 
 		final int idx24 = content.indexOf(tag2, idx23 + tag3.length());
 		final int idx25 = content.indexOf(tag3, idx24 + tag2.length());
 		final String licenseOffice = content.substring(idx24 + tag2.length(), idx25);
-		earthBasicData.setLicenseOffice(licenseOffice);
+		earthBasicDataJpa.setLicenseOffice(licenseOffice);
 
 		final int idx26 = content.indexOf(tag2, idx25 + tag3.length());
 		final int idx27 = content.indexOf(tag3, idx26 + tag2.length());
@@ -523,9 +523,9 @@ public class WebSpider {
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
-		earthBasicData.setLicenseIssueDate(lidDate);
+		earthBasicDataJpa.setLicenseIssueDate(lidDate);
 
-		return earthBasicData;
+		return earthBasicDataJpa;
 	}
 
 	public static ProjectBasicDataJpa getProjectBasicData(final String projectId) throws UnsupportedEncodingException {

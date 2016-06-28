@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.house.db.entity.jpa.EarthBasicData;
+import org.house.db.entity.jpa.EarthBasicDataJpa;
 import org.house.db.entity.jpa.PreSellLicenseDataJpa;
 import org.house.db.entity.jpa.ProjectBasicDataJpa;
-import org.house.db.repository.jpa.EarthBasicDataRepository;
+import org.house.db.repository.jpa.EarthBasicDataJpaRepository;
 import org.house.db.repository.jpa.PreSellLicenseDataJpaRepository;
 import org.house.db.repository.jpa.ProjectBasicDataJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class SimpleQueryController {
 	@Autowired
 	private PreSellLicenseDataJpaRepository preSellLicenseDataJpaRepository;
 	@Autowired
-	private EarthBasicDataRepository earthBasicDataRepository;
+	private EarthBasicDataJpaRepository earthBasicDataJpaRepository;
 
 	private Object getFullProjectData(final List<ProjectBasicDataJpa> projectBasicDataJpas) {
 		final List<Map<String, Object>> reList = Lists.newArrayList();
@@ -45,19 +45,19 @@ public class SimpleQueryController {
 			final PreSellLicenseDataJpa preSellLicenseDataJpa = this.preSellLicenseDataJpaRepository
 					.findByPreSellLicenseId(projectBasicDataJpa.getPreSellLicenseId());
 
-			final List<EarthBasicData> earthBasicDatas = Lists.newArrayList();
+			final List<EarthBasicDataJpa> earthBasicDataJpas = Lists.newArrayList();
 			final String[] earthLicenseIds = projectBasicDataJpa.getCountryId().split(",");
 			for (int i = 0; i < earthLicenseIds.length; i++) {
 				if (!Strings.isNullOrEmpty(earthLicenseIds[i])) {
-					final EarthBasicData earthBasicData = this.earthBasicDataRepository.findByEarthLicenseId(earthLicenseIds[i]);
-					earthBasicDatas.add(earthBasicData);
+					final EarthBasicDataJpa earthBasicDataJpa = this.earthBasicDataJpaRepository.findByEarthLicenseId(earthLicenseIds[i]);
+					earthBasicDataJpas.add(earthBasicDataJpa);
 				}
 			}
 
 			final Map<String, Object> re = Maps.newHashMap();
 			re.put("projectBasicData", projectBasicDataJpa);
 			re.put("preSellLicenseData", preSellLicenseDataJpa);
-			re.put("earthBasicDatas", earthBasicDatas);
+			re.put("earthBasicDatas", earthBasicDataJpas);
 
 			reList.add(re);
 		}
@@ -122,15 +122,15 @@ public class SimpleQueryController {
 
 		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
 
-		final List<EarthBasicData> earthBasicDatas = this.earthBasicDataRepository.findByBorrowFromBetween(borrowFrom, borrowTo);
+		final List<EarthBasicDataJpa> earthBasicDataJpas = this.earthBasicDataJpaRepository.findByBorrowFromBetween(borrowFrom, borrowTo);
 		final Set<String> set = Sets.newHashSet();
-		for (final EarthBasicData earthBasicData : earthBasicDatas) {
-			if (!set.contains(earthBasicData.getProjectId())) {
-				final ProjectBasicDataJpa projectBasicDataJpa = this.projectBasicDataJpaRepository.findByProjectId(earthBasicData.getProjectId());
+		for (final EarthBasicDataJpa earthBasicDataJpa : earthBasicDataJpas) {
+			if (!set.contains(earthBasicDataJpa.getProjectId())) {
+				final ProjectBasicDataJpa projectBasicDataJpa = this.projectBasicDataJpaRepository.findByProjectId(earthBasicDataJpa.getProjectId());
 				if (projectBasicDataJpa != null) {
 					projectBasicDataJpas.add(projectBasicDataJpa);
 				}
-				set.add(earthBasicData.getProjectId());
+				set.add(earthBasicDataJpa.getProjectId());
 			}
 		}
 

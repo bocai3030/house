@@ -6,7 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.client.ClientProtocolException;
-import org.house.db.entity.jpa.EarthBasicData;
+import org.house.db.entity.jpa.EarthBasicDataJpa;
 import org.house.db.entity.jpa.PreSellLicenseDataJpa;
 import org.house.db.entity.jpa.ProjectBasicDataJpa;
 import org.house.util.Utils;
@@ -40,9 +40,9 @@ public class ShellSpiderController {
 			if (!Strings.isNullOrEmpty(countryId)) {
 				final String[] countryIdAr = countryId.split(",");
 				for (int i = 0; i < countryIdAr.length; i++) {
-					final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(projectBasicDataJpa.getProjectId(), countryName,
-							countryId, countryIdAr[i], i);
-					Utils.writlnAndFlushResponse(response, "updated earthBasicData, id:" + earthBasicData.getEarthLicenseId());
+					final EarthBasicDataJpa earthBasicDataJpa = this.spiderController.updateEarthBasicData(projectBasicDataJpa.getProjectId(),
+							countryName, countryId, countryIdAr[i], i);
+					Utils.writlnAndFlushResponse(response, "updated earthBasicData, id:" + earthBasicDataJpa.getEarthLicenseId());
 				}
 			} else {
 				Utils.writlnAndFlushResponse(response, "no earthBasicData found for projectId:" + projectBasicDataJpa.getProjectId());
@@ -70,9 +70,9 @@ public class ShellSpiderController {
 		if (!Strings.isNullOrEmpty(countryId)) {
 			final String[] countryIdAr = countryId.split(",");
 			for (int i = 0; i < countryIdAr.length; i++) {
-				final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(projectId, countryName, countryId, countryIdAr[i],
-						i);
-				Utils.writlnAndFlushResponse(response, "updated earthBasicData, id:" + earthBasicData.getEarthLicenseId());
+				final EarthBasicDataJpa earthBasicDataJpa = this.spiderController.updateEarthBasicData(projectId, countryName, countryId,
+						countryIdAr[i], i);
+				Utils.writlnAndFlushResponse(response, "updated earthBasicData, id:" + earthBasicDataJpa.getEarthLicenseId());
 			}
 		} else {
 			Utils.writlnAndFlushResponse(response, "no earthBasicData found for projectId:" + projectId);
