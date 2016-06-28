@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.house.db.entity.EarthBasicData;
-import org.house.db.entity.PreSellLicenseData;
-import org.house.db.entity.ProjectBasicData;
-import org.house.db.repository.EarthBasicDataRepository;
-import org.house.db.repository.PreSellLicenseDataRepository;
-import org.house.db.repository.ProjectBasicDataRepository;
+import org.house.db.entity.jpa.EarthBasicData;
+import org.house.db.entity.jpa.PreSellLicenseData;
+import org.house.db.entity.jpa.ProjectBasicDataJpa;
+import org.house.db.repository.jpa.EarthBasicDataRepository;
+import org.house.db.repository.jpa.PreSellLicenseDataRepository;
+import org.house.db.repository.jpa.ProjectBasicDataJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,24 +29,24 @@ import com.google.common.collect.Sets;
 @RequestMapping("/api/internal/simpleQuery")
 public class SimpleQueryController {
 	@Autowired
-	private ProjectBasicDataRepository projectBasicDataRepository;
+	private ProjectBasicDataJpaRepository projectBasicDataJpaRepository;
 	@Autowired
 	private PreSellLicenseDataRepository preSellLicenseDataRepository;
 	@Autowired
 	private EarthBasicDataRepository earthBasicDataRepository;
 
-	private Object getFullProjectData(final List<ProjectBasicData> projectBasicDatas) {
+	private Object getFullProjectData(final List<ProjectBasicDataJpa> projectBasicDataJpas) {
 		final List<Map<String, Object>> reList = Lists.newArrayList();
 
-		for (final ProjectBasicData projectBasicData : projectBasicDatas) {
-			if (projectBasicData == null) {
+		for (final ProjectBasicDataJpa projectBasicDataJpa : projectBasicDataJpas) {
+			if (projectBasicDataJpa == null) {
 				continue;
 			}
 			final PreSellLicenseData preSellLicenseData = this.preSellLicenseDataRepository
-					.findByPreSellLicenseId(projectBasicData.getPreSellLicenseId());
+					.findByPreSellLicenseId(projectBasicDataJpa.getPreSellLicenseId());
 
 			final List<EarthBasicData> earthBasicDatas = Lists.newArrayList();
-			final String[] earthLicenseIds = projectBasicData.getCountryId().split(",");
+			final String[] earthLicenseIds = projectBasicDataJpa.getCountryId().split(",");
 			for (int i = 0; i < earthLicenseIds.length; i++) {
 				if (!Strings.isNullOrEmpty(earthLicenseIds[i])) {
 					final EarthBasicData earthBasicData = this.earthBasicDataRepository.findByEarthLicenseId(earthLicenseIds[i]);
@@ -55,7 +55,7 @@ public class SimpleQueryController {
 			}
 
 			final Map<String, Object> re = Maps.newHashMap();
-			re.put("projectBasicData", projectBasicData);
+			re.put("projectBasicData", projectBasicDataJpa);
 			re.put("preSellLicenseData", preSellLicenseData);
 			re.put("earthBasicDatas", earthBasicDatas);
 
@@ -67,44 +67,44 @@ public class SimpleQueryController {
 
 	@RequestMapping(value = "/getProjectDataByProjectId", produces = "application/json")
 	public Object getProjectDataByProjectId(@RequestParam(required = true) final String projectId) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		projectBasicDatas.add(this.projectBasicDataRepository.findByProjectId(projectId));
-		return this.getFullProjectData(projectBasicDatas);
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
+		projectBasicDataJpas.add(this.projectBasicDataJpaRepository.findByProjectId(projectId));
+		return this.getFullProjectData(projectBasicDataJpas);
 	}
 
 	@RequestMapping(value = "/getProjectDataByProjectNameLike", produces = "application/json")
 	public Object getProjectDataByProjectNameLike(@RequestParam(required = true) final String projectNameLike) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		projectBasicDatas.addAll(this.projectBasicDataRepository.findByProjectNameLike("%" + projectNameLike + "%"));
-		return this.getFullProjectData(projectBasicDatas);
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
+		projectBasicDataJpas.addAll(this.projectBasicDataJpaRepository.findByProjectNameLike("%" + projectNameLike + "%"));
+		return this.getFullProjectData(projectBasicDataJpas);
 	}
 
 	@RequestMapping(value = "/getProjectDataByPreSellLicenseId", produces = "application/json")
 	public Object getProjectDataByPreSellLicenseId(@RequestParam(required = true) final String preSellLicenseId) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		projectBasicDatas.add(this.projectBasicDataRepository.findByPreSellLicenseId(preSellLicenseId));
-		return this.getFullProjectData(projectBasicDatas);
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
+		projectBasicDataJpas.add(this.projectBasicDataJpaRepository.findByPreSellLicenseId(preSellLicenseId));
+		return this.getFullProjectData(projectBasicDataJpas);
 	}
 
 	@RequestMapping(value = "/getProjectDataByProjectAddressLike", produces = "application/json")
 	public Object getProjectDataByProjectAddressLike(@RequestParam(required = true) final String projectAddressLike) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		projectBasicDatas.addAll(this.projectBasicDataRepository.findByProjectAddressLike("%" + projectAddressLike + "%"));
-		return this.getFullProjectData(projectBasicDatas);
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
+		projectBasicDataJpas.addAll(this.projectBasicDataJpaRepository.findByProjectAddressLike("%" + projectAddressLike + "%"));
+		return this.getFullProjectData(projectBasicDataJpas);
 	}
 
 	@RequestMapping(value = "/getProjectDataByDeveloperLike", produces = "application/json")
 	public Object getProjectDataByDeveloperLike(@RequestParam(required = true) final String developerLike) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		projectBasicDatas.addAll(this.projectBasicDataRepository.findByDeveloperLike("%" + developerLike + "%"));
-		return this.getFullProjectData(projectBasicDatas);
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
+		projectBasicDataJpas.addAll(this.projectBasicDataJpaRepository.findByDeveloperLike("%" + developerLike + "%"));
+		return this.getFullProjectData(projectBasicDataJpas);
 	}
 
 	@RequestMapping(value = "/getProjectDataByDivision", produces = "application/json")
 	public Object getProjectDataByDivision(@RequestParam(required = true, defaultValue = "番禺区") final String division) {
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
-		projectBasicDatas.addAll(this.projectBasicDataRepository.findByDivision(division));
-		return this.getFullProjectData(projectBasicDatas);
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
+		projectBasicDataJpas.addAll(this.projectBasicDataJpaRepository.findByDivision(division));
+		return this.getFullProjectData(projectBasicDataJpas);
 	}
 
 	@RequestMapping(value = "/getProjectDataByEarthBorrowFromBetween", produces = "application/json")
@@ -120,21 +120,21 @@ public class SimpleQueryController {
 		} catch (final Exception e) {
 		}
 
-		final List<ProjectBasicData> projectBasicDatas = Lists.newArrayList();
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = Lists.newArrayList();
 
 		final List<EarthBasicData> earthBasicDatas = this.earthBasicDataRepository.findByBorrowFromBetween(borrowFrom, borrowTo);
 		final Set<String> set = Sets.newHashSet();
 		for (final EarthBasicData earthBasicData : earthBasicDatas) {
 			if (!set.contains(earthBasicData.getProjectId())) {
-				final ProjectBasicData projectBasicData = this.projectBasicDataRepository.findByProjectId(earthBasicData.getProjectId());
-				if (projectBasicData != null) {
-					projectBasicDatas.add(projectBasicData);
+				final ProjectBasicDataJpa projectBasicDataJpa = this.projectBasicDataJpaRepository.findByProjectId(earthBasicData.getProjectId());
+				if (projectBasicDataJpa != null) {
+					projectBasicDataJpas.add(projectBasicDataJpa);
 				}
 				set.add(earthBasicData.getProjectId());
 			}
 		}
 
-		return this.getFullProjectData(projectBasicDatas);
+		return this.getFullProjectData(projectBasicDataJpas);
 	}
 
 }

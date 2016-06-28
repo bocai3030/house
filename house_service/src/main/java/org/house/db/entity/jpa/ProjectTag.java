@@ -1,4 +1,4 @@
-package org.house.db.entity;
+package org.house.db.entity.jpa;
 
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @JsonAutoDetect
 @Entity
 @Table(name = "project_tag")
-public class ProjectTag extends AbstractDbBean implements Serializable {
+public class ProjectTag extends AbstractJpaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@NotNull
 	protected String projectId; // 项目ID

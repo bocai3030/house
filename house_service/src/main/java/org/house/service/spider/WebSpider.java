@@ -17,9 +17,9 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.house.db.entity.EarthBasicData;
-import org.house.db.entity.PreSellLicenseData;
-import org.house.db.entity.ProjectBasicData;
+import org.house.db.entity.jpa.EarthBasicData;
+import org.house.db.entity.jpa.PreSellLicenseData;
+import org.house.db.entity.jpa.ProjectBasicDataJpa;
 import org.house.util.Utils;
 
 import com.google.common.collect.Lists;
@@ -77,7 +77,7 @@ public class WebSpider {
 				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"));
 	}
 
-	public static List<ProjectBasicData> getProjectBasicData(final int page) throws UnsupportedEncodingException {
+	public static List<ProjectBasicDataJpa> getProjectBasicData(final int page) throws UnsupportedEncodingException {
 		final HttpPost httpPost = new HttpPost("http://www.laho.gov.cn/g4cdata/search/laho/preSellSearch.jsp");
 		setRequestHeader(httpPost, "http://www.laho.gov.cn/g4cdata/search/laho/preSellSearch.jsp");
 
@@ -99,11 +99,11 @@ public class WebSpider {
 
 		httpPost.setEntity(entity);
 
-		final List<ProjectBasicData> earthBasicDatas = Lists.<ProjectBasicData>newArrayList();
+		final List<ProjectBasicDataJpa> earthBasicDataJpas = Lists.<ProjectBasicDataJpa>newArrayList();
 
 		final String content = doHttpRequest(httpPost);
 		if (content == null) {
-			return earthBasicDatas;
+			return earthBasicDataJpas;
 		}
 
 		int idx = 0;
@@ -119,7 +119,7 @@ public class WebSpider {
 				break;
 			}
 
-			final ProjectBasicData projectBasicData = new ProjectBasicData();
+			final ProjectBasicDataJpa projectBasicDataJpa = new ProjectBasicDataJpa();
 
 			final int idx2 = content.indexOf(tag1, idx1);
 
@@ -151,24 +151,24 @@ public class WebSpider {
 			idx = content.indexOf(tag, idx + tag.length());
 			idx = idx + tag.length();
 
-			projectBasicData.setProjectId(projectId);
-			projectBasicData.setPreSellLicenseId(preSellLicenseId);
-			projectBasicData.setProjectName(projectName);
-			projectBasicData.setDeveloper(developer);
+			projectBasicDataJpa.setProjectId(projectId);
+			projectBasicDataJpa.setPreSellLicenseId(preSellLicenseId);
+			projectBasicDataJpa.setProjectName(projectName);
+			projectBasicDataJpa.setDeveloper(developer);
 
-			fullFillProjectDetailData(projectBasicData);
-			fullFillProjectLicenceIdData(projectBasicData);
+			fullFillProjectDetailData(projectBasicDataJpa);
+			fullFillProjectLicenceIdData(projectBasicDataJpa);
 
-			earthBasicDatas.add(projectBasicData);
+			earthBasicDataJpas.add(projectBasicDataJpa);
 		}
 
-		return earthBasicDatas;
+		return earthBasicDataJpas;
 	}
 
-	private static void fullFillProjectLicenceIdData(final ProjectBasicData projectBasicData) {
+	private static void fullFillProjectLicenceIdData(final ProjectBasicDataJpa projectBasicDataJpa) {
 		final HttpGet httpGet = new HttpGet(
 				"http://www.laho.gov.cn/g4cdata/search/laho/project_detail.jsp?changeproInfoTag=0&changePreSellTag=1&preSell="
-						+ projectBasicData.getPreSellLicenseId() + "&pjID=" + projectBasicData.getProjectId() + "&name=ysz");
+						+ projectBasicDataJpa.getPreSellLicenseId() + "&pjID=" + projectBasicDataJpa.getProjectId() + "&name=ysz");
 		setAjaxRequestHeader(httpGet);
 
 		final String content = doHttpRequest(httpGet);
@@ -190,38 +190,38 @@ public class WebSpider {
 		final int idx2 = content.indexOf(tag7, idx1 + tag3.length());
 		final String[] countryStr = content.substring(idx1 + tag3.length(), idx2).split(tag0);
 		if (countryStr.length == 2) { // 目前发现有可能没有国土证信息
-			projectBasicData.setCountryName(countryStr[0]);
-			projectBasicData.setCountryId(countryStr[1]);
+			projectBasicDataJpa.setCountryName(countryStr[0]);
+			projectBasicDataJpa.setCountryId(countryStr[1]);
 		} else {
-			projectBasicData.setCountryName("");
-			projectBasicData.setCountryId("");
+			projectBasicDataJpa.setCountryName("");
+			projectBasicDataJpa.setCountryId("");
 		}
 
 		final int idx3 = content.indexOf(tag4, idx2 + tag7.length());
 		final int idx4 = content.indexOf(tag7, idx3 + tag4.length());
 		final String[] agreeStr = content.substring(idx3 + tag4.length(), idx4).split(tag1);
 		if (agreeStr.length == 2) { // 目前发现有可能没有施工许可证信息
-			projectBasicData.setAgreeName(agreeStr[0]);
-			projectBasicData.setAgreeId(agreeStr[1]);
+			projectBasicDataJpa.setAgreeName(agreeStr[0]);
+			projectBasicDataJpa.setAgreeId(agreeStr[1]);
 		} else {
-			projectBasicData.setAgreeName("");
-			projectBasicData.setAgreeId("");
+			projectBasicDataJpa.setAgreeName("");
+			projectBasicDataJpa.setAgreeId("");
 		}
 		final int idx5 = content.indexOf(tag5, idx4 + tag7.length());
 		final int idx6 = content.indexOf(tag8, idx5 + tag5.length());
 		final String[] layoutStr = content.substring(idx5 + tag5.length(), idx6).split(tag2);
-		projectBasicData.setLayoutName(layoutStr[0]);
-		projectBasicData.setLayoutId(layoutStr[1]);
+		projectBasicDataJpa.setLayoutName(layoutStr[0]);
+		projectBasicDataJpa.setLayoutId(layoutStr[1]);
 
 		final int idx7 = content.indexOf(tag6, idx6 + tag8.length());
 		final int idx8 = content.indexOf(tag7, idx7 + tag6.length());
 		final String[] str = content.substring(idx7 + tag6.length(), idx8).split("&");
-		projectBasicData.setDeveloperId(str[1].split("=")[1]);
-		projectBasicData.setSectionId(str[2].split("=")[1]);
+		projectBasicDataJpa.setDeveloperId(str[1].split("=")[1]);
+		projectBasicDataJpa.setSectionId(str[2].split("=")[1]);
 	}
 
-	private static void fullFillProjectDetailData(final ProjectBasicData projectBasicData) {
-		final HttpGet httpGet = new HttpGet("http://www.laho.gov.cn/g4cdata/search/laho/project.jsp?pjID=" + projectBasicData.getProjectId());
+	private static void fullFillProjectDetailData(final ProjectBasicDataJpa projectBasicDataJpa) {
+		final HttpGet httpGet = new HttpGet("http://www.laho.gov.cn/g4cdata/search/laho/project.jsp?pjID=" + projectBasicDataJpa.getProjectId());
 		setAjaxRequestHeader(httpGet);
 
 		final String content = doHttpRequest(httpGet);
@@ -236,34 +236,34 @@ public class WebSpider {
 		final int idx2 = content.indexOf(tag2, idx1 + tag1.length());
 		final int idx3 = content.indexOf(tag3, idx2 + tag2.length());
 		final String projectAddress = content.substring(idx2 + tag2.length(), idx3);
-		projectBasicData.setProjectAddress(projectAddress);
+		projectBasicDataJpa.setProjectAddress(projectAddress);
 
 		final int idx4 = content.indexOf(tag2, idx3); // 开发商
 
 		final int idx5 = content.indexOf(tag2, idx4 + tag2.length());// 行政区划
 		final int idx6 = content.indexOf(tag3, idx5 + tag2.length());
 		final String division = content.substring(idx5 + tag2.length(), idx6);
-		projectBasicData.setDivision(division);
+		projectBasicDataJpa.setDivision(division);
 
 		final int idx7 = content.indexOf(tag2, idx6 + tag3.length());// 占地面积
 		final int idx8 = content.indexOf(tag3, idx7 + tag2.length());
 		final String totalCostArea = content.substring(idx7 + tag2.length(), idx8);
-		projectBasicData.setTotalCostArea(totalCostArea);
+		projectBasicDataJpa.setTotalCostArea(totalCostArea);
 
 		final int idx9 = content.indexOf(tag2, idx8 + tag3.length());// 总建筑面积
 		final int idx10 = content.indexOf(tag3, idx9 + tag2.length());
 		final String totalBuildArea = content.substring(idx9 + tag2.length(), idx10);
-		projectBasicData.setTotalBuildArea(totalBuildArea);
+		projectBasicDataJpa.setTotalBuildArea(totalBuildArea);
 
 		final int idx11 = content.indexOf(tag2, idx10 + tag3.length());// 资质证书编号
 		final int idx12 = content.indexOf(tag3, idx11 + tag2.length());
 		final String qualificationLicenceNo = content.substring(idx11 + tag2.length(), idx12);
-		projectBasicData.setQualificationLicenceNo(qualificationLicenceNo);
+		projectBasicDataJpa.setQualificationLicenceNo(qualificationLicenceNo);
 
 		final int idx13 = content.indexOf(tag2, idx12 + tag3.length());// 用途性质
 		final int idx14 = content.indexOf(tag3, idx13 + tag2.length());
 		final String usagee = content.substring(idx13 + tag2.length(), idx14);
-		projectBasicData.setUsagee(usagee);
+		projectBasicDataJpa.setUsagee(usagee);
 	}
 
 	public static PreSellLicenseData getPreSellLicenseData(final String projectId, final String preSellLicenseId) {
@@ -528,7 +528,7 @@ public class WebSpider {
 		return earthBasicData;
 	}
 
-	public static ProjectBasicData getProjectBasicData(final String projectId) throws UnsupportedEncodingException {
+	public static ProjectBasicDataJpa getProjectBasicData(final String projectId) throws UnsupportedEncodingException {
 		final HttpGet httpGet = new HttpGet("http://www.laho.gov.cn/g4cdata/search/laho/project.jsp?pjID=" + projectId);
 		setAjaxRequestHeader(httpGet);
 
@@ -537,8 +537,8 @@ public class WebSpider {
 			return null;
 		}
 
-		final ProjectBasicData projectBasicData = new ProjectBasicData();
-		projectBasicData.setProjectId(projectId);
+		final ProjectBasicDataJpa projectBasicDataJpa = new ProjectBasicDataJpa();
+		projectBasicDataJpa.setProjectId(projectId);
 
 		final String tag2 = "tab_style01_td\">";
 		final String tag3 = "</td>";
@@ -546,50 +546,50 @@ public class WebSpider {
 		final int idx2 = content.indexOf(tag2);
 		final int idx3 = content.indexOf(tag3, idx2 + tag2.length());
 		final String projectName = content.substring(idx2 + tag2.length(), idx3);
-		projectBasicData.setProjectName(projectName);
+		projectBasicDataJpa.setProjectName(projectName);
 
 		final int idx4 = content.indexOf(tag2, idx3 + tag3.length());
 		final int idx5 = content.indexOf(tag3, idx4 + tag2.length());
 		final String preSellLicenseId2 = content.substring(idx4 + tag2.length(), idx5);
-		projectBasicData.setPreSellLicenseId(preSellLicenseId2);
+		projectBasicDataJpa.setPreSellLicenseId(preSellLicenseId2);
 
-		fullFillProjectLicenceIdData(projectBasicData);
+		fullFillProjectLicenceIdData(projectBasicDataJpa);
 
 		final int idx6 = content.indexOf(tag2, idx5 + tag3.length());
 		final int idx7 = content.indexOf(tag3, idx6 + tag2.length());
 		final String projectAddress = content.substring(idx6 + tag2.length(), idx7);
-		projectBasicData.setProjectAddress(projectAddress);
+		projectBasicDataJpa.setProjectAddress(projectAddress);
 
 		final int idx8 = content.indexOf(tag2, idx7 + tag3.length());
 		final int idx9 = content.indexOf(tag3, idx8 + tag2.length());
 		final String developer = content.substring(idx8 + tag2.length(), idx9);
-		projectBasicData.setDeveloper(developer);
+		projectBasicDataJpa.setDeveloper(developer);
 
 		final int idx10 = content.indexOf(tag2, idx9 + tag2.length());
 		final int idx11 = content.indexOf(tag3, idx10 + tag2.length());
 		final String division = content.substring(idx10 + tag2.length(), idx11);
-		projectBasicData.setDivision(division);
+		projectBasicDataJpa.setDivision(division);
 
 		final int idx12 = content.indexOf(tag2, idx11 + tag3.length());
 		final int idx13 = content.indexOf(tag3, idx12 + tag2.length());
 		final String totalCostArea = content.substring(idx12 + tag2.length(), idx13);
-		projectBasicData.setTotalCostArea(totalCostArea);
+		projectBasicDataJpa.setTotalCostArea(totalCostArea);
 
 		final int idx14 = content.indexOf(tag2, idx13 + tag3.length());
 		final int idx15 = content.indexOf(tag3, idx14 + tag2.length());
 		final String totalBuildArea = content.substring(idx14 + tag2.length(), idx15);
-		projectBasicData.setTotalBuildArea(totalBuildArea);
+		projectBasicDataJpa.setTotalBuildArea(totalBuildArea);
 
 		final int idx16 = content.indexOf(tag2, idx15 + tag3.length());
 		final int idx17 = content.indexOf(tag3, idx16 + tag2.length());
 		final String qualificationLicenceNo = content.substring(idx16 + tag2.length(), idx17);
-		projectBasicData.setQualificationLicenceNo(qualificationLicenceNo);
+		projectBasicDataJpa.setQualificationLicenceNo(qualificationLicenceNo);
 
 		final int idx18 = content.indexOf(tag2, idx17 + tag3.length());
 		final int idx19 = content.indexOf(tag3, idx18 + tag2.length());
 		final String usagee = content.substring(idx18 + tag2.length(), idx19);
-		projectBasicData.setUsagee(usagee);
+		projectBasicDataJpa.setUsagee(usagee);
 
-		return projectBasicData;
+		return projectBasicDataJpa;
 	}
 }

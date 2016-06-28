@@ -3,12 +3,12 @@ package org.house.service.spider;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import org.house.db.entity.EarthBasicData;
-import org.house.db.entity.PreSellLicenseData;
-import org.house.db.entity.ProjectBasicData;
-import org.house.db.repository.EarthBasicDataRepository;
-import org.house.db.repository.PreSellLicenseDataRepository;
-import org.house.db.repository.ProjectBasicDataRepository;
+import org.house.db.entity.jpa.EarthBasicData;
+import org.house.db.entity.jpa.PreSellLicenseData;
+import org.house.db.entity.jpa.ProjectBasicDataJpa;
+import org.house.db.repository.jpa.EarthBasicDataRepository;
+import org.house.db.repository.jpa.PreSellLicenseDataRepository;
+import org.house.db.repository.jpa.ProjectBasicDataJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,44 +18,45 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/spider")
 public class SpiderController {
 	@Autowired
-	private ProjectBasicDataRepository projectBasicDataRepository;
+	private ProjectBasicDataJpaRepository projectBasicDataJpaRepository;
 	@Autowired
 	private PreSellLicenseDataRepository preSellLicenseDataRepository;
 	@Autowired
 	private EarthBasicDataRepository earthBasicDataRepository;
 
 	@RequestMapping(value = "/updateProjectBasicData", produces = "application/json")
-	public ProjectBasicData updateProjectBasicData(final String projectId) throws UnsupportedEncodingException {
-		final ProjectBasicData projectBasicData = WebSpider.getProjectBasicData(projectId);
+	public ProjectBasicDataJpa updateProjectBasicData(final String projectId) throws UnsupportedEncodingException {
+		final ProjectBasicDataJpa projectBasicDataJpa = WebSpider.getProjectBasicData(projectId);
 
-		final ProjectBasicData projectBasicDataInDb = this.projectBasicDataRepository.findByProjectId(projectBasicData.getProjectId());
-		if (projectBasicDataInDb == null) {
-			this.projectBasicDataRepository.save(projectBasicData);
-		} else if (!projectBasicDataInDb.equals(projectBasicData)) {
-			projectBasicDataInDb.fromObj(projectBasicData);
-			this.projectBasicDataRepository.save(projectBasicDataInDb);
+		final ProjectBasicDataJpa projectBasicDataJpaInDb = this.projectBasicDataJpaRepository.findByProjectId(projectBasicDataJpa.getProjectId());
+		if (projectBasicDataJpaInDb == null) {
+			this.projectBasicDataJpaRepository.save(projectBasicDataJpa);
+		} else if (!projectBasicDataJpaInDb.equals(projectBasicDataJpa)) {
+			projectBasicDataJpaInDb.fromObj(projectBasicDataJpa);
+			this.projectBasicDataJpaRepository.save(projectBasicDataJpaInDb);
 		} else {
 		}
 
-		return projectBasicData;
+		return projectBasicDataJpa;
 	}
 
 	@RequestMapping(value = "/updateProjectBasicDataByPage", produces = "application/json")
-	public List<ProjectBasicData> updateProjectBasicDataByPage(final int page) throws UnsupportedEncodingException {
-		final List<ProjectBasicData> projectBasicDatas = WebSpider.getProjectBasicData(page);
+	public List<ProjectBasicDataJpa> updateProjectBasicDataByPage(final int page) throws UnsupportedEncodingException {
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = WebSpider.getProjectBasicData(page);
 
-		for (final ProjectBasicData projectBasicData : projectBasicDatas) {
-			final ProjectBasicData projectBasicDataInDb = this.projectBasicDataRepository.findByProjectId(projectBasicData.getProjectId());
-			if (projectBasicDataInDb == null) {
-				this.projectBasicDataRepository.save(projectBasicData);
-			} else if (!projectBasicDataInDb.equals(projectBasicData)) {
-				projectBasicDataInDb.fromObj(projectBasicData);
-				this.projectBasicDataRepository.save(projectBasicDataInDb);
+		for (final ProjectBasicDataJpa projectBasicDataJpa : projectBasicDataJpas) {
+			final ProjectBasicDataJpa projectBasicDataJpaInDb = this.projectBasicDataJpaRepository
+					.findByProjectId(projectBasicDataJpa.getProjectId());
+			if (projectBasicDataJpaInDb == null) {
+				this.projectBasicDataJpaRepository.save(projectBasicDataJpa);
+			} else if (!projectBasicDataJpaInDb.equals(projectBasicDataJpa)) {
+				projectBasicDataJpaInDb.fromObj(projectBasicDataJpa);
+				this.projectBasicDataJpaRepository.save(projectBasicDataJpaInDb);
 			} else {
 			}
 		}
 
-		return projectBasicDatas;
+		return projectBasicDataJpas;
 	}
 
 	@RequestMapping(value = "/updatePreSellLicenseData", produces = "application/json")

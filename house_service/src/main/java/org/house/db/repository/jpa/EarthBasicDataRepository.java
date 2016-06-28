@@ -1,9 +1,9 @@
-package org.house.db.repository;
+package org.house.db.repository.jpa;
 
 import java.util.Date;
 import java.util.List;
 
-import org.house.db.entity.EarthBasicData;
+import org.house.db.entity.jpa.EarthBasicData;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EarthBasicDataRepository extends JpaRepository<EarthBasicData, Integer> {

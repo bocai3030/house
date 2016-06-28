@@ -1,4 +1,4 @@
-package org.house.db.entity;
+package org.house.db.entity.jpa;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @JsonAutoDetect
 @Entity
 @Table(name = "project_basic_data")
-public class ProjectBasicData extends AbstractDbBean implements Serializable {
+public class ProjectBasicDataJpa extends AbstractJpaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String projectId; // 项目ID
 	protected String projectName; // 所属项目名称
@@ -50,8 +50,8 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (obj instanceof ProjectBasicData) {
-			final ProjectBasicData anObject = (ProjectBasicData) obj;
+		if (obj instanceof ProjectBasicDataJpa) {
+			final ProjectBasicDataJpa anObject = (ProjectBasicDataJpa) obj;
 			if (ObjectUtils.nullSafeEquals(this.projectId, anObject.getProjectId())
 					&& ObjectUtils.nullSafeEquals(this.projectName, anObject.getProjectName())
 					&& ObjectUtils.nullSafeEquals(this.preSellLicenseId, anObject.getPreSellLicenseId())
@@ -76,7 +76,7 @@ public class ProjectBasicData extends AbstractDbBean implements Serializable {
 		return false;
 	}
 
-	public void fromObj(final ProjectBasicData theObj) {
+	public void fromObj(final ProjectBasicDataJpa theObj) {
 		// this.projectId = theObj.projectId; // NO ID
 		this.projectName = theObj.projectName;
 		this.preSellLicenseId = theObj.preSellLicenseId;

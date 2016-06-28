@@ -1,4 +1,4 @@
-package org.house.db.entity;
+package org.house.db.entity.jpa;
 
 import java.util.Date;
 
@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 @JsonAutoDetect
 @MappedSuperclass
-public abstract class AbstractDbBean {
+public abstract class AbstractJpaBean {
 	@Id
 	@GeneratedValue()
 	@JsonIgnore

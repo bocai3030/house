@@ -1,6 +1,6 @@
 package org.house.bean.response;
 
-import org.house.db.entity.ProjectTag;
+import org.house.db.entity.jpa.ProjectTag;
 
 public class ProjectHasTag {
 	protected String projectId; // 项目ID

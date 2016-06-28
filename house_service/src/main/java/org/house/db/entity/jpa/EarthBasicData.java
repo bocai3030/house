@@ -1,4 +1,4 @@
-package org.house.db.entity;
+package org.house.db.entity.jpa;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 @JsonAutoDetect
 @Entity
 @Table(name = "earth_basic_data")
-public class EarthBasicData extends AbstractDbBean implements Serializable {
+public class EarthBasicData extends AbstractJpaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String earthLicenseId; // 国土证号ID
 	protected String projectId;

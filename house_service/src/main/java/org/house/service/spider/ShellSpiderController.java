@@ -6,9 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.client.ClientProtocolException;
-import org.house.db.entity.EarthBasicData;
-import org.house.db.entity.PreSellLicenseData;
-import org.house.db.entity.ProjectBasicData;
+import org.house.db.entity.jpa.EarthBasicData;
+import org.house.db.entity.jpa.PreSellLicenseData;
+import org.house.db.entity.jpa.ProjectBasicDataJpa;
 import org.house.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,27 +25,27 @@ public class ShellSpiderController {
 	@RequestMapping(value = "/updatePageData", produces = "text/html; charset=utf-8")
 	public void updatePageData(final int page, final HttpServletResponse response) throws ClientProtocolException, IOException {
 		response.setContentType("text/html; charset=utf-8");
-		final List<ProjectBasicData> projectBasicDatas = this.spiderController.updateProjectBasicDataByPage(page);
+		final List<ProjectBasicDataJpa> projectBasicDataJpas = this.spiderController.updateProjectBasicDataByPage(page);
 		Utils.writlnAndFlushResponse(response, "updated page " + page);
-		for (final ProjectBasicData projectBasicData : projectBasicDatas) {
+		for (final ProjectBasicDataJpa projectBasicDataJpa : projectBasicDataJpas) {
 			Utils.writlnAndFlushResponse(response,
-					"updating projectId:" + projectBasicData.getProjectId() + ", projectName:" + projectBasicData.getProjectName());
+					"updating projectId:" + projectBasicDataJpa.getProjectId() + ", projectName:" + projectBasicDataJpa.getProjectName());
 
-			final PreSellLicenseData preSellLicenseData = this.spiderController.updatePreSellLicenseData(projectBasicData.getProjectId(),
-					projectBasicData.getPreSellLicenseId());
+			final PreSellLicenseData preSellLicenseData = this.spiderController.updatePreSellLicenseData(projectBasicDataJpa.getProjectId(),
+					projectBasicDataJpa.getPreSellLicenseId());
 			Utils.writlnAndFlushResponse(response, "updated preSellLicenseData, id:" + preSellLicenseData.getPreSellLicenseId());
 
-			final String countryName = projectBasicData.getCountryName();
-			final String countryId = projectBasicData.getCountryId();
+			final String countryName = projectBasicDataJpa.getCountryName();
+			final String countryId = projectBasicDataJpa.getCountryId();
 			if (!Strings.isNullOrEmpty(countryId)) {
 				final String[] countryIdAr = countryId.split(",");
 				for (int i = 0; i < countryIdAr.length; i++) {
-					final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(projectBasicData.getProjectId(), countryName,
+					final EarthBasicData earthBasicData = this.spiderController.updateEarthBasicData(projectBasicDataJpa.getProjectId(), countryName,
 							countryId, countryIdAr[i], i);
 					Utils.writlnAndFlushResponse(response, "updated earthBasicData, id:" + earthBasicData.getEarthLicenseId());
 				}
 			} else {
-				Utils.writlnAndFlushResponse(response, "no earthBasicData found for projectId:" + projectBasicData.getProjectId());
+				Utils.writlnAndFlushResponse(response, "no earthBasicData found for projectId:" + projectBasicDataJpa.getProjectId());
 			}
 			Utils.writlnAndFlushResponse(response, "");
 		}
@@ -56,17 +56,17 @@ public class ShellSpiderController {
 		response.setContentType("text/html; charset=utf-8");
 
 		Utils.writlnAndFlushResponse(response, "updating project_basic_data " + projectId);
-		final ProjectBasicData projectBasicData = this.spiderController.updateProjectBasicData(projectId);
+		final ProjectBasicDataJpa projectBasicDataJpa = this.spiderController.updateProjectBasicData(projectId);
 
 		Utils.writlnAndFlushResponse(response,
-				"updating projectId:" + projectBasicData.getProjectId() + ", projectName:" + projectBasicData.getProjectName());
+				"updating projectId:" + projectBasicDataJpa.getProjectId() + ", projectName:" + projectBasicDataJpa.getProjectName());
 
-		final PreSellLicenseData preSellLicenseData = this.spiderController.updatePreSellLicenseData(projectBasicData.getProjectId(),
-				projectBasicData.getPreSellLicenseId());
+		final PreSellLicenseData preSellLicenseData = this.spiderController.updatePreSellLicenseData(projectBasicDataJpa.getProjectId(),
+				projectBasicDataJpa.getPreSellLicenseId());
 		Utils.writlnAndFlushResponse(response, "updated preSellLicenseData, id:" + preSellLicenseData.getPreSellLicenseId());
 
-		final String countryName = projectBasicData.getCountryName();
-		final String countryId = projectBasicData.getCountryId();
+		final String countryName = projectBasicDataJpa.getCountryName();
+		final String countryId = projectBasicDataJpa.getCountryId();
 		if (!Strings.isNullOrEmpty(countryId)) {
 			final String[] countryIdAr = countryId.split(",");
 			for (int i = 0; i < countryIdAr.length; i++) {

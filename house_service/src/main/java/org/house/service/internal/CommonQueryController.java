@@ -5,10 +5,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.house.bean.response.ProjectHasTag;
-import org.house.db.entity.ProjectBasicData;
-import org.house.db.entity.ProjectTag;
-import org.house.db.repository.ProjectBasicDataRepository;
-import org.house.db.repository.ProjectTagRepository;
+import org.house.db.entity.jpa.ProjectBasicDataJpa;
+import org.house.db.entity.jpa.ProjectTag;
+import org.house.db.repository.jpa.ProjectBasicDataJpaRepository;
+import org.house.db.repository.jpa.ProjectTagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
 @RequestMapping("/api/internal/commonQuery")
 public class CommonQueryController {
 	@Autowired
-	private ProjectBasicDataRepository projectBasicDataRepository;
+	private ProjectBasicDataJpaRepository projectBasicDataJpaRepository;
 	@Autowired
 	private ProjectTagRepository projectTagRepository;
 
@@ -58,15 +58,15 @@ public class CommonQueryController {
 			return null;
 		}
 
-		final ProjectBasicData projectBasicData = this.projectBasicDataRepository.findByProjectId(projectId);
-		if (projectBasicData == null) {
+		final ProjectBasicDataJpa projectBasicDataJpa = this.projectBasicDataJpaRepository.findByProjectId(projectId);
+		if (projectBasicDataJpa == null) {
 			return null;
 		}
 
 		final ProjectHasTag projectHasTag = new ProjectHasTag();
-		projectHasTag.setProjectId(projectBasicData.getProjectId());
-		projectHasTag.setProjectName(projectBasicData.getProjectName());
-		projectHasTag.setProjectAddress(projectBasicData.getProjectAddress());
+		projectHasTag.setProjectId(projectBasicDataJpa.getProjectId());
+		projectHasTag.setProjectName(projectBasicDataJpa.getProjectName());
+		projectHasTag.setProjectAddress(projectBasicDataJpa.getProjectAddress());
 		projectHasTag.setProjectTag(projectTag);
 		return projectHasTag;
 	}
@@ -82,15 +82,15 @@ public class CommonQueryController {
 
 		final List<ProjectHasTag> re = Lists.newArrayListWithExpectedSize(projectTags.size());
 		for (final ProjectTag projectTag : projectTags) {
-			final ProjectBasicData projectBasicData = this.projectBasicDataRepository.findByProjectId(projectTag.getProjectId());
-			if (projectBasicData == null) {
+			final ProjectBasicDataJpa projectBasicDataJpa = this.projectBasicDataJpaRepository.findByProjectId(projectTag.getProjectId());
+			if (projectBasicDataJpa == null) {
 				continue;
 			}
 
 			final ProjectHasTag projectHasTag = new ProjectHasTag();
-			projectHasTag.setProjectId(projectBasicData.getProjectId());
-			projectHasTag.setProjectName(projectBasicData.getProjectName());
-			projectHasTag.setProjectAddress(projectBasicData.getProjectAddress());
+			projectHasTag.setProjectId(projectBasicDataJpa.getProjectId());
+			projectHasTag.setProjectName(projectBasicDataJpa.getProjectName());
+			projectHasTag.setProjectAddress(projectBasicDataJpa.getProjectAddress());
 			projectHasTag.setProjectTag(projectTag);
 
 			re.add(projectHasTag);
