@@ -2,14 +2,14 @@ package org.house.db.repository.jpa;
 
 import java.util.List;
 
-import org.house.db.entity.jpa.ProjectTag;
+import org.house.db.entity.jpa.ProjectTagJpa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface ProjectTagRepository extends JpaRepository<ProjectTag, Integer> {
-	ProjectTag findByProjectId(String projectId);
+public interface ProjectTagJpaRepository extends JpaRepository<ProjectTagJpa, Integer> {
+	ProjectTagJpa findByProjectId(String projectId);
 
-	List<ProjectTag> findByFocusStatusLike(String focusStatusLike);
+	List<ProjectTagJpa> findByFocusStatusLike(String focusStatusLike);
 
 	@Query("SELECT DISTINCT focusStatus from ProjectTag")
 	List<String> findDistinctFocusStatus();

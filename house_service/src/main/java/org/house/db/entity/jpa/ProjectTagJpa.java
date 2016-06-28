@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @JsonAutoDetect
 @Entity
 @Table(name = "project_tag")
-public class ProjectTag extends AbstractJpaBean implements Serializable {
+public class ProjectTagJpa extends AbstractJpaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@NotNull
 	protected String projectId; // 项目ID
@@ -40,8 +40,8 @@ public class ProjectTag extends AbstractJpaBean implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (obj instanceof ProjectTag) {
-			final ProjectTag anObject = (ProjectTag) obj;
+		if (obj instanceof ProjectTagJpa) {
+			final ProjectTagJpa anObject = (ProjectTagJpa) obj;
 			if (ObjectUtils.nullSafeEquals(this.projectId, anObject.getProjectId())
 					&& ObjectUtils.nullSafeEquals(this.focusStatus, anObject.getFocusStatus())
 					&& ObjectUtils.nullSafeEquals(this.remark, anObject.getRemark())) {
@@ -51,7 +51,7 @@ public class ProjectTag extends AbstractJpaBean implements Serializable {
 		return false;
 	}
 
-	public void fromObj(final ProjectTag theObj) {
+	public void fromObj(final ProjectTagJpa theObj) {
 		// this.projectId = theObj.projectId; // NO ID
 		this.focusStatus = theObj.focusStatus;
 		this.remark = theObj.remark;

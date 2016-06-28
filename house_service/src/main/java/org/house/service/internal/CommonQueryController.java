@@ -6,9 +6,9 @@ import javax.validation.Valid;
 
 import org.house.bean.response.ProjectHasTag;
 import org.house.db.entity.jpa.ProjectBasicDataJpa;
-import org.house.db.entity.jpa.ProjectTag;
+import org.house.db.entity.jpa.ProjectTagJpa;
 import org.house.db.repository.jpa.ProjectBasicDataJpaRepository;
-import org.house.db.repository.jpa.ProjectTagRepository;
+import org.house.db.repository.jpa.ProjectTagJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,33 +28,33 @@ public class CommonQueryController {
 	@Autowired
 	private ProjectBasicDataJpaRepository projectBasicDataJpaRepository;
 	@Autowired
-	private ProjectTagRepository projectTagRepository;
+	private ProjectTagJpaRepository projectTagJpaRepository;
 
 	@RequestMapping(value = "/getProjectTagByProjectId", produces = "application/json")
 	public Object getProjectTagByProjectId(@RequestParam(required = true) final String projectId) {
-		return this.projectTagRepository.findByProjectId(projectId);
+		return this.projectTagJpaRepository.findByProjectId(projectId);
 	}
 
 	@RequestMapping(value = "/updateFocusStatusByProjectId", method = RequestMethod.POST, produces = "application/json")
 	public Object updateFocusStatusByProjectId(@RequestParam(required = true) final String projectId,
 			@RequestParam(required = true) final String focusStatus) {
-		ProjectTag projectTag = this.projectTagRepository.findByProjectId(projectId);
-		if (projectTag == null) {
-			projectTag = new ProjectTag();
-			projectTag.setProjectId(projectId);
-			projectTag.setFocusStatus(focusStatus);
-			projectTag.setRemark("");
-		} else if (!projectTag.getFocusStatus().equals(focusStatus)) {
-			projectTag.setFocusStatus(focusStatus);
+		ProjectTagJpa projectTagJpa = this.projectTagJpaRepository.findByProjectId(projectId);
+		if (projectTagJpa == null) {
+			projectTagJpa = new ProjectTagJpa();
+			projectTagJpa.setProjectId(projectId);
+			projectTagJpa.setFocusStatus(focusStatus);
+			projectTagJpa.setRemark("");
+		} else if (!projectTagJpa.getFocusStatus().equals(focusStatus)) {
+			projectTagJpa.setFocusStatus(focusStatus);
 		}
-		this.projectTagRepository.save(projectTag);
+		this.projectTagJpaRepository.save(projectTagJpa);
 		return ImmutableMap.<String, String>of("status", "ok");
 	}
 
 	@RequestMapping(value = "/getProjectHasTag", produces = "application/json")
 	public Object getProjectHasTag(final String projectId) {
-		final ProjectTag projectTag = this.projectTagRepository.findByProjectId(projectId);
-		if (projectTag == null) {
+		final ProjectTagJpa projectTagJpa = this.projectTagJpaRepository.findByProjectId(projectId);
+		if (projectTagJpa == null) {
 			return null;
 		}
 
@@ -67,22 +67,22 @@ public class CommonQueryController {
 		projectHasTag.setProjectId(projectBasicDataJpa.getProjectId());
 		projectHasTag.setProjectName(projectBasicDataJpa.getProjectName());
 		projectHasTag.setProjectAddress(projectBasicDataJpa.getProjectAddress());
-		projectHasTag.setProjectTag(projectTag);
+		projectHasTag.setProjectTag(projectTagJpa);
 		return projectHasTag;
 	}
 
 	@RequestMapping(value = "/getProjectHasTags", produces = "application/json")
 	public Object getProjectHasTags(final String focusStatus) {
-		List<ProjectTag> projectTags = null;
+		List<ProjectTagJpa> projectTagJpas = null;
 		if (Strings.isNullOrEmpty(focusStatus)) {
-			projectTags = this.projectTagRepository.findAll();
+			projectTagJpas = this.projectTagJpaRepository.findAll();
 		} else {
-			projectTags = this.projectTagRepository.findByFocusStatusLike("%" + focusStatus + "%");
+			projectTagJpas = this.projectTagJpaRepository.findByFocusStatusLike("%" + focusStatus + "%");
 		}
 
-		final List<ProjectHasTag> re = Lists.newArrayListWithExpectedSize(projectTags.size());
-		for (final ProjectTag projectTag : projectTags) {
-			final ProjectBasicDataJpa projectBasicDataJpa = this.projectBasicDataJpaRepository.findByProjectId(projectTag.getProjectId());
+		final List<ProjectHasTag> re = Lists.newArrayListWithExpectedSize(projectTagJpas.size());
+		for (final ProjectTagJpa projectTagJpa : projectTagJpas) {
+			final ProjectBasicDataJpa projectBasicDataJpa = this.projectBasicDataJpaRepository.findByProjectId(projectTagJpa.getProjectId());
 			if (projectBasicDataJpa == null) {
 				continue;
 			}
@@ -91,7 +91,7 @@ public class CommonQueryController {
 			projectHasTag.setProjectId(projectBasicDataJpa.getProjectId());
 			projectHasTag.setProjectName(projectBasicDataJpa.getProjectName());
 			projectHasTag.setProjectAddress(projectBasicDataJpa.getProjectAddress());
-			projectHasTag.setProjectTag(projectTag);
+			projectHasTag.setProjectTag(projectTagJpa);
 
 			re.add(projectHasTag);
 		}
@@ -100,19 +100,19 @@ public class CommonQueryController {
 	}
 
 	@RequestMapping(value = "/updateProjectTagByProjectId", method = RequestMethod.POST, produces = "application/json")
-	public Object updateProjectTagByProjectId(@RequestBody @Valid final ProjectTag newProjectTag) {
-		final String projectId = newProjectTag.getProjectId();
-		final String focusStatus = newProjectTag.getFocusStatus();
-		final String remark = newProjectTag.getRemark();
+	public Object updateProjectTagByProjectId(@RequestBody @Valid final ProjectTagJpa newProjectTagJpa) {
+		final String projectId = newProjectTagJpa.getProjectId();
+		final String focusStatus = newProjectTagJpa.getFocusStatus();
+		final String remark = newProjectTagJpa.getRemark();
 
-		ProjectTag projectTag = this.projectTagRepository.findByProjectId(projectId);
-		if (projectTag == null) {
+		ProjectTagJpa projectTagJpa = this.projectTagJpaRepository.findByProjectId(projectId);
+		if (projectTagJpa == null) {
 			if (focusStatus != null || remark != null) {
-				projectTag = new ProjectTag();
-				projectTag.setProjectId(projectId);
-				projectTag.setFocusStatus(focusStatus == null ? "" : focusStatus);
-				projectTag.setRemark(remark == null ? "" : remark);
-				this.projectTagRepository.save(projectTag);
+				projectTagJpa = new ProjectTagJpa();
+				projectTagJpa.setProjectId(projectId);
+				projectTagJpa.setFocusStatus(focusStatus == null ? "" : focusStatus);
+				projectTagJpa.setRemark(remark == null ? "" : remark);
+				this.projectTagJpaRepository.save(projectTagJpa);
 				return ImmutableMap.<String, String>of("status", "saved");
 			} else {
 				return ImmutableMap.<String, String>of("status", "not changed");
@@ -124,16 +124,16 @@ public class CommonQueryController {
 		}
 
 		boolean needSave = false;
-		if (focusStatus != null && !projectTag.getFocusStatus().equals(focusStatus)) {
-			projectTag.setFocusStatus(focusStatus);
+		if (focusStatus != null && !projectTagJpa.getFocusStatus().equals(focusStatus)) {
+			projectTagJpa.setFocusStatus(focusStatus);
 			needSave = true;
 		}
-		if (remark != null && !projectTag.getRemark().equals(remark)) {
-			projectTag.setRemark(remark);
+		if (remark != null && !projectTagJpa.getRemark().equals(remark)) {
+			projectTagJpa.setRemark(remark);
 			needSave = true;
 		}
 		if (needSave) {
-			this.projectTagRepository.save(projectTag);
+			this.projectTagJpaRepository.save(projectTagJpa);
 			return ImmutableMap.<String, String>of("status", "saved");
 		} else {
 			return ImmutableMap.<String, String>of("status", "not changed");

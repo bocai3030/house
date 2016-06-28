@@ -9,11 +9,11 @@ import java.util.Set;
 import org.house.db.entity.jpa.EarthBasicDataJpa;
 import org.house.db.entity.jpa.PreSellLicenseDataJpa;
 import org.house.db.entity.jpa.ProjectBasicDataJpa;
-import org.house.db.entity.jpa.ProjectTag;
+import org.house.db.entity.jpa.ProjectTagJpa;
 import org.house.db.repository.jpa.EarthBasicDataJpaRepository;
 import org.house.db.repository.jpa.PreSellLicenseDataJpaRepository;
 import org.house.db.repository.jpa.ProjectBasicDataJpaRepository;
-import org.house.db.repository.jpa.ProjectTagRepository;
+import org.house.db.repository.jpa.ProjectTagJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,7 +37,7 @@ public class ComplicateQueryController {
 	@Autowired
 	private EarthBasicDataJpaRepository earthBasicDataJpaRepository;
 	@Autowired
-	private ProjectTagRepository projectTagRepository;
+	private ProjectTagJpaRepository projectTagJpaRepository;
 
 	private Object getFullProjectData(final List<ProjectBasicDataJpa> projectBasicDataJpas) {
 		final List<Map<String, Object>> reList = Lists.newArrayList();
@@ -108,10 +108,10 @@ public class ComplicateQueryController {
 			final List<ProjectBasicDataJpa> projectBasicDataJpasTmp = Lists.newArrayList(projectBasicDataJpas);
 			projectBasicDataJpas.clear();
 			for (final ProjectBasicDataJpa projectBasicDataJpa : projectBasicDataJpasTmp) {
-				final ProjectTag projectTag = this.projectTagRepository.findByProjectId(projectBasicDataJpa.getProjectId());
-				if (projectTag == null && focusStatus.length() == 0) {
+				final ProjectTagJpa projectTagJpa = this.projectTagJpaRepository.findByProjectId(projectBasicDataJpa.getProjectId());
+				if (projectTagJpa == null && focusStatus.length() == 0) {
 					projectBasicDataJpas.add(projectBasicDataJpa);
-				} else if (projectTag != null && focusStatus.length() >= 0 && focusStatus.equals(projectTag.getFocusStatus())) {
+				} else if (projectTagJpa != null && focusStatus.length() >= 0 && focusStatus.equals(projectTagJpa.getFocusStatus())) {
 					projectBasicDataJpas.add(projectBasicDataJpa);
 				}
 			}
@@ -135,6 +135,6 @@ public class ComplicateQueryController {
 
 	@RequestMapping(value = "/getAllFocusStatuses", produces = "application/json")
 	public Object getAllFocusStatuses() {
-		return this.projectTagRepository.findDistinctFocusStatus();
+		return this.projectTagJpaRepository.findDistinctFocusStatus();
 	}
 }
