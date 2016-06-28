@@ -1,4 +1,4 @@
-package org.house.service.internal;
+package org.house.service.internal.jpa;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +28,7 @@ import com.google.common.collect.Sets;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/internal/complicateQuery")
+@RequestMapping("/api/internal/jpa/complicateQuery")
 public class ComplicateQueryController {
 	@Autowired
 	private ProjectBasicDataJpaRepository projectBasicDataJpaRepository;

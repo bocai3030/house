@@ -2,25 +2,25 @@
 angular.module('adminApp').factory('CommonQueryService', function ($resource, ENV) {
     return $resource(ENV.apiUrl, {}, {
         'getProjectTagByProjectId': {
-            url: ENV.apiUrl + '/commonQuery/getProjectTagByProjectId',
+            url: ENV.apiUrl + '/jpa/commonQuery/getProjectTagByProjectId',
             method: 'GET'
         },
         'updateFocusStatusByProjectId': {
-            url: ENV.apiUrl + '/commonQuery/updateFocusStatusByProjectId',
+            url: ENV.apiUrl + '/jpa/commonQuery/updateFocusStatusByProjectId',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'POST'
         },
         'getProjectHasTag': {
-            url: ENV.apiUrl + '/commonQuery/getProjectHasTag',
+            url: ENV.apiUrl + '/jpa/commonQuery/getProjectHasTag',
             method: 'GET'
         },
         'getProjectHasTags': {
-            url: ENV.apiUrl + '/commonQuery/getProjectHasTags',
+            url: ENV.apiUrl + '/jpa/commonQuery/getProjectHasTags',
             method: 'GET',
             isArray: true
         },
         'updateProjectTagByProjectId': {
-            url: ENV.apiUrl + '/commonQuery/updateProjectTagByProjectId',
+            url: ENV.apiUrl + '/jpa/commonQuery/updateProjectTagByProjectId',
             method: 'POST'
         }
     });

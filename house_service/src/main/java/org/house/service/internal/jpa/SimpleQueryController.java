@@ -1,4 +1,4 @@
-package org.house.service.internal;
+package org.house.service.internal.jpa;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,7 +26,7 @@ import com.google.common.collect.Sets;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/internal/simpleQuery")
+@RequestMapping("/api/internal/jpa/simpleQuery")
 public class SimpleQueryController {
 	@Autowired
 	private ProjectBasicDataJpaRepository projectBasicDataJpaRepository;

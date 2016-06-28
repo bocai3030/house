@@ -1,4 +1,4 @@
-package org.house.service.internal;
+package org.house.service.internal.jpa;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import com.google.common.collect.Lists;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/internal/commonQuery")
+@RequestMapping("/api/internal/jpa/commonQuery")
 public class CommonQueryController {
 	@Autowired
 	private ProjectBasicDataJpaRepository projectBasicDataJpaRepository;
