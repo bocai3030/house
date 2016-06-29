@@ -11,6 +11,6 @@ public interface EarthBasicDataSolrRepository extends SolrCrudRepository<EarthBa
 	@Query(value = "earth_license_id:?0 AND entity_name:earth_basic_data")
 	EarthBasicDataSolr findByEarthLicenseId(String earthLicenseId);
 
-	@Query(value = "borrow_from:?0 TO ?1 AND entity_name:earth_basic_data")
+	@Query(value = "borrow_from:[?0 TO ?1] AND entity_name:earth_basic_data")
 	List<EarthBasicDataSolr> findByBorrowFromBetween(Date from, Date to);
 }

@@ -38,7 +38,7 @@ public class PreSellLicenseDataJpa extends AbstractJpaBean implements Serializab
 	protected String validateTo; // 有效期至
 	@Temporal(TemporalType.DATE)
 	@JsonSerialize(using = DateSerializer.class)
-	@JsonFormat(pattern = C.DATE_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
+	@JsonFormat(pattern = C.DAY_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
 	protected Date licenseIssueDate; // 发证日期
 	protected int distributeOfResidentialCount; // 住宅套数
 	protected String distributeOfResidentialArea; // 住宅面积

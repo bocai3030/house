@@ -52,7 +52,7 @@ public class PreSellLicenseDataSolr extends AbstractSolrBean implements Serializ
 	protected String validateTo; // 有效期至
 	@Temporal(TemporalType.DATE)
 	@JsonSerialize(using = DateSerializer.class)
-	@JsonFormat(pattern = C.DATE_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
+	@JsonFormat(pattern = C.DAY_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
 	@Field("license_issue_date")
 	protected Date licenseIssueDate; // 发证日期
 	@Field("distribute_of_residential_count")

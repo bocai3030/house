@@ -21,15 +21,16 @@ angular.module('datetimepicker',[])
             };  
               
             element.datetimepicker({
-                	format: 'Y-m-d H:m:s',
-                	onSelect:function(dateTimeTxt, picker) {  
-                        updateModel(dateTimeTxt);  
-                        if(scope.select) {  
-                            scope.$apply(function() {  
-                                scope.select({date: dateTimeTxt});  
-                            });  
-                        }  
+                format: 'Y-m-d',
+                timepicker: false,
+                onSelect:function(dateTimeTxt, picker) {
+                    updateModel(dateTimeTxt);
+                    if(scope.select) {
+                        scope.$apply(function() {
+                            scope.select({date: dateTimeTxt});
+                        });
                     }
+                }
             });
            
         }  

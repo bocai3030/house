@@ -32,7 +32,7 @@ public class EarthBasicDataJpa extends AbstractJpaBean implements Serializable {
 	protected String levell; // 土地等级
 	@Temporal(TemporalType.DATE)
 	@JsonSerialize(using = DateSerializer.class)
-	@JsonFormat(pattern = C.DATE_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
+	@JsonFormat(pattern = C.DAY_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
 	protected Date borrowFrom; // 土地出让年限自
 	protected String useRightKind; // 使用权类型
 	protected String useArea; // 使用权面积
@@ -40,7 +40,7 @@ public class EarthBasicDataJpa extends AbstractJpaBean implements Serializable {
 	protected String licenseOffice; // 发证机关
 	@Temporal(TemporalType.DATE)
 	@JsonSerialize(using = DateSerializer.class)
-	@JsonFormat(pattern = C.DATE_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
+	@JsonFormat(pattern = C.DAY_JSON_FORMAT_PATTERN, timezone = C.DATE_JSON_FORMAT_TIMEZONE)
 	protected Date licenseIssueDate; // 发证日期
 
 	@Override
