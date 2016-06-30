@@ -16,7 +16,7 @@ public interface ProjectTagSolrRepository extends SolrCrudRepository<ProjectTagS
 	@Query(value = "focus_status:*?0* AND entity_name:project_tag")
 	List<ProjectTagSolr> findByFocusStatusLike(String focusStatusLike);
 
-	@Facet(fields = "focus_status")
+	@Facet(fields = "focus_status", limit = 200)
 	// @Query("SELECT DISTINCT focusStatus from ProjectTagSolr")
 	@Query(value = "entity_name:project_tag")
 	FacetPage<ProjectTagSolr> findDistinctFocusStatus(Pageable pageable);
