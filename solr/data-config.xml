@@ -91,5 +91,18 @@
            <field column="license_office" name="license_office"/>
            <field column="license_issue_date" name="license_issue_date"/>
         </entity>
+        <entity name="project_tag" pk="id"
+                query="select concat('pt_', id) as id,'project_tag' as entity_name,create_time,update_time,project_id,focus_status,remark from project_tag"
+                deltaImportQuery="select concat('pt_', id) as id,'project_tag' as entity_name,create_time,update_time,project_id,focus_status,remark from project_tag where id='${dih.delta.id}'"
+                deltaQuery="select id from project_tag where update_time>'${dataimporter.last_index_time}'"
+         >
+　　　     <field column="id" name="id"/>
+　　　     <field column="entity_name" name="entity_name"/>
+           <field column="create_time" name="create_time"/>
+           <field column="update_time" name="update_time"/>
+           <field column="project_id" name="project_id"/>
+           <field column="focus_status" name="focus_status"/>
+           <field column="remark" name="remark"/>
+        </entity>
 　　</document>
 </dataConfig>
