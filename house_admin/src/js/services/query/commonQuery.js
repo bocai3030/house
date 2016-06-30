@@ -2,7 +2,7 @@
 angular.module('adminApp').factory('CommonQueryService', function ($resource, ENV) {
     return $resource(ENV.apiUrl, {}, {
         'getProjectTagByProjectId': {
-            url: ENV.apiUrl + '/jpa/commonQuery/getProjectTagByProjectId',
+            url: ENV.apiUrl + '/solr/commonQuery/getProjectTagByProjectId',
             method: 'GET'
         },
         'updateFocusStatusByProjectId': {
@@ -11,11 +11,11 @@ angular.module('adminApp').factory('CommonQueryService', function ($resource, EN
             method: 'POST'
         },
         'getProjectHasTag': {
-            url: ENV.apiUrl + '/jpa/commonQuery/getProjectHasTag',
+            url: ENV.apiUrl + '/solr/commonQuery/getProjectHasTag',
             method: 'GET'
         },
         'getProjectHasTags': {
-            url: ENV.apiUrl + '/jpa/commonQuery/getProjectHasTags',
+            url: ENV.apiUrl + '/solr/commonQuery/getProjectHasTags',
             method: 'GET',
             isArray: true
         },

@@ -3,6 +3,7 @@ package org.house.db.repository.solr;
 import java.util.List;
 
 import org.house.db.entity.solr.ProjectTagSolr;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.repository.Facet;
 import org.springframework.data.solr.repository.Query;
@@ -18,5 +19,5 @@ public interface ProjectTagSolrRepository extends SolrCrudRepository<ProjectTagS
 	@Facet(fields = "focus_status")
 	// @Query("SELECT DISTINCT focusStatus from ProjectTagSolr")
 	@Query(value = "entity_name:project_tag")
-	FacetPage<ProjectTagSolr> findDistinctFocusStatus();
+	FacetPage<ProjectTagSolr> findDistinctFocusStatus(Pageable pageable);
 }

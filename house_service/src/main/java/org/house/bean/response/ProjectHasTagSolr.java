@@ -1,11 +1,11 @@
 package org.house.bean.response;
 
-import org.house.db.entity.jpa.ProjectTagJpa;
+import org.house.db.entity.solr.ProjectTagSolr;
 
-public class ProjectHasTag {
+public class ProjectHasTagSolr {
 	protected String projectId; // 项目ID
 	protected String projectName; // 所属项目名称
-	protected ProjectTagJpa projectTag;
+	protected ProjectTagSolr projectTag;
 	protected String projectAddress; // 项目地址
 
 	public String getProjectId() {
@@ -24,11 +24,11 @@ public class ProjectHasTag {
 		this.projectName = projectName;
 	}
 
-	public ProjectTagJpa getProjectTag() {
+	public ProjectTagSolr getProjectTag() {
 		return this.projectTag;
 	}
 
-	public void setProjectTag(final ProjectTagJpa projectTag) {
+	public void setProjectTag(final ProjectTagSolr projectTag) {
 		this.projectTag = projectTag;
 	}
 
